@@ -1,0 +1,4 @@
+select seq_no_n,Capture_Datetime,capture_location_lat,capture_location_long,agent_email,Store_Address,Store_Address_lat,Store_Address_long,nin,msisdn,Reg_type,eyeball_status,eyeball_remarks,status,tbl_dt
+from ${SCHEMA_NAME}.${TABLE_NAME}
+where tbl_dt BETWEEN ${START_DATE} AND ${END_DATE}
+and cast(date_format(from_iso8601_timestamp(Capture_Datetime),'%H') as integer) BETWEEN ${START_HOUR} and ${END_HOUR}

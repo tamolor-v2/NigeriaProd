@@ -1,0 +1,122 @@
+{
+  "Container": {
+    "NameSpace": "com.mtn.containers",
+    "Name": "vp_hsdp_lookup",
+    "Version": "00.01.00",
+    "Description": "vp_hsdp_lookup",
+    "Fixed": "true",
+    "Persist": "true",
+    "Fields": [
+      {
+        "name": "opco_name",
+        "type": "string"
+      },
+      {
+        "name": "partner_name",
+        "type": "string"
+      },
+      {
+        "name": "partner_id",
+        "type": "string"
+      },
+      {
+        "name": "service_name",
+        "type": "string"
+      },
+      {
+        "name": "service_id",
+        "type": "string"
+      },
+      {
+        "name": "product_name",
+        "type": "string"
+      },
+      {
+        "name": "product_id",
+        "type": "string"
+      },
+      {
+        "name": "status",
+        "type": "string"
+      },
+      {
+        "name": "product_type",
+        "type": "string"
+      },
+      {
+        "name": "sms_access_code",
+        "type": "string"
+      },
+      {
+        "name": "ussd_access_code",
+        "type": "string"
+      },
+      {
+        "name": "opt_in_keyword",
+        "type": "string"
+      },
+      {
+        "name": "subsciption_fee",
+        "type": "string"
+      },
+      {
+        "name": "opt_out_keyword",
+        "type": "string"
+      },
+      {
+        "name": "on_demand_fee",
+        "type": "string"
+      },
+      {
+        "name": "product_online_date",
+        "type": "string"
+      },
+      {
+        "name": "total_subscriptions",
+        "type": "string"
+      },
+      {
+        "name": "on_demand_request",
+        "type": "string"
+      },
+      {
+        "name": "service_category",
+        "type": "string"
+      },
+      {
+        "name": "service_sub_category",
+        "type": "string"
+      },
+      {
+        "name": "product_category",
+        "type": "string"
+      },
+      {
+        "name": "finance_category",
+        "type": "string"
+      },
+      {
+        "name": "mkt_category",
+        "type": "string"
+      },
+      {
+        "name": "platform_revenue",
+        "type": "string"
+      },
+      {
+        "name": "mod_catogory",
+        "type": "string"
+      },
+      {
+        "name": "is_mod",
+        "type": "string"
+      }
+    ],
+    "PartitionKey": [
+      "product_id"
+    ],
+    "PrimaryKey": [
+      "product_id"
+    ]
+  }
+}

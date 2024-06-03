@@ -1,0 +1,9 @@
+[ {
+  "AdapterName" : "flytxt_main_acct_balance",
+  "MessageNames" : [ "com.mtn.messages.FLYTXT_MAIN_ACCT_BALANCE" ],
+  "Options" : {
+    "alwaysQuoteFields" : false,
+    "fieldDelimiter" : ","
+  },
+  "Serializer" : "com.ligadata.kamanja.serializer.csvserdeser"
+} ]

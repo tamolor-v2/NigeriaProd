@@ -1,0 +1,3 @@
+select aparty, bparty, eventtimestamp, amountdebited,amountcredited, tbl_dt
+from ${SCHEMA_NAME}.${TABLE_NAME}
+where tbl_dt BETWEEN ${START_DATE} AND ${END_DATE}

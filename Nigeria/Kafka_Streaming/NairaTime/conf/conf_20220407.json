@@ -1,0 +1,134 @@
+{
+    "jdbc.conf": [
+      {
+        "name": "presto1",
+        "url": "jdbc:presto://10.1.197.145:8999/hive5/flare_8",
+        "username": "daasuser",
+        "password": ""
+      }
+    ],
+    "global.config": {
+      "schema.name": "default",
+      "output.format": "json",
+      "query.template.path": "/nas/share05/tools/DBExtrct/conf/tmp/query.sql.template"
+    },
+    "sources.config": [
+      {
+        "name": "promo_code_events_flytxt",
+        "schema.name": "flare_8",
+        "table.name": "cs6_ccn_cdr",
+        "query.template.path": "/nas/share05/tools/DBExtrct/conf/PromoCodeFlytxtTrigger.sql.template",
+        "output.kafka.topic": "promo_code_events_flytxt",
+        "output.format": "delimited,,",
+        "output.partition.key.name": "msisdn_key"
+      },
+      {
+        "name": "ayoba_events",
+        "schema.name": "flare_8",
+        "table.name": "ayobaevents",
+        "query.template.path": "/nas/share05/tools/DBExtrct/conf/Ayoba.sql.template",
+        "output.kafka.topic": "ayoba_events_to_flytxt",
+        "output.format": "delimited,,",
+        "output.partition.key.name": "msisdn_key"
+      },
+      {
+        "name": "customer_transactions",
+        "schema.name": "flare_8",
+        "table.name": "ayobaevents",
+        "query.template.path": "/nas/share05/tools/DBExtrct/conf/DCBS.sql.template",
+        "output.kafka.topic": "customertransaction-test2",
+        "output.format": "delimited,,",
+        "output.partition.key.name": "msisdn_key"
+      },
+      {
+        "name": "gprs_ma",
+        "schema.name": "flare_8",
+        "table.name": "CS5_CCN_GPRS_MA",
+        "query.template.path": "/nas/share05/tools/DBExtrct/conf/tmp/query.sql.template1",
+        "output.kafka.topic": "db_extract_test_3",
+        "output.format": "json",
+        "output.partition.key.name": "msisdn_key"
+      },{
+        "name": "momo_bal_to_tas",
+        "schema.name": "flare_8",
+        "table.name": "vp_momo_bal_daas_to_tas",
+        "query.template.path": "/nas/share05/tools/DBExtrct/conf/MomoBalance.sql.template",
+        "output.kafka.topic": "momo_balance_to_tas",
+        "output.format": "delimited,,",
+        "output.partition.key.name": "momo_msisdn"
+      },{
+        "name": "tas_evd_stock_balance",
+        "schema.name": "flare_8",
+        "table.name": "VP_EVD_STOCK_BAL_TO_TAS",
+        "query.template.path": "/nas/share05/tools/DBExtrct/conf/EvdStockBalance.sql.template",
+        "output.kafka.topic": "TAS_EVD_STOCK_BALANCE",
+        "output.format": "delimited,,",
+        "output.partition.key.name": "sender_msisdn"
+      },{
+        "name": "sim_swap_to_voc",
+        "schema.name": "nigeria",
+        "table.name": "vp_call_reason_for_voc",
+        "query.template.path": "/nas/share05/tools/DBExtrct/conf/Sim_Swap.sql.template",
+        "output.kafka.topic": "voc_sim_swap_test1",
+        "output.format": "delimited,,",
+        "output.partition.key.name": "customer_id"
+      },{
+        "name": "sim_reg_to_voc",
+        "schema.name": "nigeria",
+        "table.name": "vp_sim_reg_voc",
+        "query.template.path": "/nas/share05/tools/DBExtrct/conf/Sim_Reg.sql.template",
+        "output.kafka.topic": "voc_sim_reg_test",
+        "output.format": "delimited,,",
+        "output.partition.key.name": "customer_id"
+      },{
+        "name": "roaming_to_voc",
+        "schema.name": "nigeria",
+        "table.name": "vp_roaming_voc",
+        "query.template.path": "/nas/share05/tools/DBExtrct/conf/Roaming_to_VoC.sql.template",
+        "output.kafka.topic": "voc_roaming_test",
+        "output.format": "delimited,,",
+        "output.partition.key.name": "customer_id"
+      },{
+        "name": "vas_activation_to_voc",
+        "schema.name": "nigeria",
+        "table.name": "vp_vas_activation_voc",
+        "query.template.path": "/nas/share05/tools/DBExtrct/conf/VAS_Activation_to_VoC.sql.template",
+        "output.kafka.topic": "voc_vas_activation_test",
+        "output.format": "delimited,,",
+        "output.partition.key.name": "customer_id"
+      },{
+        "name": "data_activation_to_voc",
+        "schema.name": "nigeria",
+        "table.name": "vp_data_activation_voc",
+        "query.template.path": "/nas/share05/tools/DBExtrct/conf/Data_Activation_to_VoC.sql.template",
+        "output.kafka.topic": "voc_data_activation_test",
+        "output.format": "delimited,,",
+        "output.partition.key.name": "customer_id"
+      },{
+        "name": "digital_channels_to_voc",
+        "schema.name": "nigeria",
+        "table.name": "vp_digital_channels_voc",
+        "query.template.path": "/nas/share05/tools/DBExtrct/conf/Digital_Channels_to_VoC.sql.template",
+        "output.kafka.topic": "voc_digital_channels_test",
+        "output.format": "delimited,,",
+        "output.partition.key.name": "customer_id"
+      },{
+        "name": "liveearth_simreg",
+        "schema.name": "flare_8",
+        "table.name": "vp_liveearth_simreg",
+        "query.template.path": "/nas/share05/tools/DBExtrct/conf/Sim_Hourly_Feeds.sql.template",
+        "output.kafka.topic": "liveearth_simreg",
+        "output.format": "json",
+        "output.partition.key.name": "msisdn"
+      }
+    ],
+    "kafka.config": {
+      "bootstrap.servers": "datanode01001.mtn.com:6667,datanode01002.mtn.com:6667,datanode01003.mtn.com:6667,datanode01004.mtn.com:6667,datanode01005.mtn.com:6667,datanode01006.mtn.com:6667,datanode01007.mtn.com:6667,datanode01008.mtn.com:6667,datanode01009.mtn.com:6667,datanode01010.mtn.com:6667,datanode01011.mtn.com:6667,datanode01012.mtn.com:6667,datanode01013.mtn.com:6667,datanode01014.mtn.com:6667,datanode01015.mtn.com:6667,datanode01016.mtn.com:6667,datanode01017.mtn.com:6667,datanode01018.mtn.com:6667,datanode01019.mtn.com:6667,datanode01020.mtn.com:6667,datanode01021.mtn.com:6667,datanode01022.mtn.com:6667,datanode01023.mtn.com:6667,datanode01024.mtn.com:6667,datanode01025.mtn.com:6667,datanode01026.mtn.com:6667,datanode01027.mtn.com:6667,datanode01028.mtn.com:6667,datanode01029.mtn.com:6667,datanode01030.mtn.com:6667,datanode01031.mtn.com:6667,datanode01032.mtn.com:6667,datanode01033.mtn.com:6667,datanode01034.mtn.com:6667,datanode01035.mtn.com:6667,datanode01036.mtn.com:6667,datanode01037.mtn.com:6667,datanode01038.mtn.com:6667,datanode01039.mtn.com:6667,datanode01040.mtn.com:6667,datanode01041.mtn.com:6667,datanode01042.mtn.com:6667",
+      "transaction.state.log.replication.factor":"1",
+      "transaction.state.log.min.isr":"1",
+      "___transactional.id":"prod_trans_1",
+      "security.protocol": "SASL_PLAINTEXT",
+      "sasl.mechanism": "GSSAPI",
+      "sasl.kerberos.service.name": "kafka"
+    }
+  }

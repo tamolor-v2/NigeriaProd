@@ -1,0 +1,9 @@
+[ {
+  "AdapterName" : "hdfs_output_adapter_1",
+  "MessageNames" : [ "com.mtn.messages.FLYTXT_DATA_BALANCE" ],
+  "Options" : {
+    "alwaysQuoteFields" : false,
+    "fieldDelimiter" : ","
+  },
+  "Serializer" : "com.ligadata.kamanja.serializer.csvserdeser"
+} ]

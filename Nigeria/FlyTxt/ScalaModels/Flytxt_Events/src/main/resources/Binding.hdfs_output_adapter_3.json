@@ -1,0 +1,41 @@
+[ 
+{
+  "AdapterName" : "flytxt_data_balance",
+  "MessageNames" : [ "com.mtn.messages.FLYTXT_DATA_BALANCE" ],
+  "Options" : {
+    "alwaysQuoteFields" : false,
+    "fieldDelimiter" : ","
+  },
+  "Serializer" : "com.ligadata.kamanja.serializer.csvserdeser"
+}
+,
+{
+  "AdapterName" : "flytxt_main_acct_balance",
+  "MessageNames" : [ "com.mtn.messages.FLYTXT_MAIN_ACCT_BALANCE" ],
+  "Options" : {
+    "alwaysQuoteFields" : false,
+    "fieldDelimiter" : ","
+  },
+  "Serializer" : "com.ligadata.kamanja.serializer.csvserdeser"
+}
+,
+{
+  "AdapterName" : "flytxt_data_bundle_expiry",
+  "MessageNames" : [ "com.mtn.messages.FLYTXT_DATA_BUNDLE_EXPIRY" ],
+  "Options" : {
+    "alwaysQuoteFields" : false,
+    "fieldDelimiter" : ","
+  },
+  "Serializer" : "com.ligadata.kamanja.serializer.csvserdeser"
+}
+,
+{
+  "AdapterName" : "flytxt_incoming_voice_usage",
+  "MessageNames" : [ "com.mtn.messages.FLYTXT_INCOMING_VOICE_USAGE" ],
+  "Options" : {
+    "alwaysQuoteFields" : false,
+    "fieldDelimiter" : ","
+  },
+  "Serializer" : "com.ligadata.kamanja.serializer.csvserdeser"
+}
+]

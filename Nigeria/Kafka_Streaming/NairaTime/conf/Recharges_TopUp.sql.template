@@ -1,0 +1,3 @@
+select subscriber_msisdn, eventtimestamp, topup_channel,topup_amount,face_value, tbl_dt
+from ${SCHEMA_NAME}.${TABLE_NAME}
+where tbl_dt BETWEEN ${START_DATE} AND ${END_DATE}

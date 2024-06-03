@@ -1,0 +1,21 @@
+select
+msisdn_key as MSISDN_NSK,
+date_of_activation as ACTIVATION_DT,
+SUBSCRIBER_STATUS,
+replace(service_class,',',';') as SERVICE_CLASS_DESCR,
+DUAL_SIM_HANDSET,
+DEVICE_TYPE,
+case when try_cast(substr(cast(bal_last_day_period as varchar),index(cast(bal_last_day_period as varchar),'.')+1) as integer)>0 then try_cast(try_cast(try_cast(cast(bal_last_day_period as varchar) as decimal(18,2)) as double) as varchar) else substr(cast(bal_last_day_period as varchar),1,index(cast(bal_last_day_period as varchar),'.')-1) end as MAIN_AC_BALANCE,
+case when try_cast(substr(cast(ADVANCE_CREDIT as varchar),index(cast(ADVANCE_CREDIT as varchar),'.')+1) as integer)>0 then try_cast(try_cast(try_cast(cast(ADVANCE_CREDIT as varchar) as decimal(18,2)) as double) as varchar) else substr(cast(ADVANCE_CREDIT as varchar),1,index(cast(ADVANCE_CREDIT as varchar),'.')-1) end as ADVANCE_CREDIT,
+DOLA,
+DOLA_UPDATE_DATE,
+RBT_SERVICE_CLASS,
+VLR_STATUS,
+DND_STATUS,
+CURRENT_SEGMENT,
+LAST_REFILL_DATE,
+coalesce(try_cast(round(LAST_REFILL_VALUE,0) as decimal(10,0)),0) LAST_REFILL_VALUE,
+RGS_STATUS,
+service_class_id as SERVICE_CLASS,
+profile_update_date as UPDATE_DATE
+from nigeria.cm_profile_adail_sit_f;

@@ -1,0 +1,3 @@
+select aparty_msisdn,bparty_msisdn,time_stamp,monetary_cost,bundle_id,cell_id,Bparty_MSISDN_type,tbl_dt
+from ${SCHEMA_NAME}.${TABLE_NAME}
+where tbl_dt BETWEEN ${START_DATE} AND ${END_DATE}

@@ -1,0 +1,34 @@
+{
+  "Message":{
+    "NameSpace":"com.mtn.messages",
+    "Name":"FLYTXT_DATA_BUNDLE_EXPIRY",
+    "Version":"00.01.00",
+    "Description":"",
+    "Fixed":"true",
+    "Fields":[{
+      "Name":"msisdn_key",
+      "Type":"Long"
+    },{
+      "Name":"expirydate",
+      "Type":"String"
+    },{
+      "Name":"original_timestamp_enrich",
+      "Type":"String"
+    },{
+      "Name":"productid",
+      "Type":"String"
+    },{
+      "Name":"product_name",
+      "Type":"String"
+    },{
+      "Name":"tbl_dt",
+      "Type":"Int"
+    }],
+    "TimePartitionInfo":{
+      "Key":"tbl_dt",
+      "Format":"yyyyMMdd",
+      "Type":"Daily"
+    },
+    "PartitionKey":["msisdn_key"]
+  }
+}

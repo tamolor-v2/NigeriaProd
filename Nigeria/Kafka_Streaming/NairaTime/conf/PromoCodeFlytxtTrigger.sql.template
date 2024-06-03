@@ -1,0 +1,1 @@
+select msisdn_key,band,promo_trigger,triggered_dt from flare_8.tbl_promo_code_trigger

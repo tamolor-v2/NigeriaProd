@@ -1,0 +1,4 @@
+select Distinct SUBSCRIBR_MSISDN, devicetype, imei, model_name, brand, activationdate, tbl_dt
+from ${SCHEMA_NAME}.${TABLE_NAME}
+where tbl_dt BETWEEN ${START_DATE} AND ${END_DATE}
+and devicetype is not null and imei is not null and model_name is not null and brand is not null and activationdate is not null

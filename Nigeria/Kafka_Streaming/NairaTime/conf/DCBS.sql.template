@@ -1,0 +1,5 @@
+select event_name, sign_up_method, msisdn_key,date_format(from_unixtime(event_timestamp/1000),'%d-%b-%Y %H:%i:%s') Event_time, date_key
+from ${SCHEMA_NAME}.${TABLE_NAME}
+where tbl_dt BETWEEN ${START_DATE} AND ${END_DATE}
+and cast(date_format(from_unixtime(event_timestamp/1000),'%H') as integer) between ${START_HOUR} and ${END_HOUR}
+

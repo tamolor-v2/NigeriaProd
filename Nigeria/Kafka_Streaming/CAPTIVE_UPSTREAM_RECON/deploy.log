@@ -1,0 +1,299 @@
+adding messages
+ WARN [main] - DATABASE_SCHEMA remains unset
+ WARN [main] - DATABASE_LOCATION remains unset
+ WARN [main] - DATABASE_HOST remains unset
+ WARN [main] - ADAPTER_SPECIFIC_CONFIG remains unset
+ WARN [main] - SSL_PASSWD remains unset
+ WARN [main] - AUDIT_PARMS remains unset
+ WARN [main] - DATABASE remains unset
+/home/daasuser/FlareCluster/Flare_3.1.20.2711_20211119-183544/logs/Archive/2022-09-11/KamanjaManager/KamanjaLog-2022-09-11-18-1.log.gz => /home/daasuser/FlareCluster/Flare_3.1.20.2711_20211119-183544/ArchivedLogs/Archive/2022-09-11/KamanjaManager/KamanjaLog-2022-09-11-18-1-1662916909575.log.gz, isMoved:true
+added manifest
+adding: CAPTIVE_UPSTREAM_RECON_input.scala(in = 22581) (out= 4496)(deflated 80%)
+adding: CAPTIVE_UPSTREAM_RECON_inputFactory.java(in = 518) (out= 232)(deflated 55%)
+adding: com/(in = 0) (out= 0)(stored 0%)
+adding: com/mtn/(in = 0) (out= 0)(stored 0%)
+adding: com/mtn/messages/(in = 0) (out= 0)(stored 0%)
+adding: com/mtn/messages/V1000000/(in = 0) (out= 0)(stored 0%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$$anonfun$14.class(in = 1360) (out= 608)(deflated 55%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_GenerateAttributeTypes$.class(in = 1734) (out= 781)(deflated 54%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$9.class(in = 1720) (out= 689)(deflated 59%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$3.class(in = 1720) (out= 689)(deflated 59%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$4.class(in = 1720) (out= 689)(deflated 59%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$$anonfun$getAttributeType$1.class(in = 1217) (out= 599)(deflated 50%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$.class(in = 5697) (out= 1544)(deflated 72%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$$anonfun$15.class(in = 1360) (out= 608)(deflated 55%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$2.class(in = 1720) (out= 689)(deflated 59%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$10.class(in = 1722) (out= 690)(deflated 59%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$$anonfun$com$mtn$messages$V1000000$CAPTIVE_UPSTREAM_RECON_input$$getKeyValueByteArray$2.class(in = 2546) (out= 1100)(deflated 56%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$$anonfun$19.class(in = 1360) (out= 608)(deflated 55%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$$anonfun$16.class(in = 1360) (out= 607)(deflated 55%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$$anonfun$com$mtn$messages$V1000000$CAPTIVE_UPSTREAM_RECON_input$$getKeyValueByteArray$1.class(in = 2546) (out= 1099)(deflated 56%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$$anonfun$1.class(in = 1515) (out= 673)(deflated 55%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$$anonfun$13.class(in = 1360) (out= 608)(deflated 55%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$.class(in = 14632) (out= 4357)(deflated 70%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$$typecreator1$1.class(in = 1828) (out= 765)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$$anonfun$11.class(in = 1360) (out= 607)(deflated 55%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$5.class(in = 1720) (out= 689)(deflated 59%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$$anonfun$getAllAttributesByteArrays$1.class(in = 2161) (out= 992)(deflated 54%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$$anonfun$17.class(in = 1360) (out= 608)(deflated 55%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$$anonfun$12.class(in = 1360) (out= 607)(deflated 55%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_inputFactory.class(in = 828) (out= 410)(deflated 50%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$$anonfun$18.class(in = 1360) (out= 608)(deflated 55%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$6.class(in = 1720) (out= 689)(deflated 59%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$8.class(in = 1720) (out= 689)(deflated 59%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$7.class(in = 1720) (out= 689)(deflated 59%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON_input.class(in = 35013) (out= 14434)(deflated 58%)
+added manifest
+adding: CAPTIVE_UPSTREAM_RECON_inputFactory.java(in = 509) (out= 227)(deflated 55%)
+adding: com/(in = 0) (out= 0)(stored 0%)
+adding: com/mtn/(in = 0) (out= 0)(stored 0%)
+adding: com/mtn/messages/(in = 0) (out= 0)(stored 0%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$$anonfun$14.class(in = 1294) (out= 602)(deflated 53%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_GenerateAttributeTypes$.class(in = 1713) (out= 776)(deflated 54%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$9.class(in = 1654) (out= 684)(deflated 58%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$$anonfun$com$mtn$messages$CAPTIVE_UPSTREAM_RECON_input$$getKeyValueByteArray$1.class(in = 2471) (out= 1091)(deflated 55%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$3.class(in = 1654) (out= 684)(deflated 58%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$4.class(in = 1654) (out= 684)(deflated 58%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$$anonfun$getAttributeType$1.class(in = 1178) (out= 596)(deflated 49%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$.class(in = 5559) (out= 1542)(deflated 72%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$$anonfun$15.class(in = 1294) (out= 602)(deflated 53%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$2.class(in = 1654) (out= 684)(deflated 58%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$10.class(in = 1656) (out= 686)(deflated 58%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$$anonfun$19.class(in = 1294) (out= 601)(deflated 53%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$$anonfun$16.class(in = 1294) (out= 602)(deflated 53%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$$anonfun$1.class(in = 1494) (out= 670)(deflated 55%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$$anonfun$13.class(in = 1294) (out= 601)(deflated 53%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$.class(in = 14368) (out= 4351)(deflated 69%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$$typecreator1$1.class(in = 1780) (out= 759)(deflated 57%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$$anonfun$11.class(in = 1294) (out= 600)(deflated 53%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$5.class(in = 1654) (out= 684)(deflated 58%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$$anonfun$getAllAttributesByteArrays$1.class(in = 2113) (out= 990)(deflated 53%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$$anonfun$17.class(in = 1294) (out= 602)(deflated 53%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$$anonfun$12.class(in = 1294) (out= 601)(deflated 53%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_inputFactory.class(in = 792) (out= 405)(deflated 48%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$$anonfun$18.class(in = 1294) (out= 602)(deflated 53%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$$anonfun$com$mtn$messages$CAPTIVE_UPSTREAM_RECON_input$$getKeyValueByteArray$2.class(in = 2471) (out= 1093)(deflated 55%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$6.class(in = 1654) (out= 684)(deflated 58%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$8.class(in = 1654) (out= 684)(deflated 58%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input$CAPTIVE_UPSTREAM_RECON_input_SetFnsObj$$anonfun$7.class(in = 1654) (out= 684)(deflated 58%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON_input.class(in = 34604) (out= 14375)(deflated 58%)
+adding: CAPTIVE_UPSTREAM_RECON_input_local.scala(in = 22545) (out= 4489)(deflated 80%)
+Result: {
+  "APIResults" : {
+    "Status Code" : 0,
+    "Function Name" : "AddMessageDef",
+    "Result Data" : null,
+    "Result Description" : "Message Added Successfully:com.mtn.messages.captive_upstream_recon_input.000000000001000000"
+  }
+}
+ WARN [main] - DATABASE_SCHEMA remains unset
+ WARN [main] - DATABASE_LOCATION remains unset
+ WARN [main] - DATABASE_HOST remains unset
+ WARN [main] - ADAPTER_SPECIFIC_CONFIG remains unset
+ WARN [main] - SSL_PASSWD remains unset
+ WARN [main] - AUDIT_PARMS remains unset
+ WARN [main] - DATABASE remains unset
+/home/daasuser/FlareCluster/Flare_3.1.20.2711_20211119-183544/logs/Archive/2022-09-11/KamanjaManager/KamanjaLog-2022-09-11-18-1.log.gz => /home/daasuser/FlareCluster/Flare_3.1.20.2711_20211119-183544/ArchivedLogs/Archive/2022-09-11/KamanjaManager/KamanjaLog-2022-09-11-18-1-1662916953760.log.gz, isMoved:true
+added manifest
+adding: CAPTIVE_UPSTREAM_RECON.scala(in = 32995) (out= 5919)(deflated 82%)
+adding: com/(in = 0) (out= 0)(stored 0%)
+adding: com/mtn/(in = 0) (out= 0)(stored 0%)
+adding: com/mtn/messages/(in = 0) (out= 0)(stored 0%)
+adding: com/mtn/messages/V1000000/(in = 0) (out= 0)(stored 0%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$recomputeUniqueRowId$1.class(in = 2423) (out= 1162)(deflated 52%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$19.class(in = 1639) (out= 684)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$13.class(in = 1639) (out= 684)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$computePartitionKeyHashIdValue$1.class(in = 1821) (out= 901)(deflated 50%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$20.class(in = 1306) (out= 600)(deflated 54%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$21.class(in = 1306) (out= 599)(deflated 54%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECONFactory.class(in = 798) (out= 407)(deflated 48%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$30.class(in = 1307) (out= 600)(deflated 54%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$7.class(in = 1636) (out= 683)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$37.class(in = 1307) (out= 602)(deflated 53%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_GenerateAttributeTypes$.class(in = 2194) (out= 1035)(deflated 52%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$6.class(in = 1636) (out= 682)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$getAttributeType$1.class(in = 1181) (out= 592)(deflated 49%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$typecreator1$1.class(in = 1786) (out= 759)(deflated 57%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$17.class(in = 1639) (out= 684)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$29.class(in = 1306) (out= 601)(deflated 53%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON.class(in = 42529) (out= 18059)(deflated 57%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$2.class(in = 1636) (out= 682)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$12.class(in = 1639) (out= 683)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$18.class(in = 1639) (out= 684)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$com$mtn$messages$V1000000$CAPTIVE_UPSTREAM_RECON$$getKeyValueByteArray$2.class(in = 2486) (out= 1094)(deflated 55%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$11.class(in = 1638) (out= 683)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$10.class(in = 1638) (out= 683)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$36.class(in = 1307) (out= 602)(deflated 53%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$.class(in = 10412) (out= 2791)(deflated 73%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$26.class(in = 1306) (out= 601)(deflated 53%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$5.class(in = 1636) (out= 683)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$25.class(in = 1306) (out= 601)(deflated 53%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$31.class(in = 1307) (out= 599)(deflated 54%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$com$mtn$messages$V1000000$CAPTIVE_UPSTREAM_RECON$$getKeyValueByteArray$1.class(in = 2486) (out= 1091)(deflated 56%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$recomputeUniqueRowId$1$$anonfun$apply$1.class(in = 1687) (out= 806)(deflated 52%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$33.class(in = 1307) (out= 600)(deflated 54%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$1.class(in = 1491) (out= 666)(deflated 55%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$28.class(in = 1306) (out= 601)(deflated 53%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$3.class(in = 1636) (out= 683)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$23.class(in = 1306) (out= 599)(deflated 54%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$9.class(in = 1636) (out= 683)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$getAllAttributesByteArrays$1.class(in = 2119) (out= 987)(deflated 53%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$24.class(in = 1306) (out= 600)(deflated 54%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$fromFunc$1.class(in = 1520) (out= 721)(deflated 52%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$.class(in = 17163) (out= 5169)(deflated 69%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$4.class(in = 1636) (out= 682)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$setFn17$1.class(in = 1434) (out= 657)(deflated 54%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$35.class(in = 1307) (out= 601)(deflated 54%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$15.class(in = 1639) (out= 684)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$27.class(in = 1306) (out= 601)(deflated 53%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$16.class(in = 1639) (out= 684)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$32.class(in = 1307) (out= 600)(deflated 54%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$8.class(in = 1636) (out= 683)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$14.class(in = 1639) (out= 683)(deflated 58%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$22.class(in = 1306) (out= 599)(deflated 54%)
+adding: com/mtn/messages/V1000000/CAPTIVE_UPSTREAM_RECON$$anonfun$34.class(in = 1307) (out= 601)(deflated 54%)
+adding: CAPTIVE_UPSTREAM_RECONFactory.java(in = 494) (out= 227)(deflated 54%)
+added manifest
+adding: CAPTIVE_UPSTREAM_RECON_local.scala(in = 32959) (out= 5914)(deflated 82%)
+adding: com/(in = 0) (out= 0)(stored 0%)
+adding: com/mtn/(in = 0) (out= 0)(stored 0%)
+adding: com/mtn/messages/(in = 0) (out= 0)(stored 0%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$recomputeUniqueRowId$1.class(in = 2357) (out= 1155)(deflated 50%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$19.class(in = 1573) (out= 680)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$13.class(in = 1573) (out= 680)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$computePartitionKeyHashIdValue$1.class(in = 1773) (out= 893)(deflated 49%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$20.class(in = 1240) (out= 597)(deflated 51%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$21.class(in = 1240) (out= 596)(deflated 51%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECONFactory.class(in = 762) (out= 397)(deflated 47%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$30.class(in = 1241) (out= 597)(deflated 51%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$7.class(in = 1570) (out= 678)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$37.class(in = 1241) (out= 598)(deflated 51%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_GenerateAttributeTypes$.class(in = 2173) (out= 1033)(deflated 52%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$6.class(in = 1570) (out= 678)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$getAttributeType$1.class(in = 1142) (out= 589)(deflated 48%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$typecreator1$1.class(in = 1738) (out= 752)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$17.class(in = 1573) (out= 680)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$29.class(in = 1240) (out= 597)(deflated 51%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON.class(in = 42079) (out= 18023)(deflated 57%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$2.class(in = 1570) (out= 677)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$12.class(in = 1573) (out= 680)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$18.class(in = 1573) (out= 680)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$11.class(in = 1572) (out= 679)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$10.class(in = 1572) (out= 679)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$36.class(in = 1241) (out= 597)(deflated 51%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$.class(in = 10184) (out= 2786)(deflated 72%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$26.class(in = 1240) (out= 597)(deflated 51%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$5.class(in = 1570) (out= 678)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$25.class(in = 1240) (out= 596)(deflated 51%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$31.class(in = 1241) (out= 596)(deflated 51%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$recomputeUniqueRowId$1$$anonfun$apply$1.class(in = 1648) (out= 808)(deflated 50%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$33.class(in = 1241) (out= 597)(deflated 51%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$1.class(in = 1470) (out= 663)(deflated 54%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$28.class(in = 1240) (out= 597)(deflated 51%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$3.class(in = 1570) (out= 678)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$23.class(in = 1240) (out= 596)(deflated 51%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$9.class(in = 1570) (out= 678)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$getAllAttributesByteArrays$1.class(in = 2071) (out= 982)(deflated 52%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$24.class(in = 1240) (out= 596)(deflated 51%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$fromFunc$1.class(in = 1463) (out= 717)(deflated 50%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$.class(in = 16818) (out= 5161)(deflated 69%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$com$mtn$messages$CAPTIVE_UPSTREAM_RECON$$getKeyValueByteArray$2.class(in = 2411) (out= 1086)(deflated 54%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$4.class(in = 1570) (out= 678)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$setFn17$1.class(in = 1395) (out= 654)(deflated 53%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$35.class(in = 1241) (out= 597)(deflated 51%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$15.class(in = 1573) (out= 680)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$27.class(in = 1240) (out= 597)(deflated 51%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$16.class(in = 1573) (out= 680)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$32.class(in = 1241) (out= 597)(deflated 51%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$8.class(in = 1570) (out= 677)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$CAPTIVE_UPSTREAM_RECON_SetFnsObj$$anonfun$14.class(in = 1573) (out= 680)(deflated 56%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$com$mtn$messages$CAPTIVE_UPSTREAM_RECON$$getKeyValueByteArray$1.class(in = 2411) (out= 1085)(deflated 54%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$22.class(in = 1240) (out= 596)(deflated 51%)
+adding: com/mtn/messages/CAPTIVE_UPSTREAM_RECON$$anonfun$34.class(in = 1241) (out= 597)(deflated 51%)
+adding: CAPTIVE_UPSTREAM_RECONFactory.java(in = 485) (out= 221)(deflated 54%)
+Result: {
+  "APIResults" : {
+    "Status Code" : 0,
+    "Function Name" : "AddMessageDef",
+    "Result Data" : null,
+    "Result Description" : "Message Added Successfully:com.mtn.messages.captive_upstream_recon.000000000001000000"
+  }
+}
+creating hive tables
+uploading compile config
+ WARN [main] - DATABASE_SCHEMA remains unset
+ WARN [main] - DATABASE_LOCATION remains unset
+ WARN [main] - DATABASE_HOST remains unset
+ WARN [main] - ADAPTER_SPECIFIC_CONFIG remains unset
+ WARN [main] - SSL_PASSWD remains unset
+ WARN [main] - AUDIT_PARMS remains unset
+ WARN [main] - DATABASE remains unset
+/home/daasuser/FlareCluster/Flare_3.1.20.2711_20211119-183544/logs/Archive/2022-09-11/KamanjaManager/KamanjaLog-2022-09-11-18-1.log.gz => /home/daasuser/FlareCluster/Flare_3.1.20.2711_20211119-183544/ArchivedLogs/Archive/2022-09-11/KamanjaManager/KamanjaLog-2022-09-11-18-1-1662917007910.log.gz, isMoved:true
+Result: {
+  "APIResults" : {
+    "Status Code" : 0,
+    "Function Name" : "UploadModelsConfig",
+    "Result Data" : null,
+    "Result Description" : "Upload of model config successful"
+  }
+}
+adding models
+ WARN [main] - DATABASE_SCHEMA remains unset
+ WARN [main] - DATABASE_LOCATION remains unset
+ WARN [main] - DATABASE_HOST remains unset
+ WARN [main] - ADAPTER_SPECIFIC_CONFIG remains unset
+ WARN [main] - SSL_PASSWD remains unset
+ WARN [main] - AUDIT_PARMS remains unset
+ WARN [main] - DATABASE remains unset
+/home/daasuser/FlareCluster/Flare_3.1.20.2711_20211119-183544/logs/Archive/2022-09-11/KamanjaManager/KamanjaLog-2022-09-11-18-1.log.gz => /home/daasuser/FlareCluster/Flare_3.1.20.2711_20211119-183544/ArchivedLogs/Archive/2022-09-11/KamanjaManager/KamanjaLog-2022-09-11-18-1-1662917022031.log.gz, isMoved:true
+added manifest
+adding: com/(in = 0) (out= 0)(stored 0%)
+adding: com/ligadata/(in = 0) (out= 0)(stored 0%)
+adding: com/ligadata/jtm/(in = 0) (out= 0)(stored 0%)
+adding: com/ligadata/jtm/V1/(in = 0) (out= 0)(stored 0%)
+adding: com/ligadata/jtm/V1/CAPTIVE_UPSTREAM_RECON_schema_common_model_code_generated_class$$anonfun$2.class(in = 1835) (out= 799)(deflated 56%)
+adding: com/ligadata/jtm/V1/CAPTIVE_UPSTREAM_RECON_schema$$anonfun$4.class(in = 1227) (out= 602)(deflated 50%)
+adding: com/ligadata/jtm/V1/CAPTIVE_UPSTREAM_RECON_schemaFactory.class(in = 2179) (out= 1232)(deflated 43%)
+adding: com/ligadata/jtm/V1/CAPTIVE_UPSTREAM_RECONDateFormatter$.class(in = 1202) (out= 584)(deflated 51%)
+adding: com/ligadata/jtm/V1/common_exeGenerated_CAPTIVE_UPSTREAM_RECON_1_process_oo.class(in = 5817) (out= 3021)(deflated 48%)
+adding: com/ligadata/jtm/V1/CAPTIVE_UPSTREAM_RECON_schema_common_model_code_generated_class$$anonfun$1.class(in = 1835) (out= 799)(deflated 56%)
+adding: com/ligadata/jtm/V1/FactoryTransDateCheckerObj$.class(in = 858) (out= 465)(deflated 45%)
+adding: com/ligadata/jtm/V1/CAPTIVE_UPSTREAM_RECON_schema$$anonfun$execute$1.class(in = 2555) (out= 1154)(deflated 54%)
+adding: com/ligadata/jtm/V1/FactoryTransDateCheckerObj.class(in = 1055) (out= 719)(deflated 31%)
+adding: com/ligadata/jtm/V1/common_exeGenerated_CAPTIVE_UPSTREAM_RECON_1$$anonfun$liftedTree36$1$1.class(in = 1935) (out= 851)(deflated 56%)
+adding: com/ligadata/jtm/V1/CAPTIVE_UPSTREAM_RECON_schema_common_model_code_generated_class.class(in = 9213) (out= 4672)(deflated 49%)
+adding: com/ligadata/jtm/V1/common_exeGenerated_CAPTIVE_UPSTREAM_RECON_1_process_o1.class(in = 6256) (out= 3188)(deflated 49%)
+adding: com/ligadata/jtm/V1/CAPTIVE_UPSTREAM_RECON_schema.class(in = 9817) (out= 4197)(deflated 57%)
+adding: com/ligadata/jtm/V1/common_exeGenerated_CAPTIVE_UPSTREAM_RECON_1.class(in = 21285) (out= 8964)(deflated 57%)
+adding: com/ligadata/jtm/V1/CAPTIVE_UPSTREAM_RECON_schema$$anonfun$3.class(in = 2020) (out= 854)(deflated 57%)
+adding: com/ligadata/jtm/V1/CAPTIVE_UPSTREAM_RECONDateFormatter.class(in = 1179) (out= 737)(deflated 37%)
+adding: com/ligadata/jtm/V1/CAPTIVE_UPSTREAM_RECON_schema$$anonfun$execute$2.class(in = 2548) (out= 1163)(deflated 54%)
+adding: CAPTIVE_UPSTREAM_RECON_schema.scala(in = 23709) (out= 5054)(deflated 78%)
+Result: {
+  "APIResults" : {
+    "Status Code" : 0,
+    "Function Name" : "AddModel",
+    "Result Data" : null,
+    "Result Description" : "Model Added Successfully:com.ligadata.jtm.CAPTIVE_UPSTREAM_RECON_schema.000000000000000001"
+  }
+}
+adding adapter bindings
+ WARN [main] - DATABASE_SCHEMA remains unset
+ WARN [main] - DATABASE_LOCATION remains unset
+ WARN [main] - DATABASE_HOST remains unset
+ WARN [main] - ADAPTER_SPECIFIC_CONFIG remains unset
+ WARN [main] - SSL_PASSWD remains unset
+ WARN [main] - AUDIT_PARMS remains unset
+ WARN [main] - DATABASE remains unset
+/home/daasuser/FlareCluster/Flare_3.1.20.2711_20211119-183544/logs/Archive/2022-09-11/KamanjaManager/KamanjaLog-2022-09-11-18-1.log.gz => /home/daasuser/FlareCluster/Flare_3.1.20.2711_20211119-183544/ArchivedLogs/Archive/2022-09-11/KamanjaManager/KamanjaLog-2022-09-11-18-1-1662917049470.log.gz, isMoved:true
+Result: 
+[
+{
+  "APIResults" : {
+    "Status Code" : 0,
+    "Function Name" : "AddAdapterMessageBinding",
+    "Result Data" : "hdfs_output_adapter_encr,com.mtn.messages.captive_upstream_recon,com.ligadata.kamanja.serializer.csvserdeser",
+    "Result Description" : "added."
+  }
+}
+]

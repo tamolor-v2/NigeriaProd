@@ -1,0 +1,34 @@
+{
+  "Message":{
+    "NameSpace":"com.mtn.messages",
+    "Name":"FLYTXT_MAIN_ACCT_BALANCE",
+    "Version":"00.01.00",
+    "Description":"",
+    "Fixed":"true",
+    "Fields":[{
+      "Name":"msisdn_key",
+      "Type":"Long"
+    },{
+      "Name":"chargeable_event_type",
+      "Type":"String"
+    },{
+      "Name":"band_type",
+      "Type":"String"
+    },{
+      "Name":"balance",
+      "Type":"Double"
+    },{
+      "Name":"original_timestamp_enrich",
+      "Type":"String"
+    },{
+      "Name":"tbl_dt",
+      "Type":"Int"
+    }],
+    "TimePartitionInfo":{
+      "Key":"tbl_dt",
+      "Format":"yyyyMMdd",
+      "Type":"Daily"
+    },
+    "PartitionKey":["msisdn_key"]
+  }
+}

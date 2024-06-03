@@ -1,0 +1,9 @@
+[ {
+  "AdapterName" : "flytxt_data_bundle_expiry",
+  "MessageNames" : [ "com.mtn.messages.FLYTXT_DATA_BUNDLE_EXPIRY" ],
+  "Options" : {
+    "alwaysQuoteFields" : false,
+    "fieldDelimiter" : ","
+  },
+  "Serializer" : "com.ligadata.kamanja.serializer.csvserdeser"
+} ]
