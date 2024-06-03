@@ -1,0 +1,408 @@
+import airflow
+from airflow.models import DAG
+from airflow.operators.python_operator import PythonOperator
+from airflow.operators.subdag import SubDagOperator
+from datetime import datetime, timedelta
+from airflow.models import Variable
+from airflow.executors.celery_executor import CeleryExecutor
+from big_eye_autorenewca import getSubDag_BigEyeAutorenewca
+from big_eye_autorenewcd import getSubDag_BigEyeAutorenewcd
+from big_eye_autorenewcm import getSubDag_BigEyeAutorenewcm
+from big_eye_autorenewcq import getSubDag_BigEyeAutorenewcq
+from big_eye_autorenewcy import getSubDag_BigEyeAutorenewcy
+from big_eye_dataccpre1 import getSubDag_BigEyeDataccpre1
+from big_eye_dataccpre2 import getSubDag_BigEyeDataccpre2
+from big_eye_datacd import getSubDag_BigEyeDatacd
+from big_eye_datacda import getSubDag_BigEyeDatacda
+from big_eye_datagd import getSubDag_BigEyeDatagd
+from big_eye_datagda import getSubDag_BigEyeDatagda
+from big_eye_datagdaa import getSubDag_BigEyeDatagdaa
+from big_eye_datapld import getSubDag_BigEyeDatapld
+from big_eye_devd import getSubDag_BigEyeDevd
+from big_eye_rchd import getSubDag_BigEyeRchd
+from big_eye_rchd_cube import getSubDag_BigEyeRchdCube
+from big_eye_rchh import getSubDag_BigEyeRchh
+from big_eye_rchh_cube import getSubDag_BigEyeRchhCube
+from big_eye_subd import getSubDag_BigEyeSubd
+from big_eye_subda import getSubDag_BigEyeSubda
+from big_eye_subdd import getSubDag_BigEyeSubdd
+from big_eye_proj import getSubDag_BigEyeProj
+from big_eye_dailycube import getSubDag_BigEyeDailyCube
+from big_eye_monthlycube import getSubDag_BigEyeMonthlyCube
+from big_eye_dataccma import getSubDag_BigEyeDataccma
+from big_eye_dataccda import getSubDag_BigEyeDataccda
+from runPresto import presto
+
+sharedPath = "/nas/share05/sql/templates/be/"
+
+args = {
+    'owner': 'MTN Nigeria',
+    'depends_on_past':False,
+    'start_date': airflow.utils.dates.days_ago(1),
+    'email': ['y.bloukh@ligadata.com'],
+    'email_on_failure': ['y.bloukh@ligadata.com'],
+    'email_on_retry': False,
+    'retries': 10,
+    'retry_delay': timedelta(minutes=1),
+    'catchup':False,
+}
+
+dag = DAG('Big_Eye_Main',
+    default_args=args,
+    schedule_interval= "0 */12 * * * ",
+    catchup=False,
+    concurrency=1,
+    max_active_runs=1)
+
+
+def setVariable():
+        lastRunID =  Variable.get("BigEyeLastRunID", deserialize_json=False)
+        if lastRunID == "0":
+                runId = datetime.now().strftime("%Y%m%d%H%M%S")
+                lastRunID = Variable.set("BigEyeLastRunID","{}".format(runId))
+        else :
+             raise ValueError('LastRunID check did not pass, please check if another run is in progress, or clear the variable so it is 0')
+
+def resetVariable():
+        varRunId = Variable.set("BigEyeLastRunID","0")
+
+
+start_big_eye=PythonOperator(
+    task_id = 'start_big_eye',
+    python_callable=setVariable,
+    dag=dag,
+    run_as_user = 'daasuser'
+)
+
+big_eye_proj = SubDagOperator(
+    task_id='big_eye_proj',
+    subdag=getSubDag_BigEyeProj('Big_Eye_Main', 'big_eye_proj', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+
+big_eye_subd = SubDagOperator(
+    task_id='big_eye_subd',
+    subdag=getSubDag_BigEyeSubd('Big_Eye_Main', 'big_eye_subd', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+
+big_eye_subdd = SubDagOperator(
+    task_id='big_eye_subdd',
+    subdag=getSubDag_BigEyeSubdd('Big_Eye_Main', 'big_eye_subdd', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+
+big_eye_subda = SubDagOperator(
+    task_id='big_eye_subda',
+    subdag=getSubDag_BigEyeSubda('Big_Eye_Main', 'big_eye_subda', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+
+big_eye_autorenewca = SubDagOperator(
+    task_id='big_eye_autorenewca',
+    subdag=getSubDag_BigEyeAutorenewca('Big_Eye_Main', 'big_eye_autorenewca', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+big_eye_autorenewcd = SubDagOperator(
+    task_id='big_eye_autorenewcd',
+    subdag=getSubDag_BigEyeAutorenewcd('Big_Eye_Main', 'big_eye_autorenewcd', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+big_eye_autorenewcm = SubDagOperator(
+    task_id='big_eye_autorenewcm',
+    subdag=getSubDag_BigEyeAutorenewcm('Big_Eye_Main', 'big_eye_autorenewcm', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+big_eye_autorenewcq = SubDagOperator(
+    task_id='big_eye_autorenewcq',
+    subdag=getSubDag_BigEyeAutorenewcq('Big_Eye_Main', 'big_eye_autorenewcq', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+big_eye_autorenewcy = SubDagOperator(
+    task_id='big_eye_autorenewcy',
+    subdag=getSubDag_BigEyeAutorenewcy('Big_Eye_Main', 'big_eye_autorenewcy', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+big_eye_dataccpre1 = SubDagOperator(
+    task_id='big_eye_dataccpre1',
+    subdag=getSubDag_BigEyeDataccpre1('Big_Eye_Main', 'big_eye_dataccpre1', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+big_eye_dataccpre2 = SubDagOperator(
+    task_id='big_eye_dataccpre2',
+    subdag=getSubDag_BigEyeDataccpre2('Big_Eye_Main', 'big_eye_dataccpre2', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+big_eye_datacd = SubDagOperator(
+    task_id='big_eye_datacd',
+    subdag=getSubDag_BigEyeDatacd('Big_Eye_Main', 'big_eye_datacd', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+big_eye_datacda = SubDagOperator(
+    task_id='big_eye_datacda',
+    subdag=getSubDag_BigEyeDatacda('Big_Eye_Main', 'big_eye_datacda', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+big_eye_datagd = SubDagOperator(
+    task_id='big_eye_datagd',
+    subdag=getSubDag_BigEyeDatagd('Big_Eye_Main', 'big_eye_datagd', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+big_eye_datagda = SubDagOperator(
+    task_id='big_eye_datagda',
+    subdag=getSubDag_BigEyeDatagda('Big_Eye_Main', 'big_eye_datagda', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+big_eye_datagdaa = SubDagOperator(
+    task_id='big_eye_datagdaa',
+    subdag=getSubDag_BigEyeDatagdaa('Big_Eye_Main', 'big_eye_datagdaa', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+big_eye_datapld = SubDagOperator(
+    task_id='big_eye_datapld',
+    subdag=getSubDag_BigEyeDatapld('Big_Eye_Main', 'big_eye_datapld', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+big_eye_devd = SubDagOperator(
+    task_id='big_eye_devd',
+    subdag=getSubDag_BigEyeDevd('Big_Eye_Main', 'big_eye_devd', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+big_eye_rchd = SubDagOperator(
+    task_id='big_eye_rchd',
+    subdag=getSubDag_BigEyeRchd('Big_Eye_Main', 'big_eye_rchd', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+big_eye_rchdcube = SubDagOperator(
+    task_id='big_eye_rchdcube',
+    subdag=getSubDag_BigEyeRchdCube('Big_Eye_Main', 'big_eye_rchdcube', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+big_eye_rchh = SubDagOperator(
+    task_id='big_eye_rchh',
+    subdag=getSubDag_BigEyeRchh('Big_Eye_Main', 'big_eye_rchh', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+big_eye_rchhcube = SubDagOperator(
+    task_id='big_eye_rchhcube',
+    subdag=getSubDag_BigEyeRchhCube('Big_Eye_Main', 'big_eye_rchhcube', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+
+big_eye_dailycube = SubDagOperator(
+    task_id='big_eye_dailycube',
+    subdag=getSubDag_BigEyeDailyCube('Big_Eye_Main', 'big_eye_dailycube', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+
+big_eye_monthlycube = SubDagOperator(
+    task_id='big_eye_monthlycube',
+    subdag=getSubDag_BigEyeMonthlyCube('Big_Eye_Main', 'big_eye_monthlycube', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+
+big_eye_dataccma = SubDagOperator(
+    task_id='big_eye_dataccma',
+    subdag=getSubDag_BigEyeDataccma('Big_Eye_Main', 'big_eye_dataccma', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+
+big_eye_dataccda = SubDagOperator(
+    task_id='big_eye_dataccda',
+    subdag=getSubDag_BigEyeDataccda('Big_Eye_Main', 'big_eye_dataccda', args),
+    default_args=args,
+    executor=CeleryExecutor(),
+    priority_weight = 16,
+    dag=dag,
+    run_as_user = 'daasuser')
+
+finish_big_eye=PythonOperator(
+    task_id = 'finish_big_eye',
+    python_callable=resetVariable,
+    dag=dag,
+    run_as_user = 'daasuser'
+)
+def dummyop():
+    print("Dummy Operator")
+
+finishRecharge=PythonOperator(
+    task_id = 'finishRecharge',
+    python_callable=dummyop,
+    dag=dag,
+    run_as_user = 'daasuser'
+)
+finishData=PythonOperator(
+    task_id = 'finishData',
+    python_callable=dummyop,
+    dag=dag,
+    run_as_user = 'daasuser'
+)
+finishSubscriber=PythonOperator(
+    task_id = 'finishSubscriber',
+    python_callable=dummyop,
+    dag=dag,
+    run_as_user = 'daasuser'
+)
+finishProj=PythonOperator(
+    task_id = 'finishProj',
+    python_callable=dummyop,
+    dag=dag,
+    run_as_user = 'daasuser'
+)
+
+#NEW LINES 
+prestoHost='10.1.197.145'
+prestoPort='8999'
+prestoCatalog='hive5'
+prestojarPath='/nas/share05/tools/TransactionsTool/presto-jdbc-350.jar'
+oPresto=presto(host=prestoHost,port=prestoPort,catalog=prestoCatalog,username='daasuser',jarPath=prestojarPath)
+
+def readall(path,num):
+    file = open(path,mode='r')
+    readQuery = file.read()
+    return str(readQuery).replace("yyyymmdd",datetime.now().strftime('%Y%m%d')).replace("vhr",str(num))
+
+
+def excQ(p,q):
+    print(q)
+    res = p.executeQuery(q,True)
+    return str(res[0][0])
+
+def excT(p,q):
+    res = p.executeTransaction(q)
+    print(res)
+    return res
+
+
+big_eye_rchAll_0 = PythonOperator(task_id = 'be_rchd2_0',depends_on_past=False,python_callable=excQ,op_args=[oPresto,readall("{sharedPath}/{ftr}".format(sharedPath=sharedPath,ftr="be_rchd2_1_20191101.sql"),0)],dag=dag,run_as_user = 'daasuser')
+big_eye_rchAll_1 = PythonOperator(task_id = 'be_rchd2_1',depends_on_past=False,python_callable=excQ,op_args=[oPresto,readall("{sharedPath}/{ftr}".format(sharedPath=sharedPath,ftr="be_rchd2_1_20191101.sql"),1)],dag=dag,run_as_user = 'daasuser')
+big_eye_rchAll_2 = PythonOperator(task_id = 'be_rchd2_2',depends_on_past=False,python_callable=excQ,op_args=[oPresto,readall("{sharedPath}/{ftr}".format(sharedPath=sharedPath,ftr="be_rchd2_1_20191101.sql"),2)],dag=dag,run_as_user = 'daasuser')
+big_eye_rchAll_3 = PythonOperator(task_id = 'be_rchd2_3',depends_on_past=False,python_callable=excQ,op_args=[oPresto,readall("{sharedPath}/{ftr}".format(sharedPath=sharedPath,ftr="be_rchd2_1_20191101.sql"),3)],dag=dag,run_as_user = 'daasuser')
+big_eye_rchAll_4 = PythonOperator(task_id = 'be_rchd2_4',depends_on_past=False,python_callable=excQ,op_args=[oPresto,readall("{sharedPath}/{ftr}".format(sharedPath=sharedPath,ftr="be_rchd2_1_20191101.sql"),4)],dag=dag,run_as_user = 'daasuser')
+big_eye_rchAll_5 = PythonOperator(task_id = 'be_rchd2_5',depends_on_past=False,python_callable=excQ,op_args=[oPresto,readall("{sharedPath}/{ftr}".format(sharedPath=sharedPath,ftr="be_rchd2_1_20191101.sql"),5)],dag=dag,run_as_user = 'daasuser')
+big_eye_rchAll_6 = PythonOperator(task_id = 'be_rchd2_6',depends_on_past=False,python_callable=excQ,op_args=[oPresto,readall("{sharedPath}/{ftr}".format(sharedPath=sharedPath,ftr="be_rchd2_1_20191101.sql"),6)],dag=dag,run_as_user = 'daasuser')
+big_eye_rchAll_7 = PythonOperator(task_id = 'be_rchd2_7',depends_on_past=False,python_callable=excQ,op_args=[oPresto,readall("{sharedPath}/{ftr}".format(sharedPath=sharedPath,ftr="be_rchd2_1_20191101.sql"),7)],dag=dag,run_as_user = 'daasuser')
+big_eye_rchAll_8 = PythonOperator(task_id = 'be_rchd2_8',depends_on_past=False,python_callable=excQ,op_args=[oPresto,readall("{sharedPath}/{ftr}".format(sharedPath=sharedPath,ftr="be_rchd2_1_20191101.sql"),8)],dag=dag,run_as_user = 'daasuser')
+big_eye_rchAll_9 = PythonOperator(task_id = 'be_rchd2_9',depends_on_past=False,python_callable=excQ,op_args=[oPresto,readall("{sharedPath}/{ftr}".format(sharedPath=sharedPath,ftr="be_rchd2_1_20191101.sql"),9)],dag=dag,run_as_user = 'daasuser')
+
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_0 >> big_eye_rchdcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_1 >> big_eye_rchdcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_2 >> big_eye_rchdcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_3 >> big_eye_rchdcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_4 >> big_eye_rchdcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_5 >> big_eye_rchdcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_6 >> big_eye_rchdcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_7 >> big_eye_rchdcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_8 >> big_eye_rchdcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_9 >> big_eye_rchdcube
+
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_0 >> big_eye_rchhcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_1 >> big_eye_rchhcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_2 >> big_eye_rchhcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_3 >> big_eye_rchhcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_4 >> big_eye_rchhcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_5 >> big_eye_rchhcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_6 >> big_eye_rchhcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_7 >> big_eye_rchhcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_8 >> big_eye_rchhcube
+big_eye_rchd >> big_eye_rchh >> big_eye_rchAll_9 >> big_eye_rchhcube
+
+#END NEW LINES
+big_eye_subdd >> big_eye_datacd >> big_eye_datacda >> big_eye_autorenewca >> finishData
+big_eye_datacd >> big_eye_datacda >> big_eye_autorenewcd >> finishData >> finish_big_eye
+big_eye_datacd >> big_eye_datacda >> big_eye_autorenewcm >> finishData >> finish_big_eye
+big_eye_datacd >> big_eye_datacda >> big_eye_autorenewcq >> finishData >> finish_big_eye
+big_eye_datacd >> big_eye_datacda >> big_eye_autorenewcy >> finishData >> finish_big_eye
+big_eye_subdd >> big_eye_dataccpre1
+big_eye_datacd >> big_eye_datacda >> big_eye_dataccpre2
+big_eye_datacd >> big_eye_datacda >> big_eye_datapld >> finishData >> finish_big_eye
+big_eye_datagd >> big_eye_datagda >> big_eye_datagdaa >> finishData >> finish_big_eye
+big_eye_subdd >> big_eye_datagd >> big_eye_datagda >> big_eye_devd >> finishData >> finish_big_eye
+big_eye_subdd >> big_eye_rchd >> big_eye_rchh >> big_eye_rchdcube >> finishRecharge >> finish_big_eye
+big_eye_subdd >> big_eye_rchd >> big_eye_rchh >> big_eye_rchhcube >> finishRecharge >> finish_big_eye
+[big_eye_dataccpre1, big_eye_dataccpre2] >> big_eye_dailycube >> big_eye_dataccda >> finishData >> finish_big_eye
+[big_eye_dataccpre1, big_eye_dataccpre2] >> big_eye_monthlycube >> big_eye_dataccma >> finishData >> finish_big_eye
+start_big_eye >> big_eye_proj
+start_big_eye >> big_eye_subd
+big_eye_subd >> big_eye_subdd
+big_eye_subdd >> big_eye_subda
+big_eye_subda >> finishSubscriber >> finish_big_eye
+big_eye_proj >> finishProj >> finish_big_eye
+finishSubscriber >> finishProj
+finishSubscriber >> finishData
+finishSubscriber >> finishRecharge
