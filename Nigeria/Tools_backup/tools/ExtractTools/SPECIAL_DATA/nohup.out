@@ -1,0 +1,5 @@
+bash: /mnt/beegfs/tools/JsonBuilder/JsonBuilder.scala: No such file or directory
+cat: /mnt/beegfs/tools/Crontab/Scripts/email.dat: No such file or directory
+rm: cannot remove ‘/mnt/beegfs_bsl/tools/ExtractTools/SPECIAL_DATA/logs/20190530’: No such file or directory
+SPECIAL_DATA.sh: line 16: /mnt/beegfs/tools/Crontab/logs/general_logs/20190729/genral_logs_20190729.log: No such file or directory
+starting command: bash /home/daasuser/JDBC_Tool/JDBCExtract.scala --configFile /nas/share05/tools/ExtractTools/SPECIAL_DATA/config.properties --sqlFile /nas/share05/tools/ExtractTools/SPECIAL_DATA/query_template.sql --outputFile /nas/share05/tools/ExtractTools/SPECIAL_DATA/tmp/20190728/.20190728_AYA_SPECIAL_DATA.gz --delimiter | --kvTemplate ${DATE}=20190728

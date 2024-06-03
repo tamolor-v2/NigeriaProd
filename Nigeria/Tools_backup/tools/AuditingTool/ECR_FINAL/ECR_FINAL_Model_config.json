@@ -1,0 +1,17 @@
+{
+  "ECR_FINALModel": {
+    "Dependencies": ["commons-csv-1.4.jar","enrichmentutilis_2.11-1.0.jar","transactiondateutil_2.11-1.5.3.jar"],
+	"MessageAndContainers": [
+      "com.mtn.messages.ecr_final_input",
+      "com.mtn.messages.ECR_FINAL"
+    ],
+    "InputTypesSets": [
+      [
+        "com.mtn.messages.ecr_final_input"
+      ]
+    ],
+    "OutputTypes": [
+      "com.mtn.messages.ECR_FINAL"
+    ]
+  }
+}

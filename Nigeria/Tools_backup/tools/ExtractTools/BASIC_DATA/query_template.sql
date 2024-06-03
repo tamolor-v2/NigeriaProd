@@ -1,0 +1,23 @@
+select
+ID, 
+translate(BIOMETRIC_CAPTURE_AGENT, chr(10)||chr(11)||chr(13) , ' '), 
+translate(BIRTHDAY, chr(10)||chr(11)||chr(13) , ' '), 
+translate(BD_PART_KEY, chr(10)||chr(11)||chr(13) , ' '), 
+translate(FIRSTNAME, chr(10)||chr(11)||chr(13) , ' '), 
+translate(GENDER,chr(10)||chr(11)||chr(13) , ' '), 
+IS_PROCESSED, 
+translate(LAST_BASIC_DATA_EDIT_AGENT, chr(10)||chr(11)||chr(13) , ' '), 
+translate(LAST_BASIC_DATA_EDIT_LOGIN_ID, chr(10)||chr(11)||chr(13) , ' '), 
+MATCH_FOUND, 
+translate(MATCH_ID, chr(10)||chr(11)||chr(13) , ' '), 
+translate(OTHERNAME, chr(10)||chr(11)||chr(13) , ' '), 
+translate(SMS_STATUS, chr(10)||chr(11)||chr(13) , ' '), 
+translate(SURNAME, chr(10)||chr(11)||chr(13) , ' '), 
+translate(SV_INIT_TIMESTAMP, chr(10)||chr(11)||chr(13) , ' '), 
+translate(SV_PUSH_TIMESTAMP, chr(10)||chr(11)||chr(13) , ' '), 
+translate(SV_STATUS, chr(10)||chr(11)||chr(13) , ' '), 
+translate(SYNC_STATUS, chr(10)||chr(11)||chr(13) , ' '), 
+STATE_OF_REGISTRATION_FK, 
+USER_ID_FK, 
+translate(TYPE, chr(10)||chr(11)||chr(13) , ' ')
+from BIOCAPTURE.BASIC_DATA  WHERE SUBSTR(id,-1,1)='${MSSDN}'  --${DATE}

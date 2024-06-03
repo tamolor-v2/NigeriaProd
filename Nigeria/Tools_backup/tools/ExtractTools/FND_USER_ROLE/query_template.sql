@@ -1,0 +1,5 @@
+select  
+IDENTITY, 
+OBJID, 
+OBJVERSION, 
+ROLE  from IFSAPP.FND_USER_ROLE  

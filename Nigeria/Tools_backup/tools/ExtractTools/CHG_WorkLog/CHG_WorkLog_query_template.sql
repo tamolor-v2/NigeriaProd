@@ -1,0 +1,1 @@
+select Detailed_Description,Infrastructure_Change_ID,Work_Log_Type from aradmin.CHG_WorkLog

@@ -1,0 +1,124 @@
+ INFO [main] - 2019:03:26 08:59:48 main: adding include file filter - .*\.tar.gz$
+ERROR [main] - 2019:03:26 08:59:48 main: given input path doesn't exist - -idf
+ERROR [main] - 2019:03:26 08:59:48 main: given input path doesn't exist - 201903
+ INFO [main] - 2019:03:26 08:59:48 main: Processing input path - /nas/share05/archived/SDP_ACC_ADJ_MA
+ INFO [main] - 2019:03:26 08:59:48 main: Creating initial direcotry work unit and placing into queue, input path: /nas/share05/archived/SDP_ACC_ADJ_MA, full path: /nas/share05/archived/SDP_ACC_ADJ_MA, name: SDP_ACC_ADJ_MA, modified: 1552228351000
+ INFO [main] - 2019:03:26 08:59:48 with parallelism: dirs: 4, files: 32, depth: 15, maxFiles: 1000000000
+ INFO [main] - 2019:03:26 08:59:48 Created file to write file information - /nas/share05/archived/SPOOL/WAHEED/report/latest/fileinfo-SDP_ACC_ADJ_MA-20190326_085948_468-001.txt.gz
+ INFO [main] - 2019:03:26 08:59:48 main: added new file collection @ 0/4
+ INFO [main] - 2019:03:26 08:59:48 Created file to write file information - /nas/share05/archived/SPOOL/WAHEED/report/latest/fileinfo-SDP_ACC_ADJ_MA-20190326_085948_468-002.txt.gz
+ INFO [main] - 2019:03:26 08:59:48 main: added new file collection @ 1/4
+ INFO [main] - 2019:03:26 08:59:48 Created file to write file information - /nas/share05/archived/SPOOL/WAHEED/report/latest/fileinfo-SDP_ACC_ADJ_MA-20190326_085948_468-003.txt.gz
+ INFO [main] - 2019:03:26 08:59:48 main: added new file collection @ 2/4
+ INFO [main] - 2019:03:26 08:59:48 Created file to write file information - /nas/share05/archived/SPOOL/WAHEED/report/latest/fileinfo-SDP_ACC_ADJ_MA-20190326_085948_468-004.txt.gz
+ INFO [main] - 2019:03:26 08:59:48 main: added new file collection @ 3/4
+ INFO [main] - 2019:03:26 08:59:48 main: number of file collections: - 4, 
+ INFO [main] - 2019:03:26 08:59:48 main: Successfully validated arguments, output path: /nas/share05/archived/SPOOL/WAHEED/report/latest, out full path: /nas/share05/archived/SPOOL/WAHEED/report/latest, out path pattern: 
+ INFO [main] - 2019:03:26 08:59:48 Elapsed:265 ms, in queue: dirs - 7; files - 0, processed: dirs - 14, files: 0, In FCs: count - 0, size - 0, ActiveCount: 13
+ INFO [main] - 2019:03:26 08:59:49 Elapsed:1265 ms, in queue: dirs - 0; files - 11044, processed: dirs - 492, files: 11961, In FCs: count - 885, size - 0, ActiveCount: 11076
+ INFO [main] - 2019:03:26 08:59:50 Elapsed:2266 ms, in queue: dirs - 0; files - 10772, processed: dirs - 492, files: 11961, In FCs: count - 1157, size - 0, ActiveCount: 10804
+ INFO [main] - 2019:03:26 08:59:51 Elapsed:3267 ms, in queue: dirs - 0; files - 10537, processed: dirs - 492, files: 11961, In FCs: count - 1392, size - 0, ActiveCount: 10569
+ INFO [main] - 2019:03:26 08:59:52 Elapsed:4267 ms, in queue: dirs - 0; files - 10216, processed: dirs - 492, files: 11961, In FCs: count - 1713, size - 0, ActiveCount: 10248
+ INFO [main] - 2019:03:26 08:59:53 Elapsed:5290 ms, in queue: dirs - 0; files - 9718, processed: dirs - 492, files: 11961, In FCs: count - 2211, size - 0, ActiveCount: 9750
+ INFO [main] - 2019:03:26 08:59:54 Elapsed:6291 ms, in queue: dirs - 0; files - 9584, processed: dirs - 492, files: 11961, In FCs: count - 2346, size - 0, ActiveCount: 9616
+ INFO [main] - 2019:03:26 08:59:55 Elapsed:7291 ms, in queue: dirs - 0; files - 9448, processed: dirs - 492, files: 11961, In FCs: count - 2481, size - 0, ActiveCount: 9480
+ INFO [main] - 2019:03:26 08:59:56 Elapsed:8295 ms, in queue: dirs - 0; files - 9286, processed: dirs - 492, files: 11961, In FCs: count - 2643, size - 0, ActiveCount: 9318
+ INFO [main] - 2019:03:26 08:59:57 Elapsed:9296 ms, in queue: dirs - 0; files - 9130, processed: dirs - 492, files: 11961, In FCs: count - 2799, size - 0, ActiveCount: 9162
+ INFO [main] - 2019:03:26 08:59:58 Elapsed:10296 ms, in queue: dirs - 0; files - 8315, processed: dirs - 492, files: 11961, In FCs: count - 3614, size - 0, ActiveCount: 8347
+ INFO [main] - 2019:03:26 08:59:59 Elapsed:11296 ms, in queue: dirs - 0; files - 8174, processed: dirs - 492, files: 11961, In FCs: count - 3755, size - 0, ActiveCount: 8206
+ INFO [main] - 2019:03:26 09:00:00 Elapsed:12297 ms, in queue: dirs - 0; files - 8028, processed: dirs - 492, files: 11961, In FCs: count - 3901, size - 0, ActiveCount: 8060
+ INFO [main] - 2019:03:26 09:00:01 Elapsed:13297 ms, in queue: dirs - 0; files - 7887, processed: dirs - 492, files: 11961, In FCs: count - 4042, size - 0, ActiveCount: 7919
+ INFO [main] - 2019:03:26 09:00:02 Elapsed:14298 ms, in queue: dirs - 0; files - 7737, processed: dirs - 492, files: 11961, In FCs: count - 4192, size - 0, ActiveCount: 7769
+ INFO [main] - 2019:03:26 09:00:03 Elapsed:15299 ms, in queue: dirs - 0; files - 7591, processed: dirs - 492, files: 11961, In FCs: count - 4338, size - 0, ActiveCount: 7623
+ INFO [main] - 2019:03:26 09:00:04 Elapsed:16299 ms, in queue: dirs - 0; files - 7446, processed: dirs - 492, files: 11961, In FCs: count - 4483, size - 0, ActiveCount: 7478
+ INFO [main] - 2019:03:26 09:00:05 Elapsed:17300 ms, in queue: dirs - 0; files - 7287, processed: dirs - 492, files: 11961, In FCs: count - 4642, size - 0, ActiveCount: 7319
+ INFO [main] - 2019:03:26 09:00:06 Elapsed:18301 ms, in queue: dirs - 0; files - 7136, processed: dirs - 492, files: 11961, In FCs: count - 4793, size - 0, ActiveCount: 7168
+ INFO [main] - 2019:03:26 09:00:07 Elapsed:19302 ms, in queue: dirs - 0; files - 6997, processed: dirs - 492, files: 11961, In FCs: count - 4932, size - 0, ActiveCount: 7029
+ INFO [main] - 2019:03:26 09:00:08 Elapsed:20302 ms, in queue: dirs - 0; files - 6848, processed: dirs - 492, files: 11961, In FCs: count - 5081, size - 0, ActiveCount: 6880
+ INFO [main] - 2019:03:26 09:00:09 Elapsed:21303 ms, in queue: dirs - 0; files - 6588, processed: dirs - 492, files: 11961, In FCs: count - 5341, size - 0, ActiveCount: 6620
+ INFO [main] - 2019:03:26 09:00:10 Elapsed:22304 ms, in queue: dirs - 0; files - 5504, processed: dirs - 492, files: 11961, In FCs: count - 6425, size - 0, ActiveCount: 5536
+ INFO [main] - 2019:03:26 09:00:11 Elapsed:23304 ms, in queue: dirs - 0; files - 5136, processed: dirs - 492, files: 11961, In FCs: count - 6793, size - 0, ActiveCount: 5168
+ INFO [main] - 2019:03:26 09:00:12 Elapsed:24305 ms, in queue: dirs - 0; files - 4988, processed: dirs - 492, files: 11961, In FCs: count - 6941, size - 0, ActiveCount: 5020
+ INFO [main] - 2019:03:26 09:00:13 Elapsed:25306 ms, in queue: dirs - 0; files - 4841, processed: dirs - 492, files: 11961, In FCs: count - 7088, size - 0, ActiveCount: 4873
+ INFO [main] - 2019:03:26 09:00:14 Elapsed:26306 ms, in queue: dirs - 0; files - 4686, processed: dirs - 492, files: 11961, In FCs: count - 7243, size - 0, ActiveCount: 4718
+ INFO [main] - 2019:03:26 09:00:15 Elapsed:27307 ms, in queue: dirs - 0; files - 4536, processed: dirs - 492, files: 11961, In FCs: count - 7394, size - 0, ActiveCount: 4568
+ INFO [main] - 2019:03:26 09:00:16 Elapsed:28308 ms, in queue: dirs - 0; files - 4389, processed: dirs - 492, files: 11961, In FCs: count - 7540, size - 0, ActiveCount: 4421
+ INFO [main] - 2019:03:26 09:00:17 Elapsed:29308 ms, in queue: dirs - 0; files - 4243, processed: dirs - 492, files: 11961, In FCs: count - 7686, size - 0, ActiveCount: 4275
+ INFO [main] - 2019:03:26 09:00:18 Elapsed:30309 ms, in queue: dirs - 0; files - 4073, processed: dirs - 492, files: 11961, In FCs: count - 7856, size - 0, ActiveCount: 4105
+ INFO [main] - 2019:03:26 09:00:19 Elapsed:31309 ms, in queue: dirs - 0; files - 3868, processed: dirs - 492, files: 11961, In FCs: count - 8061, size - 0, ActiveCount: 3900
+ INFO [main] - 2019:03:26 09:00:20 Elapsed:32310 ms, in queue: dirs - 0; files - 3660, processed: dirs - 492, files: 11961, In FCs: count - 8269, size - 0, ActiveCount: 3692
+ERROR [FileOps-1-thread-22] - 2019:03:26 09:00:21 searchForFile fail 
+java.io.EOFException
+	at org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream.read(GzipCompressorInputStream.java:243) ~[FileOps_2.11-0.1-SNAPSHOT.jar:0.1-SNAPSHOT]
+	at org.apache.commons.compress.archivers.tar.TarBuffer.readBlock(TarBuffer.java:224) ~[FileOps_2.11-0.1-SNAPSHOT.jar:0.1-SNAPSHOT]
+	at org.apache.commons.compress.archivers.tar.TarBuffer.readRecord(TarBuffer.java:195) ~[FileOps_2.11-0.1-SNAPSHOT.jar:0.1-SNAPSHOT]
+	at org.apache.commons.compress.archivers.tar.TarArchiveInputStream.read(TarArchiveInputStream.java:497) ~[FileOps_2.11-0.1-SNAPSHOT.jar:0.1-SNAPSHOT]
+	at org.apache.commons.compress.archivers.tar.TarArchiveInputStream.skip(TarArchiveInputStream.java:185) ~[FileOps_2.11-0.1-SNAPSHOT.jar:0.1-SNAPSHOT]
+	at org.apache.commons.compress.archivers.tar.TarArchiveInputStream.getNextTarEntry(TarArchiveInputStream.java:223) ~[FileOps_2.11-0.1-SNAPSHOT.jar:0.1-SNAPSHOT]
+	at org.apache.commons.compress.archivers.tar.TarArchiveInputStream.getNextEntry(TarArchiveInputStream.java:446) ~[FileOps_2.11-0.1-SNAPSHOT.jar:0.1-SNAPSHOT]
+	at FileOps$.searchForFile(FileOps.scala:1515) [FileOps_2.11-0.1-SNAPSHOT.jar:?]
+	at FileOps$.searchForFile(FileOps.scala:1477) [FileOps_2.11-0.1-SNAPSHOT.jar:?]
+	at FileOps$.ProcessFile(FileOps.scala:1438) [FileOps_2.11-0.1-SNAPSHOT.jar:?]
+	at FileOps$.collect(FileOps.scala:1679) [FileOps_2.11-0.1-SNAPSHOT.jar:?]
+	at FileOps$StartProcessFile.run(FileOps.scala:964) [FileOps_2.11-0.1-SNAPSHOT.jar:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [?:1.8.0_181]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [?:1.8.0_181]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_181]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_181]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_181]
+ INFO [main] - 2019:03:26 09:00:21 Elapsed:33310 ms, in queue: dirs - 0; files - 3379, processed: dirs - 492, files: 11961, In FCs: count - 8550, size - 0, ActiveCount: 3411
+ INFO [main] - 2019:03:26 09:00:22 Elapsed:34311 ms, in queue: dirs - 0; files - 3193, processed: dirs - 492, files: 11961, In FCs: count - 8736, size - 0, ActiveCount: 3225
+ INFO [main] - 2019:03:26 09:00:23 Elapsed:35311 ms, in queue: dirs - 0; files - 3001, processed: dirs - 492, files: 11961, In FCs: count - 8928, size - 0, ActiveCount: 3033
+ INFO [main] - 2019:03:26 09:00:24 Elapsed:36312 ms, in queue: dirs - 0; files - 2814, processed: dirs - 492, files: 11961, In FCs: count - 9115, size - 0, ActiveCount: 2846
+ INFO [main] - 2019:03:26 09:00:25 Elapsed:37313 ms, in queue: dirs - 0; files - 2624, processed: dirs - 492, files: 11961, In FCs: count - 9305, size - 0, ActiveCount: 2656
+ INFO [main] - 2019:03:26 09:00:26 Elapsed:38314 ms, in queue: dirs - 0; files - 2455, processed: dirs - 492, files: 11961, In FCs: count - 9474, size - 0, ActiveCount: 2487
+ INFO [main] - 2019:03:26 09:00:27 Elapsed:39315 ms, in queue: dirs - 0; files - 2315, processed: dirs - 492, files: 11961, In FCs: count - 9614, size - 0, ActiveCount: 2347
+ INFO [main] - 2019:03:26 09:00:28 Elapsed:40315 ms, in queue: dirs - 0; files - 2169, processed: dirs - 492, files: 11961, In FCs: count - 9760, size - 0, ActiveCount: 2201
+ INFO [main] - 2019:03:26 09:00:29 Elapsed:41316 ms, in queue: dirs - 0; files - 1972, processed: dirs - 492, files: 11961, In FCs: count - 9957, size - 0, ActiveCount: 2004
+ INFO [main] - 2019:03:26 09:00:30 Elapsed:42316 ms, in queue: dirs - 0; files - 1786, processed: dirs - 492, files: 11961, In FCs: count - 10143, size - 0, ActiveCount: 1818
+ INFO [main] - 2019:03:26 09:00:31 Elapsed:43317 ms, in queue: dirs - 0; files - 1595, processed: dirs - 492, files: 11961, In FCs: count - 10334, size - 0, ActiveCount: 1627
+ INFO [main] - 2019:03:26 09:00:32 Elapsed:44317 ms, in queue: dirs - 0; files - 1433, processed: dirs - 492, files: 11961, In FCs: count - 10496, size - 0, ActiveCount: 1465
+ INFO [main] - 2019:03:26 09:00:33 Elapsed:45318 ms, in queue: dirs - 0; files - 1248, processed: dirs - 492, files: 11961, In FCs: count - 10681, size - 0, ActiveCount: 1280
+ INFO [main] - 2019:03:26 09:00:34 Elapsed:46318 ms, in queue: dirs - 0; files - 1071, processed: dirs - 492, files: 11961, In FCs: count - 10858, size - 0, ActiveCount: 1103
+ INFO [main] - 2019:03:26 09:00:35 Elapsed:47319 ms, in queue: dirs - 0; files - 893, processed: dirs - 492, files: 11961, In FCs: count - 11037, size - 0, ActiveCount: 925
+ INFO [main] - 2019:03:26 09:00:36 Elapsed:48319 ms, in queue: dirs - 0; files - 730, processed: dirs - 492, files: 11961, In FCs: count - 11199, size - 0, ActiveCount: 762
+ INFO [main] - 2019:03:26 09:00:37 main: shutting down threads and work queue..
+ INFO [pool-2-thread-2] - 2019:03:26 09:00:37 StartProcessDir - exiting thread - idx 2
+ INFO [pool-2-thread-1] - 2019:03:26 09:00:37 StartProcessDir - exiting thread - idx 1
+ INFO [pool-2-thread-3] - 2019:03:26 09:00:37 StartProcessDir - exiting thread - idx 3
+ INFO [pool-2-thread-4] - 2019:03:26 09:00:37 StartProcessDir - exiting thread - idx 4
+ INFO [FileOps-1-thread-22] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 22
+ INFO [FileOps-1-thread-19] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 19
+ INFO [FileOps-1-thread-15] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 15
+ INFO [FileOps-1-thread-25] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 25
+ INFO [FileOps-1-thread-5] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 5
+ INFO [FileOps-1-thread-32] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 32
+ INFO [FileOps-1-thread-29] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 29
+ INFO [FileOps-1-thread-2] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 2
+ INFO [FileOps-1-thread-1] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 1
+ INFO [FileOps-1-thread-7] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 7
+ INFO [FileOps-1-thread-27] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 27
+ INFO [FileOps-1-thread-11] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 11
+ INFO [FileOps-1-thread-6] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 6
+ INFO [FileOps-1-thread-24] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 24
+ INFO [FileOps-1-thread-20] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 20
+ INFO [FileOps-1-thread-12] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 12
+ INFO [FileOps-1-thread-9] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 9
+ INFO [FileOps-1-thread-14] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 14
+ INFO [FileOps-1-thread-31] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 31
+ INFO [FileOps-1-thread-4] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 4
+ INFO [FileOps-1-thread-13] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 13
+ INFO [FileOps-1-thread-16] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 16
+ INFO [FileOps-1-thread-28] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 28
+ INFO [FileOps-1-thread-23] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 23
+ INFO [FileOps-1-thread-3] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 3
+ INFO [FileOps-1-thread-10] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 10
+ INFO [FileOps-1-thread-21] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 21
+ INFO [FileOps-1-thread-26] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 26
+ INFO [FileOps-1-thread-17] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 17
+ INFO [FileOps-1-thread-30] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 30
+ INFO [FileOps-1-thread-8] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 8
+ INFO [FileOps-1-thread-18] - 2019:03:26 09:00:37 StartProcessFile - exiting thread - idx 18
+ShutdownHook: stats - #files: 11961, #compressed: 11961, #dirs: 492, filesSize: 35170277530, compressedSize: 35170277530, numLines: 0
+ShutdownHook: stats - number of directories from dir collection: 493
+Elapsed:49373 ms, exiting cleanly..

@@ -1,0 +1,15 @@
+import org.apache.spark.sql._
+val hiveContext = new org.apache.spark.sql.hive.HiveContext(sc)
+hiveContext.sql("set hive.tez.container.size=1700000")
+
+hiveContext.sql("set hive.enforce.bucketing=true")
+hiveContext.sql("set hive.exec.dynamic.partition.mode=nonstrict")
+
+
+hiveContext.sql("insert overwrite table databasename.directory_filesopps_summary partition (file_dt) select feed_name,sum(lines),count(*),file_dt from databasename.files_filesopps_summary_partition group by feed_name,file_dt")
+
+
+
+
+
+exit;

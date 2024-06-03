@@ -1,0 +1,963 @@
+{ 
+ "logLocation" : "/nas/share05/tools/Facebook_ValidationTool/logs",
+ "getLocation" : "/nas/share05/tools/Facebook_ValidationTool/lib/getLocation.py",
+ "reports":[
+ {
+     "name": "site_information",
+	 "reportLocation": "/nas/share05/tools/Facebook_ValidationTool/Reports_result/site_info",
+	 "columns": [
+	 {
+	 "name":"country",
+	 "columnPosition": 1,
+	 "Checks": [{
+	 "name": "length",
+	 "rule": "2~2"
+	 },
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "contain",
+	 "rule": "NG|UG|ZM"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"site_id",
+	 "columnPosition": 2,
+	 "Checks": [{
+	 "name": "length",
+	 "rule": "4~40"
+	 },
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"latitude_deg",
+	 "columnPosition": 3,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Float"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"longitude_deg",
+	 "columnPosition": 4,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Float"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"status",
+	 "columnPosition": 5,
+	 "Checks": [{
+	 "name": "length",
+	 "rule": "2~100"
+	 },
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "contain",
+	 "rule": "PLANNED|ACTIVE|INACTIVE|DECOMMISSIONED"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"operation_date",
+	 "columnPosition": 6,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "date",
+	 "rule": "yyyy-MM-dd"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"active_ran_list",
+	 "columnPosition": 7,
+	 "Checks": [{
+	 "name": "length",
+	 "rule": "2~"
+	 },
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "containOrAll",
+	 "rule": "2G|3G|4G"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"backhaul",
+	 "columnPosition": 8,
+	 "Checks": [{
+	 "name": "length",
+	 "rule": "4~"
+	 },
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "contain",
+	 "rule": "MICROWAVE|FIBER|SATELLITE"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"capacity_uplink_kbps",
+	 "columnPosition": 9,
+	 "Checks": [{
+	 "name": "length",
+	 "rule": "2~"
+	 },
+	 {
+	 "name": "dataType",
+	 "rule": "Float"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"fiber_date",
+	 "columnPosition": 11,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "date",
+	 "rule": "yyyy-MM-dd"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"site_type",
+	 "columnPosition": 12,
+	 "Checks": [{
+	 "name": "length",
+	 "rule": "2~100"
+	 },
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "contain",
+	 "rule": "NOT_BASELINE_OR_ACCELERATED|BASELINE_UPGRADE|BASELINE_NEW|ACCELERATED_UPGRADE|ACCELERATED_NEW|NOT_UPGRADED"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"date_time",
+	 "columnPosition": 13,
+	 "Checks": [{
+	 "name": "length",
+	 "rule": "2~100"
+	 },
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "date",
+	 "rule": "yyyy-MM-dd'T'HH:mm:ss"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 }]
+ },
+ {
+     "name": "cell_information",
+	 "reportLocation": "/nas/share05/tools/Facebook_ValidationTool/Reports_result/cell_info",
+	 "columns": [
+	 {
+	 "name":"country",
+	 "columnPosition": 1,
+	 "Checks": [{
+	 "name": "length",
+	 "rule": "2~2"
+	 },
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "contain",
+	 "rule": "NG|UG|ZM"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"site_id",
+	 "columnPosition": 2,
+	 "Checks": [{
+	 "name": "length",
+	 "rule": "4~40"
+	 },
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"gateway_id",
+	 "columnPosition": 3,
+	 "Checks": [{
+	 "name": "length",
+	 "rule": "4~40"
+	 },
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"ran",
+	 "columnPosition": 4,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "contain",
+	 "rule": "2G|3G|4G"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "false"
+	 }]
+	 },
+	 {
+	 "name":"ci",
+	 "columnPosition": 5,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Long"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true~4~2G|3G"
+	 }]
+	 },
+	 {
+	 "name":"lac",
+	 "columnPosition": 6,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Long"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true~4~2G|3G"
+	 }]
+	 },
+	 {
+	 "name":"cgi",
+	 "columnPosition": 7,
+	 "Checks": [
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true~4~2G|3G"
+	 }]
+	 },
+	 {
+	 "name":"eci",
+	 "columnPosition": 8,
+	 "Checks": [
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true~4~4G"
+	 }]
+	 },
+	 {
+	 "name":"tac",
+	 "columnPosition": 9,
+	 "Checks": [
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true~4~4G"
+	 }]
+	 },
+	 {
+	 "name":"tai",
+	 "columnPosition": 10,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true~4~4G"
+	 }]
+	 },
+	 {
+	 "name":"enodeb_id",
+	 "columnPosition": 11,
+	 "Checks": [
+	 {
+	 "name": "dataType",
+	 "rule": "Long"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true~4~4G"
+	 }]
+	 },
+	 {
+	 "name":"ecgi",
+	 "columnPosition": 12,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true~4~4G"
+	 }]
+	 },
+	 {
+	 "name":"status",
+	 "columnPosition": 13,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "contain",
+	 "rule": "PLANNED|ACTIVE|INACTIVE|DECOMMISSIONED"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "false"
+	 }]
+	 },
+	 {
+	 "name":"frequency_mhz",
+	 "columnPosition": 14,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Long"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"tx_power_dbm",
+	 "columnPosition": 15,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Float"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"operation_date",
+	 "columnPosition": 16,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Date"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"date_time",
+	 "columnPosition": 17,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Date"
+	 },
+	 {
+	 "name": "date",
+	 "rule": "yyyy-MM-dd'T'HH:mm:ss"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 }]
+ },
+ {
+     "name": "gateway_information",
+	 "reportLocation": "/nas/share05/tools/Facebook_ValidationTool/Reports_result/gateway_info",
+	 "columns": [
+	 {
+	 "name":"country",
+	 "columnPosition": 1,
+	 "Checks": [{
+	 "name": "length",
+	 "rule": "2~2"
+	 },
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "contain",
+	 "rule": "NG|UG|ZM"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"gateway_id",
+	 "columnPosition": 2,
+	 "Checks": [
+	 {
+	 "name": "dataType",
+	 "rule": "Long"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"ip_prefix",
+	 "columnPosition": 3,
+	 "Checks": [
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"gatway_ip",
+	 "columnPosition": 4,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"date_time",
+	 "columnPosition": 5,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "date",
+	 "rule": "yyyy-MM-dd'T'HH:mm:ss"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 }]
+ },
+ {
+     "name": "cell_qos_measurement",
+	 "reportLocation": "/nas/share05/tools/Facebook_ValidationTool/Reports_result/cell_qos",
+	 "columns": [
+	 {
+	 "name":"country",
+	 "columnPosition": 1,
+	 "Checks": [{
+	 "name": "length",
+	 "rule": "2~2"
+	 },
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "contain",
+	 "rule": "NG|UG|ZM"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"site_id",
+	 "columnPosition": 2,
+	 "Checks": [
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },{
+	 "name": "length",
+	 "rule": "4~40"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"ran",
+	 "columnPosition": 3,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "contain",
+	 "rule": "2G|3G|4G"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "false"
+	 }]
+	 },
+	 {
+	 "name":"ci",
+	 "columnPosition": 4,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "true~3~2G|3G~Long"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true~3~2G|3G"
+	 }]
+	 },
+	 {
+	 "name":"cgi",
+	 "columnPosition": 5,
+	 "Checks": [
+	 {
+	 "name": "dataType",
+	 "rule": "true~3~2G|3G~String"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true~3~2G|3G"
+	 }]
+	 },
+	 {
+	 "name":"eci",
+	 "columnPosition": 6,
+	 "Checks": [
+	 {
+	 "name": "dataType",
+	 "rule": "true~3~4G~String"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true~3~4G"
+	 }]
+	 },
+	 {
+	 "name":"ecgi",
+	 "columnPosition": 7,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "true~3~4G~String"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true~3~4G"
+	 }]
+	 },
+	 {
+	 "name":"data_vol_down_GB",
+	 "columnPosition": 8,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Float"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"data_vol_up_GB",
+	 "columnPosition": 9,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Float"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"tput_down_kbps",
+	 "columnPosition": 10,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Float"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"tput_up_kbps",
+	 "columnPosition": 11,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Float"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"tput_user_down_kbps",
+	 "columnPosition": 12,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Float"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"tput_user_up_kbps",
+	 "columnPosition": 13,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Float"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"date_time",
+	 "columnPosition": 14,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "date",
+	 "rule": "yyyy-MM-dd'T'HH:mm:ss"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 }]
+ },
+ {
+     "name": "site_engagement_measurement",
+	 "reportLocation": "/nas/share05/tools/Facebook_ValidationTool/Reports_result/site_engagement",
+	 "columns": [
+	 {
+	 "name":"country",
+	 "columnPosition": 1,
+	 "Checks": [{
+	 "name": "length",
+	 "rule": "2~2"
+	 },
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "contain",
+	 "rule": "NG|UG|ZM"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"site_id",
+	 "columnPosition": 2,
+	 "Checks": [
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },{
+	 "name": "length",
+	 "rule": "4~40"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"ran",
+	 "columnPosition": 3,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "contain",
+	 "rule": "2G|3G|4G|ALL"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"users_monthly",
+	 "columnPosition": 4,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Integer"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"users_daily",
+	 "columnPosition": 5,
+	 "Checks": [
+	 {
+	 "name": "dataType",
+	 "rule": "Integer"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"data_vol_down_GB",
+	 "columnPosition": 6,
+	 "Checks": [
+	 {
+	 "name": "dataType",
+	 "rule": "Float"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"data_vol_up_GB",
+	 "columnPosition": 7,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Float"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"date_time",
+	 "columnPosition": 8,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "date",
+	 "rule": "yyyy-MM-dd'T'HH:mm:ssZ"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 }]
+ },
+ {
+     "name": "system_engagement_measurement",
+	 "reportLocation": "/nas/share05/tools/Facebook_ValidationTool/Reports_result/system_engagement",
+	 "columns": [
+	 {
+	 "name":"country",
+	 "columnPosition": 1,
+	 "Checks": [{
+	 "name": "length",
+	 "rule": "2~2"
+	 },
+	 {
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "contain",
+	 "rule": "NG|UG|ZM"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"ran",
+	 "columnPosition": 2,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "contain",
+	 "rule": "2G|3G|4G|ALL"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"users_monthly",
+	 "columnPosition": 3,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Integer"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"users_daily",
+	 "columnPosition": 4,
+	 "Checks": [
+	 {
+	 "name": "dataType",
+	 "rule": "Integer"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"data_vol_down_GB",
+	 "columnPosition": 5,
+	 "Checks": [
+	 {
+	 "name": "dataType",
+	 "rule": "Float"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"data_vol_up_GB",
+	 "columnPosition": 6,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "Float"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 },
+	 {
+	 "name":"date_time",
+	 "columnPosition": 7,
+	 "Checks": [{
+	 "name": "dataType",
+	 "rule": "String"
+	 },
+	 {
+	 "name": "date",
+	 "rule": "yyyy-MM-dd'T'HH:mm:ssZ"
+	 },
+	 {
+	 "name": "dataRequired",
+	 "rule": "true"
+	 }]
+	 }]
+ }]
+}

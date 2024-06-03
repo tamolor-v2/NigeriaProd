@@ -1,0 +1,15 @@
+{
+	"decreaseRatio": 0.55,
+	"backDays" : 7,
+	"tableName": "dq.final_feed_report",
+	"rejectionRatio": 0.25,
+
+
+        "reportDate": "20190123",
+	"templateFile" : "/mnt/beegfs/production/validation_Rep",
+	"headerFile": "/mnt/beegfs/tools/validationCheck/email/mailheader",
+	"emailScript": "/mnt/beegfs/tools/validationCheck/email/sendEmail.sh",
+        "removeFromReport": "recon,fin_log",
+        "increaseRatio"  : 0.55
+
+}

@@ -1,0 +1,12 @@
+rm: cannot remove ‘/mnt/beegfs_bsl/tools/ExtractTools/WBS_CLIENT_DAARS_TAPOUT/logs/20190616’: No such file or directory
+starting command: bash /home/daasuser/JDBC_Tool/JDBCExtract.scala --configFile /mnt/beegfs_bsl/tools/ExtractTools/WBS_CLIENT_DAARS_TAPOUT/config.properties --sqlFile /mnt/beegfs_bsl/tools/ExtractTools/WBS_CLIENT_DAARS_TAPOUT/query_template.sql --outputFile /mnt/beegfs_bsl/tools/ExtractTools/WBS_CLIENT_DAARS_TAPOUT/tmp/20190814/20190814_WBS_CLIENT_DAARS_TAPOUT.gz --delimiter | --kvTemplate ${DATE}=20190814;
+mv: cannot move ‘/mnt/beegfs_bsl/tools/ExtractTools/WBS_CLIENT_DAARS_TAPOUT/tmp/20190814/’ to ‘/mnt/beegfs_bsl/live/DB_extract_lz/WBS_CLIENT_DAARS_TAPOUT/incoming/20190814’: File exists
+hi
+rm: cannot remove ‘/mnt/beegfs_bsl/tools/ExtractTools/WBS_CLIENT_DAARS_TAPOUT/logs/20190617’: No such file or directory
+starting command: bash /home/daasuser/JDBC_Tool/JDBCExtract.scala --configFile /nas/share05/tools/ExtractTools/WBS_CLIENT_DAARS_TAPOUT/config.properties --sqlFile /nas/share05/tools/ExtractTools/WBS_CLIENT_DAARS_TAPOUT/query_template.sql --outputFile /mnt/beegfs_bsl/tools/ExtractTools/WBS_CLIENT_DAARS_TAPOUT/tmp/20190815/20190815_WBS_CLIENT_DAARS_TAPOUT.gz --delimiter | --kvTemplate ${DATE}=20190815;
+hi
+cat: /mnt/beegfs_bsl/tools/ExtractTools/WBS_CLIENT_DAARS_TAPOUT/logs/20190815/*.log: No such file or directory
+rm: cannot remove ‘/mnt/beegfs_bsl/tools/ExtractTools/WBS_CLIENT_DAARS_TAPOUT/logs/20190630’: No such file or directory
+starting command: bash /home/daasuser/JDBC_Tool/JDBCExtract.scala --configFile /nas/share05/tools/ExtractTools/WBS_CLIENT_DAARS_TAPOUT/config.properties --sqlFile /nas/share05/tools/ExtractTools/WBS_CLIENT_DAARS_TAPOUT/query_template.sql --outputFile /mnt/beegfs_bsl/tools/ExtractTools/WBS_CLIENT_DAARS_TAPOUT/tmp/20190828/20190828_WBS_CLIENT_DAARS_TAPOUT.gz --delimiter | --kvTemplate ${DATE}=20190828;
+hi
+cat: /mnt/beegfs_bsl/tools/ExtractTools/WBS_CLIENT_DAARS_TAPOUT/logs/20190828/*.log: No such file or directory

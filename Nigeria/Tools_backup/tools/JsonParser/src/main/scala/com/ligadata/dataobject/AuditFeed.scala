@@ -1,0 +1,107 @@
+package com.ligadata.dataobject
+
+import com.ligadata.parsers.Constants
+
+class AuditFeed extends Feed { // todo adding more fields ( SupplementaryData & ExtensionData )
+
+  var INITIATING_USER: String = ""
+  var REAL_USER: String = ""
+  var LOGGING_TIME: String = ""
+  var SESSION_ID: String = ""
+  var TRANSACTION_ID: String = ""
+  var TRANSACTION_TYPE: String = ""
+  var STATUS: String = ""
+  var RECORD_VERSION: String = ""
+  var SUPPLEMENTARY_DATA_FRI_FRI: String = ""
+  var SUPPLEMENTARY_DATA_SENDER_VOUCHER_USER: String = ""
+  var SUPPLEMENTARY_DATA_RECEIVER_VOUCHER_USER: String = "0"
+  var SUPPLEMENTARY_DATA_AMOUNT_AMOUNT: String = ""
+  var SUPPLEMENTARY_DATA_VOUCHER_ID: String = ""
+  var SUPPLEMENTARY_DATA_RECEIVER_VOUCHER_USER_ID: String = ""
+  var SUPPLEMENTARY_DATA_RECEIVER_VOUCHER_USER_IDENTIFICATION_NUMBER: String = ""
+  var SUPPLEMENTARY_DATA_BATCH_CONTEXT: String = ""
+  var SUPPLEMENTARY_DATA_RECEIVER_REGISTERED_AS_ACCOUNT_HOLDER: String = ""
+  var SUPPLEMENTARY_DATA_RECEIVER_ACCOUNT_HOLDER_ID: String = ""
+  var SUPPLEMENTARY_DATA_BATCH_ID: String = ""
+  var SUPPLEMENTARY_DATA_EXTERNAL_BATCH_TRANSACTION_ID: String = ""
+  var SUPPLEMENTARY_DATA_FINANCIAL_TRANSACTION_ID: String = ""
+  var SUPPLEMENTARY_DATA_INSTRUCTION_TYPE: String = ""
+  var SUPPLEMENTARY_DATA_TRANSFER_TYPE: String = ""
+  var SUPPLEMENTARY_DATA_SENDER_FRI: String = ""
+  var SUPPLEMENTARY_DATA_SENDER_NOTE: String = ""
+  var SUPPLEMENTARY_DATA_RECEIVING_FRI: String = ""
+  var SUPPLEMENTARY_DATA_RECEIVING_MESSAGE: String = ""
+  var SUPPLEMENTARY_DATA_REFERENCE_ID: String = ""
+  var SUPPLEMENTARY_DATA_INCLUDE_OFF_NET: String = ""
+  var SUPPLEMENTARY_DATA_INCLUDE_SENDER_CHARGES: String = ""
+  var EXTENSION_DATA_FAILURE_REASON: String = ""   //Added from here on 20211201
+  var SUPPLEMENTARY_DATA_PROFILE_ID: String = ""
+  var SUPPLEMENTARY_DATA_PROFILE_NAME: String = ""
+  var SUPPLEMENTARY_DATA_CHANGED_FIELDS: String = ""
+//  var SUPPLEMENTARY_DATA_CHANGED_FIELDS_FIELD_NAME: String = ""
+//  var SUPPLEMENTARY_DATA_CHANGED_FIELDS_VALUE_BEFORE: String = ""
+//  var SUPPLEMENTARY_DATA_CHANGED_FIELDS_VALUE_AFTER: String = ""
+
+  override def getName: String = {
+    Constants.AUDIT
+  }
+
+  override def getFields: Array[String] = {
+    val arr: Array[String] = new Array(34)
+    arr(0) = INITIATING_USER
+    arr(1) = REAL_USER
+    arr(2) = LOGGING_TIME
+    arr(3) = SESSION_ID
+    arr(4) = TRANSACTION_ID
+    arr(5) = TRANSACTION_TYPE
+    arr(6) = STATUS
+    arr(7) = RECORD_VERSION
+    arr(8) = SUPPLEMENTARY_DATA_FRI_FRI
+    arr(9) = SUPPLEMENTARY_DATA_SENDER_VOUCHER_USER
+    arr(10) = SUPPLEMENTARY_DATA_RECEIVER_VOUCHER_USER
+    arr(11) = SUPPLEMENTARY_DATA_AMOUNT_AMOUNT
+    arr(12) = SUPPLEMENTARY_DATA_VOUCHER_ID
+    arr(13) = SUPPLEMENTARY_DATA_RECEIVER_VOUCHER_USER_ID
+    arr(14) = SUPPLEMENTARY_DATA_RECEIVER_VOUCHER_USER_IDENTIFICATION_NUMBER
+    arr(15) = SUPPLEMENTARY_DATA_BATCH_CONTEXT
+    arr(16) = SUPPLEMENTARY_DATA_RECEIVER_REGISTERED_AS_ACCOUNT_HOLDER
+    arr(17) = SUPPLEMENTARY_DATA_RECEIVER_ACCOUNT_HOLDER_ID
+    arr(18) = SUPPLEMENTARY_DATA_BATCH_ID
+    arr(19) = SUPPLEMENTARY_DATA_EXTERNAL_BATCH_TRANSACTION_ID
+    arr(20) = SUPPLEMENTARY_DATA_FINANCIAL_TRANSACTION_ID
+    arr(21) = SUPPLEMENTARY_DATA_INSTRUCTION_TYPE
+    arr(22) = SUPPLEMENTARY_DATA_TRANSFER_TYPE
+    arr(23) = SUPPLEMENTARY_DATA_SENDER_FRI
+    arr(24) = SUPPLEMENTARY_DATA_SENDER_NOTE
+    arr(25) = SUPPLEMENTARY_DATA_RECEIVING_FRI
+    arr(26) = SUPPLEMENTARY_DATA_RECEIVING_MESSAGE
+    arr(27) = SUPPLEMENTARY_DATA_REFERENCE_ID
+    arr(28) = SUPPLEMENTARY_DATA_INCLUDE_OFF_NET
+    arr(29) = SUPPLEMENTARY_DATA_INCLUDE_SENDER_CHARGES
+    arr(30) = EXTENSION_DATA_FAILURE_REASON
+    arr(31) = SUPPLEMENTARY_DATA_PROFILE_ID
+    arr(32) = SUPPLEMENTARY_DATA_PROFILE_NAME
+    arr(33) = SUPPLEMENTARY_DATA_CHANGED_FIELDS
+//    arr(33) = SUPPLEMENTARY_DATA_CHANGED_FIELDS_FIELD_NAME
+//    arr(34) = SUPPLEMENTARY_DATA_CHANGED_FIELDS_VALUE_BEFORE
+//    arr(35) = SUPPLEMENTARY_DATA_CHANGED_FIELDS_VALUE_AFTER
+
+    arr
+  }
+}
+
+object AudiCls {
+
+  case class Audit(InitiatingUser: Option[String] = None,
+                   RealUser: Option[String] = None,
+                   LoggingTime: String,
+                   SessionId: Option[Long] = None,
+                   TransactionId: Option[Long] = None,
+                   TransactionType: Option[String] = None,
+                   Status: String,
+                   RecordVersion: Int,
+                   SupplementaryData: Option[Map[String, Any]] = None,
+                   ExtensionData: Option[Any] = None
+                  )
+
+}

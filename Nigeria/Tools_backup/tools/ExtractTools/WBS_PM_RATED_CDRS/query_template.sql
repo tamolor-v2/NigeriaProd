@@ -1,0 +1,1 @@
+select * from WBS_CLIENT.WBS_CDR_${date} WHERE billing_date >= to_date('${date} ${hour}:${minS}:00','YYYYMMDD HH24:MI:SS') AND billing_date <= to_date('${date} ${hour}:${minE}:59','YYYYMMDD HH24:MI:SS') and ANUM is not null and SUBSTR (anum,-1,1)='${anum}'

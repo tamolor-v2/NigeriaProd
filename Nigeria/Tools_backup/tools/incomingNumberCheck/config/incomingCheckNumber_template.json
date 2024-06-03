@@ -1,0 +1,11 @@
+{
+    "reportDir": "/mnt/beegfs/tools/Crontab/listIncoming/dateTemp",
+	"outputDir": "/mnt/beegfs/tools/incomingNumberCheck/report",
+	"searchLevel" : 0,
+    "increaseRatio": 0.5,
+	"threshold": 50000,
+	"limit": 200000,
+	"templateFile" : "/mnt/beegfs/tools/incomingNumberCheck/htmlRep",
+	"headerFile": "/mnt/beegfs/tools/incomingNumberCheck/email/mailheader",
+	"emailScript": "/mnt/beegfs/tools/incomingNumberCheck/email/sendEmail.sh"
+}

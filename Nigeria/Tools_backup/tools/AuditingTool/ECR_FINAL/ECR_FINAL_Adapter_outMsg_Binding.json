@@ -1,0 +1,11 @@
+[
+   {  
+      "AdapterName":"output_hdfs_kafka",
+      "MessageNames":["com.mtn.messages.ecr_output"],
+      "Options":{  
+         "alwaysQuoteFields":false,
+         "fieldDelimiter":","
+      },
+      "Serializer":"com.ligadata.kamanja.serializer.csvserdeser"
+   }
+]

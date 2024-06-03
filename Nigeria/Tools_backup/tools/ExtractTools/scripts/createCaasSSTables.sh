@@ -1,0 +1,62 @@
+feeds=("CB_POS_TRANSACTIONS"
+"CB_RETAIL_OUTLETS"
+"BUDGET_PERIOD_AMOUNT "
+"CUST_ORD_CUSTOMER_ENT"
+"CUST_ORDER_TYPE"
+"CUSTOMER_DETAILS"
+"CUSTOMER_INFO_COMM_METHOD"
+"CUSTOMER_INFO_TAB"
+"CUSTOMER_ORDER_HISTORY"
+"CUSTOMER_ORDER_LINE_TAB"
+"CUSTOMER_ORDER_TAB"
+"DAY_TRANS_DETAIL"
+"DBA_ROLE_PRIVS"
+"DBA_TAB_PRIVS"
+"FND_USER_ROLE"
+"HISTORY_LOG"
+"INVENTORY_PART_IN_STOCK"
+"INVENTORY_TRANSACTION_HIST"
+"LEDGER_ITEM_TAB"
+"PAYMENT_TAB"
+"PAYMENT_TERM"
+"PURCH_REQ_APPROVAL"
+"PURCHASE_ORDER"
+"PURCHASE_ORDER_APPROVAL"
+"PURCHASE_ORDER_HIST"
+"PURCHASE_ORDER_LINE"
+"PURCHASE_RECEIPT_TAB"
+"PURCHASE_REQUISITION_TAB"
+"SUPPLIER_INFO"
+"BLACKLIST_HISTORY"
+"DEALER_TYPE"
+"ENROLLMENT_REF"
+"KM_USER"
+"KM_USER_ROLE"
+"KYC_DEALER"
+"NODE"
+"NODE_ASSIGNMENT"
+"SMS_ACTIVATION_REQUEST"
+"STATE"
+"MASTER_DATA_VIEW")
+
+
+for feed in "${feeds[@]}"
+do
+
+
+#sed -i "1s/^/drop table ${DATA_NAMESPACE}.${FEED_NAME}; \\n /" /mnt/beegfs_bsl/Deployment/DEV/output/${FEED_NAME}/${FEED_NAME}.hql
+#echo "; msck repair table ${DATA_NAMESPACE}.${FEED_NAME};" >> /mnt/beegfs_bsl/Deployment/DEV/output/${FEED_NAME}/${FEED_NAME}.hql
+
+
+
+	FEED_NAME=$feed
+	DATA_PATH="/FlareData/CAAS_SS"
+	DATA_NAMESPACE="stg_gen_ss"
+	
+	cp /mnt/beegfs_bsl/Deployment/DEV/output/${FEED_NAME}/${FEED_NAME}.hql /mnt/beegfs_bsl/Deployment/DEV/output/${FEED_NAME}/${FEED_NAME}_SS.hql
+	sed -i -e "s/PARTITIONED by (tbl_dt Int)/PARTITIONED BY (ss_dt int,tbl_dt int)/g" /mnt/beegfs_bsl/Deployment/DEV/output/${FEED_NAME}/${FEED_NAME}_SS.hql
+	
+	echo "hive -hivevar DATA_NAMESPACE=${DATA_NAMESPACE} -hivevar DATA_PATH=${DATA_PATH} -f /mnt/beegfs_bsl/Deployment/DEV/output/${FEED_NAME}/${FEED_NAME}_SS.hql"
+	hive -hivevar DATA_NAMESPACE=${DATA_NAMESPACE} -hivevar DATA_PATH=${DATA_PATH} -f /mnt/beegfs_bsl/Deployment/DEV/output/${FEED_NAME}/${FEED_NAME}_SS.hql
+
+done

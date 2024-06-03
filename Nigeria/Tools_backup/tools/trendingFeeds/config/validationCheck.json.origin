@@ -1,0 +1,12 @@
+{
+       "reportDir": "/mnt/beegfs/tmp/waddah/list",
+	"outputDir": "/mnt/beegfs/yousef/validationCheck/report",
+	"decrease": 0.25,
+	"backDays" : 7,
+	"tableName": "flare_8.final_feed_report_yousef3",
+	"rejectionRatio": 0.01,
+	"activeFieldsTable" : "flare_8.dim_feed",
+	"templateFile" : "/mnt/beegfs/yousef/validationCheck/email/template.html",
+	"headerFile": "/mnt/beegfs/yousef/validationCheck/email/mailheader",
+	"emailScript": "/mnt/beegfs/yousef/validationCheck/email/sendEmail.sh"
+}

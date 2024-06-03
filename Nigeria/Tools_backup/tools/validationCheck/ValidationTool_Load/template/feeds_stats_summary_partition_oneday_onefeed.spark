@@ -1,0 +1,9 @@
+import org.apache.spark.sql._
+val hiveContext = new org.apache.spark.sql.hive.HiveContext(sc)
+
+hiveContext.sql("set hive.enforce.bucketing=true")
+hiveContext.sql("set hive.exec.dynamic.partition.mode=nonstrict")
+
+hiveContext.sql(" insert overwrite table databasename.feeds_count_stats_summary partition (file_dt) select count(*) as numberoffiles, sum(recordscount) as recordscount, sum(processedrecordscount) as processedByKamanja, feedname, file_dt from databasename.files_count_stats_summary where file_dt= targetdate group by feedname,file_dt ")
+
+exit;

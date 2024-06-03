@@ -1,0 +1,28 @@
+import org.apache.spark.sql._
+val hiveContext = new org.apache.spark.sql.hive.HiveContext(sc)
+
+hiveContext.sql("set hive.enforce.bucketing=true")
+hiveContext.sql("set hive.exec.dynamic.partition.mode=nonstrict")
+
+
+
+
+
+hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,file_dt,feed_name)  select file_name,split(file_name,\"\\/\")[size(split(file_name,\"\\/\"))-1] , count(*),current_timestamp(),current_user() ,tbl_dt,FeedFileterValues,	\"FeedNameValues\" from databasename.FeedNameValues where FeedFileterValues=\"targetdate\" targethdfsdate group by tbl_dt,file_name,FeedFileterValues")
+
+
+
+
+hiveContext.sql("insert overwrite table databasename.feeds_count_summary_partition partition (tbl_dt) select * from databasename.feeds_count_summary_partition   where feed_name <>\"FeedNameValues\"  and tbl_dt=\"targetdate\" ")
+hiveContext.sql("insert into table databasename.feeds_count_summary_partition partition (tbl_dt)  select  count(*), FeedMSISDNValue, count(distinct file_name),  \"FeedNameValues\"  ,current_timestamp(),current_user() ,tbl_dt   from databasename.FeedNameValues where tbl_dt=\"targetdate\" group by tbl_dt")
+
+
+hiveContext.sql("insert overwrite table databasename.feeds_count_summary partition (file_dt) select * from databasename.feeds_count_summary   where feed_name <>\"FeedNameValues\" and file_dt=\"targetdate\" ")
+
+
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (file_dt) select feed_name,sum(numberofline),count(distinct file_name) numberoffile,current_timestamp(),current_user(),file_dt from databasename.files_count_summary   where feed_name=\"FeedNameValues\" and file_dt=\"targetdate\" group by feed_name,file_dt ")
+
+
+
+
+exit;

@@ -1,0 +1,14 @@
+Select 
+TRANS_DATE_D         
+,ACCOUNT_CODE_N       
+,ACCOUNT_NAME_V       
+,SUBSCRIBER_CODE_N    
+,SERVICE_INFO_V       
+,PACKAGE_NAME_V       
+,ACCOUNT_LINK_CODE_N  
+,TRANS_NUM_V          
+,TRANS_AMT            
+,CLEAR_AMT            
+,OPEN_AMT             
+,BILL_CLEARED_FLG_V   
+from TT_MSO_1.ALL_STMT_SERVICE_OPEN_CRED_VW

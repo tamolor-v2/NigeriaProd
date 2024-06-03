@@ -1,0 +1,12 @@
+CUPPA{
+Components{
+	Presto{
+                number=2
+                type=JDBC
+                query="select 1 from flare_8.bundle4u_gprs where tbl_dt=20180722 limit 1"
+                connection_String="jdbc:presto://master01004.mtn.com:8099/hive5/flare_8|test|null"
+                Seq_Commands="None"
+                expected_result="1"
+        }
+}
+}

@@ -1,0 +1,47 @@
+import org.apache.spark.sql._
+val hiveContext = new org.apache.spark.sql.hive.HiveContext(sc)
+
+hiveContext.sql("set hive.enforce.bucketing=true")
+hiveContext.sql("set hive.exec.dynamic.partition.mode=nonstrict")
+
+
+
+
+
+hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),targetdate,	\"CCN_VOICE_MA\"					 from databasename.CCN_VOICE_MA  where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\"  group by file_name")
+hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),targetdate,	\"CCN_VOICE_DA\"					 from databasename.CCN_VOICE_DA where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\"  group by file_name")
+hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),targetdate,	\"CCN_SMS_MA\" 					 	 from databasename.CCN_SMS_MA  where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\" group by file_name")
+hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),targetdate,	\"CCN_SMS_DA\"					 	 from databasename.CCN_SMS_DA  where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\" group by file_name")
+hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),targetdate,	\"CCN_GPRS_MA\"					     from databasename.CCN_GPRS_MA where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\"  group by file_name")
+hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),targetdate,	\"CCN_GPRS_DA\"					     from databasename.CCN_GPRS_DA where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\"  group by file_name")
+hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),targetdate,	\"AIR_ADJ_MA\"					     from databasename.AIR_ADJ_MA  where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\" group by file_name")
+hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),targetdate,	\"AIR_ADJ_DA\"					     from databasename.AIR_ADJ_DA where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\" group by file_name")
+hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),targetdate,	\"AIR_REFILL_MA\"					 from databasename.AIR_REFILL_MA  where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\" group by file_name")
+hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),targetdate,	\"AIR_REFILL_DA\"					 from databasename.AIR_REFILL_DA  where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\" group by file_name")
+//hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),tbl_dt,	\"SDP_DUMP_MA_CSV\"					 from databasename.SDP_DUMP_MA_CSV  where tbl_dt=targetdate group by file_name,tbl_dt")
+//hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),tbl_dt,	\"SDP_DUMP_DA_CSV\"					 from databasename.SDP_DUMP_DA_CSV  where tbl_dt=targetdate group by file_name,tbl_dt")
+//hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),tbl_dt,	\"EWP_EOD_USER_ACC_BAL\"			 from databasename.EWP_EOD_USER_ACC_BAL where tbl_dt=targetdate group by file_name,tbl_dt")
+//hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),tbl_dt,	\"EWP_EOD_REGISTRATIONS\"			 from databasename.EWP_EOD_REGISTRATIONS where tbl_dt=targetdate group by file_name,tbl_dt")
+//hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),tbl_dt,	\"EWP_EOD_TRANSACTIONS\"			 from databasename.EWP_EOD_TRANSACTIONS  where tbl_dt=targetdate group by file_name,tbl_dt")
+//hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),tbl_dt,	\"EWP_EOD_CUSTODY_ACC_BAL\"	         from databasename.EWP_EOD_CUSTODY_ACC_BAL where tbl_dt=targetdate group by file_name,tbl_dt")
+//hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),tbl_dt,	\"ADC_SUBS_HANDSET\"			     from databasename.ADC_SUBS_HANDSET where tbl_dt=targetdate group by file_name,tbl_dt")
+//hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),tbl_dt,	\"PM_RATED\" 					     from databasename.PM_RATED  where tbl_dt=targetdate group by file_name,tbl_dt")
+hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),targetdate,	\"SDP_ACC_ADJ_MA\"					 from databasename.SDP_ACC_ADJ_MA  where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\" group by file_name")
+hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),targetdate,	\"SDP_ACC_ADJ_DA\"					 from databasename.SDP_ACC_ADJ_DA  where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\" group by file_name")
+//hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),targetdate,	\"FIN_LOG\"					 	     from databasename.FIN_LOG  where substring(substring(file_name,INSTR(file_name,'financiallog')+13),1,8)=\"targetdate\" group by file_name")
+//hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),targetdate,	\"EVD_CDR\"					         from databasename.EVD_CDR  where substring(substring(file_name,INSTR(file_name,'incoming')+9),12,8) =\"targetdate\" group by file_name")
+//hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),targetdate,	\"GGSN_CDR\"					     from databasename.GGSN_CDR where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\" group by file_name")
+//hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),targetdate,	\"MSC_CDR\"					         from databasename.MSC_CDR where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\" group by file_name,substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)")
+//hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),targetdate,	\"GSM_SERV_MASTER\"					 from databasename.GSM_SERV_MASTER where tbl_dt=targetdate group by file_name,substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)")
+
+
+
+
+
+
+hiveContext.sql("insert overwrite table databasename.feeds_count_summary partition (tbl_dt=targetdate) select feedname,sum(numberofline) from databasename.files_count_summary  where tbl_dt=targetdate group by feedname")
+
+
+
+
+exit;

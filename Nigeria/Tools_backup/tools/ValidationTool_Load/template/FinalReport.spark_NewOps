@@ -1,0 +1,48 @@
+import org.apache.spark.sql._
+val hiveContext = new org.apache.spark.sql.hive.HiveContext(sc)
+val buffer = scala.collection.mutable.ArrayBuffer(
+" insert overwrite table databasename.final_feed_report partition (tbl_dt=targetdate)  ",
+" select fcs.feed_name HiveTargetTable,", 
+" coalesce(fcs.numberofline ,0) feed_name_lineNumber,",
+" a.feed_name DiroctoryFeedName,",
+" coalesce(a.linecount ,0) DiroctoryFeedNameLineCount,",
+" b.feed_name RjectedFeedname,",
+" coalesce(b.numberofline,0) TotalRejectedCount ,",
+" case when coalesce(a.linecount ,0) <> coalesce(fcs.numberofline ,0)+coalesce(b.numberofline,0) then \"Not Match\" else \"Match\" end status",
+" from",
+" (select * from databasename.feeds_count_summary s where tbl_dt=targetdate )fcs left outer join",
+" (select distinct trim(case when path like \"%VOICE_MA%\"  then  \"CCN_VOICE_MA\"",
+" when path like \"%VOICE_DA%\"  then  \"CCN_VOICE_DA\"",
+" when path like \"%SMS_MA%\"  then  \"CCN_SMS_MA  \"",
+" when path like \"%SMS_DA%\"  then  \"CCN_SMS_DA\"",
+" when path like \"%GPRS_MA%\"  then  \"CCN_GPRS_MA\"",
+" when path like \"%GPRS_DA%\"  then  \"CCN_GPRS_DA\"",
+" when path like \"%DUMP_MA%\"  then  \"SDP_DUMP_MA_CSV\"",
+" when path like \"%DUMP_DA%\"  then  \"SDP_DUMP_DA_CSV\"",
+" when path like \"%SDP_ACC_ADJ_MA%\"  then  \"SDP_ACC_ADJ_MA\"",
+" when path like \"%SDP_ACC_ADJ_DA%\"  then  \"SDP_ACC_ADJ_DA\"",
+" when path like \"%EOD_USER_ACC_BAL%\"  then  \"EWP_EOD_USER_ACC_BAL\"",
+" when path like \"%EOD_REGISTRATIONS%\"  then  \"EWP_EOD_REGISTRATIONS\"",
+" when path like \"%EOD_TRANSACTIONS%\"  then  \"EWP_EOD_TRANSACTIONS\"",
+" when path like \"%FIN_LOG%\"  then  \"FIN_LOG\"",
+" when path like \"%EOD_CUSTODY_ACC_BAL%\"  then  \"EWP_EOD_CUSTODY_ACC_BAL\"",
+" when path like \"%ADJ_MA%\"  then  \"AIR_ADJ_MA\"",
+" when path like \"%ADJ_DA%\"  then  \"AIR_ADJ_DA\"",
+" when path like \"%REFILL_MA%\"  then  \"AIR_REFILL_MA\"",
+" when path like \"%REFILL_DA%\"  then  \"AIR_REFILL_DA\"",
+" when path like \"%GGSN%\"  then  \"GGSN_CDR\"",
+" when path like \"%EVD_CDR%\"  then  \"EVD_CDR\"",
+" when path like \"%MSC_CDR%\"  then  \"MSC_CDR\"",
+" when path like \"%ADC_SUBS_HANDSETS%\"  then  \"ADC_SUBS_HANDSETS\"",
+" when path like \"%PM_RATED%\"  then  \"PM_RATED\"",
+" when path like \"%GSM_SERV_MASTER%\"  then  \"GSM_SERV_MASTER\"",
+" else \"UK\" end) feed_name,path, linecount",
+"  from  directory_count_summary v where path like \"%targetdate%\"  or path like \"%MMMdate%\" ) a",
+"  on fcs.feed_name=a.feed_name full outer join",
+"  (select * from databasename.feeds_count_rejected_summary where tbl_dt=targetdate ) b",
+"  on coalesce(a.feed_name,fcs.feed_name)=b.feed_name ")
+
+val sql=buffer.mkString(" ")
+println(sql)
+hiveContext.sql(sql)
+exit

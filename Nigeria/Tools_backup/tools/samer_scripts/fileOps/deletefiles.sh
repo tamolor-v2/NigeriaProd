@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for date in 201710{01..30}; do
+  for feed in AIR_ADJ_DA AIR_ADJ_MA AIR_REFILL_AC AIR_REFILL_DA AIR_REFILL_MA BUNDLE4U_GPRS BUNDLE4U_VOICE CB_SERV_MAST_VIEW CCN_GPRS_AC CCN_GPRS_DA CCN_GPRS_MA CCN_SMS_AC CCN_SMS_DA CCN_SMS_MA CCN_VOICE_AC CCN_VOICE_DA CCN_VOICE_MA Containers CUG_ACCESS_FEES DMC_DUMP_ALL DMC_DUMP_ALL_unsplitted EWP_FINANCIAL_LOG GGSN HSDP HSDP_tmp MAPS_INV_2G MAPS_INV_3G MAPS_INV_4G MOBILE_MONEY MSC SDP_ACC_ADJ_AC SDP_ACC_ADJ_MA SDP_ADJ_DA SDP_DMP_MA SGSN WBS_PM_RATED_CDRS; do
+    echo "rm -rf /mnt/beegfs/share/production/archived/$feed/$date/$date"
+    rm -rf /mnt/beegfs/share/production/archived/$feed/$date/$date	
+  done
+done

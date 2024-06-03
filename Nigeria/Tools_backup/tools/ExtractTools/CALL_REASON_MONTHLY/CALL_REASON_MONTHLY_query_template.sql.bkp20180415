@@ -1,0 +1,20 @@
+
+select
+activity_name,
+event_ref_no,
+"SERVICE_ID/USER_ID",
+created_by,
+created_user_source,
+location_desc,
+created_date_time,
+assigned_date_time,
+closed_date_time,
+status,
+"STATUS MODIFIED_BY",
+ticket_type,
+catecory,
+sub_category,
+translate(issue_note, chr(10)||chr(11)||chr(13) , ' ') issue_note,
+translate(resolution_note, chr(10)||chr(11)||chr(13) , ' ') resolution_note,
+to_char(to_date(CREATED_DATE_TIME,'DD-MON-YYYY HH24:MI:SS'),'yyyymmdd') created_date
+from TT_MSO_1.CALL_REASON_DEC_17_VW where SUBSTR (event_ref_no,-1,1)='${msisdn}'

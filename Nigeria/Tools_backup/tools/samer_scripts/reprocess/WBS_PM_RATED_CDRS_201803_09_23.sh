@@ -1,0 +1,14 @@
+bash run_reprocess.sh --config ./reprocess.conf --feed WBS_PM_RATED_CDRS --date 20180309
+bash run_reprocess.sh --config ./reprocess.conf --feed WBS_PM_RATED_CDRS --date 20180311
+bash run_reprocess.sh --config ./reprocess.conf --feed WBS_PM_RATED_CDRS --date 20180312
+bash run_reprocess.sh --config ./reprocess.conf --feed WBS_PM_RATED_CDRS --date 20180313
+bash run_reprocess.sh --config ./reprocess.conf --feed WBS_PM_RATED_CDRS --date 20180314
+bash run_reprocess.sh --config ./reprocess.conf --feed WBS_PM_RATED_CDRS --date 20180315
+bash run_reprocess.sh --config ./reprocess.conf --feed WBS_PM_RATED_CDRS --date 20180316
+bash run_reprocess.sh --config ./reprocess.conf --feed WBS_PM_RATED_CDRS --date 20180317
+bash run_reprocess.sh --config ./reprocess.conf --feed WBS_PM_RATED_CDRS --date 20180318
+bash run_reprocess.sh --config ./reprocess.conf --feed WBS_PM_RATED_CDRS --date 20180319
+bash run_reprocess.sh --config ./reprocess.conf --feed WBS_PM_RATED_CDRS --date 20180320
+bash run_reprocess.sh --config ./reprocess.conf --feed WBS_PM_RATED_CDRS --date 20180321
+bash run_reprocess.sh --config ./reprocess.conf --feed WBS_PM_RATED_CDRS --date 20180322
+bash run_reprocess.sh --config ./reprocess.conf --feed WBS_PM_RATED_CDRS --date 20180323

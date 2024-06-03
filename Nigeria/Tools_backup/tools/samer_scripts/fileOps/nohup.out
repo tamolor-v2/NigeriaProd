@@ -1,0 +1,10 @@
+find: find: find: find: ‘/mnt/beegfs/structured/CDR/AIR_REFILL_AC/20171002’find: ‘/mnt/beegfs/structured/CDR/AIR_REFILL_DA/20171002’find: ‘/mnt/beegfs/structured/CDR/CCN_SMS_AC/2017-10-02’‘/mnt/beegfs/structured/CDR/CCN_VOICE_MA/20171002’find: : No such file or directory‘/mnt/beegfs/structured/CDR/AIR_ADJ_DA/20171002’‘/mnt/beegfs/structured/CDR/GGSN/20171002’: No such file or directory‘/mnt/beegfs/structured/CDR/MSC/20171002’
+: No such file or directory: No such file or directory: No such file or directory
+
+
+: No such file or directory
+
+: No such file or directory
+find: ‘/mnt/beegfs/structured/CDR/SDP_ADJ_AC/20171002’: No such file or directory
+find: ‘/mnt/beegfs/structured/CDR/SDP_ADJ_DA/20171002’: No such file or directory
+find: ‘/mnt/beegfs/structured/CDR/CCN_GPRS_AC/20171002’: No such file or directory

@@ -1,0 +1,22 @@
+select
+msisdn_key as MSISDN_NSK,
+coalesce(DOU_DATA,0) as DOU_DATA,
+coalesce(DOU_SMS,0) as DOU_SMS,
+coalesce(DOU_VOICE,0) as DOU_VOICE,
+coalesce(total_refill_count,0) as TOTAL_REFILL_CNT,
+case when try_cast(substr(cast(DATA_BALANCE as varchar),index(cast(DATA_BALANCE as varchar),'.')+1) as integer)>0 then try_cast(try_cast(try_cast(cast(DATA_BALANCE as varchar) as decimal(18,2)) as double) as varchar) else substr(cast(DATA_BALANCE as varchar),1,index(cast(DATA_BALANCE as varchar),'.')-1) end as DATA_BALANCE,
+case when try_cast(substr(cast(data_remaining_pack_balance as varchar),index(cast(data_remaining_pack_balance as varchar),'.')+1) as integer)>0 then try_cast(try_cast(try_cast(cast(data_remaining_pack_balance as varchar) as decimal(18,2)) as double) as varchar) else substr(cast(data_remaining_pack_balance as varchar),1,index(cast(data_remaining_pack_balance as varchar),'.')-1) end as DATA_REMAINING_PACK_BAL,
+LAST_SMS_RECV_DT,
+LAST_SMS_SENT_DT,
+lastdatausagedt as LAST_DATA_USAGE_DT,
+lastvoiceusagedt as LAST_VOICE_USAGE_DT,
+case when try_cast(substr(cast(MOMO_CLOSING_BALANCE as varchar),index(cast(MOMO_CLOSING_BALANCE as varchar),'.')+1) as integer)>0 then try_cast(try_cast(try_cast(cast(MOMO_CLOSING_BALANCE as varchar) as decimal(18,2)) as double) as varchar) else substr(cast(MOMO_CLOSING_BALANCE as varchar),1,index(cast(MOMO_CLOSING_BALANCE as varchar),'.')-1) end as MOMO_CLOSING_BALANCE,
+coalesce(MOMO_INACTIVITY_DAYS,0) as MOMO_INACTIVITY_DAYS,
+MOMO_RGS_STATUS,
+coalesce(MOMO_TOTAL_TXNS,0) as MOMO_TOTAL_TXNS,
+case when try_cast(substr(cast(MOMO_TOTAL_TXNS_FEES as varchar),index(cast(MOMO_TOTAL_TXNS_FEES as varchar),'.')+1) as integer)>0 then try_cast(try_cast(try_cast(cast(MOMO_TOTAL_TXNS_FEES as varchar) as decimal(18,2)) as double) as varchar) else substr(cast(MOMO_TOTAL_TXNS_FEES as varchar),1,index(cast(MOMO_TOTAL_TXNS_FEES as varchar),'.')-1) end as MOMO_TOTAL_TXNS_FEES,
+momolasttxdate as MOMO_LAST_TX_DATE,
+coalesce(try_cast(round(average_refill_amount,0) as decimal(10,0)),0) as AVE_REFILL_AMOUNT,
+coalesce(try_cast(round(MAX_REFILL_AMOUNT,0) as decimal(10,0)),0) as MAX_REFILL_AMOUNT,
+profile_update_date as UPDATE_DATE
+from nigeria.cm_profile_bdail_sit_f;

@@ -1,0 +1,54 @@
+import org.apache.spark.sql._
+val hiveContext = new org.apache.spark.sql.hive.HiveContext(sc)
+
+hiveContext.sql("set hive.enforce.bucketing=true")
+hiveContext.sql("set hive.exec.dynamic.partition.mode=nonstrict")
+
+
+
+
+
+hiveContext.sql("insert overwrite table flaretest.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),20170712,	\"EVD_CDR\"					         from flaretest.EVD_CDR  where substring(substring(file_name,INSTR(file_name,'incoming')+9),12,8) =\"20170712\" group by file_name")
+hiveContext.sql("insert overwrite table flaretest.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),20170712,	\"GGSN_CDR\"					     from flaretest.GGSN_CDR where tbl_dt=20170712 group by file_name")
+hiveContext.sql("insert overwrite table flaretest.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),20170712,	\"MSC_CDR\"					         from flaretest.MSC_CDR where tbl_dt=20170712 group by file_name,substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)")
+hiveContext.sql("insert overwrite table flaretest.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),20170712,	\"GSM_SERV_MASTER\"					 from flaretest.GSM_SERV_MASTER where tbl_dt=20170712 group by file_name,substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)")
+
+
+
+
+
+hiveContext.sql("insert overwrite table flaretest.feeds_count_summary partition (tbl_dt) select feedname,sum(numberofline),tbl_dt from flaretest.files_count_summary where tbl_dt=20170712  group by feedname,tbl_dt ")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+hiveContext.sql("insert overwrite table flaretest.feeds_count_summary partition (tbl_dt=20170712) select feedname,sum(numberofline) from flaretest.files_count_summary  where tbl_dt=20170712 group by feedname")
+
+
+
+
+exit;

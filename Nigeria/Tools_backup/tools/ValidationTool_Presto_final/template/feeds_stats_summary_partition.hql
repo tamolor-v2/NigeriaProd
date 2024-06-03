@@ -1,0 +1,1 @@
+insert into dq.feeds_count_stats_summary_pre select count(*) as numberoffiles, sum(recordscount) as recordscount, sum(processedrecordscount) as processedByKamanja, feedname, file_dt from audit.files_count_stats_summary where file_dt= targetdate group by feedname,file_dt;

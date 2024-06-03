@@ -1,0 +1,19 @@
+import org.apache.spark.sql._
+val hiveContext = new org.apache.spark.sql.hive.HiveContext(sc)
+
+hiveContext.sql("set hive.enforce.bucketing=true")
+hiveContext.sql("set hive.exec.dynamic.partition.mode=nonstrict")
+
+val buffer = scala.collection.mutable.ArrayBuffer(
+" insert overwrite table databasename.files_count_stats_detailes_yousef partition (tbl_dt,feed_name) " ,
+" SELECT filename as path, " ,
+" sum (processedrecordscount) as processed_count, targetdate, feed_name  " ,
+" FROM (select distinct upper(substring(fsys_msgtype,18)) feed_name,filename ,recordscount , processedrecordscount from databasename.file_stats where tbl_dt>=targetdate ) a " ,
+" GROUP BY filename,feed_name "
+)
+val sql=buffer.mkString(" ")
+
+println(sql)
+hiveContext.sql(sql)
+
+exit;

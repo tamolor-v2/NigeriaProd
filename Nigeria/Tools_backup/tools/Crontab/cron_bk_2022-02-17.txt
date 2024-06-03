@@ -1,0 +1,850 @@
+ cron tab of node  101 n
+0 1 * * * bash /nas/share05/tools/ali_SSH_SCRIPT_crontab.sh
+#*/5 * * * * bash /opt/service_control/presto
+#55 * * * * bash /nas/share05/tools/SwiftAlert_V2/runSwiftAlertdriver.sh
+30 10 * * * bash /mnt/beegfs_bsl/tools/SupportTeam/callReason_Script.sh
+#30 10 * * * bash /nas/share05/tools/avayaGenerator/avaya_driver.sh
+0 1 * * 7,3 bash /mnt/beegfs_bsl/tools/SupportTeam/sdp_dmp_ma_130_new.sh
+0 10 * * *  bash /mnt/beegfs_bsl/tools/SupportTeam/RGS30.sh
+##0 */1 * * * bash /mnt/beegfs_bsl/tools/api_backup/apidailybackup.sh
+10 * * * * bash /nas/share05/tools/EMM_Hourly_Report/driver_EMM.sh
+#0 6 * * * bash /mnt/beegfs_bsl/tools/sms_alert/modtransaction.sh
+#0 5 * * * bash /mnt/beegfs_bsl/scripts/extra_time/aut_run_extra_time.sh
+0 8 * * * perl /nas/share05/ops/scripts/cs18_daily_payment_summary.pl
+0 * * * *  /home/daasuser/fileOps/move/MoveSplit.sh
+#59 1-23/2 * * * bash /mnt/beegfs_bsl/scripts/ncc48/aut_run_ncc48.sh
+# LiveUI reports (1,2 & 3) Resync script
+# 10 3,6,9,12,15,18,21 * * * bash /mnt/beegfs_bsl/FlareLoadCluster/LiveUiResetData/Queries/ResyncScript.sh > /mnt/beegfs_bsl/FlareLoadCluster/LiveUiResetData/logs/ResyncScriptRun_$(date +\%Y\%m\%d\%H\%M\%S).txt 2>&1
+# 10 0,2,4,6,8,10,12,14,16,18,20,22 * * * bash /mnt/beegfs_bsl/FlareLoadCluster/LiveUiResetData/Queries/ResyncScript.sh > /mnt/beegfs_bsl/FlareLoadCluster/LiveUiResetData/logs/ResyncScriptRun_$(date +\%Y\%m\%d\%H\%M\%S).txt 2>&1
+
+# Live UI Run d & d-1
+# 10 0,2,6,8,12,14,18,20 * * * bash /mnt/beegfs_bsl/FlareLoadCluster/LiveUiResetData/Queries/ResyncScript.sh > /mnt/beegfs_bsl/FlareLoadCluster/LiveUiResetData/logs/ResyncScriptRun_$(date +\%Y\%m\%d\%H\%M\%S).txt 2>&1
+10 0,2,6,8,12,14,18,20 * * * bash /nas/share05/FlareProd/Run/Load/LiveUiResetData/Queries/ResyncScript.sh > /nas/share05/FlareProd/Run/Load/LiveUiResetData/logs/ResyncScriptRun_$(date +\%Y\%m\%d\%H\%M\%S).txt 2>&1
+
+# Live UI Run d, d-1, d-2, d-3, d-4, d-5, d-6 & d-7
+# 10 4,10,16,22 * * * bash /mnt/beegfs_bsl/FlareLoadCluster/LiveUiResetData/Queries/ResyncScript.sh --DaysToProcess 7 > /mnt/beegfs_bsl/FlareLoadCluster/LiveUiResetData/logs/ResyncScriptRun_$(date +\%Y\%m\%d\%H\%M\%S).txt 2>&1
+10 4,10,16,22 * * * bash /nas/share05/FlareProd/Run/Load/LiveUiResetData/Queries/ResyncScript.sh --DaysToProcess 7 > /nas/share05/FlareProd/Run/Load/LiveUiResetData/logs/ResyncScriptRun_$(date +\%Y\%m\%d\%H\%M\%S).txt 2>&1
+
+##NGVS Dedup and PCF
+35 * * * * bash /nas/share05/tools/DedupIncr/Crontab/NGVS_Dedup_Cron.sh
+
+##WBS_REPORT extraction
+45 3 * * * bash /nas/share05/tools/DAS/WBS.sh
+
+############################Maher#####################
+*/30 * * * * /usr/bin/zabbix_sender -z 10.1.197.143 -p 10052 -s "datanode01001.mtn.com" -k HiveStatus -o $(/home/daasuser/HiveScripts/hiveQuery.sh)
+
+################## YAZEED ###################
+00 10,22 * * * bash /home/daasuser/ops_script/LoopAlluxioFlarClean.sh
+
+###############Yahya##################
+#55 */2 * * * python3.6 /home/daasuser/Fault_Alert.py
+
+#*/60 * * * * bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_1.sh
+
+0 */1 * * * beeline -n daasuser -p '' -u 'jdbc:hive2://datanode01026.mtn.com:2181,datanode01028.mtn.com:2181,master01001.mtn.com:2181,master01002.mtn.com:2181,master01003.mtn.com:2181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2' -f  /nas/share05/tools/ValidationTool_Presto_final/template/Repair_table.sql
+ cron tab of node  102 n
+*/10 * * * * bash /home/daasuser/SwiftAlert/runSwiftAlertdriver.sh
+##10 * * * * /home/daasuser/moveLogs.sh
+
+
+
+# Extract & Upload LoadCluster containers everyday at 1hr and 10mins
+10 1 * * * bash /nas/share05/tools/ContainerRefresh/bin/LoadClusterScript.sh > /nas/share05/tools/ContainerRefresh/teelog/LoadClusterScriptRun_$(date +\%Y\%m\%d\%H\%M\%S).txt  2>&1
+
+#*/60 * * * * bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_2.sh
+0 4 * * * bash /nas/share05/tools/MSC_DAAS_LEA/LEA_driver_rerun.sh date --date="-1 days" +%Y%m%d
+ cron tab of node  103 n
+#*/60 * * * * bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_3.sh
+ cron tab of node  104 n
+##10 * * * * /home/daasuser/moveLogs.sh
+
+#*/60 * * * * bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_4.sh
+ cron tab of node  105 n
+##10 * * * * /home/daasuser/moveLogs.sh
+
+#5 1 * * * bash /nas/share05/tools/DAS/PCF_1.sh
+
+#5 1 * * * bash /nas/share05/tools/DAS/PCF_2.sh
+
+#5 1 * * * bash /nas/share05/tools/DAS/PCF_3.sh
+
+#5 1 * * * bash /nas/share05/tools/DAS/PCF_4.sh
+
+#*/60 * * * * bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_5.sh
+ cron tab of node  106 n
+##10 * * * * /home/daasuser/moveLogs.sh
+
+30 * * * * bash /mnt/beegfs_bsl/tools/SupportTeam/minitar_cron/group11.sh
+
+
+#*/60 * * * * bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_6.sh
+ cron tab of node  107 n
+##10 * * * * /home/daasuser/moveLogs.sh
+
+#10 * * * * bash /nas/share05/tools/msckrepair/msck_N_1.sh
+#10 * * * * bash /nas/share05/tools/msckrepair/msck_N_22.sh
+#10 * * * * bash /nas/share05/tools/msckrepair/msck_N_38.sh
+#15 10,11,12,13 * * * bash /nas/share05/tools/msckrepair/msck_CaaS_N_38.sh
+
+#*/60 * * * * bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_7.sh 
+ cron tab of node  108 n
+##10 * * * * /home/daasuser/moveLogs.sh
+ cron tab of node  109 n
+##10 * * * * /home/daasuser/moveLogs.sh
+
+
+## run generator 
+#1 1 * * * /mnt/beegfs/tools/minitarringLists/date_generator.sh
+
+
+ cron tab of node  110 n
+##10 * * * * /home/daasuser/moveLogs.sh
+
+
+ cron tab of node  111 n
+##10 * * * * /home/daasuser/moveLogs.sh
+ cron tab of node  112 n
+##10 * * * * /home/daasuser/moveLogs.sh
+
+
+ cron tab of node  113 n
+##10 * * * * /home/daasuser/moveLogs.sh
+
+
+ cron tab of node  114 n
+ cron tab of node  115 n
+##10 * * * * /home/daasuser/moveLogs.sh
+
+ cron tab of node  116 n
+
+*/30 * * * * bash /mnt/beegfs_bsl/tools/SupportTeam/minitar_cron/group11.sh
+*/60 * * * * bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_1.sh
+*/60 * * * *  bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_2.sh
+*/60 * * * *  bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_3.sh
+*/60 * * * *  bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_4.sh
+*/60 * * * *  bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_5.sh
+*/60 * * * *  bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_6.sh
+*/60 * * * *  bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_7.sh
+*/60 * * * *  bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_FDI.sh
+*/60 * * * *  bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_extracted.sh
+#10 * * * * /home/daasuser/moveLogs.sh
+ cron tab of node  117 n
+###10 * * * * /home/daasuser/moveLogs.sh
+
+ cron tab of node  118 n
+##10 * * * * /home/daasuser/moveLogs.sh
+ cron tab of node  119 n
+##10 * * * * /home/daasuser/moveLogs.sh
+
+ cron tab of node  120 n
+##10 * * * * /home/daasuser/moveLogs.sh
+
+30 10 * * * bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_MAPS.sh
+15 10 * * * bash /nas/share05/tools/SupportTeam/minitar_cron/minitar_MKT.sh
+ cron tab of node  121 n
+##10 * * * * /home/daasuser/moveLogs.sh
+
+55 * * * * bash /nas/share05/tools/SwiftAlert_V2/runSwiftAlertdriver.sh
+0 * * * * bash /nas/share05/tools/Crontab/Scripts/list_live_incoming.sh
+30 10 * * * bash /nas/share05/tools/avayaGenerator/avaya_driver.sh
+#15 5,6,7,8,10,12,16,20,0 * * * bash /nas/share05/tools/MSC_DAAS_LEA/LEA_driver_today.sh
+#15 14 * * * bash /nas/share05/tools/MSC_DAAS_LEA/LEA_driver_yesterday.sh
+
+
+ cron tab of node  122 n
+##10 * * * * /home/daasuser/moveLogs.sh
+###__MOVED_TO_AIRFLOW_#10 * * * * bash /home/daasuser/msck_repair_all.sh
+#59 8 * * * bash /nas/share05/tools/USSDReport/USSD_REPORT_FINAL.sh
+
+
+ cron tab of node  123 n
+##10 * * * * /home/daasuser/moveLogs.sh
+
+
+ cron tab of node  124 n
+##10 * * * * /home/daasuser/moveLogs.sh
+
+ cron tab of node  125 n
+##10 * * * * /home/daasuser/moveLogs.sh
+ cron tab of node  126 n
+##10 * * * * /home/daasuser/moveLogs.sh
+
+ cron tab of node  127 n
+#50 23 * * * bash /mnt/beegfs_bsl/apidfs/apiscripts/runObsDirCron.sh
+#45 7,9,11,13,15,17,20 * * * bash /mnt/beegfs_bsl/apidfs/apiscripts/ApiScriptiDailyDpiCron.sh
+#0 6,7,12,18 * * * bash /mnt/beegfs_bsl/apidfs/apiscripts/ApiScriptiDimCron.sh
+
+### New API jobs with API Q
+
+#*/5 */1 * * * bash /mnt/beegfs_bsl/apidfs/apiscripts/StartApiDriver_q_group1.sh
+#*/5 */1 * * * bash /mnt/beegfs_bsl/apidfs/apiscripts/StartApiDriver_q_group2.sh
+#*/5 */1 * * * bash /mnt/beegfs_bsl/apidfs/apiscripts/StartApiDriver_q_group3.sh
+
+
+
+#*/2 * * * * bash /mnt/beegfs_bsl/apidfs/apiscripts/StartApiDriver_group1.sh
+#*/2 * * * * bash /mnt/beegfs_bsl/apidfs/apiscripts/StartApiDriver_group2.sh
+
+#30 8,12 * * * bash /mnt/beegfs_bsl/apidfs/apiscripts/DAAS7_API_OneFeed.sh $(date -d '-1 day' +\%Y\%m\%d) da_history
+#30 8,12 * * * bash /mnt/beegfs_bsl/apidfs/apiscripts/DAAS7_API_OneFeed.sh $(date -d '-1 day' +\%Y\%m\%d) last_recharge
+#0 2,5,8,11,14,17,20 * * * bash /mnt/beegfs_bsl/apidfs/apiscripts/DAAS7_API_OneFeed.sh $(date +\%Y\%m\%d) ma_history
+#0 6 * * * bash /mnt/beegfs_bsl/apidfs/apiscripts/DAAS7_API_OneFeed.sh $(date -d '-1 day' +\%Y\%m\%d) ma_history
+#0 2,5,8,11,14,17,20 * * * bash /mnt/beegfs_bsl/apidfs/apiscripts/ApiScriptiDailyNonDpiOthers_OneFeed.sh $(date +\%Y\%m\%d) subscription
+#0 8,20 * * * bash /mnt/beegfs_bsl/apidfs/apiscripts/Bulk_api.sh
+#0 6,12,18 * * * bash /mnt/beegfs_bsl/apidfs/apiscripts/ApiScriptiDailyGrp3.sh
+#5,55 0,5,23 * * * bash /mnt/beegfs_bsl/apidfs/apiscripts/StartApiDriver_Lea.sh
+
+#0 7,14,21 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/GDS_API.sh  $(date -d '-1 day' +\%Y\%m\%d)
+
+#0 20 6,7,8 * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/ApiScriptMonthlyCustSpend.sh
+
+#0 10 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/ApiScriptCustomerSpend.sh $(date -d '-1 day' +\%Y\%m\%d)
+#0 11 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/ApiScriptCustomerSpend.sh $(date -d '-2 day' +\%Y\%m\%d)
+
+####### Digital Payment for D-0 ########
+##0 3,11,15,19,23 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/Digital_Payment.sh $(date +\%Y\%m\%d)
+
+####### Digital Payment for D-1 ########
+###45 6 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/Digital_Payment.sh $(date -d '-1 day' +\%Y\%m\%d)
+
+####### Naira Time API for a Fixed Date ########
+####15 22 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/Naira_Time.sh 20210601
+
+######## RETAILER INCENTIVE API ########
+##45 8,11,14 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/Customer_Winback.sh
+###45 8,11,14 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/Customer_Winback_Count.sh
+
+####### CS18 API JOBS #######
+##*/5 */1 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/StartApiDriver_q_group1_cs18.sh
+##*/5 */1 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/StartApiDriver_q_group2_cs18.sh
+##*/5 */1 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/StartApiDriver_q_group3_cs18.sh
+##*/5 */1 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/StartApiDriver_q_group4_cs18.sh
+
+15 7,14 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/Data_Share_Sponsor.sh (date -d '-1 day' +\%Y\%m\%d)
+
+45 7,11 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/Credit_Score_Datamart.sh $(date -d '-1 day' +\%Y\%m\%d)
+ cron tab of node  128 n
+##10 * * * * /home/daasuser/moveLogs.sh
+
+ cron tab of node  129 n
+
+##10 * * * * /home/daasuser/moveLogs.sh
+
+ cron tab of node  130 n
+#0 8 * * * bash /mnt/beegfs_bsl/scripts/qrios_sdp_timeout_report/qrios_sdp_recon_morn.sh
+#0 14 * * * bash /mnt/beegfs_bsl/scripts/qrios_sdp_timeout_report/qrios_sdp_recon_aft.sh
+#0 8 * * * bash /mnt/beegfs_bsl/scripts/qrios_sdp_timeout_report/qrios_gprs_recon_morn.sh
+#0 14 * * * bash /mnt/beegfs_bsl/scripts/qrios_sdp_timeout_report/qrios_gprs_recon_aft.sh
+#0 8 * * * Perl /mnt/beegfs_bsl/scripts/qmatic_report/Qmatic_CRv2.pl `date --date="-1 days" +%Y%m%d`
+#0 8 * * * perl /mnt/beegfs_bsl/scripts/cvm/cvm_inbound_urs1.pl `date --date="-1 days" +%Y%m%d`
+#0 8 * * * bash /nas/share05/tools/ExtractTools/BULK_USSD_GENERATOR/File_To_Agility.sh
+#0 8 * * * bash /nas/share05/tools/MyMTNApp_Report/SmartApp_Rep.sh
+#0 6 * * * python3.6 /nas/share05/dataOps_dev/revamped_cug/revamped_cug_rpt.py
+#0 6 * * * python3.6 /nas/share05/dataOps_dev/free_data_elearning/free_data_elearning_rpt.py
+#0 5 * * * python3.6 /nas/share05/dataOps_dev/fibrenet_install/fibernet_install_rpt.py
+#0 8 * * * python3.6 /nas/share05/ops/mtnops/gprs_roaming_report.py
+#5 10 * * * bash /nas/share05/tools/DataMax/CLM/DATA_MAX_PLAN.sh
+#0 10 * * * bash /nas/share05/tools/DataMax/FLYTXT/DATA_MAX_PLAN.sh
+#0 4 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/HYNETFLEX_CUSTOMER/extract_HYNETFLEX_CUSTOMER.sh
+#0 8 * * * bash /nas/share05/dataOps_dev/mnp_incentive/DataOps_MNP_INCENTIVE.sh `date +%Y-%m-%d`
+#15 4 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/CB_MNP_INTERFACE_DTLS/extract_CB_MNP_INTERFACE_DTLS.sh
+#0 6 * * * bash /nas/share05/tools/ExtractTools/MTN_ONLINE/extract_MTN_ONLINE.sh
+#0 7 * * * bash /nas/share05/tools/ExtractTools/WBS_BIB_REPORT_DAAS/WBS_BIB_REPORT_DAAS.sh
+#0 */1 * * * bash /nas/share05/tools/ExtractTools/NIMC_DETAILS/extract_NIMC_DETAILS_hourly.sh
+#0 4 * * * bash /nas/share05/tools/ExtractTools/NIMC_DETAILS/extract_NIMC_DETAILS.sh
+#0 10 * * * python3.6 /nas/share05/dataOps_dev/dailydata_gross_gc/daily_data_gc_rpt.py
+#0 6 * * * python3.6 /nas/share05/ops/mtnops/eyeballing_recycle.py
+#0 10 * * 0 bash /nas/share05/tools/ExtractTools/gsm_sims_master_LIVE/gsm_sims_master_LIVE_today.sh
+#0 6 1,2 * * bash /nas/share05/tools/ExtractTools/gsm_sims_master_LIVE/gsm_sims_master_LIVE_today.sh
+45 8,13,16 * * * bash /mnt/beegfs_bsl2/TOM/NIN_ENROLLMENT/NIN_ENROLL_RECON_DEDUP.sh
+##0 6,18 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/CB_NIN_UPDT_REQUEST_POOL/extract_CB_NIN_UPDT_REQUEST_POOL.sh
+#15 9,14,19 * * * bash /nas/share05/ops/CB_NIN_UPDT_DEDUP.sh
+#45 8,13,16 * * * bash /nas/share05/ops/NIN_ENROLL_RECON_DEDUP.sh
+#15 22 * * *  python3.6 /nas/share05/ops/NIN_Enrollment_Validation.py
+#0 8 * * * bash /nas/share05/tools/ExtractTools/MYMTN_FOUNDATION_REPORT/extract_MYMTN_FOUNDATION_REPORT.sh
+#0 7 * * * bash /nas/share05/tools/ExtractTools/MTNF_SERVEYS/extract_MTNF_SERVEYS.sh
+#0 */1 * * * bash /nas/share05/tools/ExtractTools/EBU_GROUP_ESCALATIONS_CLOSED/extract_EBU_GROUP_ESCALATIONS_CLOSED.sh
+#30 3 * * * bash /nas/share05/tools/ExtractTools/EBU_GROUP_ESCALATIONS_CLOSED/extract_EBU_GROUP_ESCALATIONS_CLOSED_D-1.sh
+#0 */1 * * * bash /nas/share05/tools/ExtractTools/EBU_GROUP_ESCALATIONS_PENDING/extract_EBU_GROUP_ESCALATIONS_PENDING.sh
+#30 3 * * * bash /nas/share05/tools/ExtractTools/EBU_GROUP_ESCALATIONS_PENDING/extract_EBU_GROUP_ESCALATIONS_PENDING_D-1.sh
+#0 7 * * * bash /nas/share05/tools/ExtractTools/SEND2ME_RPT/extract_SEND2ME_RPT.sh
+#0 7 * * * bash /nas/share05/tools/ExtractTools/IFS_SALES_PART/extract_IFS_SALES_PART.sh
+#35 6 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/CLM_WBO_LOCATION/extract_CLM_WBO_LOCATION.sh
+#0 10 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/ApiScriptCustomerSpend.sh $(date -d '-1 day' +\%Y\%m\%d)
+#0 11 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/ApiScriptCustomerSpend.sh $(date -d '-2 day' +\%Y\%m\%d)
+ cron tab of node  131 n
+##10 * * * * /home/daasuser/moveLogs.sh
+ cron tab of node  132 n
+##10 * * * * /home/daasuser/moveLogs.sh
+ cron tab of node  133 n
+##10 * * * * /home/daasuser/moveLogs.sh
+ cron tab of node  134 n
+##10 * * * * /home/daasuser/moveLogs.sh
+ cron tab of node  135 n
+##10 * * * * /home/daasuser/moveLogs.sh
+ cron tab of node  136 n
+##10 * * * * /home/daasuser/moveLogs.sh
+ cron tab of node  137 n
+ cron tab of node  138 n
+#########################Omar Jobs ###########################
+#0 0 5 */1 * bash /nas/share05/tools/ExtractTools/BILL_RUN_STATISTICS_TAB/BILL_RUN_STATISTICS_TAB.sh
+#10 3 * * * bash /nas/share05/tools/ExtractTools/BUDGET_YEAR_AMOUNT/BUDGET_YEAR_AMOUNT.sh
+#10 3 * * * bash /nas/share05/tools/ExtractTools/CB_SCHEDULES/CB_SCHEDULES.sh
+#30 5 * * * bash /nas/share05/tools/ExtractTools/CB_SUBS_POS_SERVICES/CB_SUBS_POS_SERVICES.sh
+#58 16 * * * bash /nas/share05/tools/ExtractTools/CHANGE_REPORT_MTN/CHANGE_REPORT_MTN.sh
+#30 6 * * * bash /nas/share05/tools/ExtractTools/CLIENT_ACTIVITY_LOG/CLIENT_ACTIVITY_LOG.sh
+#30 5 * * * bash /nas/share05/tools/ExtractTools/MSO_PROCESS_AVG_TIME/extract_MSO_PROCESS_AVG_TIME.sh
+#0 4 * * * bash /nas/share05/tools/ExtractTools/HPD_HELP_DESK/HPD_HELP_DESK.sh
+#0 0 3 */1 * bash /nas/share05/tools/ExtractTools/MSO_ACCURACY_STATISTICS/MSO_ACCURACY_STATISTICS.sh
+#15 4 * * * bash /nas/share05/tools/ExtractTools/MTN_OVERVIEW_COMM_RPT/MTN_OVERVIEW_COMM_RPT.sh
+#0 3 * * * bash /nas/share05/tools/ExtractTools/MTN_PR_DETAILS/MTN_PR_DETAILS.sh
+#0 6 * * * bash /nas/share05/tools/ExtractTools/OTP_STATUS/OTP_STATUS.sh
+#0 6 * * * bash /nas/share05/tools/ExtractTools/SERV_STATUS_SEAMFIX_REF/SERV_STATUS_SEAMFIX_REF.sh
+0 5 * * * bash /nas/share05/tools/ExtractTools/SMS_ACTIVATION_REQUEST_kpi/SMS_ACTIVATION_REQUEST.sh
+#0 6 * * * bash /nas/share05/tools/ExtractTools/SMS_ACTIVATION_REQUEST_JOIN/SMS_ACTIVATION_REQUEST_JOIN.sh
+#3 4 * * * bash /nas/share05/tools/ExtractTools/SMS_ACTIVATION_VW/SMS_ACTIVATION_VW.sh
+#45 6 * * * bash /nas/share05/tools/ExtractTools/VALIDATION_PASSED/VALIDATION_PASSED.sh
+0 5 * * * bash /nas/share05/tools/ExtractTools/ACCOUNTING_BALANCE_TAB/ACCOUNTING_BALANCE_TAB.sh
+#30 3 * * * bash /nas/share05/tools/ExtractTools/AGENT_USER_BIB/AGENT_USER_BIB.sh
+#0 5 * * * bash /nas/share05/tools/ExtractTools/IFSAPP_CUSTOMER_INFO_TAB/IFSAPP_CUSTOMER_INFO_TAB.sh
+#0 5 * * * bash /nas/share05/tools/ExtractTools/IFSAPP_CUSTOMER_ORDER_LINE/IFSAPP_CUSTOMER_ORDER_LINE.sh
+#0 5 * * * bash /nas/share05/tools/ExtractTools/IFSAPP_INVENTORY_TRANSACTION_HIS/IFSAPP_INVENTORY_TRANSACTION_HIS.sh
+####0 5 * * * bash /nas/share05/tools/ExtractTools/IFSAPP_MANUF_FILE_DETAIL/IFSAPP_MANUF_FILE_DETAIL.sh
+#0 5 * * * bash /nas/share05/tools/ExtractTools/IFSAPP_PURCHASE_ORDER_LINE_TAB/IFSAPP_PURCHASE_ORDER_LINE_TAB.sh
+#0 5 * * * bash /nas/share05/tools/ExtractTools/MULTIPLE_REG_BIB/MULTIPLE_REG_BIB.sh
+#0 17 * * * bash /nas/share05/tools/ExtractTools/SMS_INCENTIVE_IMEI_VW/SMS_INCENTIVE_IMEI_VW.sh
+#0 5 * * * bash /nas/share05/tools/ExtractTools/TT_MSO_1_ISP_LOGIN_IDS_LOOKUP/TT_MSO_1_ISP_LOGIN_IDS_LOOKUP.sh
+#25 4 * * * bash /nas/share05/tools/ExtractTools/WBS_CLIENT_DAARS_TAPIN/WBS_CLIENT_DAARS_TAPIN.sh
+#25 4 * * * bash /nas/share05/tools/ExtractTools/WBS_CLIENT_DAARS_TAPOUT/WBS_CLIENT_DAARS_TAPOUT.sh
+
+#0 7 * * * bash /nas/share05/tools/ExtractTools/IFS_SALES_PART/extract_IFS_SALES_PART.sh
+#4 3 * * * bash /nas/share05/tools/ExtractTools/IFS_SALES_HIST/IFS_SALES_HIST.sh
+#16 3 * * * bash /nas/share05/tools/ExtractTools/IFS_SERVICE_CENTRE_SALES/IFS_SERVICE_CENTRE_SALES.sh
+#30 5 * * * bash /nas/share05/tools/ExtractTools/EDW_REPORT/EDW_REPORT.sh
+#30 5 * * * bash /nas/share05/tools/ExtractTools/IFSAPP_IFSCONNECT_SALES_HIST/IFSAPP_IFSCONNECT_SALES_HIST.sh
+#30 4 * * * bash /nas/share05/tools/ExtractTools/IFSAPP_SERVICE_CONNECT_STORE/IFSAPP_SERVICE_CONNECT_STORE.sh
+
+#0 8 * * * /nas/share05/tools/ExtractTools/SRM_REQUEST/SRM_REQUEST.sh
+#0 8 * * * /nas/share05/tools/ExtractTools/PBM_PROBLEM_INVESTIGATION/PBM_PROBLEM_INVESTIGATION.sh
+####__MOVED_TO_AIRFLOW_####0 7 * * * /mnt/beegfs_bsl/tools/ExtractTools/AGILITY_PAYMENT/extract_AGILITY_PAYMENT.sh
+#30 7 * * * /nas/share05/tools/ExtractTools/IFSAPP_ACCOUNT/IFSAPP_ACCOUNT.sh
+#30 7 * * * /nas/share05/tools/ExtractTools/IFSAPP_BUDGET_COMM_COST_VAR/IFSAPP_BUDGET_COMM_COST_VAR.sh
+#30 7 * * * /nas/share05/tools/ExtractTools/IFSAPP_PRO_BUDGET_COMMITMENTS/IFSAPP_PRO_BUDGET_COMMITMENTS.sh
+#30 7 * * * /nas/share05/tools/ExtractTools/IFSAPP_MTN_RECEIPT_RECONC_RPT/IFSAPP_MTN_RECEIPT_RECONC_RPT.sh
+#30 7 * * * /nas/share05/tools/ExtractTools/IFSAPP_BUDGET_YEAR_AMOUNT_UNION/IFSAPP_BUDGET_YEAR_AMOUNT_UNION.sh
+
+#30 4 * * * bash /nas/share05/tools/ExtractTools/SOAPPKEY/extract_SOAPPKEY.sh
+#30 4 * * * bash /nas/share05/tools/ExtractTools/SORECORD/extract_SORECORD.sh
+#30 4 * * * bash /nas/share05/tools/ExtractTools/SORESPONSE/extract_SORESPONSE.sh
+#0 7 * * * bash /nas/share05/tools/ExtractTools/WBS_BIB_REPORT_DAAS/WBS_BIB_REPORT_DAAS.sh
+######################### End of Omar Jobs
+######################### Group and Bright KPI
+#3 0 5 */1 * bash /nas/share05/tools/kpi_reports/scripts/Monthly_KPIs.sh
+#0 07 * * 0 bash /nas/share05/tools/kpi_reports/scripts/weekly_KPIs.sh
+#0 */1 * * * bash /nas/share05/tools/kpi_reports/scripts/kpi_reports_script.sh
+#45 15 * * * bash /nas/share05/tools/kpi_reports/scripts/MANUAL_KPI.sh
+####0 */1 * * * bash /nas/share05/tools/kpi_reports/scripts/ElasticSearchScript/bin/CRM_API_Response_time.sh
+####*/45 * * * * bash /nas/share05/tools/kpi_reports/scripts/move_data.sh
+#30 7 * * * bash /nas/share05/tools/kpi_reports/scripts/daily_KPIs.sh
+*/30 * * * * bash /nas/share05/tools/kpi_reports/xml_tool/XML_ingestion.sh
+#5 7 * * * bash /nas/share05/tools/kpi_reports/scripts/new/runallmanually.sh
+0 03 * * * python3.6 /nas/share05/dataOps_dev/dap_filespool/dpa_daily_usage_spool.py $(date -d '-1 day' +\%Y\%m\%d) $(date -d '-1 day' +\%Y\%m\%d) 0
+20 03 * * * python3.6 /nas/share05/dataOps_dev/dap_filespool/dpa_offer_spool.py $(date -d '-1 day' +\%Y\%m\%d) $(date -d '-1 day' +\%Y\%m\%d) 0
+################ End Group and Bright KPI
+################
+#0 3 * * * bash /nas/share05/tools/ExtractTools/ABLT_GSM_STARTER_PACK/extract_ABLT_GSM_STARTER_PACK.sh
+####__MOVED_TO_AIRFLOW_####30 3 * * * bash /nas/share05/tools/ExtractTools/CALL_REASON/extract_CALL_REASON.sh
+####__MOVED_TO_AIRFLOW_####10 7,11,15,19,22 * * * bash /nas/share05/tools/ExtractTools/CALL_REASON/extract_CALL_REASON_Today.sh
+33 7,11,15,19,22 * * * bash /nas/share05/tools/ExtractTools/CALL_REASON/extract_CALL_REASON_Dedup_Today.sh
+3 8,12,16,20,23 * * * bash /nas/share05/tools/ExtractTools/CALL_REASON/extract_CALL_REASON_Dedup_Today.sh
+#0 2 * * * bash /nas/share05/tools/ExtractTools/MNP_PORTING_BROADCAST/extract_MNP_PORTING_BROADCAST.sh
+####__MOVED_TO_AIRFLOW_####0 6 * * 1 bash /nas/share05/tools/ExtractTools/NEWREG_BIOUPDT_POOL/extract_NEWREG_BIOUPDT_POOL.sh
+#####0 7 * * * bash /nas/share05/tools/ExtractTools/TPC_CB_NEWREG_BIOUPDT_POOL_DAILY/TPC_CB_NEWREG_BIOUPDT_POOL_DAILY.sh
+#0 2 * * * bash  /nas/share05/tools/ExtractTools/AGL_CRM_STATE_MAP/extract_AGL_CRM_STATE_MAP.sh
+#10 2 * * * bash /nas/share05/tools/ExtractTools/AGL_CRM_LGA_MAP/extract_AGL_CRM_LGA_MAP.sh
+#20 2 * * * bash /nas/share05/tools/ExtractTools/AGL_CRM_COUNTRY_MAP/extract_AGL_CRM_COUNTRY_MAP.sh
+0 0 3 */1 * bash /nas/share05/tools/ExtractTools/AGL_BILL_ANALYZER_MONTHLY/extract_AGL_BILL_ANALYZER_MONTHLY.sh
+0 3 * * * bash /nas/share05/tools/ExtractTools/MTN_BIB_SERIAL_ALLSK/MTN_BIB_SERIAL_ALLSK.sh
+#0 1 * * * bash /nas/share05/tools/ExtractTools/CUG_ACCESS_FEES/extract_CUG_ACCESS_FEES.sh
+30 00 * * * bash /nas/share05/tools/ExtractTools/CB_NEWREG_BIOUPDT_POOL_DAILY/extract_CB_NEWREG_BIOUPDT_POOL_DAILY.sh
+##0 6,12,20 * * * bash /nas/share05/tools/ExtractTools/WBS_BIB_REPORT/extract_WBS_BIB_REPORT_today.sh
+#0 6 * * * bash /nas/share05/tools/ExtractTools/WBS_REPORT/extract_WBS_REPORT_Crontab.sh
+##35 6 * * * bash /nas/share05/tools/ExtractTools/WBS_REPORT/dedup_WBS_REPORT.sh
+##5 7,8,9 * * * bash /nas/share05/tools/ExtractTools/WBS_REPORT/dedup_WBS_REPORT.sh
+##0 10,22 * * * bash /nas/share05/tools/ExtractTools/WBS_BIB_REPORT/extract_WBS_BIB_REPORT_yesterday.sh
+0 8 * * * bash   /nas/share05/tools/ExtractTools/FCT_FIN_INTERCONNECT/extract_FCT_FIN_INTERCONNECT.scala
+#0 3 * * * bash /nas/share05/tools/ExtractTools/PREPAID_PAYMENTS_LOG/extract_PREPAID_PAYMENTS_LOG.sh
+20 6 * * * bash /nas/share05/tools/ExtractTools/FCT_FIN_INTERCONNECT/FCT_FIN_INTERCONNECT_driver.sh
+0 9 * * 1 bash /nas/share05/tools/Crontab/Scripts/merge_newreg_weekly.sh
+#5 3 * * * bash /nas/share05/tools/Crontab/Scripts/merge_newreg_New_presto.sh
+##*/30 * * * * bash /mnt/beegfs_bsl/production/tarringscript/DPI_crontab.sh
+*/3 * * * * bash /home/daasuser/CMS/run.sh
+####__MOVED_TO_AIRFLOW_####0 9 * * * bash /nas/share05/tools/ExtractTools/CAAS_SCRIPT/group1.sh
+####__MOVED_TO_AIRFLOW_####0 9 * * * bash /nas/share05/tools/ExtractTools/CAAS_SCRIPT/group2.sh
+####__MOVED_TO_AIRFLOW_####20 9 * * * bash /nas/share05/tools/ExtractTools/CAAS_SCRIPT/group3.sh
+####__MOVED_TO_AIRFLOW_####20 9 * * * bash /nas/share05/tools/ExtractTools/CAAS_SCRIPT/group4.sh
+####__MOVED_TO_AIRFLOW_####40 9 * * * bash /nas/share05/tools/ExtractTools/CAAS_SCRIPT/group5.sh
+####__MOVED_TO_AIRFLOW_####40 9 * * * bash /nas/share05/tools/ExtractTools/CAAS_SCRIPT/group6.sh
+0 13 * * * bash /nas/share05/tools/ValidationTool_Presto_BSL_NEW/timer_validation_auto.sh
+#0 4 * * * bash /nas/share05/tools/ExtractTools/SPON_PROVIDER_DTLS/SPON_PROVIDER_DTLS.sh
+#0,15,30,45 * * * * bash /nas/share05/tools/ExtractTools/NEWREG_BIOUPDT_POOL_LIVE/driver_NEWREG_BIOUPDT_POOL_LIVE_today.sh
+#0 4 * * * bash /nas/share05/tools/ExtractTools/AGENT_USER_BIB_LIVE/AGENT_USER_BIB_LIVE_today.sh
+#0 4 * * * bash /nas/share05/tools/ExtractTools/device_mapper_LIVE/device_mapper_LIVE_today.sh
+#0 4 * * * bash /nas/share05/tools/ExtractTools/multiple_reg_bib_LIVE/multiple_reg_bib_LIVE_today.sh
+#0 4 * * * bash /nas/share05/tools/ExtractTools/quarantined_msisdn_bib_LIVE/quarantined_msisdn_bib_LIVE_today.sh
+#0 10 * * 0 bash /nas/share05/tools/ExtractTools/gsm_sims_master_LIVE/gsm_sims_master_LIVE_today.sh
+#0 6 1,2 * * bash /nas/share05/tools/ExtractTools/gsm_sims_master_LIVE/gsm_sims_master_LIVE_today.sh
+######0 6 * * * bash /nas/share05/tools/ExtractTools/tbl_imei_registration_dtls_vw/tbl_imei_registration_dtls_vw_D3_D0_new.sh
+####0 6 * * * bash /nas/share05/tools/ExtractTools/tbl_data_agent_registration_vw_LIVE_N/tbl_data_agent_registration_vw_LIVE_N.sh
+####31 6 * * * bash /nas/share05/tools/ExtractTools/tbl_data_agent_registration_vw_LIVE/check_delete_partion.sh
+#0 5 * * * bash /nas/share05/tools/ExtractTools/BIB_AGL_SUBBASE_TAB_RPT/BIB_AGL_SUBBASE_TAB_RPT.sh
+0 5 * * * bash /nas/share05/tools/ExtractTools/COMPENSATION/COMPENSATION_LIVE.sh
+0 5 * * * bash /nas/share05/tools/ExtractTools/COMPENSATION/check_delete.sh
+0 */1 * * * bash /nas/share05/tools/Crontab/Scripts/sdp_api_merge_move.sh
+15 23 * * * bash /nas/share05/tools/ExtractTools/CB_SERV_MAST_VIEW_LIVE/driver_CB_SERV_MAST_VIEW_last_run.sh $(date +\%Y\%m\%d)
+0 5,9,13,17,21 * * * bash /nas/share05/tools/ExtractTools/CB_SERV_MAST_VIEW_LIVE/driver_run_cb_serv_mast.sh $(date +\%Y\%m\%d)
+59 23 * * * bash /nas/share05/tools/ExtractTools/CB_SERV_MAST_VIEW_LIVE/driver_run_cb_serv_mast.sh $(date +\%Y\%m\%d)
+0 * * * *  bash  /nas/share05/tools/anaylsis_incoming/incoming_analysis.sh
+10 0 * * * bash /nas/share05/tools/ExtractTools/CB_SERV_MAST_VIEW_LIVE/driver_run_cb_serv_mast.sh
+##0 10,14,20,23 * * * bash /mnt/beegfs_bsl/BACK_crontab/backCrontab.sh
+#0 6 * * * bash /nas/share05/tools/ExtractTools/bib_credit_control_report/bib_credit_control_report_date.sh
+#0 8 * * * bash /nas/share05/tools/ExtractTools/BIB_AGL_FXL_STS_REPORT/BIB_AGL_FXL_STS_REPORT.sh
+#0 5 * * * bash /nas/share05/tools/ExtractTools/BIB_AGL_GSM_STS_REPORT/BIB_AGL_GSM_STS_REPORT.sh
+###__MOVED_TO_AIRFLOW_#10 * * * * bash /home/daasuser/msck.sh
+###__MOVED_TO_AIRFLOW_#15 10,11,12,13 * * * bash /home/daasuser/CaaS_msck.sh
+#0 3 * * * bash /nas/share05/tools/ExtractTools/B_SERV_WISE_PAY_REP/extract_B_SERV_WISE_PAY_REP.sh
+#0 1 * * * bash /nas/share05/tools/ExtractTools/CB_ACCOUNT_MASTER/extract_CB_ACCOUNT_MASTER.sh
+#0 2 * * * bash /nas/share05/tools/ExtractTools/EDW_SIM_SWAP/extract_EDW_SIM_SWAP.sh
+0 9 * * * bash /nas/share05/tools/GDS_REPORT/GDS_REPORT.sh
+0 9 * * * bash /nas/share05/tools/GDS_REPORT/GDS_REPORT2.sh
+0 9 * * * bash /nas/share05/tools/GDS_REPORT/GDS_REPORT_bk.sh
+0 9 * * * bash /nas/share05/tools/SPONSORED_DATA/SPONSORED_DATA.sh
+#####
+0 6 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/MSO_POST_SWAP_EYEBALLING_VW/extract_MSO_POST_SWAP_EYEBALLING_VW.sh
+0 6 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/MTN_FAST_EYEBALLING_RPT/extract_MTN_FAST_EYEBALLING_RPT.sh
+##0 4 * * * bash /nas/share05/tools/ExtractTools/CREDIT_LIMIT_STATUS/extract_CREDIT_LIMIT_STATUS.sh
+##30 3 * * * bash /nas/share05/tools/ExtractTools/CREDIT_LIMIT_ASSIGNED/extract_CREDIT_LIMIT_ASSIGNED.sh
+##45 3 * * * bash /nas/share05/tools/ExtractTools/BIOSMART_NIN_REPORT/extract_BIOSMART_NIN_REPORT.sh
+0 4 * * * bash /nas/share05/tools/ExtractTools/AGENT_REGISTRATION/extract_AGENT_REGISTRATION.sh
+0 7 * * * bash /nas/share05/tools/ExtractTools/IMEI_UPLOAD_DETAILS/extract_IMEI_UPLOAD_DETAILS.sh
+#0 */1 * * * bash /nas/share05/tools/ExtractTools/NIMC_DETAILS/extract_NIMC_DETAILS_hourly.sh
+##0 4 * * * bash /nas/share05/tools/ExtractTools/NIMC_DETAILS/extract_NIMC_DETAILS.sh
+##0 4 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/HYNETFLEX_CUSTOMER/extract_HYNETFLEX_CUSTOMER.sh
+0 */1 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/HYNETFLEX_CUSTOMER/extract_HYNETFLEX_CUSTOMER_hours.sh
+##15 4 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/CB_MNP_INTERFACE_DTLS/extract_CB_MNP_INTERFACE_DTLS.sh
+0 4 * * * bash /nas/share05/tools/ExtractTools/BIOSMART_WEB_TRANSACTIONS/extract_BIOSMART_WEB_TRANSACTIONS.sh
+0 4 * * * bash /nas/share05/tools/ExtractTools/ACTIVE_DEVICES/extract_ACTIVE_DEVICES.sh
+#0 6 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/TEMP_PERM_CRDLMT_CHANGE_VW/extract_TEMP_PERM_CRDLMT_CHANGE_VW.sh
+0 8 5 1,4,7,10 * bash /nas/share05/tools/SEGMENTATION/CustomerSegmentation.sh
+##0 5 5 1,4,7,10 * bash /nas/share05/tools/SEGMENTATION/CustomerSegmentation.sh
+##0 8 5-11 1,4,7,10 * bash /nas/share05/tools/SEGMENTATION/CustomerSegmentation_Daily.sh
+#0 5 * * * bash /nas/share05/tools/ExtractTools/MNP_LOCATION/extract_MNP_LOCATION.sh
+0 6 * * * bash /nas/share05/tools/ExtractTools/BFP_FAILURE_LOG/BFP_FAILURE_LOG.sh
+##0 4,6,8 * * * bash /mnt/beegfs_bsl/Deployment/DEV/scripts/splittingScirpts/EWP_Account_Holder/Split_EWP_ACCOUNT_HOLDERS_DUMP.sh
+######0 4 * * * bash /nas/share05/tools/ExtractTools/INACTIVE_DEVICES/extract_INACTIVE_DEVICES.sh
+######0 4 * * *  bash /nas/share05/tools/ExtractTools/MNP/extract_MNP.sh
+#0 4 * * *  bash /nas/share05/tools/ExtractTools/SIM_SWAP/extract_SIM_SWAP.sh
+#####0 4 1 * *  bsah /nas/share05/tools/ExtractTools/PAYMENT_REPORT_ALL/PAYMENT_REPORT_ALL.sh
+30 7 * * * bash /nas/share05/tools/ExtractTools/BULK_USSD_GENERATOR/BULK_USSD.sh
+#####0 8 * * * bash /nas/share05/tools/ExtractTools/BULK_USSD_GENERATOR/File_To_Agility.sh
+#30 8 * * * bash /nas/share05/tools/ExtractTools/BULK_USSD_GENERATOR/File_To_DCBS.sh
+*/35 * * * * beeline -n daasuser -p '' -u 'jdbc:hive2://datanode01026.mtn.com:2181,datanode01028.mtn.com:2181,master01001.mtn.com:2181,master01002.mtn.com:2181,master01003.mtn.com:2181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2' -f  /nas/share05/tools/ValidationTool_Presto_final/template/Repair_table.sql
+*/10 * * * * bash /nas/share05/tools/ValidationTool_Presto_final/template/Repair_table_new.sh
+0 5 * * * bash /nas/share05/tools/ExtractTools/SME_REPORT/SME_Report.sh
+0 5 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/MSO_MNP_NUMBER_SUMMARY/extract_MSO_MNP_NUMBER_SUMMARY.sh
+0 5 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/INV_SPECIFIC_PAYMENT_VW2/extract_INV_SPECIFIC_PAYMENT_VW2.sh
+0 5 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/INV_SPECIFIC_PAYMENT_VW/extract_INV_SPECIFIC_PAYMENT_VW.sh
+##0 0 3 * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/TAX_INVOICE_VW/extract_TAX_INVOICE_VW.sh
+0 6 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/WOM_TASK_STATUS_REPORT_VW/extract_WOM_TASK_STATUS_REPORT_VW.sh
+#0 8 * * * bash /nas/share05/tools/ExtractTools/IFS_VW_INVOICED_SALES_TRAN/extract_IFS_VW_INVOICED_SALES_TRAN.sh
+0 5 * * * bash /nas/share05/tools/ExtractTools/BI_IMEI_ACTIVATION_INPUT_VIEW/extract_BI_IMEI_ACTIVATION_INPUT_VIEW.sh
+0 */1 * * * bash /nas/share05/tools/ExtractTools/EBU_GROUP_ESCALATIONS/extract_EBU_GROUP_ESCALATIONS_hourly.sh
+30 3 * * * bash /nas/share05/tools/ExtractTools/EBU_GROUP_ESCALATIONS/extract_EBU_GROUP_ESCALATIONS_rerun_D-1.sh
+#0 */1 * * * bash /nas/share05/tools/ExtractTools/EBU_GROUP_ESCALATIONS_PENDING/extract_EBU_GROUP_ESCALATIONS_PENDING.sh
+#30 3 * * * bash /nas/share05/tools/ExtractTools/EBU_GROUP_ESCALATIONS_PENDING/extract_EBU_GROUP_ESCALATIONS_PENDING_D-1.sh
+#0 */1 * * * bash /nas/share05/tools/ExtractTools/EBU_GROUP_ESCALATIONS_CLOSED/extract_EBU_GROUP_ESCALATIONS_CLOSED.sh
+#30 3 * * * bash /nas/share05/tools/ExtractTools/EBU_GROUP_ESCALATIONS_CLOSED/extract_EBU_GROUP_ESCALATIONS_CLOSED_D-1.sh
+#30 2 * * * bash /nas/share05/tools/ExtractTools/CUSTOMER_MIGRATION_RPT/extract_CUSTOMER_MIGRATION_RPT.sh
+##0 6 * * * bash /nas/share05/tools/ExtractTools/MTN_ONLINE/extract_MTN_ONLINE.sh
+#0 7 * * * bash /nas/share05/tools/ExtractTools/PIN_PASSWORD/extract_PIN_PASSWORD.sh
+#################ydfs_reports######################
+#0 6 * * * bash /mnt/beegfs_bsl/scripts/ydfs/ydfs_inward.sh
+#0 6 * * * bash /mnt/beegfs_bsl/scripts/ydfs/ydfs_outward.sh
+#0 6 * * * bash /mnt/beegfs_bsl/scripts/ydfs/ydfs_transactions.sh
+#0 6 * * * bash /mnt/beegfs_bsl/scripts/ydfs/ydfs_balances.sh
+#0 6 * * * bash /mnt/beegfs_bsl/scripts/ydfs/ydfs_ecw_transacting_agent.sh
+#0 6 * * * bash /mnt/beegfs_bsl/scripts/ydfs/ydfs_transacting_agent_ecw.sh
+#0 6 * * * bash /mnt/beegfs_bsl/scripts/ydfs/ydfs_token_report.sh
+#30 6 * * * bash /mnt/beegfs_bsl/scripts/ydfs/ydfs_unified_transactions.sh
+#0 7 * * * bash /mnt/beegfs_bsl/scripts/ydfs/ydfs_accounts.sh
+#0 7 * * * bash /mnt/beegfs_bsl/scripts/ydfs/ydfs_first_transactions.sh
+#0 7 * * * bash /mnt/beegfs_bsl/scripts/ydfs/ydfs_last_transactions.sh
+#30 7 * * * bash /mnt/beegfs_bsl/scripts/ydfs/ydfs_msisdn_daily.sh
+#0 7 * * * bash /mnt/beegfs_bsl/scripts/ydfs/ydfs_outward_monthly_summary.sh
+#0 7 * * * bash /mnt/beegfs_bsl/scripts/ydfs/ydfs_inward_monthly_summary.sh
+
+#################CLM_CVM######################
+#0 7 * * * bash /mnt/beegfs_bsl/scripts/clm_cvm/clm_inbound_details.sh
+#0 7 * * * bash /mnt/beegfs_bsl/scripts/clm_cvm/clm_ash_details.sh
+#30 7 * * * bash /mnt/beegfs_bsl/scripts/clm_cvm/clm_ash_summary.sh
+#0 8 * * * bash /mnt/beegfs_bsl/scripts/clm_cvm/cust_retention_latch_cube.sh
+#0 11 * * * bash /mnt/beegfs_bsl/scripts/clm_cvm/clm_latching_dashboard.sh
+
+#####################F48_SIM_REG_LIVE_UI#######################
+##*/50 * * * * bash /nas/share05/FlareProd/Run/liveUI/first48live/scripts/first48live/run_first48_.sh
+
+
+##############################MOBILE_MONEY#########################
+05 00 * * *  bash /nas/share05/tools/DAS/MOBILE_MONEY.sh
+
+#############################NOKIA_AVAYA_FILES####################
+35 10 * * * bash /nas/share05/tools/avayaGenerator/generate_avaya_v2.sh
+30 10 * * * bash /nas/share05/tools/SupportTeam/callReason_Script.sh
+
+#############################AGILITY_VIEWS####################
+#35 6 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/CLM_WBO_LOCATION/extract_CLM_WBO_LOCATION.sh
+###0 6,18 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/CB_NIN_UPDT_REQUEST_POOL/extract_CB_NIN_UPDT_REQUEST_POOL.sh
+##5 8 * * * bash  /nas/share05/tools/ExtractTools/AGILITY_VIEWS/CB_NIN_UPDT_REQUEST_POOL/extract_CB_NIN_UPDT_REQUEST_POOL_history.sh
+#############################TrustVas DB####################
+#0 7 * * * bash /nas/share05/tools/ExtractTools/SEND2ME_RPT/extract_SEND2ME_RPT.sh
+
+###0 8 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/SOLO.sh
+
+
+0 7 * * * perl /nas/share05/ops/daily/cs18_daily_recharges.pl
+0 7 * * * perl /nas/share05/ops/daily/cs18_daily_payment_summary.pl
+#Abdallah
+#0 * * * *  bash -x /nas/share05/Abdallah/LEA.sh
+
+
+#############Ayoba Events Streaming to Flytxt#################
+##2 0-23 * * * bash /nas/share05/tools/DBExtrct/automated_scripts/AyobaEvents_to_Flytxt.sh
+
+##EngineRoom##
+#0 7 * * * bash /nas/share05/tools/Engine_Room/KYC_Marketing/Insert_KYC_Marketing_cron.sh
+#0 11 * * * bash /nas/share05/tools/Engine_Room/KYC_Marketing/Insert_KYC_Marketing_cron_yest.sh
+0 8 5 * * bash /nas/share05/tools/Engine_Room/Clean/Clean_logs.sh
+
+##NIN ENROLLMENT DEDUP##
+#0 */2 * * * bash /nas/share05/tools/DedupIncr/bin/NIN_ENROLLMENT_Dedup.sh
+
+##############Momo Balance to TAS#############################
+###5 0-23 * * * bash /nas/share05/tools/DBExtrct/automated_scripts/Momo_Balance_to_TAS.sh
+10 0-23 * * * bash /nas/share05/tools/DBExtrct/automated_scripts/Tas_Evd_Stock_Balance.sh
+
+###AYOBA_DTT###
+##30 11 * * * bash /nas/share05/tools/ValidationTool_Presto_final/bin/InvokeValidation.sh $(date -d "-2 day" '+%Y%m%d') AYOBA_DTT AYOBA_DTT.conf true
+
+###NIN ENROLLMENT###
+##45 8,13,16 * * *  bash /mnt/beegfs_bsl2/TOM/NIN_ENROLLMENT/NIN_ENROLL_RECON_DEDUP.sh
+10 7 * * *  bash /nas/share05/ops/mtnops/NIN_Enrollment_Validation/NIN_ENROLL_DEDUP_HIST.sh
+
+###15 22 * * *  ssh edge01001 python3.6 /nas/share05/ops/mtnops/NIN_Enrollment_Validation/NIN_Enrollment_Validation.py -l 1
+
+##15 9,14,19 * * *  bash /mnt/beegfs_bsl2/TOM/CB_NIN_UPDT/CB_NIN_UPDT_DEDUP.sh
+0 7 * * * bash /nas/share05/tools/ExtractTools/WOM_ORDER_DTLS/extract_WOM_ORDER_DTLS.sh 
+#0 7 * * * bash /nas/share05/tools/ExtractTools/MTNF_SERVEYS/extract_MTNF_SERVEYS.sh
+
+###LEA API SYNC FOR PREVIOUS DAY####
+55 5 * * *  bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/StartApiDriver_Lea_Yesterday.sh
+
+#########CRM_CUSTOMER_VIEW#############
+15 8 * * * bash  /nas/share05/tools/ExtractTools/CRM_CUSTOMER_VIEW/extract_CRM_CUSTOMER_VIEW.sh
+
+###FAMILY PACK API#####
+45 7,10 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/Family_Pack.sh $(date -d '-1 day' +\%Y\%m\%d)
+
+###MYMTN FOUNDATION#####
+#0 8 * * * bash /nas/share05/tools/ExtractTools/MYMTN_FOUNDATION_REPORT/extract_MYMTN_FOUNDATION_REPORT.sh
+
+###NIN AUDIT LINK####
+15 7 * * *  bash /nas/share05/tools/ExtractTools/NIN_AUDIT_LINK/extract_NIN_AUDIT_LINK.sh 
+
+#########QoS Data Refresh##################
+25 8 * * *  bash /mnt/beegfs_bsl2/TOM/LEA/API_Data_Availability.sh
+20 8 * * *  bash /mnt/beegfs_bsl2/TOM/LEA/API_Data_Completeness.sh
+15 8 * * *  bash /mnt/beegfs_bsl2/TOM/LEA/Data_Late_Arrival_Adhoc.sh
+
+######## POS REVAMP REPORT ###########
+###15 7 * * * bash /nas/share05/tools/ExtractTools/POS_REVAMP_REPORT/extract_POS_REVAMP_REPORT.sh
+
+########
+####0 6 * * * bash /nas/share05/tools/ExtractTools/SIMREG_CLIENT_ACTIVITY_LOG/extract_SIMREG_CLIENT_ACTIVITY_LOG.sh
+##0 5 * * * bash /nas/share05/tools/ExtractTools/SYNC2NETWORK_END_TO_END_KPI2/extract_SYNC2NETWORK_END_TO_END_KPI2.sh
+##0 6 * * * bash /nas/share05/tools/ExtractTools/TT_CLOSED_TIKET_OUTSIDE_SLA/extract_TT_CLOSED_TIKET_OUTSIDE_SLA.sh
+##0 7 * * * bash /nas/share05/tools/ExtractTools/TT_CLOSED_TIKET_WITHIN_SLA/extract_TT_CLOSED_TIKET_WITHIN_SLA.sh
+##0 6 * * * bash /nas/share05/tools/ExtractTools/GET_PRE2POST_CONSENT_DETAILS/extract_GET_PRE2POST_CONSENT_DETAILS.sh
+################  hourly RDS FEEDS for D-0 ################
+#0 * * * * bash /nas/share05/tools/ExtractTools/RDS_FEEDS/ACCOUNT_HOLDER/extract_ACCOUNT_HOLDER.sh
+#0 * * * * bash /nas/share05/tools/ExtractTools/RDS_FEEDS/ACCOUNT_REFERENCE/extract_ACCOUNT_REFERENCE.sh
+#0 * * * * bash /nas/share05/tools/ExtractTools/RDS_FEEDS/AHIDENTITIES/extract_AHIDENTITIES.sh
+#0 * * * * bash /nas/share05/tools/ExtractTools/RDS_FEEDS/AUDITTRAIL/extract_AUDITTRAIL.sh
+#0 * * * * bash /nas/share05/tools/ExtractTools/RDS_FEEDS/FINANCIALRECEIPT/extract_FINANCIALRECEIPT.sh
+#0 * * * * bash /nas/share05/tools/ExtractTools/RDS_FEEDS/FINANCIALRECEIPT_DETAILS/extract_FINANCIALRECEIPT_DETAILS.sh
+#0 * * * * bash /nas/share05/tools/ExtractTools/RDS_FEEDS/SESSIONLOGEVENT/extract_SESSIONLOGEVENT.sh
+################  Rerun RDS FEEDS for D-1 ################
+#30 6 * * * bash  /nas/share05/tools/ExtractTools/RDS_FEEDS/ACCOUNT_HOLDER/extract_ACCOUNT_HOLDER_rerun_yest.sh
+#30 6 * * * bash  /nas/share05/tools/ExtractTools/RDS_FEEDS/ACCOUNT_REFERENCE/extract_ACCOUNT_REFERENCE_rerun_yest.sh
+#30 6 * * * bash  /nas/share05/tools/ExtractTools/RDS_FEEDS/AHIDENTITIES/extract_AHIDENTITIES_rerun_yest.sh
+#30 6 * * * bash  /nas/share05/tools/ExtractTools/RDS_FEEDS/AUDITTRAIL/extract_AUDITTRAIL_rerun_yest.sh
+#30 6 * * * bash  /nas/share05/tools/ExtractTools/RDS_FEEDS/FINANCIALRECEIPT_DETAILS/extract_FINANCIALRECEIPT_DETAILS_rerun_yest.sh
+#30 6 * * * bash  /nas/share05/tools/ExtractTools/RDS_FEEDS/FINANCIALRECEIPT/extract_FINANCIALRECEIPT_rerun_yest.sh
+#30 6 * * * bash  /nas/share05/tools/ExtractTools/RDS_FEEDS/SESSIONLOGEVENT/extract_SESSIONLOGEVENT_rerun_yest.sh
+
+###0 7 * * * bash /nas/share05/tools/ExtractTools/GET_AUTO_ASSIGNED_WORK_VW/extract_GET_AUTO_ASSIGNED_WORK_VW.sh
+###0 7 * * * bash /nas/share05/tools/ExtractTools/PM_MONTHLY_SUMMARY_REPORT/extract_PM_MONTHLY_SUMMARY_REPORT.sh
+##0 7 * * * bash /nas/share05/tools/ExtractTools/PM_9MOB_USSD_SUMMARY/extract_PM_9MOB_USSD_SUMMARY.sh
+###0 7 * * * bash /nas/share05/tools/ExtractTools/PM_9MOB_VSD_SUMMARY/extract_PM_9MOB_VSD_SUMMARY.sh
+0 8 * * * bash /nas/share05/tools/ExtractTools/TAS_PRIMARY_SALES/extract_TAS_PRIMARY_SALES.sh
+0 6 * * * bash /nas/share05/tools/ExtractTools/STAFF_OIM_EXTRACT/extract_STAFF_OIM_EXTRACT.sh
+###moved to airflow 0 6 * * * bash /nas/share05/tools/ExtractTools/CB_RETAIL_OUTLETS/CB_RETAIL_OUTLETS.sh
+#####moved to airflow 0 6 * * * bash /nas/share05/tools/ExtractTools/CB_ACCOUNT_SERVICE_LIST/CB_ACCOUNT_SERVICE_LIST.sh
+0 6 * * * bash /nas/share05/tools/ExtractTools/CB_POS_EXCL_INCL_HIST/extract_CB_POS_EXCL_INCL_HIST.sh
+
+							################ CVM ####################
+###Daily Transaction Tables
+#0 8 * * * bash /nas/share05/tools/CVM_Reports/Insert_CVM20_DISTRIBUTOR_ACTIVATIONS_cron.sh
+#0 9 * * * bash /nas/share05/tools/CVM_Reports/Insert_CVM20_REFILL_INFO_cron.sh
+#30 9 * * * bash /nas/share05/tools/CVM_Reports/Insert_CVM20_BUNDLE_TRANSACTION_cron.sh
+#0 10 * * * bash /nas/share05/tools/CVM_Reports/Insert_CVM20_BUNDLE_TRANSACTION_AWUF4U_cron.sh
+#30 10 * * * bash /nas/share05/tools/CVM_Reports/Insert_CVM20_AYOBA_cron.sh
+#0 8 * * * bash /nas/share05/tools/CVM_Reports/Insert_CVM20_MOMO_DAILY_KPIS_cron.sh
+
+###Weekly areas  
+    ################################ MUST follow the timing flow when moving to the Airflow! ###################################
+0 7 * * 1 bash /nas/share05/tools/CVM_Reports/Insert_CVM20_SUBS_TMP_cron.sh
+0 8 * * 1 bash /nas/share05/tools/CVM_Reports/Insert_CVM20_REC_ENGINE_DEV2_cron.sh
+0 8 * * 1 bash /nas/share05/tools/CVM_Reports/Insert_CVM20_REFILL_DATA_BUNDLE_cron.sh
+30 8 * * 1 bash /nas/share05/tools/CVM_Reports/Insert_CVM20_REG_SBSCR_FLAGS_cron.sh
+0 10 * * 1 bash /nas/share05/tools/CVM_Reports/Insert_CVM20_REFILL_AND_SUBSCRIPTION_BACTH2_cron.sh
+0 10 * * 1 bash /nas/share05/tools/CVM_Reports/Insert_CVM20_CAMPAIGN_RELATED_ATTRIBUTES_OUTBOUND_cron.sh
+30 10 * * 1 bash /nas/share05/tools/CVM_Reports/Insert_CVM20_REV_VOI_SMS_DATA_TMP_cron.sh
+30 10 * * 1 bash /nas/share05/tools/CVM_Reports/Insert_CVM20_CAMPAIGN_RELATED_ATTRIBUTES_cron.sh
+0 11 * * 1 bash /nas/share05/tools/CVM_Reports/Insert_CVM20_CC_cron.sh
+30 8 * * 1 bash /nas/share05/tools/CVM_Reports/Insert_CVM20_USG_SMS_cron.sh ##contains SMS and DATA ##
+30 10 * * 1 bash /nas/share05/tools/CVM_Reports/Insert_CVM20_USG_VOICE_cron.sh
+0 11 * * 1 bash /nas/share05/tools/CVM_Reports/Insert_CVM20_DEVICEINFO_cron.sh
+0 11 * * 1 bash /nas/share05/tools/CVM_Reports/Insert_CVM20_CUSTOMERINFO_cron.sh
+
+0 13 * * 1 bash /nas/share05/tools/CVM_Reports/Insert_CVM20_REC_ENGINE_DEV_PROD_cron.sh
+
+###### STATS & CHARGING Recon process #####
+0 7 * * * bash /nas/share05/tools/ReconTools/STATS_CHARGING_CDR.sh
+
+######### SIMREG Eyeballing - Hynetflex Feed (CB_NEWREG_BIOUPDT_POOL_HOURLY) #########
+0 */1 * * * bash /nas/share05/tools/ExtractTools/CB_NEWREG_BIOUPDT_POOL_HOURLY/extract_CB_NEWREG_BIOUPDT_POOL_HOURLY_hours.sh
+###0 8 * * * bash /nas/share05/FlareProd/Run/ApiSync/apiscripts/Sim_Reg_Eyeballing.sh
+0 4 * * * bash /nas/share05/tools/ExtractTools/AGILITY_GSM_SERVICE_MAST/extract_AGILITY_GSM_SERVICE_MAST.sh
+
+####HOURLY REPORT#######
+0 * * * * python3.6 /nas/share05/ops/mtnops/hourly_rch.py -p HOURLY_RECHARGES -l 2
+0 * * * * python3.6 /nas/share05/ops/mtnops/data_revenue.py -l 1
+
+######## RETAILER INCENTIVE RETURNEE MAPPING ##########
+*/15 * * * * bash /mnt/beegfs_bsl2/TOM/RETAILER_INCENTIVE/Retailer_Returnee.sh
+
+####### PROMO CODE TRIGGER #########
+0 * * * * bash /nas/share05/scripts/promo_code/cust_data_bundle_purchased_state/promo_trigger.sh
+
+#############Ayoba SDP#################
+0 5,7 * * * bash /nas/share05/FlareProd/Run/Ayoba/Extract_Ayoba_SDP_D_1.sh
+
+############ MSCK REPAIR JOB #########
+*/15 * * * * bash /nas/share05/tools/msckrepair/msck_N_38.sh
+
+########### MSO PROVISIONING DTLS ########
+30 6 * * * bash /nas/share05/tools/ExtractTools/MSO_PROVISIONING_DTLS/extract_MSO_PROVISIONING_DTLS.sh
+
+########### IFS_VW_INVOICED_SALES_TRAN_NEW ########
+0 8 * * * bash /nas/share05/tools/ExtractTools/IFS_VW_INVOICED_SALES_TRAN_NEW/extract_IFS_VW_INVOICED_SALES_TRAN_NEW.sh
+
+## Credit Score
+#0 9 * * * bash /nas/share05/tools/CREDIT_SCORE/Insert_CREDIT_SCORE_cron.sh
+
+############  DCBS_BILL_ACCOUNT_SUMRY on the 6th of each month  ############# 
+0 9 6 * * bash /nas/share05/tools/ExtractTools/DCBS_BILL_ACCOUNT_SUMRY/extract_DCBS_BILL_ACCOUNT_SUMRY.sh
+
+
+################## THERESA JOB############################
+#0 4 * * * bash /nas/share05/tools/ExtractTools/CALL_REASON/extract_CALL_REASON.sh
+#0 4 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/HYNETFLEX_CUSTOMER/extract_HYNETFLEX_CUSTOMER.sh
+#0 4 * * * bash /nas/share05/tools/ExtractTools/CB_NEWREG_BIOUPDT_POOL_HOURLY/extract_CB_NEWREG_BIOUPDT_POOL_HOURLY.sh
+0 4 * * * bash /nas/share05/tools/ExtractTools/EBU_GROUP_ESCALATIONS_CLOSED/extract_EBU_GROUP_ESCALATIONS_CLOSED_rerun.sh date --date="-1 days" +%Y%m%d
+0 4 * * * bash /nas/share05/tools/ExtractTools/EBU_GROUP_ESCALATIONS_PENDING/extract_EBU_GROUP_ESCALATIONS_PENDING_rerun.sh date --date="-1 days" +%Y%m%d
+0 4 * * * bash /nas/share05/tools/ExtractTools/AGILITY_VIEWS/TEMP_PERM_CRDLMT_CHANGE_VW/extract_TEMP_PERM_CRDLMT_CHANGE_VW.sh
+30 7 * * * python3.6 /nas/share05/ops/mtnops/mshare_ops_dashboard.py -l 1 -s `date --date="-1 days" +%Y-%m-%d` -p MSHARE_VALIDATION
+ cron tab of node  139 n
+*/5 * * * * /nas/share05/tools/fileOps/move/MoveExtractedData.sh
+#*/10 * * * * /nas/share05/tools/fileOps/move/MoveExtractedData_beegfs_api.sh
+
+*/30 * * * * bash /nas/share05/tools/caas_repair.sh
+
+
+####__MOVED_TO_AIRFLOW_####0 3 * * * bash /nas/share05/tools/ExtractTools/Agility_GSM_SERVICE_MAST/Agility_GSM_SERVICE_MAST.sh
+
+##The NEW Port_IN_OUT scripts
+
+####__MOVED_TO_AIRFLOW_####15 1,3,5,7,9,11,13,15,18,20 * * * /nas/share05/tools/ExtractTools/PORT_IN_OUT/PORT_IN_OUT_Daily.sh
+
+####__MOVED_TO_AIRFLOW_####15 3 * * * /nas/share05/tools/ExtractTools/PORT_IN_OUT/PORT_IN_OUT_Yesterday.sh
+
+####__MOVED_TO_AIRFLOW_####0 3 * * * bash /nas/share05/tools/ExtractTools/SMS_INCENTIVE_IMEI_VW/SMS_INCENTIVE_IMEI_VW.sh
+
+#0 6 * * * bash /nas/share05/tools/ExtractTools/VALID_USER/VALID_USER.sh
+
+####__MOVED_TO_AIRFLOW_####0 6 * * * bash /nas/share05/tools/ExtractTools/RETAIL_SHOP/RETAIL_SHOP.sh
+
+####__MOVED_TO_AIRFLOW_####0 6 * * * bash /nas/share05/tools/ExtractTools/MTN_CONNECT_USER_DETAILS/MTN_CONNECT_USER_DETAILS.sh
+#2,32 * * * * /nas/share05/Deployment/DEV/first48live/scripts/first48live/driver.sh
+
+
+ cron tab of node  140 n
+*/15 * * * * bash /home/daasuser/infra_scripts/cataling_logs_move.sh
+ cron tab of node  141 n
+##################### Muhannad #################
+#*/20 * * * * /usr/bin/zabbix_sender -z 10.1.197.143 -p 10052 -s "edge01002.mtn.com" -k fileslivedir -o $(find /data/data_lz/beegfs/live -type f|wc -l)
+#*/20 * * * * /usr/bin/zabbix_sender -z 10.1.197.143 -p 10052 -s "edge01002.mtn.com" -k filesinfdiproc -o $(find /data/data_lz/FdiBase/processed -type f|wc -l)
+#*/20 * * * * /usr/bin/zabbix_sender -z 10.1.197.143 -p 10052 -s "edge01002.mtn.com" -k filesinfdiverf -o $(find /data/data_lz/FdiBase/verified -type f|wc -l)
+#*/20 * * * * /usr/bin/zabbix_sender -z 10.1.197.143 -p 10052 -s "edge01002.mtn.com" -k filesinfdirepr -o $(find /data/data_lz/FdiBase/reprocess -type f|wc -l)
+###*/20 * * * * /usr/bin/zabbix_sender -z 10.1.197.143 -p 10052 -s "edge01002.mtn.com" -k dfsincoming -o $(cd /mnt/beegfs_bsl/Hourly_check;bash /nas/share05/FlareProd/Run/Load/bin/DfsIncomingFilesByFind.sh|awk '{print $10}')
+###*/20 * * * * /usr/bin/zabbix_sender -z 10.1.197.143 -p 10052 -s "edge01002.mtn.com" -k dfsprocessed -o $(ls -l -d /mnt/beegfs_bsl/production/live/*/processed | awk '{SUM+=$5}END{print SUM}')
+*/20 * * * * /usr/bin/zabbix_sender -z 10.1.197.143 -p 10052 -s "edge01002.mtn.com" -k sizelz -o $(df -h|grep -i /data/data_lz|awk '{print $5}'|sed 's/%//')
+###*/20 * * * * /usr/bin/zabbix_sender -z 10.1.197.143 -p 10052 -s "edge01002.mtn.com" -k fileslivedir30 -o $(cd /mnt/beegfs_bsl/Hourly_check;bash /nas/share05/FlareProd/Run/Load/bin/FdiFeedsCount30MinsOld.sh 2>/dev/null|awk '{print $12}')
+################################################*/20 * * * * /usr/bin/zabbix_sender -z 10.1.197.143 -p 10052 -s "edge01002.mtn.com" -k filesprocdir30 -o $(bash /nas/share05/FlareProd/Run/Load/bin/FdiProcessedCount30MinsOld.sh 2>/dev/null| awk '{print $12}')
+####################################################*/20 * * * * /usr/bin/zabbix_sender -z 10.1.197.143 -p 10052 -s "edge01002.mtn.com" -k filesverfdir60 -o $(bash /nas/share05/FlareProd/Run/Load/bin/FdiVerifiedCount60MinsOld.sh 2>/dev/null| awk '{ print $12 }')
+###*/20 * * * * /usr/bin/zabbix_sender -z 10.1.197.143 -p 10052 -s "edge01002.mtn.com" -k grid -o $(sudo -u daasuser bash -c "/nas/share05/FlareProd/Run/Load/bin/FlareControlManager.scala -c status -s all 2>/dev/null | grep 'ServiceType: GRID'")
+###*/20 * * * * /usr/bin/zabbix_sender -z 10.1.197.143 -p 10052 -s "edge01002.mtn.com" -k kamanja -o $(sudo -u daasuser bash -c "/nas/share05/FlareProd/Run/Load/bin/FlareControlManager.scala -c status -s all 2>/dev/null | grep 'ServiceType: KAMANJA'")
+###*/20 * * * * /usr/bin/zabbix_sender -z 10.1.197.143 -p 10052 -s "edge01002.mtn.com" -k fdi -o $(sudo -u daasuser bash -c "/nas/share05/FlareProd/Run/Load/bin/FlareControlManager.scala -c status -s all 2>/dev/null | grep 'ServiceType: FDI'")
+###*/20 * * * * /usr/bin/zabbix_sender -z 10.1.197.143 -p 10052 -s "edge01002.mtn.com" -k validator -o $(sudo -u daasuser bash -c "/nas/share05/FlareProd/Run/Load/bin/FlareControlManager.scala -c status -s all 2>/dev/null | grep 'ServiceType: VALIDATOR'")
+################################################
+
+
+
+
+#0 7 * * * bash /mnt/beegfs_bsl/ops/sms_alert/sms_barred.sh > /mnt/beegfs_bsl/ops/sms_alert/sms_barred_logs.txt
+#0 7 * * * bash /mnt/beegfs_bsl/ops/sms_alert/sms_optimus.sh > /mnt/beegfs_bsl/ops/sms_alert/sms_optimus_logs.txt
+#45 4 * * * nohup bash /mnt/beegfs_bsl/scripts/segment5b5/run_segment5b5.sh `date --date="-1 days" +%Y%m%d` `date --date="-1 days" +%Y%m%d` segment5b5_main2_1 daily 8099 > /dev/null &
+#45 4 * * * nohup bash /mnt/beegfs_bsl/scripts/segment5b5/run_segment5b5.sh `date --date="-1 days" +%Y%m%d` `date --date="-1 days" +%Y%m%d` segment5b5_main2_2 daily 8099 > /dev/null &
+
+#### stop dfs job and use this job when no DFS deployed
+##*/15 * * * * /home/daasuser/fileOps/move/moveDataToLocal_MOBILE_MONEY_NAS.sh
+### stop dfs job and use this job when no DFS deployed
+*/15 * * * * /home/daasuser/fileOps/move/moveDataToLocal_SDP_ADJ_MA_NAS.sh
+
+#### fileops beegfs_api
+*/15 * * * * /home/daasuser/fileOps/move/move_exceptions_beegfs_api.sh
+*/15 * * * * /home/daasuser/fileOps/move/move_exclude_50_Feed_beegfs_api.sh
+*/5 * * * * /home/daasuser/fileOps/move/moveDataToLocal_DPi_beegfs_api.sh
+*/5 * * * * bash /home/daasuser/fileOps/move/moveDataToLocal_CCN_GPRS_AC_delete.sh
+*/5 * * * * bash /home/daasuser/fileOps/move/moveDataToLocal_CCN_GPRS_AC_deleteDFS.sh
+##0 */1 * * * bash /home/daasuser/fileOps/move/moveDataToLocal_CCN_GPRS_AC_move_tar.sh
+##*/15 * * * * /home/daasuser/fileOps/move/moveDataToLocal_CS6_Unified_exclud_beegfs_api.sh
+##*/15 * * * * bash /home/daasuser/fileOps/move/moveDataToLocal_CS6_Unified_TARR_MOVE.sh
+0 1 * * 1 bash /home/daasuser/RemoveEmptyDir.sh
+#0 6 * * * bash /nas/share05/tools/MoveCS6Back/moveStuck.sh
+#0 7 * * * bash /nas/share05/tools/MoveCS6Back/moveStuck_rerun.sh
+0 */3 * * * /home/daasuser/fileOps/move/ngvs_tarring.sh
+
+###########MoveTMP_DMP&ClearUP_tmp
+0 */2 * * * bash /home/daasuser/fileOps/move/Clean_Tmp.sh
+0 10,12,14 * * * bash /home/daasuser/fileOps/move/move_TMP_DMP_DUMP_ALL.sh
+
+########### Move to archive
+###########*/5 * * * * /home/daasuser/fileOps/move/move_verified.sh
+#################*/1 * * * * /home/daasuser/fileOps/move/move_verified_3feeds.sh
+#################*/1 * * * * /home/daasuser/fileOps/move/move_verified_CCN_GPRS_MA.sh
+#################*/1 * * * * /home/daasuser/fileOps/move/move_verified_CCN_GPRS_DA.sh
+#################*/1 * * * * /home/daasuser/fileOps/move/move_verified_CCN_GPRS_AC.sh
+
+#* 3,20 * * * sh /mnt/beegfs_bsl/ops/scripts/start_ussd_report.sh
+#*/35 * * * *  sh /mnt/beegfs_bsl/ops/scripts/start_usage_summary.sh
+#* 6,23 * * * sh /mnt/beegfs_bsl/ops/scripts/start_Neon_summary.sh
+#* 5 * * * sh /mnt/beegfs_bsl/ops/scripts/start_number_mgmt.sh
+#*/55 * * * * sh /mnt/beegfs_bsl/ops/scripts/start_daily_sdp_dump.sh
+#* 5 * * * sh /mnt/beegfs_bsl/ops/scripts/start_hynet_useage.sh
+#* 5,8,10 * * * sh /mnt/beegfs_bsl/ops/scripts/start_simreg_activation.sh
+#* 5,17 * * * sh /mnt/beegfs_bsl/ops/scripts/start_winback.sh
+#*/50 * * * * sh /mnt/beegfs_bsl/ops/scripts/start_recharge_by_region.sh
+#*/50 * * * * sh /mnt/beegfs_bsl/ops/scripts/start_daily_rated_files.sh
+#* 4,21 * * * sh /mnt/beegfs_bsl/ops/scripts/start_ggsn_summary.sh
+#* 2,10,14,22 * * * sh /mnt/beegfs_bsl/ops/scripts/start_cdr_summary.sh
+#*/40 * * * * sh /mnt/beegfs_bsl/ops/scripts/start_aod_visafone.sh
+#*/55 * * * * sh /mnt/beegfs_bsl/ops/scripts/start_daily_epostpaid_gprs.sh
+#* 1,3,8,10,17 * * * sh /mnt/beegfs_bsl/ops/scripts/start_vas_short_code.sh
+#* 3,17,22 * * * sh /mnt/beegfs_bsl/ops/scripts/start_call_to_180.sh
+#*/40 * * * * sh /mnt/beegfs_bsl/ops/scripts/start_daily_recharges.sh
+
+#0 6 * * * bash /mnt/beegfs_bsl/tools/sms_alert/modtransaction.sh
+#0 5 * * * bash /mnt/beegfs_bsl/scripts/extra_time/aut_run_extra_time.sh
+#0 10 * * * perl /mnt/beegfs_bsl/tools/SupportTeam/scripts/daily_rated_files_new.pl
+#30 7 * * * bash /mnt/beegfs_bsl/ops/daily/flytxt_rev.shontab/Scripts/create_partition_crontab.sh
+50 15 * * * /home/daasuser/hdfs_report.sh
+
+#5 * * * * bash /nas/share05/tools/API_logs/apilogs_cron.sh
+#*/5 * * * * /home/daasuser/fileOps/move/listingincoming.sh
+#30 8,10,12 * * * bash /mnt/beegfs_bsl/ops/daily/feed_tracker.sh
+#5 * * * *  bash /mnt/beegfs_bsl/ops/daily/flytxt_airrefill_hourly.sh
+#35 * * * *  bash /mnt/beegfs_bsl/ops/daily/flytxt_airrefill_hourly.sh
+#0 6 * * * bash /mnt/beegfs_bsl/ops/scripts/modtransaction.sh
+#0 5 * * * bash /mnt/beegfs_bsl/scripts/extra_time/aut_run_extra_time.sh
+#0 10 * * * perl /mnt/beegfs_bsl/tools/SupportTeam/scripts/daily_rated_files_new.pl
+#30 7 * * * bash /mnt/beegfs_bsl/ops/daily/flytxt_rev.sh
+#*/30 * * * * bash /mnt/beegfs_bsl/ops/scripts/hourly_recharges.sh
+#0 10,14,16,18 * * * bash /mnt/beegfs_bsl/ops/daily/flytxt_rev_hourly.sh
+#0 12 * * * bash /mnt/beegfs_bsl/ops/daily/flytxt_rev_D_1.sh
+#*/30 * * * * python3.6 /mnt/beegfs_bsl/ops/mtnops/OT_summary.py -p UPGRADED4G -l 1
+
+#*/59 * * * * bash /mnt/beegfs_bsl/ops/sms_alert/sms_optimus.sh > /mnt/beegfs_bsl/ops/sms_alert/sms_logs.txt
+#*/59 * * * * bash /mnt/beegfs_bsl/ops/sms_alert/sms_barred.sh > /mnt/beegfs_bsl/ops/sms_alert/sms_barred_logs.txt
+*/15 * * * * bash /nas/share05/tools/APIWebSockets/bin/ProcessDataFromKafkaProdCluster.sh
+
+# Number of filse in LZ
+#58 * * * * bash /mnt/beegfs_bsl/Hourly_check/numFilesLZ.sh > /mnt/beegfs_bsl/Hourly_check/nLZ.txt
+#*/1 * * * * bash /nas/share05/FlareProd/Run/Load/bin/CleanUpFdiLogState.sh
+
+# Hourly Status
+#07,37 * * * * python2 /nas/share05/opsScripts/hourlyCheck.py
+#*/30 * * * * python /nas/share05/opsScripts/hourlyCheck.py
+31 8 * * *  python /nas/share05/opsScripts/DailyCheck.py
+01 1 * * * python /nas/share05/opsScripts/DailyCheckDump.py
+
+
+
+#5 10 * * * bash /nas/share05/tools/DataMax/CLM/DATA_MAX_PLAN.sh
+#0 10 * * * bash /nas/share05/tools/DataMax/FLYTXT/DATA_MAX_PLAN.sh
+
+#Merege reports
+*/15 * * * * bash /nas/share05/tools/LocalToHdfsMerger/Merger_driver.sh
+*/15 2,3,4,5,6,7,8,9,10 * * * bash /nas/share05/tools/LocalToHdfsMerger/Merger_driver_yesterday.sh
+
+##*/10 * * * * bash /nas/share05/tools/LocalToHdfsMerger_Test/todayLive.sh
+
+##MNP Report
+0 5 * * * bash /nas/share05/tools/MNP_REPORT/Report.sh
+#Load Presto Audit logs
+#5 * * * * bash /nas/share03/presto_audit/script/load_paudit.sh > /nas/share03/presto_audit/script/load_paudit.log
+#5 * * * * bash /nas/share03/presto_audit/presto_pipeline/oldscripts/checkpipeline.sh | tee /nas/share03/presto_audit/presto_pipeline/oldscripts/checkpipeline.log
+#5 * * * * bash /nas/share03/presto_audit/presto_prod/oldscripts/checkprod.sh | tee /nas/share03/presto_audit/presto_prod/oldscripts/checkprod.log
+
+#Abdallah
+0 * * * *  bash /nas/share05/tools/Sancho/Run.sh
+
+
+#################################ZABBIX MONITORING TOOLS#######################
+
+#######################AIRFLOW SYNC###########
+*/10 * * * *  bash /nas/share05/tools/Zabbix_Airflow/bin/Sync.sh
+* * * * * bash /nas/share05/tools/Zabbix_Airflow/bin/AirflowHealthSync.sh
+
+*/10 * * * *  bash /nas/share05/tools/Zabbix_Airflow/bin/NewAirflowSync.sh
+* * * * * bash /nas/share05/tools/Zabbix_Airflow/bin/New_AirflowHealthSync.sh
+#######################API_EXTRACTION MONITORING ON ZABBIX#################
+0 * * * * bash /nas/share05/tools/Zabbix_Integration/bin/API_Sync.sh
+*/30 * * * * bash /nas/share05/tools/Zabbix_Integration/bin/SyncLZ.sh
+
+#######################API HOURLY CHECK###############
+5 * * * * bash /nas/share05/tools/Hourly_Checks/bin/run.sh
+
+############  DCBS_BILL_ACCOUNT_SUMRY on the 6th of each month  ############# 
+0 7 6 * * bash  /nas/share05/tools/ExtractTools/DCBS_BILL_ACCOUNT_SUMRY/extract_DCBS_BILL_ACCOUNT_SUMRY.sh

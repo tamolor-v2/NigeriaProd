@@ -1,0 +1,23 @@
+insert overwrite table flaretest.final_files_report partition (tbl_dt=targetdate)
+ 
+ 
+ select fcs.feed_name,ffs.filename,ffs.numberofline,fcs.feed_name,a.name,a.lines,b.feedname,b.filename,b.numberofline
+ ,coalesce(a.lines,0)-(coalesce(ffs.numberofline,0)+coalesce(b.numberofline,0)) Deff ,
+  (coalesce(a.lines,0)-(coalesce(ffs.numberofline,0)+coalesce(b.numberofline,0)))/coalesce(a.lines,0)*100 ratio ,  
+   case when coalesce(a.lines ,0) <> (coalesce(ffs.numberofline ,0)+coalesce(b.numberofline,0) )
+ then "Not Match" else "Match" end status
+ 
+ 
+  from 
+ (select * from flaretest.feeds_count_summary s where
+ tbl_dt=targetdate  ) fcs left outer join 
+  (select * from flaretest.files_count_summary s where
+ tbl_dt=targetdate   )ffs 
+ on fcs.feed_name=ffs.feedname
+ 
+ left outer join  (select distinct name,lines  from flaretest.files_filesopps_summary)  a 
+on ffs.filename=a.name
+left outer join 
+ (select * from flaretest.files_count_rejected_summary where 
+ tbl_dt=19700101   ) b
+    on ffs.feedname=b.feedname and ffs.filename=b.filename;

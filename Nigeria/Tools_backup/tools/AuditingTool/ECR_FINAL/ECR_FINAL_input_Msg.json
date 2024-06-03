@@ -1,0 +1,64 @@
+{
+  "Message": {
+    "NameSpace": "com.mtn.messages",
+    "Name": "ECR_FINAL_input",
+    "Version": "00.01.00",
+    "Description": "ECR_FINAL Input Msg",
+    "Fixed": "true",
+    "Fields": [
+      {
+        "Name": "job_id",
+        "Type": "System.String"
+      },
+      {
+        "Name": "job_name",
+        "Type": "System.String"
+      },
+      {
+        "Name": "log_type",
+        "Type": "System.String"
+      },
+          {
+        "Name": "run_id",
+        "Type": "System.String"
+      },
+      {
+        "Name": "start_time",
+        "Type": "System.String"
+      },
+      {
+        "Name": "end_time",
+        "Type": "System.String"
+      },
+      {
+        "Name": "status",
+        "Type": "System.String"
+      },
+      {
+        "Name": "message",
+        "Type": "System.String"
+      },
+      {
+        "Name": "affected_records",
+        "Type": "System.String"
+      },
+      { 
+       "Name": "data_date", 
+       "Type": "System.String" 
+      },
+      { 
+       "Name": "from_date", 
+       "Type": "System.String" 
+      },
+      { 
+       "Name": "to_date", 
+       "Type": "System.String" 
+      },
+      { 
+       "Name": "step", 
+       "Type": "System.String" 
+      }
+    ]
+  }
+}
+

@@ -1,0 +1,87 @@
+#!/bin/bash
+working_folder=$1
+incoming_folder=$2
+extract_folder="${working_folder}/tmp"
+
+cd /mnt/beegfs_bsl/tools/ExtractTools/NEWREG_BIOUPDT_POOL_LIVE/spool
+export ORACLE_BASE=/usr/lib/oracle
+export ORACLE_HOME=/usr/lib/oracle/product/11.1.0/client_1
+#BIB_CTL/h872sgf#kk@'(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.1.218.168)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SID=BIODSP12)))'
+#start_date=$1
+#end_date=$2
+yyyymmdd=`date -d $1 "+%Y%m%d"`
+echo "$yyyymmdd"
+#kinit -kt /etc/security/keytabs/daasuser.keytab daasuser@MTN.COM
+
+filename="NEWREG_BIOUPDT_POOL_LIVE_"$yyyymmdd".csv"
+/usr/lib/oracle/product/11.1.0/client_1/bin/sqlplus -S <<EOF
+DAAS_CDR/thisPWD#123@'(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.1.208.215)(PORT=1522))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=agi_p1)))'
+set term off
+set termout off
+set echo off
+set underline off
+set colsep ','
+set pages 40000
+SET LONG 50000;
+set trimout on
+set trimspool on
+set feedback off
+set heading off
+set headsep off
+SET LINESIZE 30000
+set LONGCHUNKSIZE 30000
+set pagesize 0
+set wrap off
+
+spool $filename
+
+select 
+SEQ_NO_N||'|'||
+MSISDN_V||'|'||
+234||''||MSISDN_V||'|'||
+LAST_NAME_V||'|'||
+SIM_NUMBER_V||'|'||
+FIRST_NAME_V||'|'||
+MOTHER_MAIDEN_V||'|'||
+GENDER_V||'|'||
+to_char(DATE_OF_BIRTH,'yyyymmdd hh24miss')||'|'||
+NATIONALITY_V||'|'||
+PIN_REF_NUM_V||'|'||
+STATUS_V||'|'||
+SIM_REG_TYPE_V||'|'||
+to_char(UPDATED_DT,'yyyymmdd hh24miss')||'|'||
+REMARKS_V||'|'||
+PROVIDENT_STATUS||'|'||
+AGL_STATUS||'|'||
+ replace(replace(xmlserialize(document ISL_REQUEST_X as clob),chr(10),''),chr(13),'') ||'|'||
+ INSTANCE_ID_N||'|'||
+SESSION_TOKEN_V||'|'||
+ACTION_CODE_V||'|'||
+EYEBALL_STATUS_V||'|'||
+EYEBALL_USER_N||'|'||
+to_char(EYEBALL_ON_D,'yyyymmdd hh24miss')||'|'||
+EYEBALL_REMARKS_V||'|'||
+RECORD_LOCKED_BY_N||'|'||
+to_char(RECORD_LOCKED_ON_D,'yyyymmdd hh24miss')||'|'||
+ replace(replace(xmlserialize(document ADDNL_ATTRB_X as clob),chr(10),''),chr(13),'') ||'|'||
+ EYEBALL_TYPE_V||'|'||
+SIMREG_KIT_NUM_V||'|'||
+AGENT_NAME_V||'|'||
+SERV_ADDNL_FLD_1_V||'|'||
+SERV_ADDNL_FLD_2_V||'|'||
+SERV_ADDNL_FLD_3_V||'|'||
+SERV_ADDNL_FLD_4_V||'|'||
+SERV_ADDNL_FLD_5_V||'|'||
+IS_POSTED_TO_CLM||'|'||
+to_char(POSTED_TO_CLM_DATE,'yyyymmdd hh24miss')||'|'||
+to_char(REQ_RECEIVED_DATE_FROM_CLM,'yyyymmdd hh24miss')||'|'||
+EYEBALL_DETAILS_V||'|'||
+EYEBALL_RECURRINGIMG_V from CBS_TBL_CUST.CB_NEWREG_BIOUPDT_POOL where updated_dt between to_date('${yyyymmdd} 00:00:00','yyyymmdd hh24:mi:ss') and to_date('${yyyymmdd} 23:59:59','yyyymmdd hh24:mi:ss');
+spool off
+quit
+EOF
+#Removing spaces from the spool file
+sed -i '/^[[:space:]]*$/d' $filename
+#hadoop fs -put -f /home/daasuser/spool/$filename /user/hive/flare/wbs_bib_report/
+gzip -f $filename
+exit

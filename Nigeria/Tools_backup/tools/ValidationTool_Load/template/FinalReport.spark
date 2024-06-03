@@ -1,0 +1,29 @@
+import org.apache.spark.sql._
+val hiveContext = new org.apache.spark.sql.hive.HiveContext(sc)
+val buffer = scala.collection.mutable.ArrayBuffer(
+" insert overwrite table databasename.final_feed_report partition (tbl_dt=targetdate) 						" ,
+" select fcs.feed_name HiveTargetTable,  coalesce(fcs.numberofline ,0) feed_name_lineNumber,            " ,
+" a.feedname DiroctoryFeedName,  coalesce(a.numberofline ,0) DiroctoryFeedNameLineCount,                " ,
+" b.feed_name RjectedFeedname,  coalesce(b.numberofline,0) TotalRejectedCount ,                         " ,
+" coalesce(a.numberofline,0)-(coalesce(fcs.numberofline,0)+coalesce(b.numberofline,0)) Deff ,                                        " ,
+" (coalesce(a.numberofline,0)-(coalesce(fcs.numberofline,0)+coalesce(b.numberofline,0)))/coalesce(a.numberofline,0)*100 ratio ,      " ,
+" case when coalesce(a.numberofline ,0) <> coalesce(fcs.numberofline ,0)+coalesce(b.numberofline,0)     " ,
+" then \"Not Match\" else \"Match\" end status  from                                                    " ,
+" (select * from databasename.feeds_count_summary s where                                                  " ,
+" tbl_dt=targetdate )fcs                                                                                  " ,
+" left outer join  (select * from databasename.Directory_filesopps_summary a where                         " ,
+" (tbl_dt=targetdate and feedname not like \"%EOD_USER_ACC_BAL%\" and feedname not like \"EWP_EOD_TRANSACTIONS\" and feedname not like \"%EWP_EOD_REGISTRATIONS%\") or (tbl_dt=nextday and (feedname       " ,
+" like \"%EOD_USER_ACC_BAL%\" or feedname  like \"EWP_EOD_TRANSACTIONS\" or feedname like \"%EWP_EOD_REGISTRATIONS%\") )                                                                        " ,
+"   ) a                                                                                                 " ,
+" on fcs.feed_name=a.feedname left outer join                                                           " ,
+" (select * from databasename.feeds_count_rejected_summary where                                           " ,
+" (tbl_dt=targetdate and feed_name not like \"%EOD_USER_ACC_BAL%\" and feed_name  not like \"EWP_EOD_TRANSACTIONS\" and feed_name not like \"%EWP_EOD_REGISTRATIONS%\" ) or (tbl_dt=nextday and (feed_name     " ,
+" like \"%EOD_USER_ACC_BAL%\" or feed_name  like \"%EWP_EOD_TRANSACTIONS%\" or feed_name like \"%EWP_EOD_REGISTRATIONS%\")    )                      " ,
+"  ) b   on fcs.feed_name=b.feed_name                                                                   " )
+  
+  
+  
+val sql=buffer.mkString(" ")
+println(sql)
+hiveContext.sql(sql)
+exit

@@ -1,0 +1,21 @@
+select
+translate(OBJSTATE, chr(10)||chr(11)||chr(13) , ' '), 
+translate(OBJEVENTS, chr(10)||chr(11)||chr(13) , ' '), 
+translate(STATE, chr(10)||chr(11)||chr(13) , ' '), 
+translate(COMPANY, chr(10)||chr(11)||chr(13) , ' '), 
+translate(IDENTITY, chr(10)||chr(11)||chr(13) , ' '), 
+translate(PARTY_TYPE, chr(10)||chr(11)||chr(13) , ' '), 
+translate(PARTY_TYPE_DB, chr(10)||chr(11)||chr(13) , ' '), 
+translate(LEDGER_ITEM_SERIES_ID, chr(10)||chr(11)||chr(13) , ' '), 
+translate(LEDGER_ITEM_ID, chr(10)||chr(11)||chr(13) , ' '), 
+translate(LEDGER_ITEM_VERSION, chr(10)||chr(11)||chr(13) , ' '), 
+translate(FULL_CURR_AMOUNT,chr(10)||chr(11)||chr(13) , ' '), 
+translate( FULL_DOM_AMOUNT, chr(10)||chr(11)||chr(13) , ' '), 
+translate(CLEARED_CURR_AMOUNT, chr(10)||chr(11)||chr(13) , ' '), 
+translate(CLEARED_DOM_AMOUNT, chr(10)||chr(11)||chr(13) , ' '), 
+translate(CANCEL_VOU_DATE, chr(10)||chr(11)||chr(13) , ' '), 
+translate(OBJVERSION, chr(10)||chr(11)||chr(13) , ' '), 
+translate(LEDGER_STATUS_TYPE, chr(10)||chr(11)||chr(13) , ' '), 
+translate(LEDGER_STATUS_TYPE_DB, chr(10)||chr(11)||chr(13) , ' '),
+translate(PACKAGE_ID, chr(10)||chr(11)||chr(13) , ' ')
+from IFSAPP.LEDGER_ITEM

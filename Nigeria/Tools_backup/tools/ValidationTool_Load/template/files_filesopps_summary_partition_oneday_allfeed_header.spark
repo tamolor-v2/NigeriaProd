@@ -1,0 +1,11 @@
+import org.apache.spark.sql._
+val hiveContext = new org.apache.spark.sql.hive.HiveContext(sc)
+
+hiveContext.sql("set hive.enforce.bucketing=true")
+hiveContext.sql("set hive.exec.dynamic.partition.mode=nonstrict")
+hiveContext.sql("set hive.tez.container.size=1700000")
+val buffer = scala.collection.mutable.ArrayBuffer(
+" insert overwrite table databasename.files_filesopps_summary_partition partition (feed_name,file_dt) ",
+" select distinct name,lines,feed_name,file_dt from ",
+" (select name,lines,trim(case  ",
+

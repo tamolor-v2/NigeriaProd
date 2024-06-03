@@ -1,0 +1,7 @@
+{
+  "runDate" : "20180723",
+  "tableName" : "test.daas_stat_schema",
+  "seqNo" : 25,
+  "typeOfTable" : "LHS",
+  "HDFSLocation" : "/FlareTest/dataCompleteness"
+}

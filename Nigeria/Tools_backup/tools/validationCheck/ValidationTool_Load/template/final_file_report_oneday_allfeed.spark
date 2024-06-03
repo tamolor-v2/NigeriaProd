@@ -1,0 +1,40 @@
+import org.apache.spark.sql._
+val hiveContext = new org.apache.spark.sql.hive.HiveContext(sc)
+
+hiveContext.sql("set hive.enforce.bucketing=true")
+hiveContext.sql("set hive.exec.dynamic.partition.mode=nonstrict")
+
+
+//hiveContext.sql("insert overwrite table databasename.final_files_report partition(tbl_dt,feed_name) select * from databasename.final_files_report where  tbl_dt=targetdate ")
+
+val buffer = scala.collection.mutable.ArrayBuffer( "insert overwrite table databasename.final_files_report partition (tbl_dt,feed_name) " ,
+" select ",
+" fcs.feed_name, ",
+" ffs.file_name, ",
+" ffs.numberofline, ",
+" fcs.feed_name, ",
+" a.file_name, ",
+" a.lines, ",
+" bb.feedname, ",
+" bb.filename, ",
+" bb.numberofline, " ,
+" coalesce(a.lines,0)-(coalesce(ffs.numberofline,0)+coalesce(bb.numberofline,0)) Deff , " ,
+" (coalesce(a.lines,0)-(coalesce(ffs.numberofline,0)+coalesce(bb.numberofline,0)))/coalesce(a.lines,0)*100 ratio ,  " ,
+" case when coalesce(a.lines ,0) <> (coalesce(ffs.numberofline ,0)+coalesce(bb.numberofline,0) )  " ,
+"  then 'Not Match' else 'Match' end status, ", 
+"  fcs.file_dt, ",
+"  fcs.feed_name from       " ,
+"  (select * from databasename.feeds_count_summary s  where  file_dt=targetdate) fcs left outer join   " ,
+"  (select feed_name,file_dt,file_name,sum(numberofline) numberofline from databasename.files_count_summary s   where file_dt=targetdate         group by feed_name,file_dt,file_name )ffs          " ,
+" on fcs.feed_name=ffs.feed_name and fcs.file_dt=ffs.file_dt    " ,
+" left outer join  (select * from databasename.files_filesopps_summary_partition where file_dt=targetdate)  a    " ,
+"   on ffs.feed_name=a.feed_name and ffs.file_name=a.file_name and ffs.file_dt=a.file_dt            " ,
+" left outer join                                                                                                                " ,
+"  (select feedname,tbl_dt,filename,sum(numberofline) numberofline from databasename.files_count_rejected_summary where  tbl_dt=targetdate  group by feedname,tbl_dt,filename ) bb on ffs.feed_name=bb.feedname " ,
+" and ffs.file_name=bb.filename and ffs.file_dt=bb.tbl_dt "
+)
+
+val sql=buffer.mkString(" ")
+println(sql)
+hiveContext.sql(sql)
+exit;

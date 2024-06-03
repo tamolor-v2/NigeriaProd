@@ -1,0 +1,11 @@
+processing:20190206
+startdate=20190206
+enddate=20190206
+stream=cb_serv_mast
+app=cb_serv_mast
+logdir=/mnt/beegfs/tools/ExtractTools/CB_SERV_MAST_VIEW_LIVE/log
+sqldir=/mnt/beegfs/tools/ExtractTools/CB_SERV_MAST_VIEW_LIVE/cb_serv_mast
+sqlexecdir=/mnt/beegfs/tools/ExtractTools/CB_SERV_MAST_VIEW_LIVE/execute
+logfile=/mnt/beegfs/tools/ExtractTools/CB_SERV_MAST_VIEW_LIVE/log/cb_serv_mast.out
+sqltemplatefile=/mnt/beegfs/tools/ExtractTools/CB_SERV_MAST_VIEW_LIVE/cb_serv_mast/cb_serv_mast.sql
+sqlfile=/mnt/beegfs/tools/ExtractTools/CB_SERV_MAST_VIEW_LIVE/execute/cb_serv_mast.sql

@@ -1,0 +1,11 @@
+{
+    "reportDir": "/mnt/beegfs/tmp/waddah/list",
+	"outputDir": "/mnt/beegfs/yousef/incomingNumberCheck/report",
+	"searchLevel" : 1,
+    "increaseRatio": 0.5,
+	"threshold": 50000,
+	"limit": 200000,
+	"templateFile" : "/mnt/beegfs/yousef/incomingNumberCheck/email/template.html",
+	"headerFile": "/mnt/beegfs/yousef/incomingNumberCheck/email/mailheader",
+	"emailScript": "/mnt/beegfs/yousef/incomingNumberCheck/email/sendEmail.sh"
+}

@@ -1,0 +1,2 @@
+{"index":["filebeat-*"],"ignore_unavailable":true}
+{"size":0,"aggs":{"2":{"terms":{"field":"operation.keyword","size":5},"aggs":{"1":{"avg":{"field":"processingTime"}}}}},"docvalue_fields":["@timestamp","responseTime"],"query":{"bool":{"must":[{"bool":{"should":[{"match_phrase":{"operation.keyword":"GetHSDPActiveSubscriptionRequest"}}],"minimum_should_match":1}},{"range":{"@timestamp":{"gte":fromDate,"lte":toDate,"format":"epoch_millis"}}}]}}}'

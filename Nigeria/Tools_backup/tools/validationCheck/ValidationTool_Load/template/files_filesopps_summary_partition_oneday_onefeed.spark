@@ -1,0 +1,20 @@
+import org.apache.spark.sql._
+val hiveContext = new org.apache.spark.sql.hive.HiveContext(sc)
+
+hiveContext.sql("set hive.enforce.bucketing=true")
+hiveContext.sql("set hive.exec.dynamic.partition.mode=nonstrict")
+
+val buffer = scala.collection.mutable.ArrayBuffer(
+ " insert overwrite table databasename.files_filesopps_summary_partition partition (feed_name,file_dt) ",
+ " select distinct name,lines,feed_name,file_dt from ",
+ " (select name,lines, \"FeedNameValues\" feed_name,case when upper(path) like \"%PART%\" then 1907 else ",
+ " nvl(split(substring(substring(path,INSTR(path,'ArchiveKeyWork')+3),1),\"\\/\")[2],1970) end file_dt ",
+ " from databasename.files_filesopps_summary where lines > 0 and tbl_dt=\"targetdate\" and path like \"%FeedNameCondition%\" ) FilesOps ")
+ 
+val sql=buffer.mkString(" ")
+
+println(sql)
+hiveContext.sql(sql)
+
+ exit;
+

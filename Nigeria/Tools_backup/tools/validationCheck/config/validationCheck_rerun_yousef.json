@@ -1,0 +1,14 @@
+{
+	"decreaseRatio": 0.55,
+	"backDays" : 1,
+	"tableName": "dq.final_feed_report_email",
+	"rejectionRatio": 0.25,
+        "reportDate": "20190310",
+	"templateFile" : "/mnt/beegfs/production/validation_Rep",
+	"headerFile": "/mnt/beegfs/tools/validationCheck/email/mailheader_yousef",
+	"emailScript": "/mnt/beegfs/tools/validationCheck/email/sendEmail.sh",
+        "removeFromReport": "recon,fin_log",
+        "increaseRatio"  : 0.55,
+        "Hostname" : "edge01002"
+
+}

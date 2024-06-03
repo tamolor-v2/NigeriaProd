@@ -1,0 +1,9 @@
+{
+        "templateFile" : "/mnt/beegfs/yousef/incomingNumberCheck/email/template.html",
+        "headerFile": "/mnt/beegfs/yousef/incomingNumberCheck/email/mailheader",
+        "emailScript": "/mnt/beegfs/yousef/incomingNumberCheck/email/sendEmail.sh",
+        "xlsxFile": "/mnt/beegfs/tools/TrendingReport/reports/dateTemp/dateTemp.xlsx",
+        "csvFile": "/mnt/beegfs/tools/TrendingReport/reports/dateTemp/dateTemp.csv",
+        "runDate": "Sheet2"
+}
+

@@ -1,0 +1,725 @@
+2018-08-15 22:20:31 - start
+2018-08-15 22:20:31 - Processing DPI BSL for date(s): 20180807
+log4j:WARN No such property [maxFileSize] in org.apache.log4j.DailyRollingFileAppender.
+
+Logging initialized using configuration in file:/etc/hive/2.6.1.0-129/0/hive-log4j.properties
+OK
+Time taken: 1.31 seconds
+OK
+Partitions not in metastore:	dpi_cdr:tbl_dt=20180815/hr=18	dpi_cdr:tbl_dt=20180815/hr=19	dpi_cdr:tbl_dt=20180815/hr=20	dpi_cdr:tbl_dt=20180815/hr=21
+Repair: Added partition to metastore dpi_cdr:tbl_dt=20180815/hr=18
+Repair: Added partition to metastore dpi_cdr:tbl_dt=20180815/hr=19
+Repair: Added partition to metastore dpi_cdr:tbl_dt=20180815/hr=20
+Repair: Added partition to metastore dpi_cdr:tbl_dt=20180815/hr=21
+Time taken: 3.899 seconds, Fetched: 5 row(s)
+OK
+Partitions not in metastore:	dpi_cdr_unpack:tbl_dt=20180815/hr=18	dpi_cdr_unpack:tbl_dt=20180815/hr=19	dpi_cdr_unpack:tbl_dt=20180815/hr=20	dpi_cdr_unpack:tbl_dt=20180815/hr=21
+Repair: Added partition to metastore dpi_cdr_unpack:tbl_dt=20180815/hr=18
+Repair: Added partition to metastore dpi_cdr_unpack:tbl_dt=20180815/hr=19
+Repair: Added partition to metastore dpi_cdr_unpack:tbl_dt=20180815/hr=20
+Repair: Added partition to metastore dpi_cdr_unpack:tbl_dt=20180815/hr=21
+Time taken: 3.108 seconds, Fetched: 5 row(s)
+=====>a
+2018-08-15 22:21:16 - =================================================================================
+2018-08-15 22:21:16 - executing query: 
+create table dpi_bsl.DPIAGGR_CUSTOMER_ROAM_BSL_20180807 as
+select
+msisdn_key,apn,country_enrich,operator_enrich,
+SUM(COALESCE(CAST(TRAFFICUP AS INT),0)) VOLUP,
+SUM(COALESCE(CAST(TRAFFICDOWN AS INT),0)) VOLDOWN,
+SUM(COALESCE(CAST(TRAFFICUP AS INT),0)+COALESCE(CAST(TRAFFICDOWN AS INT),0)) VOL,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS INT),0))) AVG_VOLUP,
+ROUND(AVG(COALESCE(CAST(TRAFFICDOWN AS INT),0))) AVG_VOLDOWN,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS INT),0)+COALESCE(CAST(TRAFFICDOWN AS INT),0))) AVG_VOL,
+SUM(coalesce(cast(DURATION as int),0)) DURATION,
+ROUND(AVG(coalesce(cast(DURATION as int),0))) AVG_DURATION,
+count(*) sessions,
+tbl_dt
+from flare_8.dpi_cdr where tbl_dt=20180807 and mcc<>621
+group BY
+tbl_dt,msisdn_key,apn,country_enrich,operator_enrich
+2018-08-15 22:21:16 - =================================================================================
+2018-08-15 22:21:16 - create table dpi_bsl.DPIAGGR_CUSTOMER_ROAM_BSL_20180807 as
+select
+msisdn_key,apn,country_enrich,operator_enrich,
+SUM(COALESCE(CAST(TRAFFICUP AS INT),0)) VOLUP,
+SUM(COALESCE(CAST(TRAFFICDOWN AS INT),0)) VOLDOWN,
+SUM(COALESCE(CAST(TRAFFICUP AS INT),0)+COALESCE(CAST(TRAFFICDOWN AS INT),0)) VOL,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS INT),0))) AVG_VOLUP,
+ROUND(AVG(COALESCE(CAST(TRAFFICDOWN AS INT),0))) AVG_VOLDOWN,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS INT),0)+COALESCE(CAST(TRAFFICDOWN AS INT),0))) AVG_VOL,
+SUM(coalesce(cast(DURATION as int),0)) DURATION,
+ROUND(AVG(coalesce(cast(DURATION as int),0))) AVG_DURATION,
+count(*) sessions,
+tbl_dt
+from flare_8.dpi_cdr where tbl_dt=20180807 and mcc<>621
+group BY
+tbl_dt,msisdn_key,apn,country_enrich,operator_enrich
+2018-08-15 22:21:16 - ->->-> dpi_bsl.DPIAGGR_CUSTOMER_ROAM_BSL_20180807
+2018-08-15 22:21:16 - dropping table: dpi_bsl.DPIAGGR_CUSTOMER_ROAM_BSL_20180807
+=====>a
+2018-08-15 22:21:16 - =================================================================================
+2018-08-15 22:21:16 - executing query: 
+create table dpi_bsl.DPIOPCO_DAY_BSL_20180807 as
+select
+round(avg(sessions)) avg_sessions_p_user,
+round(avg(volup)) avg_volup_p_user,
+round(avg(avg_volup)) avg_volup_p_session,
+round(avg(voldown)) avg_voldown_p_user,
+round(avg(avg_voldown)) avg_voldown_p_session,
+round(avg(vol)) avg_vol_p_user,
+round(avg(avg_vol)) avg_vol_p_session,
+round(avg(duration)) avg_duration_p_user,
+round(avg(avg_duration)) avg_duration_p_session,
+tbl_dt
+from (
+select
+msisdn_key,
+SUM(COALESCE(CAST(TRAFFICUP AS BIGINT),0)) VOLUP,
+SUM(COALESCE(CAST(TRAFFICDOWN AS BIGINT),0)) VOLDOWN,
+SUM(COALESCE(CAST(TRAFFICUP AS BIGINT),0)+COALESCE(CAST(TRAFFICDOWN AS BIGINT),0)) VOL,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS BIGINT),0))) AVG_VOLUP,
+ROUND(AVG(COALESCE(CAST(TRAFFICDOWN AS BIGINT),0))) AVG_VOLDOWN,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS BIGINT),0)+COALESCE(CAST(TRAFFICDOWN AS BIGINT),0))) AVG_VOL,
+SUM(coalesce(cast(DURATION AS BIGINT),0)) DURATION,
+ROUND(AVG(coalesce(cast(DURATION AS BIGINT),0))) AVG_DURATION,
+count(*) sessions,
+tbl_dt
+from flare_8.dpi_cdr where tbl_dt=20180807 and mcc=621
+group by tbl_dt,msisdn_key)
+group by tbl_dt
+2018-08-15 22:21:16 - =================================================================================
+2018-08-15 22:21:16 - create table dpi_bsl.DPIOPCO_DAY_BSL_20180807 as
+select
+round(avg(sessions)) avg_sessions_p_user,
+round(avg(volup)) avg_volup_p_user,
+round(avg(avg_volup)) avg_volup_p_session,
+round(avg(voldown)) avg_voldown_p_user,
+round(avg(avg_voldown)) avg_voldown_p_session,
+round(avg(vol)) avg_vol_p_user,
+round(avg(avg_vol)) avg_vol_p_session,
+round(avg(duration)) avg_duration_p_user,
+round(avg(avg_duration)) avg_duration_p_session,
+tbl_dt
+from (
+select
+msisdn_key,
+SUM(COALESCE(CAST(TRAFFICUP AS BIGINT),0)) VOLUP,
+SUM(COALESCE(CAST(TRAFFICDOWN AS BIGINT),0)) VOLDOWN,
+SUM(COALESCE(CAST(TRAFFICUP AS BIGINT),0)+COALESCE(CAST(TRAFFICDOWN AS BIGINT),0)) VOL,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS BIGINT),0))) AVG_VOLUP,
+ROUND(AVG(COALESCE(CAST(TRAFFICDOWN AS BIGINT),0))) AVG_VOLDOWN,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS BIGINT),0)+COALESCE(CAST(TRAFFICDOWN AS BIGINT),0))) AVG_VOL,
+SUM(coalesce(cast(DURATION AS BIGINT),0)) DURATION,
+ROUND(AVG(coalesce(cast(DURATION AS BIGINT),0))) AVG_DURATION,
+count(*) sessions,
+tbl_dt
+from flare_8.dpi_cdr where tbl_dt=20180807 and mcc=621
+group by tbl_dt,msisdn_key)
+group by tbl_dt
+2018-08-15 22:21:16 - ->->-> dpi_bsl.DPIOPCO_DAY_BSL_20180807
+2018-08-15 22:21:16 - dropping table: dpi_bsl.DPIOPCO_DAY_BSL_20180807
+=====>a
+2018-08-15 22:21:16 - =================================================================================
+2018-08-15 22:21:16 - executing query: 
+create table dpi_bsl.DPIUNPACK_DAY_ROAM_URI_BSL_20180807 as
+select
+a.domain,
+b.country_enrich,
+b.operator_enrich,
+SUM(COALESCE(CAST(UPLINK AS BIGINT),0)) VOLUP, 
+SUM(COALESCE(CAST(DOWNLINK AS BIGINT),0)) VOLDOWN, 
+SUM(COALESCE(CAST(UPLINK AS BIGINT),0)+COALESCE(CAST(DOWNLINK AS BIGINT),0)) VOL, 
+ROUND(AVG(COALESCE(CAST(UPLINK AS BIGINT),0))) AVG_VOLUP_PER_VISIT,
+ROUND(AVG(COALESCE(CAST(DOWNLINK AS BIGINT),0))) AVG_VOLDOWN_PER_VISIT,
+ROUND(AVG(COALESCE(CAST(UPLINK AS BIGINT),0)+COALESCE(CAST(DOWNLINK AS BIGINT),0))) AVG_VOL_PER_VISIT,
+count(*) TOT_VISITS,
+round(count(*)/count(distinct a.msisdn_key)) AVG_VISITS,
+count(distinct a.msisdn_key) UNIQ_VISITORS,
+rank() over (order by count(*)/count(distinct a.msisdn_key) desc, AVG(COALESCE(CAST(UPLINK AS BIGINT),0)+COALESCE(CAST(DOWNLINK AS BIGINT),0)) desc, a.domain asc) RNK_BY_AVG_VISITS,
+rank() over (order by AVG(COALESCE(CAST(UPLINK AS BIGINT),0)+COALESCE(CAST(DOWNLINK AS BIGINT),0)) desc, count(*)/count(distinct a.msisdn_key) desc, a.domain asc) RNK_BY_AVG_VOL,
+rank() over (order by count(*) desc,SUM(COALESCE(CAST(UPLINK AS BIGINT),0)+COALESCE(CAST(DOWNLINK AS BIGINT),0)) desc, a.domain asc) RNK_BY_TOT_VISITS,
+rank() over (order by SUM(COALESCE(CAST(UPLINK AS BIGINT),0)+COALESCE(CAST(DOWNLINK AS BIGINT),0)) desc, count(*) desc,a.domain asc) RNK_BY_TOT_VOL,
+a.tbl_dt
+from flare_8.dpi_cdr_unpack a, flare_8.dpi_cdr b
+where a.tbl_dt=20180807 and a.tbl_dt=b.tbl_dt and a.unique_id_enrich=b.unique_id_enrich and b.mcc<>621 and a.typ='UR'
+group by a.tbl_dt,a.domain,b.country_enrich,b.operator_enrich
+2018-08-15 22:21:16 - =================================================================================
+2018-08-15 22:21:16 - create table dpi_bsl.DPIUNPACK_DAY_ROAM_URI_BSL_20180807 as
+select
+a.domain,
+b.country_enrich,
+b.operator_enrich,
+SUM(COALESCE(CAST(UPLINK AS BIGINT),0)) VOLUP, 
+SUM(COALESCE(CAST(DOWNLINK AS BIGINT),0)) VOLDOWN, 
+SUM(COALESCE(CAST(UPLINK AS BIGINT),0)+COALESCE(CAST(DOWNLINK AS BIGINT),0)) VOL, 
+ROUND(AVG(COALESCE(CAST(UPLINK AS BIGINT),0))) AVG_VOLUP_PER_VISIT,
+ROUND(AVG(COALESCE(CAST(DOWNLINK AS BIGINT),0))) AVG_VOLDOWN_PER_VISIT,
+ROUND(AVG(COALESCE(CAST(UPLINK AS BIGINT),0)+COALESCE(CAST(DOWNLINK AS BIGINT),0))) AVG_VOL_PER_VISIT,
+count(*) TOT_VISITS,
+round(count(*)/count(distinct a.msisdn_key)) AVG_VISITS,
+count(distinct a.msisdn_key) UNIQ_VISITORS,
+rank() over (order by count(*)/count(distinct a.msisdn_key) desc, AVG(COALESCE(CAST(UPLINK AS BIGINT),0)+COALESCE(CAST(DOWNLINK AS BIGINT),0)) desc, a.domain asc) RNK_BY_AVG_VISITS,
+rank() over (order by AVG(COALESCE(CAST(UPLINK AS BIGINT),0)+COALESCE(CAST(DOWNLINK AS BIGINT),0)) desc, count(*)/count(distinct a.msisdn_key) desc, a.domain asc) RNK_BY_AVG_VOL,
+rank() over (order by count(*) desc,SUM(COALESCE(CAST(UPLINK AS BIGINT),0)+COALESCE(CAST(DOWNLINK AS BIGINT),0)) desc, a.domain asc) RNK_BY_TOT_VISITS,
+rank() over (order by SUM(COALESCE(CAST(UPLINK AS BIGINT),0)+COALESCE(CAST(DOWNLINK AS BIGINT),0)) desc, count(*) desc,a.domain asc) RNK_BY_TOT_VOL,
+a.tbl_dt
+from flare_8.dpi_cdr_unpack a, flare_8.dpi_cdr b
+where a.tbl_dt=20180807 and a.tbl_dt=b.tbl_dt and a.unique_id_enrich=b.unique_id_enrich and b.mcc<>621 and a.typ='UR'
+group by a.tbl_dt,a.domain,b.country_enrich,b.operator_enrich
+2018-08-15 22:21:16 - ->->-> dpi_bsl.DPIUNPACK_DAY_ROAM_URI_BSL_20180807
+2018-08-15 22:21:16 - dropping table: dpi_bsl.DPIUNPACK_DAY_ROAM_URI_BSL_20180807
+=====>a
+2018-08-15 22:21:16 - =================================================================================
+2018-08-15 22:21:16 - executing query: 
+create table dpi_bsl.DPIPIVOT_FAVHR_20180807 as
+select
+tbl_dt,
+MSISDN_KEY,FAVHR,
+VOLUP_FAVHR,
+VOLDOWN_FAVHR,
+VOL_FAVHR,
+SESSIONS_FAVHR,
+UPDOWNRATIO_FAVHR,
+DURATION_FAVHR,
+TPCALC_FAVHR,
+QOS_FAVHR,
+THROUGHPUT_FAVHR,
+JITTER_FAVHR,
+LATENCY_FAVHR
+from (
+SELECT tbl_dt,MSISDN_KEY,HR AS FAVHR,
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0)) VOLUP_FAVHR,
+SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0)) VOLDOWN_FAVHR,
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0)+COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0)) VOL_FAVHR,
+COUNT(MSISDN_KEY) SESSIONS_FAVHR,
+CASE
+WHEN SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0))>0 AND SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0))=0 THEN -100.0
+WHEN SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0))=0 AND SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0))=0 THEN 0.0
+ELSE
+TRY_CAST(
+100.0 *
+(
+(SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0.0))-SUM(COALESCE(TRY_CAST(TRAFFICUP AS DOUBLE),0.0)))
+/
+SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0.0))
+)
+AS DOUBLE)
+END UPDOWNRATIO_FAVHR,
+SUM(coalesce(TRY_CAST(DURATION as int),0)) DURATION_FAVHR,
+CASE WHEN SUM(coalesce(TRY_CAST(DURATION as int),0))=0 THEN 0 ELSE
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS DOUBLE),0)+COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0))/SUM(COALESCE(TRY_CAST(DURATION AS DOUBLE),0)) END TPCALC_FAVHR,
+TRY_CAST(0 AS INT) QOS_FAVHR,
+TRY_CAST(0 AS DOUBLE) THROUGHPUT_FAVHR,
+TRY_CAST(0 AS DOUBLE) JITTER_FAVHR,
+TRY_CAST(0 AS DOUBLE) LATENCY_FAVHR,
+rank() over (partition by msisdn_key order by SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0)+COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0)) desc,count(msisdn_key) desc, SUM(coalesce(TRY_CAST(DURATION as int),0)) desc, hr asc) rnk
+from flare_8.dpi_cdr where tbl_dt=20180807
+GROUP BY tbl_dt,MSISDN_KEY,HR)
+where rnk=1
+2018-08-15 22:21:16 - =================================================================================
+2018-08-15 22:21:16 - create table dpi_bsl.DPIPIVOT_FAVHR_20180807 as
+select
+tbl_dt,
+MSISDN_KEY,FAVHR,
+VOLUP_FAVHR,
+VOLDOWN_FAVHR,
+VOL_FAVHR,
+SESSIONS_FAVHR,
+UPDOWNRATIO_FAVHR,
+DURATION_FAVHR,
+TPCALC_FAVHR,
+QOS_FAVHR,
+THROUGHPUT_FAVHR,
+JITTER_FAVHR,
+LATENCY_FAVHR
+from (
+SELECT tbl_dt,MSISDN_KEY,HR AS FAVHR,
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0)) VOLUP_FAVHR,
+SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0)) VOLDOWN_FAVHR,
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0)+COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0)) VOL_FAVHR,
+COUNT(MSISDN_KEY) SESSIONS_FAVHR,
+CASE
+WHEN SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0))>0 AND SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0))=0 THEN -100.0
+WHEN SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0))=0 AND SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0))=0 THEN 0.0
+ELSE
+TRY_CAST(
+100.0 *
+(
+(SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0.0))-SUM(COALESCE(TRY_CAST(TRAFFICUP AS DOUBLE),0.0)))
+/
+SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0.0))
+)
+AS DOUBLE)
+END UPDOWNRATIO_FAVHR,
+SUM(coalesce(TRY_CAST(DURATION as int),0)) DURATION_FAVHR,
+CASE WHEN SUM(coalesce(TRY_CAST(DURATION as int),0))=0 THEN 0 ELSE
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS DOUBLE),0)+COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0))/SUM(COALESCE(TRY_CAST(DURATION AS DOUBLE),0)) END TPCALC_FAVHR,
+TRY_CAST(0 AS INT) QOS_FAVHR,
+TRY_CAST(0 AS DOUBLE) THROUGHPUT_FAVHR,
+TRY_CAST(0 AS DOUBLE) JITTER_FAVHR,
+TRY_CAST(0 AS DOUBLE) LATENCY_FAVHR,
+rank() over (partition by msisdn_key order by SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0)+COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0)) desc,count(msisdn_key) desc, SUM(coalesce(TRY_CAST(DURATION as int),0)) desc, hr asc) rnk
+from flare_8.dpi_cdr where tbl_dt=20180807
+GROUP BY tbl_dt,MSISDN_KEY,HR)
+where rnk=1
+2018-08-15 22:21:16 - ->->-> dpi_bsl.DPIPIVOT_FAVHR_20180807
+2018-08-15 22:21:16 - dropping table: dpi_bsl.DPIPIVOT_FAVHR_20180807
+log4j:WARN No such property [maxFileSize] in org.apache.log4j.DailyRollingFileAppender.
+
+Logging initialized using configuration in file:/etc/hive/2.6.1.0-129/0/hive-log4j.properties
+log4j:WARN No such property [maxFileSize] in org.apache.log4j.DailyRollingFileAppender.
+log4j:WARN No such property [maxFileSize] in org.apache.log4j.DailyRollingFileAppender.
+log4j:WARN No such property [maxFileSize] in org.apache.log4j.DailyRollingFileAppender.
+
+Logging initialized using configuration in file:/etc/hive/2.6.1.0-129/0/hive-log4j.properties
+
+Logging initialized using configuration in file:/etc/hive/2.6.1.0-129/0/hive-log4j.properties
+
+Logging initialized using configuration in file:/etc/hive/2.6.1.0-129/0/hive-log4j.properties
+OK
+Time taken: 1.112 seconds
+2018-08-15 22:21:31 - generating table statement for: dpi_bsl.DPIAGGR_CUSTOMER_ROAM_BSL_20180807
+2018-08-15 22:21:31 - executing statementfor: dpi_bsl.DPIAGGR_CUSTOMER_ROAM_BSL_20180807
+OK
+Time taken: 1.099 seconds
+OK
+Time taken: 1.209 seconds
+2018-08-15 22:21:32 - generating table statement for: dpi_bsl.DPIOPCO_DAY_BSL_20180807
+2018-08-15 22:21:32 - executing statementfor: dpi_bsl.DPIOPCO_DAY_BSL_20180807
+2018-08-15 22:21:32 - generating table statement for: dpi_bsl.DPIPIVOT_FAVHR_20180807
+2018-08-15 22:21:32 - executing statementfor: dpi_bsl.DPIPIVOT_FAVHR_20180807
+OK
+Time taken: 1.404 seconds
+2018-08-15 22:21:32 - generating table statement for: dpi_bsl.DPIUNPACK_DAY_ROAM_URI_BSL_20180807
+2018-08-15 22:21:32 - executing statementfor: dpi_bsl.DPIUNPACK_DAY_ROAM_URI_BSL_20180807
+2018-08-15 22:22:27 - successfully populated: dpi_bsl.DPIAGGR_CUSTOMER_ROAM_BSL_20180807
+2018-08-15 22:22:27 - =================================================================================
+2018-08-15 22:22:27 - executing query: 
+create table dpi_bsl.DPIAGGR_CUSTOMER_RU_BSL_20180807 as
+select
+msisdn_key,apn,normalizedchargedpartycgi_enrich,sgsnipaddress,ggsnipaddress,
+SUM(COALESCE(CAST(TRAFFICUP AS INT),0)) VOLUP,
+SUM(COALESCE(CAST(TRAFFICDOWN AS INT),0)) VOLDOWN,
+SUM(COALESCE(CAST(TRAFFICUP AS INT),0)+COALESCE(CAST(TRAFFICDOWN AS INT),0)) VOL,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS INT),0))) AVG_VOLUP,
+ROUND(AVG(COALESCE(CAST(TRAFFICDOWN AS INT),0))) AVG_VOLDOWN,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS INT),0)+COALESCE(CAST(TRAFFICDOWN AS INT),0))) AVG_VOL,
+SUM(coalesce(cast(DURATION as int),0)) DURATION,
+ROUND(AVG(coalesce(cast(DURATION as int),0))) AVG_DURATION,
+count(*) sessions,
+tbl_dt
+from flare_8.dpi_cdr where tbl_dt=20180807
+group BY
+tbl_dt,msisdn_key,apn,normalizedchargedpartycgi_enrich,sgsnipaddress,ggsnipaddress
+2018-08-15 22:22:27 - =================================================================================
+2018-08-15 22:22:27 - create table dpi_bsl.DPIAGGR_CUSTOMER_RU_BSL_20180807 as
+select
+msisdn_key,apn,normalizedchargedpartycgi_enrich,sgsnipaddress,ggsnipaddress,
+SUM(COALESCE(CAST(TRAFFICUP AS INT),0)) VOLUP,
+SUM(COALESCE(CAST(TRAFFICDOWN AS INT),0)) VOLDOWN,
+SUM(COALESCE(CAST(TRAFFICUP AS INT),0)+COALESCE(CAST(TRAFFICDOWN AS INT),0)) VOL,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS INT),0))) AVG_VOLUP,
+ROUND(AVG(COALESCE(CAST(TRAFFICDOWN AS INT),0))) AVG_VOLDOWN,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS INT),0)+COALESCE(CAST(TRAFFICDOWN AS INT),0))) AVG_VOL,
+SUM(coalesce(cast(DURATION as int),0)) DURATION,
+ROUND(AVG(coalesce(cast(DURATION as int),0))) AVG_DURATION,
+count(*) sessions,
+tbl_dt
+from flare_8.dpi_cdr where tbl_dt=20180807
+group BY
+tbl_dt,msisdn_key,apn,normalizedchargedpartycgi_enrich,sgsnipaddress,ggsnipaddress
+2018-08-15 22:22:27 - ->->-> dpi_bsl.DPIAGGR_CUSTOMER_RU_BSL_20180807
+2018-08-15 22:22:27 - dropping table: dpi_bsl.DPIAGGR_CUSTOMER_RU_BSL_20180807
+log4j:WARN No such property [maxFileSize] in org.apache.log4j.DailyRollingFileAppender.
+
+Logging initialized using configuration in file:/etc/hive/2.6.1.0-129/0/hive-log4j.properties
+OK
+Time taken: 1.606 seconds
+2018-08-15 22:22:42 - generating table statement for: dpi_bsl.DPIAGGR_CUSTOMER_RU_BSL_20180807
+2018-08-15 22:22:42 - executing statementfor: dpi_bsl.DPIAGGR_CUSTOMER_RU_BSL_20180807
+2018-08-15 22:26:24 - successfully populated: dpi_bsl.DPIUNPACK_DAY_ROAM_URI_BSL_20180807
+2018-08-15 22:26:24 - =================================================================================
+2018-08-15 22:26:24 - executing query: 
+create table dpi_bsl.DPIUNPACK_DAY_ROAM_PROTOCOL_CATEGORY_BSL_20180807 as
+select
+a.protocol_category,
+b.country_enrich,
+b.operator_enrich,
+SUM(COALESCE(CAST(UPLINK AS INT),0)) VOLUP, 
+SUM(COALESCE(CAST(DOWNLINK AS INT),0)) VOLDOWN, 
+SUM(COALESCE(CAST(UPLINK AS INT),0)+COALESCE(CAST(DOWNLINK AS INT),0)) VOL, 
+ROUND(AVG(COALESCE(CAST(UPLINK AS INT),0))) AVG_VOLUP_PER_VISIT,
+ROUND(AVG(COALESCE(CAST(DOWNLINK AS INT),0))) AVG_VOLDOWN_PER_VISIT,
+ROUND(AVG(COALESCE(CAST(UPLINK AS INT),0)+COALESCE(CAST(DOWNLINK AS INT),0))) AVG_VOL_PER_VISIT,
+count(*) TOT_VISITS,
+round(count(*)/count(distinct a.msisdn_key)) AVG_VISITS,
+count(distinct a.msisdn_key) UNIQ_VISITORS,
+rank() over (order by count(*)/count(distinct a.msisdn_key) desc, AVG(COALESCE(CAST(UPLINK AS INT),0)+COALESCE(CAST(DOWNLINK AS INT),0)) desc, a.protocol_category asc) RNK_BY_AVG_VISITS,
+rank() over (order by AVG(COALESCE(CAST(UPLINK AS INT),0)+COALESCE(CAST(DOWNLINK AS INT),0)) desc, count(*)/count(distinct a.msisdn_key) desc, a.protocol_category asc) RNK_BY_AVG_VOL,
+rank() over (order by count(*) desc,SUM(COALESCE(CAST(UPLINK AS INT),0)+COALESCE(CAST(DOWNLINK AS INT),0)) desc, a.protocol_category asc) RNK_BY_TOT_VISITS,
+rank() over (order by SUM(COALESCE(CAST(UPLINK AS INT),0)+COALESCE(CAST(DOWNLINK AS INT),0)) desc, count(*) desc,a.protocol_category asc) RNK_BY_TOT_VOL,
+a.tbl_dt
+from flare_8.dpi_cdr_unpack a, flare_8.dpi_cdr b
+where a.tbl_dt=20180807 and a.tbl_dt=b.tbl_dt and a.unique_id_enrich=b.unique_id_enrich and b.mcc<>621 and a.typ='PR'
+group by a.tbl_dt,a.protocol_category,b.country_enrich,b.operator_enrich
+2018-08-15 22:26:24 - =================================================================================
+2018-08-15 22:26:24 - create table dpi_bsl.DPIUNPACK_DAY_ROAM_PROTOCOL_CATEGORY_BSL_20180807 as
+select
+a.protocol_category,
+b.country_enrich,
+b.operator_enrich,
+SUM(COALESCE(CAST(UPLINK AS INT),0)) VOLUP, 
+SUM(COALESCE(CAST(DOWNLINK AS INT),0)) VOLDOWN, 
+SUM(COALESCE(CAST(UPLINK AS INT),0)+COALESCE(CAST(DOWNLINK AS INT),0)) VOL, 
+ROUND(AVG(COALESCE(CAST(UPLINK AS INT),0))) AVG_VOLUP_PER_VISIT,
+ROUND(AVG(COALESCE(CAST(DOWNLINK AS INT),0))) AVG_VOLDOWN_PER_VISIT,
+ROUND(AVG(COALESCE(CAST(UPLINK AS INT),0)+COALESCE(CAST(DOWNLINK AS INT),0))) AVG_VOL_PER_VISIT,
+count(*) TOT_VISITS,
+round(count(*)/count(distinct a.msisdn_key)) AVG_VISITS,
+count(distinct a.msisdn_key) UNIQ_VISITORS,
+rank() over (order by count(*)/count(distinct a.msisdn_key) desc, AVG(COALESCE(CAST(UPLINK AS INT),0)+COALESCE(CAST(DOWNLINK AS INT),0)) desc, a.protocol_category asc) RNK_BY_AVG_VISITS,
+rank() over (order by AVG(COALESCE(CAST(UPLINK AS INT),0)+COALESCE(CAST(DOWNLINK AS INT),0)) desc, count(*)/count(distinct a.msisdn_key) desc, a.protocol_category asc) RNK_BY_AVG_VOL,
+rank() over (order by count(*) desc,SUM(COALESCE(CAST(UPLINK AS INT),0)+COALESCE(CAST(DOWNLINK AS INT),0)) desc, a.protocol_category asc) RNK_BY_TOT_VISITS,
+rank() over (order by SUM(COALESCE(CAST(UPLINK AS INT),0)+COALESCE(CAST(DOWNLINK AS INT),0)) desc, count(*) desc,a.protocol_category asc) RNK_BY_TOT_VOL,
+a.tbl_dt
+from flare_8.dpi_cdr_unpack a, flare_8.dpi_cdr b
+where a.tbl_dt=20180807 and a.tbl_dt=b.tbl_dt and a.unique_id_enrich=b.unique_id_enrich and b.mcc<>621 and a.typ='PR'
+group by a.tbl_dt,a.protocol_category,b.country_enrich,b.operator_enrich
+2018-08-15 22:26:24 - ->->-> dpi_bsl.DPIUNPACK_DAY_ROAM_PROTOCOL_CATEGORY_BSL_20180807
+2018-08-15 22:26:24 - dropping table: dpi_bsl.DPIUNPACK_DAY_ROAM_PROTOCOL_CATEGORY_BSL_20180807
+log4j:WARN No such property [maxFileSize] in org.apache.log4j.DailyRollingFileAppender.
+
+Logging initialized using configuration in file:/etc/hive/2.6.1.0-129/0/hive-log4j.properties
+OK
+Time taken: 1.564 seconds
+2018-08-15 22:26:42 - generating table statement for: dpi_bsl.DPIUNPACK_DAY_ROAM_PROTOCOL_CATEGORY_BSL_20180807
+2018-08-15 22:26:42 - executing statementfor: dpi_bsl.DPIUNPACK_DAY_ROAM_PROTOCOL_CATEGORY_BSL_20180807
+2018-08-15 22:27:00 - successfully populated: dpi_bsl.DPIPIVOT_FAVHR_20180807
+2018-08-15 22:27:00 - =================================================================================
+2018-08-15 22:27:00 - executing query: 
+create table dpi_bsl.DPIPIVOT_2G_20180807 as
+select
+tbl_dt,MSISDN_KEY,HR_2G,
+VOLUP_2G,
+VOLDOWN_2G,
+VOL_2G,
+SESSIONS_2G,
+UPDOWNRATIO_2G,
+DURATION_2G,
+TPCALC_2G,
+QOS_2G,
+THROUGHPUT_2G,
+JITTER_2G,
+LATENCY_2G
+from (
+SELECT tbl_dt,MSISDN_KEY,'24' AS HR_2G,
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0)) VOLUP_2G,
+SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0)) VOLDOWN_2G,
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0)+COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0)) VOL_2G,
+COUNT(MSISDN_KEY) SESSIONS_2G,
+CASE
+WHEN SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0))>0 AND SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0))=0 THEN -100.0
+WHEN SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0))=0 AND SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0))=0 THEN 0.0
+ELSE
+TRY_CAST(
+100.0 *
+(
+(SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0.0))-SUM(COALESCE(TRY_CAST(TRAFFICUP AS DOUBLE),0.0)))
+/
+SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0.0))
+)
+AS DOUBLE)
+END UPDOWNRATIO_2G,
+SUM(coalesce(TRY_CAST(DURATION as int),0)) DURATION_2G,
+CASE WHEN SUM(coalesce(TRY_CAST(DURATION as int),0))=0 THEN 0 ELSE
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS DOUBLE),0)+COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0))/SUM(COALESCE(TRY_CAST(DURATION AS DOUBLE),0)) END TPCALC_2G,
+TRY_CAST(0 AS INT) QOS_2G,
+TRY_CAST(0 AS DOUBLE) THROUGHPUT_2G,
+TRY_CAST(0 AS DOUBLE) JITTER_2G,
+TRY_CAST(0 AS DOUBLE) LATENCY_2G
+from flare_8.dpi_cdr where tbl_dt=20180807 AND RATTYPE='2'
+GROUP BY tbl_dt,MSISDN_KEY)
+2018-08-15 22:27:00 - =================================================================================
+2018-08-15 22:27:00 - create table dpi_bsl.DPIPIVOT_2G_20180807 as
+select
+tbl_dt,MSISDN_KEY,HR_2G,
+VOLUP_2G,
+VOLDOWN_2G,
+VOL_2G,
+SESSIONS_2G,
+UPDOWNRATIO_2G,
+DURATION_2G,
+TPCALC_2G,
+QOS_2G,
+THROUGHPUT_2G,
+JITTER_2G,
+LATENCY_2G
+from (
+SELECT tbl_dt,MSISDN_KEY,'24' AS HR_2G,
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0)) VOLUP_2G,
+SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0)) VOLDOWN_2G,
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0)+COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0)) VOL_2G,
+COUNT(MSISDN_KEY) SESSIONS_2G,
+CASE
+WHEN SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0))>0 AND SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0))=0 THEN -100.0
+WHEN SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0))=0 AND SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0))=0 THEN 0.0
+ELSE
+TRY_CAST(
+100.0 *
+(
+(SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0.0))-SUM(COALESCE(TRY_CAST(TRAFFICUP AS DOUBLE),0.0)))
+/
+SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0.0))
+)
+AS DOUBLE)
+END UPDOWNRATIO_2G,
+SUM(coalesce(TRY_CAST(DURATION as int),0)) DURATION_2G,
+CASE WHEN SUM(coalesce(TRY_CAST(DURATION as int),0))=0 THEN 0 ELSE
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS DOUBLE),0)+COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0))/SUM(COALESCE(TRY_CAST(DURATION AS DOUBLE),0)) END TPCALC_2G,
+TRY_CAST(0 AS INT) QOS_2G,
+TRY_CAST(0 AS DOUBLE) THROUGHPUT_2G,
+TRY_CAST(0 AS DOUBLE) JITTER_2G,
+TRY_CAST(0 AS DOUBLE) LATENCY_2G
+from flare_8.dpi_cdr where tbl_dt=20180807 AND RATTYPE='2'
+GROUP BY tbl_dt,MSISDN_KEY)
+2018-08-15 22:27:00 - ->->-> dpi_bsl.DPIPIVOT_2G_20180807
+2018-08-15 22:27:00 - dropping table: dpi_bsl.DPIPIVOT_2G_20180807
+log4j:WARN No such property [maxFileSize] in org.apache.log4j.DailyRollingFileAppender.
+
+Logging initialized using configuration in file:/etc/hive/2.6.1.0-129/0/hive-log4j.properties
+OK
+Time taken: 1.335 seconds
+2018-08-15 22:27:17 - generating table statement for: dpi_bsl.DPIPIVOT_2G_20180807
+2018-08-15 22:27:17 - executing statementfor: dpi_bsl.DPIPIVOT_2G_20180807
+2018-08-15 22:27:22 - successfully populated: dpi_bsl.DPIOPCO_DAY_BSL_20180807
+2018-08-15 22:27:22 - =================================================================================
+2018-08-15 22:27:22 - executing query: 
+create table dpi_bsl.DPIOPCO_DAY_ROAM_BSL_20180807 as
+select
+round(avg(sessions)) avg_sessions_p_roam_user,
+round(avg(volup)) avg_volup_p_roam_user,
+round(avg(avg_volup)) avg_volup_p_roam_session,
+round(avg(voldown)) avg_voldown_p_roam_user,
+round(avg(avg_voldown)) avg_voldown_p_roam_session,
+round(avg(vol)) avg_vol_p_roam_user,
+round(avg(avg_vol)) avg_vol_p_roam_session,
+round(avg(duration)) avg_duration_p_roam_user,
+round(avg(avg_duration)) avg_duration_p_roam_session,
+tbl_dt
+from (
+select
+msisdn_key,
+SUM(COALESCE(CAST(TRAFFICUP AS INT),0)) VOLUP,
+SUM(COALESCE(CAST(TRAFFICDOWN AS INT),0)) VOLDOWN,
+SUM(COALESCE(CAST(TRAFFICUP AS INT),0)+COALESCE(CAST(TRAFFICDOWN AS INT),0)) VOL,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS INT),0))) AVG_VOLUP,
+ROUND(AVG(COALESCE(CAST(TRAFFICDOWN AS INT),0))) AVG_VOLDOWN,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS INT),0)+COALESCE(CAST(TRAFFICDOWN AS INT),0))) AVG_VOL,
+SUM(coalesce(cast(DURATION as int),0)) DURATION,
+ROUND(AVG(coalesce(cast(DURATION as int),0))) AVG_DURATION,
+count(*) sessions,
+tbl_dt
+from flare_8.dpi_cdr where tbl_dt=20180807 and mcc<>621
+group by tbl_dt,msisdn_key)
+group by tbl_dt
+2018-08-15 22:27:22 - =================================================================================
+2018-08-15 22:27:22 - create table dpi_bsl.DPIOPCO_DAY_ROAM_BSL_20180807 as
+select
+round(avg(sessions)) avg_sessions_p_roam_user,
+round(avg(volup)) avg_volup_p_roam_user,
+round(avg(avg_volup)) avg_volup_p_roam_session,
+round(avg(voldown)) avg_voldown_p_roam_user,
+round(avg(avg_voldown)) avg_voldown_p_roam_session,
+round(avg(vol)) avg_vol_p_roam_user,
+round(avg(avg_vol)) avg_vol_p_roam_session,
+round(avg(duration)) avg_duration_p_roam_user,
+round(avg(avg_duration)) avg_duration_p_roam_session,
+tbl_dt
+from (
+select
+msisdn_key,
+SUM(COALESCE(CAST(TRAFFICUP AS INT),0)) VOLUP,
+SUM(COALESCE(CAST(TRAFFICDOWN AS INT),0)) VOLDOWN,
+SUM(COALESCE(CAST(TRAFFICUP AS INT),0)+COALESCE(CAST(TRAFFICDOWN AS INT),0)) VOL,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS INT),0))) AVG_VOLUP,
+ROUND(AVG(COALESCE(CAST(TRAFFICDOWN AS INT),0))) AVG_VOLDOWN,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS INT),0)+COALESCE(CAST(TRAFFICDOWN AS INT),0))) AVG_VOL,
+SUM(coalesce(cast(DURATION as int),0)) DURATION,
+ROUND(AVG(coalesce(cast(DURATION as int),0))) AVG_DURATION,
+count(*) sessions,
+tbl_dt
+from flare_8.dpi_cdr where tbl_dt=20180807 and mcc<>621
+group by tbl_dt,msisdn_key)
+group by tbl_dt
+2018-08-15 22:27:22 - ->->-> dpi_bsl.DPIOPCO_DAY_ROAM_BSL_20180807
+2018-08-15 22:27:22 - dropping table: dpi_bsl.DPIOPCO_DAY_ROAM_BSL_20180807
+log4j:WARN No such property [maxFileSize] in org.apache.log4j.DailyRollingFileAppender.
+
+Logging initialized using configuration in file:/etc/hive/2.6.1.0-129/0/hive-log4j.properties
+OK
+Time taken: 17.345 seconds
+2018-08-15 22:27:55 - generating table statement for: dpi_bsl.DPIOPCO_DAY_ROAM_BSL_20180807
+2018-08-15 22:27:55 - executing statementfor: dpi_bsl.DPIOPCO_DAY_ROAM_BSL_20180807
+2018-08-15 22:29:05 - successfully populated: dpi_bsl.DPIOPCO_DAY_ROAM_BSL_20180807
+2018-08-15 22:29:05 - =================================================================================
+2018-08-15 22:29:05 - executing query: 
+create table dpi_bsl.DPIOPCO_DAY_DEVICE_BSL_20180807 as
+select
+round(avg(sessions)) avg_sessions_p_device,
+round(avg(volup)) avg_volup_p_device,
+round(avg(avg_volup)) avg_volup_p_device_session,
+round(avg(voldown)) avg_voldown_p_device,
+round(avg(avg_voldown)) avg_voldown_p_device_session,
+round(avg(vol)) avg_vol_p_device,
+round(avg(avg_vol)) avg_vol_p_device_session,
+round(avg(duration)) avg_duration_p_device,
+round(avg(avg_duration)) avg_duration_p_device_session,
+tbl_dt
+from (
+select
+tac_enrich,
+SUM(COALESCE(CAST(TRAFFICUP AS INT),0)) VOLUP,
+SUM(COALESCE(CAST(TRAFFICDOWN AS INT),0)) VOLDOWN,
+SUM(COALESCE(CAST(TRAFFICUP AS INT),0)+COALESCE(CAST(TRAFFICDOWN AS INT),0)) VOL,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS INT),0))) AVG_VOLUP,
+ROUND(AVG(COALESCE(CAST(TRAFFICDOWN AS INT),0))) AVG_VOLDOWN,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS INT),0)+COALESCE(CAST(TRAFFICDOWN AS INT),0))) AVG_VOL,
+SUM(coalesce(cast(DURATION as int),0)) DURATION,
+ROUND(AVG(coalesce(cast(DURATION as int),0))) AVG_DURATION,
+count(*) sessions,
+tbl_dt
+from flare_8.dpi_cdr where tbl_dt=20180807 and mcc=621
+group by tbl_dt,tac_enrich)
+group by tbl_dt
+2018-08-15 22:29:05 - =================================================================================
+2018-08-15 22:29:05 - create table dpi_bsl.DPIOPCO_DAY_DEVICE_BSL_20180807 as
+select
+round(avg(sessions)) avg_sessions_p_device,
+round(avg(volup)) avg_volup_p_device,
+round(avg(avg_volup)) avg_volup_p_device_session,
+round(avg(voldown)) avg_voldown_p_device,
+round(avg(avg_voldown)) avg_voldown_p_device_session,
+round(avg(vol)) avg_vol_p_device,
+round(avg(avg_vol)) avg_vol_p_device_session,
+round(avg(duration)) avg_duration_p_device,
+round(avg(avg_duration)) avg_duration_p_device_session,
+tbl_dt
+from (
+select
+tac_enrich,
+SUM(COALESCE(CAST(TRAFFICUP AS INT),0)) VOLUP,
+SUM(COALESCE(CAST(TRAFFICDOWN AS INT),0)) VOLDOWN,
+SUM(COALESCE(CAST(TRAFFICUP AS INT),0)+COALESCE(CAST(TRAFFICDOWN AS INT),0)) VOL,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS INT),0))) AVG_VOLUP,
+ROUND(AVG(COALESCE(CAST(TRAFFICDOWN AS INT),0))) AVG_VOLDOWN,
+ROUND(AVG(COALESCE(CAST(TRAFFICUP AS INT),0)+COALESCE(CAST(TRAFFICDOWN AS INT),0))) AVG_VOL,
+SUM(coalesce(cast(DURATION as int),0)) DURATION,
+ROUND(AVG(coalesce(cast(DURATION as int),0))) AVG_DURATION,
+count(*) sessions,
+tbl_dt
+from flare_8.dpi_cdr where tbl_dt=20180807 and mcc=621
+group by tbl_dt,tac_enrich)
+group by tbl_dt
+2018-08-15 22:29:05 - ->->-> dpi_bsl.DPIOPCO_DAY_DEVICE_BSL_20180807
+2018-08-15 22:29:05 - dropping table: dpi_bsl.DPIOPCO_DAY_DEVICE_BSL_20180807
+log4j:WARN No such property [maxFileSize] in org.apache.log4j.DailyRollingFileAppender.
+
+Logging initialized using configuration in file:/etc/hive/2.6.1.0-129/0/hive-log4j.properties
+OK
+Time taken: 1.168 seconds
+2018-08-15 22:29:21 - generating table statement for: dpi_bsl.DPIOPCO_DAY_DEVICE_BSL_20180807
+2018-08-15 22:29:21 - executing statementfor: dpi_bsl.DPIOPCO_DAY_DEVICE_BSL_20180807
+2018-08-15 22:29:42 - successfully populated: dpi_bsl.DPIPIVOT_2G_20180807
+2018-08-15 22:29:42 - =================================================================================
+2018-08-15 22:29:42 - executing query: 
+create table dpi_bsl.DPIPIVOT_3G_20180807 as
+select
+tbl_dt,MSISDN_KEY,HR_3G,
+VOLUP_3G,
+VOLDOWN_3G,
+VOL_3G,
+SESSIONS_3G,
+UPDOWNRATIO_3G,
+DURATION_3G,
+TPCALC_3G,
+QOS_3G,
+THROUGHPUT_3G,
+JITTER_3G,
+LATENCY_3G
+from (
+SELECT tbl_dt,MSISDN_KEY,'24' AS HR_3G,
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0)) VOLUP_3G,
+SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0)) VOLDOWN_3G,
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0)+COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0)) VOL_3G,
+COUNT(MSISDN_KEY) SESSIONS_3G,
+CASE
+WHEN SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0))>0 AND SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0))=0 THEN -100.0
+WHEN SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0))=0 AND SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0))=0 THEN 0.0
+ELSE
+TRY_CAST(
+100.0 *
+(
+(SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0.0))-SUM(COALESCE(TRY_CAST(TRAFFICUP AS DOUBLE),0.0)))
+/
+SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0.0))
+)
+AS DOUBLE)
+END UPDOWNRATIO_3G,
+SUM(coalesce(TRY_CAST(DURATION as int),0)) DURATION_3G,
+CASE WHEN SUM(coalesce(TRY_CAST(DURATION as int),0))=0 THEN 0 ELSE
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS DOUBLE),0)+COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0))/SUM(COALESCE(TRY_CAST(DURATION AS DOUBLE),0)) END TPCALC_3G,
+TRY_CAST(0 AS INT) QOS_3G,
+TRY_CAST(0 AS DOUBLE) THROUGHPUT_3G,
+TRY_CAST(0 AS DOUBLE) JITTER_3G,
+TRY_CAST(0 AS DOUBLE) LATENCY_3G
+from flare_8.dpi_cdr where tbl_dt=20180807 AND RATTYPE='1'
+GROUP BY tbl_dt,MSISDN_KEY)
+2018-08-15 22:29:42 - =================================================================================
+2018-08-15 22:29:42 - create table dpi_bsl.DPIPIVOT_3G_20180807 as
+select
+tbl_dt,MSISDN_KEY,HR_3G,
+VOLUP_3G,
+VOLDOWN_3G,
+VOL_3G,
+SESSIONS_3G,
+UPDOWNRATIO_3G,
+DURATION_3G,
+TPCALC_3G,
+QOS_3G,
+THROUGHPUT_3G,
+JITTER_3G,
+LATENCY_3G
+from (
+SELECT tbl_dt,MSISDN_KEY,'24' AS HR_3G,
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0)) VOLUP_3G,
+SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0)) VOLDOWN_3G,
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0)+COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0)) VOL_3G,
+COUNT(MSISDN_KEY) SESSIONS_3G,
+CASE
+WHEN SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0))>0 AND SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0))=0 THEN -100.0
+WHEN SUM(COALESCE(TRY_CAST(TRAFFICUP AS INT),0))=0 AND SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS INT),0))=0 THEN 0.0
+ELSE
+TRY_CAST(
+100.0 *
+(
+(SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0.0))-SUM(COALESCE(TRY_CAST(TRAFFICUP AS DOUBLE),0.0)))
+/
+SUM(COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0.0))
+)
+AS DOUBLE)
+END UPDOWNRATIO_3G,
+SUM(coalesce(TRY_CAST(DURATION as int),0)) DURATION_3G,
+CASE WHEN SUM(coalesce(TRY_CAST(DURATION as int),0))=0 THEN 0 ELSE
+SUM(COALESCE(TRY_CAST(TRAFFICUP AS DOUBLE),0)+COALESCE(TRY_CAST(TRAFFICDOWN AS DOUBLE),0))/SUM(COALESCE(TRY_CAST(DURATION AS DOUBLE),0)) END TPCALC_3G,
+TRY_CAST(0 AS INT) QOS_3G,
+TRY_CAST(0 AS DOUBLE) THROUGHPUT_3G,
+TRY_CAST(0 AS DOUBLE) JITTER_3G,
+TRY_CAST(0 AS DOUBLE) LATENCY_3G
+from flare_8.dpi_cdr where tbl_dt=20180807 AND RATTYPE='1'
+GROUP BY tbl_dt,MSISDN_KEY)
+2018-08-15 22:29:42 - ->->-> dpi_bsl.DPIPIVOT_3G_20180807
+2018-08-15 22:29:42 - dropping table: dpi_bsl.DPIPIVOT_3G_20180807
+log4j:WARN No such property [maxFileSize] in org.apache.log4j.DailyRollingFileAppender.
+
+Logging initialized using configuration in file:/etc/hive/2.6.1.0-129/0/hive-log4j.properties

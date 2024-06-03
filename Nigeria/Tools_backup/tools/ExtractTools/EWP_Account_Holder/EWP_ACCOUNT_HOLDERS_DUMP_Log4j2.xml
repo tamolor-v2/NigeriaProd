@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Properties>
+    <Property name="log-path">/nas/share05/tools/ExtractTools/EWP_Account_Holder/logs/</Property>
+  </Properties>
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </Console>
+    <RollingFile name="HourlyRoll" fileName="${log-path}/ACCOUNT_HOLDERS_DUMP.log" filePattern="${log-path}/ACCOUNT_HOLDERS_DUMP-%d{yyyy-MM-dd-HH}-%i.log.gz">
+      <!-- PatternLayout pattern="%d - %c [%t] (%F:%L) - %p - %m %n"  -->
+      <!-- PatternLayout pattern="%d - %c [%t] (%M) - %p - %m %n"  -->
+      <PatternLayout pattern="%d - %c [%t] - %p - %m %n" />
+      <Policies>
+        <SizeBasedTriggeringPolicy size="256 MB" />
+        <TimeBasedTriggeringPolicy />
+        <OnStartupTriggeringPolicy />
+      </Policies>
+    </RollingFile>
+  </Appenders>
+  <Loggers>
+    <Root level="INFO">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="HourlyRoll"/>
+    </Root>
+
+  </Loggers>
+</Configuration>

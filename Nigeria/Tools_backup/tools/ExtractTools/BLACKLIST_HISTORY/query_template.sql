@@ -1,0 +1,10 @@
+select ID, 
+translate(ACTIVITY_TIMESTAMP, chr(10)||chr(11)||chr(13) , ' '), 
+BLACKLISTED, 
+translate(ENROLLMENT_REF, chr(10)||chr(11)||chr(13) , ' '), 
+translate(BLACKLIST_REASON, chr(10)||chr(11)||chr(13) , ' '), 
+KM_USER_ID,
+translate(IP_ADDRESS, chr(10)||chr(11)||chr(13) , ' '), 
+translate(MAC_ADDRESS, chr(10)||chr(11)||chr(13) , ' '), 
+translate(APPROVED_BY, chr(10)||chr(11)||chr(13) , ' '), 
+NODE_FK  from BIOCAPTURE.BLACKLIST_HISTORY  

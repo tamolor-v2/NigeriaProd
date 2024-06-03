@@ -1,0 +1,11 @@
+[ 
+{
+      "AdapterName":"ecr_final_kafka_in",
+      "MessageName":"com.mtn.messages.ECR_FINAL",
+      "Serializer":"com.ligadata.kamanja.serializer.csvserdeser",
+      "Options":{
+         "alwaysQuoteFields":false,
+         "fieldDelimiter":"\u0001"
+      }
+   }
+]

@@ -1,0 +1,5316 @@
+{
+  "global.cfg": {
+    "namespace": "flare_8",
+    "file.stats.table.name": "file_stats",
+    "rejected.table.name": "rejecteddata",
+    "dedup.table.name": "dupdata",
+    "validation.schema": "audit",
+    "validation.table": "feed_file_validation2",
+    "bib.recon.schema": "nigeria",
+    "bib.recon.table": "bib_rated_files",
+    "validation.query.template": "/nas/share05/tools/Reprocessing/conf/ValidationQuery_v2.sql",
+    "transdate.query.template": "select distinct fsys_event_date from flare_8.filetransdatemsgbydate where fsys_msgtype='${msgtype}' and file_date >= ${stDt} and file_date <= ${edDt}",
+    "delete.query.template": "delete from ${validationSchema}.${validationTable} where msgtype = '${feedName}' and file_date >= ${stDt} and file_date <= ${edDt}",
+    "___missing.files.query.template": "/nas/share05/tools/Reprocessing/conf/MissingFilesDetectionQuery.sql",
+    "feed.filename.column": "file_name",
+    "rejected.filename.column": "fsys_filename",
+    "dedup.filename.column": "file_name",
+    "validation.filename.column": "a.fl_name",
+    "stats.filename.column": "filename",
+    "fileops.filename.column": "name",
+    "feeds.hdfs.dir": "hdfs://ngdaas/FlareData/output_8",
+    "dotfiles.list.location": "/nas/share05/tools/Reprocessing/data/dotFiles/",
+    "report.detail.location": "hdfs://ngdaas/FlareData/output_8/Reprocessing_report",
+    "report.summary.location": "hdfs://ngdaas/FlareData/output_8/Reprocessing_summary_report"
+  },
+  "hadoop.cfg": {
+    "host.lists": [
+      "hdfs://ngdaas"
+    ],
+    "principal": "daasuser@MTN.COM",
+    "keytab": "/etc/security/keytabs/daasuser.keytab",
+    "hadoop.config": {
+      "dfs.nameservices": "ngdaas",
+      "dfs.ha.namenodes.ngdaas": "nn1,nn2",
+      "dfs.namenode.rpc-address.ngdaas.nn1": "master01001.mtn.com:8020",
+      "dfs.namenode.rpc-address.ngdaas.nn2": "master01002.mtn.com:8020",
+      "dfs.client.failover.proxy.provider.ngdaas": "org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider"
+    }
+  },
+  "jdbc.cfg": [
+    {
+      "name": "10.1.197.146",
+      "url": "jdbc:presto://10.1.197.145:8999/hive5/flare_8",
+      "username": "daasuser",
+      "password": ""
+    },
+    {
+      "name": "P8668",
+      "url": "jdbc:presto://10.1.197.145:8668/hive5/flare_8",
+      "username": "daasuser",
+      "password": ""
+    }
+  ],
+  "email.cfg": {
+    "email.working.dir": "/nas/share05/tools/Reprocessing/ReprocessingToolEmail/",
+    "email.script.name": "sendEmail.sh",
+    "email.server.address": "edge01002",
+    "email.header.file.name": "mailHeader.txt",
+    "email.header.opco.name": "NG"
+  },
+  "feeds": [
+    {
+      "name": "CS5_CCN_GPRS_MA",
+      "namespace": "flare_8",
+      "table.name": "CS5_CCN_GPRS_MA",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_CCN_GPRS_MA_.*$",
+      "rejected.msg.type": "com.mtn.messages.cs5_ccn_gprs_ma",
+      "filestats.msg.type": "com.mtn.messages.cs5_ccn_gprs_ma",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/live/CCN_GPRS_MA/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CCN_GPRS_MA/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CCN_GPRS_MA/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/CCN_GPRS_MA/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "AGL_GDS_PROVIDER_CHILD_DTLS",
+      "namespace": "flare_8",
+      "table.name": "AGL_GDS_PROVIDER_CHILD_DTLS",
+      "date.regex": "^([0-9]{8}).*_AGL_GDS_PROVIDER_CHILD_DTLS_.*$",     
+      "rejected.msg.type": "com.mtn.messages.AGL_GDS_PROVIDER_CHILD_DTLS",
+      "filestats.msg.type": "com.mtn.messages.AGL_GDS_PROVIDER_CHILD_DTLS",
+      "date.regex.group": 1,
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/AGL_GDS_PROVIDER_CHILD_DTLS/incoming/",
+      "files.locations": [
+        {
+          "location": "/nas/share05/archived/AGL_GDS_PROVIDER_CHILD_DTLS/",
+          "is.tarred": true
+        }
+      ]
+      },
+      {
+      "name": "SPONSORED_DATA_DA",
+      "namespace": "kamanja_test",
+      "table.name": "SPONSORED_DATA_DA",
+      "date.regex": "^Spon([0-9]{8})([0-9]{2}).*CCN_GPRS_DA_DR.*$",
+      "rejected.msg.type": "com.mtn.messages.SPONSORED_DATA_DA",
+      "filestats.msg.type": "com.mtn.messages.SPONSORED_DATA_DA",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_bsl/live/SPONSORED_DATA_DA/incoming/",
+      "files.locations": [
+      {
+          "location": "/mnt/beegfs_bsl/production/live/SPONSORED_DATA_DA/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "",
+          "is.tarred": false
+        },
+        {
+          "location": "",
+          "is.tarred": false
+        }
+      ]
+    },
+    {
+      "name": "CS5_CCN_SMS_MA",
+      "table.name": "CS5_CCN_SMS_MA",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_CCN_SMS_MA_.*$",
+      "rejected.msg.type": "com.mtn.messages.cs5_ccn_sms_ma",
+      "filestats.msg.type": "com.mtn.messages.cs5_ccn_sms_ma",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/live/CCN_SMS_MA/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CCN_SMS_MA/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CCN_SMS_MA/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/CCN_SMS_MA/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "MTN_OVERVIEW_COMM_RPT",
+      "table.name": "MTN_OVERVIEW_COMM_RPT",
+      "rejected.msg.type": "com.mtn.messages.mtn_overview_comm_rpt",
+      "filestats.msg.type": "com.mtn.messages.MTN_OVERVIEW_COMM_RPT",
+      "date.regex": "^([0-9]{8})_MTN_OVERVIEW_COMM_RPT.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/MTN_OVERVIEW_COMM_RPT/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/MTN_OVERVIEW_COMM_RPT/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MTN_OVERVIEW_COMM_RPT/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/MTN_OVERVIEW_COMM_RPT/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS5_SDP_ACC_ADJ_MA",
+      "table.name": "CS5_SDP_ACC_ADJ_MA",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_SDP_ACC_ADJ_MA_.*$",
+      "rejected.msg.type": "com.mtn.messages.cs5_sdp_acc_adj_ma",
+      "filestats.msg.type": "com.mtn.messages.CS5_SDP_ACC_ADJ_MA",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "feed.filename.column": "file_name",
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/SDP_ADJ_MA/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SDP_ADJ_MA/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SDP_ADJ_MA/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_api/stage_archived/SDP_ADJ_MA",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "UC_DUMP",
+      "table.name": "UC_DUMP",
+      "date.regex":  "^.*DUMP([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.uc_dump",
+      "filestats.msg.type": "com.mtn.messages.UC_DUMP",
+      "date.regex.group": 1,
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/live/UC_DUMP/split",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/UC_DUMP/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/UC_DUMP/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/UC_DUMP/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/UC_DUMP/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "BUNDLE4U_VOICE",
+      "table.name": "BUNDLE4U_VOICE",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_CCN_VOICE_.*$",
+      "rejected.msg.type": "com.mtn.messages.bundle4u_voice",
+      "filestats.msg.type": "com.mtn.messages.bundle4u_voice",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/live/BUNDLE4U_VOICE/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/BUNDLE4U_VOICE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/BUNDLE4U_VOICE/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/BUNDLE4U_VOICE/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "BUNDLE4U_GPRS",
+      "table.name": "BUNDLE4U_GPRS",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_CCN_GPRS_.*$",
+      "rejected.msg.type": "com.mtn.messages.bundle4u_gprs",
+      "filestats.msg.type": "com.mtn.messages.bundle4u_gprs",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/live/BUNDLE4U_GPRS/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/BUNDLE4U_GPRS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/BUNDLE4U_GPRS/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/BUNDLE4U_GPRS/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS5_CCN_VOICE_MA",
+      "table.name": "CS5_CCN_VOICE_MA",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_CCN_VOICE_MA_.*$",
+      "rejected.msg.type": "com.mtn.messages.cs5_ccn_voice_ma",
+      "filestats.msg.type": "com.mtn.messages.cs5_ccn_voice_ma",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/live/CCN_VOICE_MA/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CCN_VOICE_MA/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CCN_VOICE_MA/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/CCN_VOICE_MA/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS5_AIR_REFILL_MA",
+      "table.name": "CS5_AIR_REFILL_MA",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_AIR_REFILL_MA_.*$",
+      "rejected.msg.type": "com.mtn.messages.cs5_air_refill_ma",
+      "filestats.msg.type": "com.mtn.messages.cs5_air_refill_ma",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/live/AIR_REFILL_MA/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/AIR_REFILL_MA/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/AIR_REFILL_MA/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/AIR_REFILL_MA/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "WBS_PM_RATED_CDRS",
+      "table.name": "WBS_PM_RATED_CDRS",
+      "rejected.msg.type": "com.mtn.messages.wbs_pm_rated_cdrs",
+      "filestats.msg.type": "com.mtn.messages.WBS_PM_RATED_CDRS",
+      "date.regex": "^([0-9]{8})_WBS_PM_RATED_CDRS.*$",
+      "date.regex.group": 1,
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/WBS_PM_RATED_CDRS/incoming/",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/WBS_PM_RATED_CDRS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/WBS_PM_RATED_CDRS/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/WBS_PM_RATED_CDRS/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "NGVS_CDR",
+      "table.name": "NGVS_CDR",
+      "rejected.msg.type": "com.mtn.messages.ngvs_cdr",
+      "filestats.msg.type": "com.mtn.messages.NGVS_CDR",
+      "date.regex": "^.*NGVS.*([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/NGVS_CDR/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/NGVS_CDR/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/NGVS_CDR/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/NGVS_CDR/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "GGSN_CDR",
+      "table.name": "GGSN_CDR",
+      "rejected.msg.type": "com.mtn.messages.ggsn_cdr",
+      "filestats.msg.type": "com.mtn.messages.ggsn_cdr",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*GGSN.*$",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/live/GGSN/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/GGSN/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/GGSN/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/GGSN/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MSC_CDR",
+      "table.name": "MSC_CDR",
+      "rejected.msg.type": "com.mtn.messages.msc_cdr",
+      "filestats.msg.type": "com.mtn.messages.MSC_CDR",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_MSC.*$",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/live/MSC_CDR/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MSC_CDR/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MSC_CDR/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/MSC/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MSC/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MSC_CDR",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS5_AIR_ADJ_MA",
+      "table.name": "CS5_AIR_ADJ_MA",
+      "rejected.msg.type": "com.mtn.messages.cs5_air_adj_ma",
+      "filestats.msg.type": "com.mtn.messages.cs5_air_adj_ma",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_AIR_ADJ_MA_.*$",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/live/AIR_ADJ_MA/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/AIR_ADJ_MA/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/AIR_ADJ_MA/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/AIR_ADJ_MA/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "AVAYA_CLID",
+      "namespace": "flare_8",
+      "table.name": "AVAYA_CLID",
+      "date.regex": "^NokiaCSI_CLID.*([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.avaya_clid",
+      "filestats.msg.type": "com.mtn.messages.Avaya_CLID",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/AVAYA_CLID/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/AVAYA_CLID/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/AVAYA_CLID",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/AVAYA_CLID/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "SDP_DMP_MA",
+      "namespace": "flare_8",
+      "table.name": "SDP_DMP_MA",
+      "date.regex": "^.*_([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.sdp_dmp_ma",
+      "filestats.msg.type": "com.mtn.messages.sdp_dmp_ma",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/live/SDP_DMP_MA/split",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SDP_DMP_MA/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SDP_DMP_MA",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SDP_DMP_MA/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+  "name": "SDP_DMP_DA",
+  "namespace": "flare_8",
+  "table.name": "SDP_DMP_DA",
+  "date.regex": "^.*DUMP([0-9]{8})([0-9]{2}).*$",
+  "rejected.msg.type": "com.mtn.messages.sdp_dmp_da",
+  "filestats.msg.type": "com.mtn.messages.SDP_DMP_DA",
+  "date.regex.group": 1,
+  "hour.regex.group": 2,
+  "feed.filename.column": "base_file_name",
+  "extract.base.file.in.feed.table": "false",
+  "incoming.dir": "/mnt/beegfs_api/live/SDP_DMP_DA/split",
+  "files.locations": [
+    {
+      "location": "/mnt/beegfs_api/production/live/SDP_DMP_DA/processed",
+      "is.tarred": false
+    },
+    {
+      "location": "/nas/share05/archived/SDP_DMP_DA_split",
+      "is.tarred": true
+    },
+    {
+      "location": "/mnt/beegfs_bsl2/archived/SDP_DMP_DA/",
+      "is.tarred": true
+    }
+  ]
+},
+    {
+      "name": "MOBILE_MONEY",
+      "namespace": "flare_8",
+      "table.name": "MOBILE_MONEY",
+      "date.regex": "^DAILY_TRANSACTIONS.*([0-9]{8})([0-9]{2}).*",
+      "rejected.msg.type": "com.mtn.messages.mobile_money",
+      "filestats.msg.type": "com.mtn.messages.mobile_money",
+      "date.regex.group": 1,
+      "date.regex.group": 2,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/MOBILE_MONEY/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MOBILE_MONEY/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MOBILE_MONEY",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MOBILE_MONEY/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "TAPIN_GPRS",
+      "namespace": "flare_8",
+      "table.name": "TAPIN_GPRS",
+      "date.regex": "^.*_tapin_gprs_([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.tapin_gprs",
+      "filestats.msg.type": "com.mtn.messages.TAPIN_GPRS",
+      "date.regex.group": 1,
+      "date.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/TAPIN_GPRS/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/TAPIN_GPRS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/TAPIN_GPRS",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/TAPIN_GPRS/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS5_SDP_PAM_ALL",
+      "namespace": "flare_8",
+      "table.name": "CS5_SDP_PAM_ALL",
+      "date.regex": "^.*([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.cs5_sdp_pam_all",
+      "filestats.msg.type": "com.mtn.messages.CS5_SDP_PAM_ALL",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/SDP_PAM_ALL/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SDP_PAM_ALL/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SDP_PAM_ALL/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_api/stage_archived/SDP_PAM_ALL/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CGW_API",
+      "namespace": "flare_8",
+      "table.name": "CGW_API",
+      "date.regex": "^CGW.*_API_([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.cgw_api",
+      "filestats.msg.type": "com.mtn.messages.CGW_API",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/CGW_API/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CGW_API/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CGW_API/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/CGW_API/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "DPI_CDR",
+      "namespace": "flare_8",
+      "table.name": "DPI_CDR",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.dpi_cdr",
+      "filestats.msg.type": "com.mtn.messages.DPI_CDR",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/DPI/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/DPI_CDR/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/DPI/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/stage_archived/DPI/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "IB_API",
+      "namespace": "flare_8",
+      "table.name": "IB_API",
+      "date.regex": "^.*_([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.ib_api",
+      "filestats.msg.type": "com.mtn.messages.IB_API",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/IB_API/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/IB_API/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/IB_API/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/IB_API/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "RECON",
+      "namespace": "flare_8",
+      "table.name": "RECON",
+      "date.regex": "^RECON_.*_([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.recon",
+      "filestats.msg.type": "com.mtn.messages.RECON",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/RECON/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/RECON/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/RECON/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/RECON/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "SAG_API",
+      "namespace": "flare_8",
+      "table.name": "SAG_API",
+      "date.regex": "^.*_([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.sag_api",
+      "filestats.msg.type": "com.mtn.messages.SAG_API",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/SAG_API/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SAG_API/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SAG_API/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SAG_API/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CIS_CDR",
+      "namespace": "flare_8",
+      "table.name": "CIS_CDR",
+      "date.regex": "^.*_([0-9]{6}).*$",
+      "rejected.msg.type": "com.mtn.messages.cis_cdr",
+      "filestats.msg.type": "com.mtn.messages.CIS_CDR",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/CIS_CDR/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CIS_CDR/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CIS_CDR/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/CIS_CDR/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MyMTNApp",
+      "namespace": "flare_8",
+      "table.name": "MyMTNApp",
+      "date.regex": "^.*([0-9]{4})-([0-9]{2})-([0-9]{2})-([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.mymtnapp",
+      "filestats.msg.type": "com.mtn.messages.MyMTNApp",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/MyMTNApp/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MyMTNApp/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MyMTNApp/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MyMTNApp/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "SMSC_A2P_P2P_P2A_A2A_SUCCESS_RATE",
+      "namespace": "flare_8",
+      "table.name": "SMSC_A2P_P2P_P2A_A2A_SUCCESS_RATE",
+      "date.regex": "^SMSC_A2P_P2P_P2A_A2A_Success_Rate_Report.*_([0-9]{4})-([0-9]{2})-([0-9]{2})_([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.smsc_a2p_p2p_p2a_a2a_success_rate",
+      "filestats.msg.type": "com.mtn.messages.SMSC_A2P_P2P_P2A_A2A_SUCCESS_RATE",
+      "_date.regex.group": 1,
+      "hour.regex.group": 4,
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/SMSC_A2P_P2P_P2A_A2A_SUCCESS_RATE/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SMSC_A2P_P2P_P2A_A2A_SUCCESS_RATE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SMSC_A2P_P2P_P2A_A2A_SUCCESS_RATE/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SMSC_A2P_P2P_P2A_A2A_SUCCESS_RATE/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "AVAYA_IVR",
+      "namespace": "flare_8",
+      "table.name": "AVAYA_IVR",
+      "date.regex": "^NokiaCSI_IVR_([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.avaya_ivr",
+      "filestats.msg.type": "com.mtn.messages.Avaya_IVR",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/AVAYA_IVR/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/AVAYA_IVR/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/AVAYA_IVR",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/AVAYA_IVR/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "USSD_TRAFFIC_SUCCESS_RATE",
+      "namespace": "flare_8",
+      "table.name": "USSD_TRAFFIC_SUCCESS_RATE",
+      "date.regex": "^USSD_Traffic_Success_Rate.*([0-9]{4})-([0-9]{2})-([0-9]{2})_([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.ussd_traffic_success_rate",
+      "filestats.msg.type": "com.mtn.messages.USSD_TRAFFIC_SUCCESS_RATE",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/USSD_TRAFFIC_SUCCESS_RATE/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/USSD_TRAFFIC_SUCCESS_RATE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/USSD_TRAFFIC_SUCCESS_RATE/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/USSD_TRAFFIC_SUCCESS_RATE/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "SMSC_LICENSE",
+      "namespace": "flare_8",
+      "table.name": "SMSC_LICENSE",
+      "date.regex": "^SMSC_License_Report.*_([0-9]{4})-([0-9]{2})-([0-9]{2})_([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.smsc_license",
+      "filestats.msg.type": "com.mtn.messages.SMSC_LICENSE",
+      "_date.regex.group": 1,
+      "hour.regex.group": 4,
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/SMSC_LICENSE/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SMSC_LICENSE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SMSC_LICENSE/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SMSC_LICENSE/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "SMSC_TOTAL_DELIVERY_SUCCESS_RATE",
+      "namespace": "flare_8",
+      "table.name": "SMSC_TOTAL_DELIVERY_SUCCESS_RATE",
+      "date.regex": "^SMSC_Total_Delivery_Success_Rate_Report.*_([0-9]{4})-([0-9]{2})-([0-9]{2})_([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.smsc_total_delivery_success_rate",
+      "filestats.msg.type": "com.mtn.messages.SMSC_TOTAL_DELIVERY_SUCCESS_RATE",
+      "_date.regex.group": 1,
+      "hour.regex.group": 4,
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/SMSC_TOTAL_DELIVERY_SUCCESS_RATE/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SMSC_TOTAL_DELIVERY_SUCCESS_RATE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SMSC_TOTAL_DELIVERY_SUCCESS_RATE/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SMSC_TOTAL_DELIVERY_SUCCESS_RATE/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "USSD_TRAFFIC_SUCCESS_RATE",
+      "namespace": "flare_8",
+      "table.name": "USSD_TRAFFIC_SUCCESS_RATE",
+      "date.regex": "^USSD_Traffic_Success_Rate.*([0-9]{4})-([0-9]{2})-([0-9]{2})_([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.ussd_traffic_success_rate",
+      "filestats.msg.type": "com.mtn.messages.USSD_TRAFFIC_SUCCESS_RATE",
+      "_date.regex.group": 1,
+      "hour.regex.group": 4,
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/USSD_TRAFFIC_SUCCESS_RATE/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/USSD_TRAFFIC_SUCCESS_RATE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/USSD_TRAFFIC_SUCCESS_RATE/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/USSD_TRAFFIC_SUCCESS_RATE/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "BYPASS_VENDOR",
+      "table.name": "BYPASS_VENDOR",
+      "rejected.msg.type": "com.mtn.messages.bypass_vendor",
+      "filestats.msg.type": "com.mtn.messages.BYPASS_VENDOR",
+      "date.regex": "^.*([0-9]{4})-([0-9]{2})-([0-9]{2})_([0-9]{2}).*$",
+      "hour.regex.group": 4,
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+
+      "incoming.dir": "/mnt/beegfs_api/live/BYPASS_VENDOR/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/BYPASS_VENDOR/processed/",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/BYPASS_VENDOR/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/BYPASS_VENDOR/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "QRIOS_SDP_TIMEOUT",
+      "table.name": "QRIOS_SDP_TIMEOUT",
+      "rejected.msg.type": "com.mtn.messages.qrios_sdp_timeout",
+      "filestats.msg.type": "com.mtn.messages.QRIOS_SDP_TIMEOUT",
+      "date.regex": "^.*_([0-9]{4})-([0-9]{2})-([0-9]{2})_([0-9]{2}).*$",
+      "hour.regex.group": 4,
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+
+      "incoming.dir": "/mnt/beegfs_api/live/QRIOS_SDP_TIMEOUT/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/QRIOS_SDP_TIMEOUT/processed/",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/QRIOS_SDP_TIMEOUT/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/QRIOS_SDP_TIMEOUT/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MVAS_DND_MSISDN_REPORT",
+      "namespace": "flare_8",
+      "table.name": "MVAS_DND_MSISDN_REPORT",
+      "date.regex": "^DND_NUM.*([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.mvas_dnd_msisdn_report",
+      "filestats.msg.type": "com.mtn.messages.MVAS_DND_MSISDN_REPORT",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/MVAS_DND_MSISDN_REP_CDR/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MVAS_DND_MSISDN_REP_CDR/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MVAS_DND_MSISDN_REP_CDR/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MVAS_DND_MSISDN_REP_CDR/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "SIS_TOKEN",
+      "namespace": "flare_8",
+      "table.name": "SIS_TOKEN",
+      "date.regex": "^.*_([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.sis_token",
+      "filestats.msg.type": "com.mtn.messages.SIS_TOKEN",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/SIS_TOKEN/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SIS_TOKEN/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SIS_TOKEN",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SIS_TOKEN/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "QRIOS_TRANSACTIONS",
+      "namespace": "flare_8",
+      "table.name": "QRIOS_TRANSACTIONS",
+      "date.regex": "^.*_([0-9]{8})(.*$",
+      "rejected.msg.type": "com.mtn.messages.qrios_transactions",
+      "filestats.msg.type": "com.mtn.messages.QRIOS_TRANSACTIONS",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/QRIOS_TRANSACTIONS/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/QRIOS_TRANSACTIONS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/QRIOS_TRANSACTIONS",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/QRIOS_TRANSACTIONS/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "HSDP_DOI_LOG",
+      "namespace": "flare_8",
+      "table.name": "HSDP_DOI_LOG",
+      "date.regex": "^.*_([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.hsdp_doi_log",
+      "filestats.msg.type": "com.mtn.messages.HSDP_DOI_Log",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/HSDP_DOL_LOG/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/HSDP_DOL_LOG/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/HSDP_DOL_LOG",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/HSDP_DOL_LOG/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "HSDP_CDR",
+      "namespace": "flare_8",
+      "table.name": "HSDP_CDR",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.hsdp_cdr",
+      "filestats.msg.type": "com.mtn.messages.hsdp_cdr",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/HSDP_live",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/HSDP_CDR/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/HSDP_CDR",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/HSDP_CDR/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "SGSN_CDR",
+      "namespace": "flare_8",
+      "table.name": "SGSN_CDR",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.sgsn_cdr",
+      "filestats.msg.type": "com.mtn.messages.sgsn_cdr",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/SGSN/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SGSN/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SGSN/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SGSN/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "TAPIN_VOICE",
+      "namespace": "flare_8",
+      "table.name": "TAPIN_VOICE",
+      "date.regex": "^.*tapin_voice_([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.tapin_voice",
+      "filestats.msg.type": "com.mtn.messages.TAPIN_VOICE",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/TAPIN_VOICE/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/TAPIN_VOICE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/TAPIN_VOICE",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/TAPIN_VOICE/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "TAPOUT_VOICE",
+      "namespace": "flare_8",
+      "table.name": "TAPOUT_VOICE",
+      "date.regex": "^.*tapout_voice.*_([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.tapout_voice",
+      "filestats.msg.type": "com.mtn.messages.TAPOUT_VOICE",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/TAPOUT_VOICE/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/TAPOUT_VOICE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/TAPOUT_VOICE",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/TAPOUT_VOICE/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MAPS2G",
+      "namespace": "flare_8",
+      "table.name": "MAPS2G",
+      "date.regex": "^Nigeria_BIB_2GCell_INV.*([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.maps2g",
+      "filestats.msg.type": "com.mtn.messages.maps2g",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/MAPS_INV_2G/incoming/",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MAPS_INV_2G/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MAPS_INV_2G/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MAPS_INV_2G/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MAPS3G",
+      "namespace": "flare_8",
+      "table.name": "MAPS3G",
+      "date.regex": "^Nigeria_BIB_3GCell_INV.*([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.maps3g",
+      "filestats.msg.type": "com.mtn.messages.maps3g",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/MAPS_INV_3G/incoming/",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MAPS_INV_3G/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MAPS_INV_3G/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MAPS_INV_3G/",
+          "is.tarred": true
+        }
+      ]
+    },
+{
+      "name": "DELIVERY_ERROR_BREAKDOWN_PER_TRAFFIC_TYPE",
+      "namespace": "flare_8",
+      "table.name": "DELIVERY_ERROR_BREAKDOWN_PER_TRAFFIC_TYPE",
+      "date.regex": "^Group_KPI_Hourly_Delivery_Error_Breakdown_Per_Traffic_Type_Hourly.*_([0-9]{4})-([0-9]{2})-([0-9]{2})_([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.delivery_error_breakdown_per_traffic_type",
+      "filestats.msg.type": "com.mtn.messages.DELIVERY_ERROR_BREAKDOWN_PER_TRAFFIC_TYPE",
+      "_date.regex.group": 1,
+      "hour.regex.group": 4,
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/DELIVERY_ERROR_BREAKDOWN_PER_TRAFFIC_TYPE/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/DELIVERY_ERROR_BREAKDOWN_PER_TRAFFIC_TYPE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/DELIVERY_ERROR_BREAKDOWN_PER_TRAFFIC_TYPE/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/DELIVERY_ERROR_BREAKDOWN_PER_TRAFFIC_TYPE/",
+          "is.tarred": true
+        }
+      ]
+    },        
+	{
+      "name": "SERVICE_USAGE_NOTIFICATION_DELIVERY_SUCCESS_RATE",
+      "namespace": "flare_8",
+      "table.name": "SERVICE_USAGE_NOTIFICATION_DELIVERY_SUCCESS_RATE",
+      "date.regex": "^Group_Hourly_Service_Usage_Notification_Delivery_Success_Rate.*_([0-9]{4})-([0-9]{2})-([0-9]{2})_([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.service_usage_notification_delivery_success_rate",
+      "filestats.msg.type": "com.mtn.messages.SERVICE_USAGE_NOTIFICATION_DELIVERY_SUCCESS_RATE",
+      "_date.regex.group": 1,
+      "hour.regex.group": 4,
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/SERVICE_USAGE_NOTIFICATION_DELIVERY_SUCCESS_RATE/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SERVICE_USAGE_NOTIFICATION_DELIVERY_SUCCESS_RATE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SERVICE_USAGE_NOTIFICATION_DELIVERY_SUCCESS_RATE/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SERVICE_USAGE_NOTIFICATION_DELIVERY_SUCCESS_RATE/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "USSD_ERROR_CODE_BREAKDOWN",
+      "namespace": "flare_8",
+      "table.name": "USSD_ERROR_CODE_BREAKDOWN",
+      "date.regex": "^.*_([0-9]{4})-([0-9]{2})-([0-9]{2})_([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.ussd_error_code_breakdown",
+      "filestats.msg.type": "com.mtn.messages.USSD_ERROR_CODE_BREAKDOWN",
+      "_date.regex.group": 1,
+      "hour.regex.group": 4,
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/USSD_ERROR_CODE_BREAKDOWN/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/USSD_ERROR_CODE_BREAKDOWN/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/USSD_ERROR_CODE_BREAKDOWN/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/USSD_ERROR_CODE_BREAKDOWN/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "AUDIT_LOGS",
+      "namespace": "flare_8",
+      "table.name": "AUDIT_LOGS",
+      "date.regex": "^auditlog-([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.audit_logs",
+      "filestats.msg.type": "com.mtn.messages.AUDIT_LOGS",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/AUDIT_LOGS/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/AUDIT_LOGS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/AUDIT_LOGS/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/AUDIT_LOGS/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "FINANCIAL_LOG",
+      "namespace": "flare_8",
+      "table.name": "FINANCIAL_LOG",
+      "date.regex": "^financiallog-([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.financial_log",
+      "filestats.msg.type": "com.mtn.messages.FINANCIAL_LOG",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/FINANCIAL_LOG/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/FINANCIAL_LOG/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/FINANCIALLOG/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/FINANCIALLOG/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "ECW_TRANSACTION",
+      "namespace": "flare_8",
+      "table.name": "ECW_TRANSACTION",
+      "date.regex": "^transactions-([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.ecw_transaction",
+      "filestats.msg.type": "com.mtn.messages.ECW_TRANSACTION",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/MFS_TRANSACTIONS/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MFS_TRANSACTIONS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MFS_TRANSACTIONS/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MFS_TRANSACTIONS/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MAPS4G",
+      "namespace": "flare_8",
+      "table.name": "MAPS4G",
+      "date.regex": "^Nigeria_BIB_4GCell_INV.*([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.maps4g",
+      "filestats.msg.type": "com.mtn.messages.maps4g",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/MAPS_INV_4G/incoming/",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MAPS_INV_4G/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MAPS_INV_4G/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MAPS_INV_4G/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "UDC_DUMP",
+      "namespace": "flare_8",
+      "table.name": "UDC_DUMP",
+      "date.regex": "^.*_([0-9]{8})_.*$",
+      "rejected.msg.type": "com.mtn.messages.udc_dump",
+      "filestats.msg.type": "com.mtn.messages.UDC_DUMP",
+      "date.regex.group": 1,
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/live/UDC_DUMP/split",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/UDC_DUMP/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/UDC_DUMP",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/UDC_DUMP/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS6_AIR_CDR",
+      "table.name": "CS6_AIR_CDR",
+      "rejected.msg.type": "com.mtn.messages.cs6_air_cdr",
+      "filestats.msg.type": "com.mtn.messages.CS6_AIR_CDR",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*AIR.*$",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/CS6_Unified/AIR_CDR/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/AIR_CDR/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/AIR_CDR",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/AIR_CDR/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CCN_CDR_GPRS",
+      "table.name": "CS6_CCN_CDR",
+      "rejected.msg.type": "com.mtn.messages.cs6_ccn_cdr",
+      "filestats.msg.type": "com.mtn.messages.CS6_CCN_CDR",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*$",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/CS6_Unified/CCN_CDR_GPRS/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/CS6_Unified/CCN_CDR_GPRS/processed",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/CCN_CDR_GPRS/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/stage_archived/CS6_Unified/CCN_CDR_GPRS",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CCN_CDR_SMS",
+      "table.name": "CS6_CCN_CDR",
+      "rejected.msg.type": "com.mtn.messages.cs6_ccn_cdr",
+      "filestats.msg.type": "com.mtn.messages.CS6_CCN_CDR",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*$",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/CS6_Unified/CCN_CDR_SMS/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CS6_Unified/CCN_CDR_SMS/processed",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/CCN_CDR_SMS/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/stage_archived/CS6_Unified/CCN_CDR_SMS/",
+          "is.tarred": true
+        }
+      ]
+    },
+     {
+      "name": "XAAS_DAILY",
+      "table.name": "XAAS_DAILY",
+      "rejected.msg.type": "com.mtn.messages.xaas_daily",
+      "filestats.msg.type": "com.mtn.messages.XAAS_DAILY",
+      "date.regex": "^DAILY_TRANSACTIONS([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/NG_DYA_XAAS/incoming/",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/NG_DYA_XAAS/processed",
+          "is.tarred": false
+        }
+      ]
+    },
+   {
+      "name": "FLYTXT_LATCH_DUMP",
+      "table.name": "FLYTXT_LATCH_DUMP",
+      "rejected.msg.type": "com.mtn.messages.flytxt_latch_dump",
+      "filestats.msg.type": "com.mtn.messages.FLYTXT_LATCH_DUMP",
+      "date.regex": "^.*([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/LATCH_DUMP/incoming/",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/LATCH_DUMP/processed",
+          "is.tarred": false
+        }
+      ]
+    },
+    {
+      "name": "IVR_SERVICE",
+      "table.name": "IVR_SERVICE",
+      "rejected.msg.type": "com.mtn.messages.ivr_service",
+      "filestats.msg.type": "com.mtn.messages.IVR_SERVICE",
+      "date.regex": "^.*([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/IVR_SERVICE_REQ/incoming/",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/IVR_SERVICE/processed",
+          "is.tarred": false
+        }
+      ]
+    },
+    {
+      "name": "CCN_CDR_VOICE",
+      "table.name": "CS6_CCN_CDR",
+      "rejected.msg.type": "com.mtn.messages.cs6_ccn_cdr",
+      "filestats.msg.type": "com.mtn.messages.CS6_CCN_CDR",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*$",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/CS6_Unified/CCN_CDR_VOICE/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CS6_Unified/CCN_CDR_VOICE/processed",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/CCN_CDR_VOICE/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/stage_archived/CS6_Unified/CCN_CDR_VOICE/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS6_SDP_CDR",
+      "table.name": "CS6_SDP_CDR",
+      "rejected.msg.type": "com.mtn.messages.cs6_sdp_cdr",
+      "filestats.msg.type": "com.mtn.messages.CS6_SDP_CDR",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*SDP.*$",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/CS6_Unified/SDP_CDR/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SDP_CDR/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SDP_CDR/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SDP_CDR/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS5_AIR_ADJ_DA",
+      "namespace": "flare_8",
+      "table.name": "CS5_AIR_ADJ_DA",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_AIR_ADJ_DA_.*$",
+      "rejected.msg.type": "com.mtn.messages.cs5_air_adj_da",
+      "filestats.msg.type": "com.mtn.messages.cs5_air_adj_da",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/AIR_ADJ_DA/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/AIR_ADJ_DA/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/AIR_ADJ_DA/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/AIR_ADJ_DA/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS5_AIR_REFILL_AC",
+      "namespace": "flare_8",
+      "table.name": "CS5_AIR_REFILL_AC",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_AIR_REFILL_AC_.*$",
+      "rejected.msg.type": "com.mtn.messages.cs5_air_refill_ac",
+      "filestats.msg.type": "com.mtn.messages.cs5_air_refill_ac",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/AIR_REFILL_AC/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/AIR_REFILL_AC/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/AIR_REFILL_AC/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/AIR_REFILL_AC/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS5_AIR_REFILL_DA",
+      "namespace": "flare_8",
+      "table.name": "CS5_AIR_REFILL_DA",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.cs5_air_refill_da",
+      "filestats.msg.type": "com.mtn.messages.cs5_air_refill_da",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/AIR_REFILL_DA/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/AIR_REFILL_DA/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/AIR_REFILL_DA/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/AIR_REFILL_DA/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS5_CCN_GPRS_AC",
+      "namespace": "flare_8",
+      "table.name": "CS5_CCN_GPRS_AC",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.cs5_ccn_gprs_ac",
+      "filestats.msg.type": "com.mtn.messages.cs5_ccn_gprs_ac",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/CCN_GPRS_AC/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CCN_GPRS_AC/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CCN_GPRS_AC/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/CCN_GPRS_AC/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS5_CCN_GPRS_DA",
+      "namespace": "flare_8",
+      "table.name": "CS5_CCN_GPRS_DA",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_CCN_GPRS_DA_.*$",
+      "rejected.msg.type": "com.mtn.messages.cs5_ccn_gprs_da",
+      "filestats.msg.type": "com.mtn.messages.cs5_ccn_gprs_da",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/CCN_GPRS_DA/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CCN_GPRS_DA/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CCN_GPRS_DA/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_api/stage_archived/CCN_GPRS_DA/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS5_CCN_SMS_AC",
+      "namespace": "flare_8",
+      "table.name": "CS5_CCN_SMS_AC",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_CCN_SMS_AC_.*$",
+      "rejected.msg.type": "com.mtn.messages.cs5_ccn_sms_ac",
+      "filestats.msg.type": "com.mtn.messages.cs5_ccn_sms_ac",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/CCN_SMS_AC/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CCN_SMS_AC/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CCN_SMS_AC/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/CCN_SMS_AC/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS5_CCN_SMS_DA",
+      "namespace": "flare_8",
+      "table.name": "CS5_CCN_SMS_DA",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_CCN_SMS_DA_.*$",
+      "rejected.msg.type": "com.mtn.messages.cs5_ccn_sms_da",
+      "filestats.msg.type": "com.mtn.messages.cs5_ccn_sms_da",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/CCN_SMS_DA/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CCN_SMS_DA/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CCN_SMS_DA/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/CCN_SMS_DA/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS5_CCN_VOICE_AC",
+      "namespace": "flare_8",
+      "table.name": "CS5_CCN_VOICE_AC",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_CCN_VOICE_AC_.*$",
+      "rejected.msg.type": "com.mtn.messages.cs5_ccn_voice_ac",
+      "filestats.msg.type": "com.mtn.messages.cs5_ccn_voice_ac",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/CCN_VOICE_AC/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CCN_VOICE_AC/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CCN_VOICE_AC/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/CCN_VOICE_AC/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS5_CCN_VOICE_DA",
+      "namespace": "flare_8",
+      "table.name": "CS5_CCN_VOICE_DA",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_CCN_VOICE_DA_.*$",
+      "rejected.msg.type": "com.mtn.messages.cs5_ccn_voice_da",
+      "filestats.msg.type": "com.mtn.messages.cs5_ccn_voice_da",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/CCN_VOICE_DA/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CCN_VOICE_DA/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CCN_VOICE_DA/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/CCN_VOICE_DA/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS5_SDP_ACC_ADJ_AC",
+      "namespace": "flare_8",
+      "table.name": "CS5_SDP_ACC_ADJ_AC",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_SDP_ACC_ADJ_AC_.*$",
+      "rejected.msg.type": "com.mtn.messages.cs5_sdp_acc_adj_ac",
+      "filestats.msg.type": "com.mtn.messages.CS5_SDP_ACC_ADJ_AC",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/SDP_ADJ_AC/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SDP_ADJ_AC/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SDP_ADJ_AC/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SDP_ADJ_AC/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MSC_DAAS",
+      "namespace": "flare_8",
+      "table.name": "MSC_DAAS",
+      "date.regex": "^.*_([0-9]{6})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.msc_daas",
+      "filestats.msg.type": "com.mtn.messages.MSC_DAAS",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/MSC_DaaS/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MSC_DaaS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MSC_DaaS/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MSC_DaaS/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CS5_SDP_ACC_ADJ_DA",
+      "namespace": "flare_8",
+      "table.name": "CS5_SDP_ACC_ADJ_DA",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*_SDP_ACC_ADJ_DA_.*$",
+      "rejected.msg.type": "com.mtn.messages.cs5_sdp_acc_adj_da",
+      "filestats.msg.type": "com.mtn.messages.CS5_SDP_ACC_ADJ_DA",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/SDP_ADJ_DA/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SDP_ADJ_DA/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SDP_ADJ_DA/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SDP_ADJ_DA/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "ESM_DYA_METRIC",
+      "namespace": "flare_8",
+      "table.name": "ESM_DYA_METRIC",
+      "date.regex": "^DYA.*([0-9]{4})-([0-9]{2})-([0-9]{2})_([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.esm_dya_metric",
+      "filestats.msg.type": "com.mtn.messages.ESM_DYA_METRIC",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/ESM_DYA_METRIC/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/ESM_DYA_METRIC/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/ESM_DYA_METRIC",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/ESM_DYA_METRIC/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "ESM_PMT_METRIC",
+      "namespace": "flare_8",
+      "table.name": "ESM_PMT_METRIC",
+      "date.regex": "^MTN_payment_metrics.*([0-9]{4})-([0-9]{2})-([0-9]{2})_([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.esm_pmt_metric",
+      "filestats.msg.type": "com.mtn.messages.ESM_PMT_METRIC",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/ESM_PMT_METRIC/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/ESM_PMT_METRIC/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/ESM_PMT_METRIC",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/ESM_PMT_METRIC/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "ESM_REFILL_METRIC",
+      "namespace": "flare_8",
+      "table.name": "ESM_REFILL_METRIC",
+      "date.regex": "^MTN_refill.*_([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.esm_refill_metric",
+      "filestats.msg.type": "com.mtn.messages.ESM_REFILL_METRIC",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/ESM_REFILL_METRIC/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/ESM_REFILL_METRIC/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/ESM_REFILL_METRIC",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/ESM_REFILL_METRIC/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "ESM_SUB_METRIC",
+      "namespace": "flare_8",
+      "table.name": "ESM_SUB_METRIC",
+      "date.regex": "^sub.*([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.esm_sub_metric",
+      "filestats.msg.type": "com.mtn.messages.ESM_SUB_METRIC",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/ESM_SUB_METRIC/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/ESM_SUB_METRIC/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/ESM_SUB_METRIC",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/ESM_SUB_METRIC/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "HSDP_OPTIN_AUTORENEWAL",
+      "namespace": "flare_8",
+      "table.name": "HSDP_OPTIN_AUTORENEWAL",
+      "date.regex": "^.*Optin_AutoRenewal.*([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.hsdp_optin_autorenewal",
+      "filestats.msg.type": "com.mtn.messages.HSDP_OPTIN_AUTORENEWAL",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/HSDP_OPTIN_AUTORENEWAL/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/HSDP_OPTIN_AUTORENEWAL/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/HSDP_OPTIN_AUTORENEWAL",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/HSDP_OPTIN_AUTORENEWAL/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "HSDP_OPTOUT_AUTORENEWAL",
+      "namespace": "flare_8",
+      "table.name": "HSDP_OPTOUT_AUTORENEWAL",
+      "date.regex": "^.*Optout_AutoRenewal.*([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.hsdp_optout_autorenewal",
+      "filestats.msg.type": "com.mtn.messages.HSDP_OPTOUT_AUTORENEWAL",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/HSDP_OPTOUT_AUTORENEWAL/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/HSDP_OPTOUT_AUTORENEWAL/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/HSDP_OPTOUT_AUTORENEWAL",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/HSDP_OPTOUT_AUTORENEWAL/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "HSDP_RENEWAL_BASE",
+      "namespace": "flare_8",
+      "table.name": "HSDP_RENEWAL_BASE",
+      "date.regex": "^.*([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.hsdp_renewal_base",
+      "filestats.msg.type": "com.mtn.messages.HSDP_RENEWAL_BASE",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/HSDP_RENEWAL_BASE/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/HSDP_RENEWAL_BASE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/HSDP_RENEWAL_BASE",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/HSDP_RENEAL_BASE/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MA_MONITOR",
+      "namespace": "flare_8",
+      "table.name": "MA_MONITOR",
+      "date.regex": "^.*_([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.ma_monitor",
+      "filestats.msg.type": "com.mtn.messages.MA_MONITOR",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/MA_MONITOR/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MA_MONITOR/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MA_MONITOR",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MA_MONITOR/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "NG_RETAILERPROMO",
+      "namespace": "flare_8",
+      "table.name": "NG_RETAILERPROMO",
+      "date.regex": "^.*USIMSuccess.*([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.ng_retailerpromo",
+      "filestats.msg.type": "com.mtn.messages.NG_RETAILERPROMO",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/NG_USIM/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/NG_USIM/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/NG_USIM",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/NG_USIM/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "SHOP_LOCATOR",
+      "namespace": "flare_8",
+      "table.name": "SHOP_LOCATOR",
+      "date.regex": "^.*([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.shop_locator",
+      "filestats.msg.type": "com.mtn.messages.SHOP_LOCATOR",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/SHOP_LOCATOR/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SHOP_LOCATOR/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SHOP_LOCATOR",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SHOP_LOCATION/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "SMART_APP_CDR",
+      "namespace": "flare_8",
+      "table.name": "SMART_APP_CDR",
+      "date.regex": "^.*([0-9]{4})-([0-9]{2})-([0-9]{2})-([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.smart_app_cdr",
+      "filestats.msg.type": "com.mtn.messages.SMART_APP_CDR",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/SMART_APP_CDR/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SMART_APP_CDR/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SMART_APP_CDR",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SMART_APP_CDR/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "SMART_APP_DOWNLOAD",
+      "namespace": "flare_8",
+      "table.name": "SMART_APP_DOWNLOAD",
+      "date.regex": "^.*([0-9]{4})-([0-9]{2})-([0-9]{2})-([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.smart_app_download",
+      "filestats.msg.type": "com.mtn.messages.SMART_APP_DOWNLOAD",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/SMART_APP_DOWNLOAD/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SMART_APP_DOWNLOAD/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SMART_APP_DOWNLOAD",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SMART_APP_DOWNLOAD/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "SMART_APP_NEW_USERS",
+      "namespace": "flare_8",
+      "table.name": "SMART_APP_NEW_USERS",
+      "date.regex": "^.*([0-9]{6}).*$",
+      "rejected.msg.type": "com.mtn.messages.smart_app_new_users",
+      "filestats.msg.type": "com.mtn.messages.SMART_APP_NEW_USERS",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/SMART_APP_NEWUSER/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SMART_APP_NEWUSER/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SMART_APP_NEW_USERS",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SMART_APP_NEW_USERS/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "SMSC",
+      "namespace": "flare_8",
+      "table.name": "SMSC",
+      "date.regex": "^SMC.*_([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.smsc",
+      "filestats.msg.type": "com.mtn.messages.SMSC",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/SMSC/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SMSC/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SMSC",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SMSC/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "UPC_SUBSCRIPTION",
+      "namespace": "flare_8",
+      "table.name": "UPC_SUBSCRIPTION",
+      "date.regex": "^BIBSubscriptionData.*([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.upc_subscription",
+      "filestats.msg.type": "com.mtn.messages.UPC_SUBSCRIPTION",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/UPC_SUBSCRIPTION/incoming/",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/UPC_SUBSCRIPTION/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/UPC_SUBSCRIPTION",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/UPS_SUBSCRIPTION/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "DIRECT_CONNECT_CCTP",
+      "namespace": "flare_8",
+      "table.name": "DIRECT_CONNECT_CCTP",
+      "date.regex": "^CCTP.*([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.direct_connect_cctp",
+      "filestats.msg.type": "com.mtn.messages.DIRECT_CONNECT_CCTP",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/DIRECT_CONNECT_CCTP/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/DIRECT_CONNECT_CCTP/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/DIRECT_CONNECT_CCTP",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/DIRECT_CONNECT_CCTP/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "ESM_SIM_REG_METRIC",
+      "namespace": "flare_8",
+      "table.name": "ESM_SIM_REG_METRIC",
+      "date.regex": "^MTN_simreg_metrics_hourly.*([0-9]{4})-([0-9]{2})-([0-9]{2})_([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.esm_sim_reg_metric",
+      "filestats.msg.type": "com.mtn.messages.ESM_SIM_REG_METRIC",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/ESM_SIM_REG_METRIC/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/ESM_SIM_REG_METRIC/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/ESM_SIM_REG_METRIC",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/ESM_SIM_REG_METRIC/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "ESM_UNSUB_METRIC",
+      "namespace": "flare_8",
+      "table.name": "ESM_UNSUB_METRIC",
+      "date.regex": "^unsub.*([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.esm_unsub_metric",
+      "filestats.msg.type": "com.mtn.messages.ESM_UNSUB_METRIC",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/ESM_UNSUB_METRIC/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/ESM_UNSUB_METRIC/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/ESM_UNSUB_METRIC",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/ESM_UNSUB_METRIC/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "ESM_VTU_VENDING_METRIC",
+      "namespace": "flare_8",
+      "table.name": "ESM_VTU_VENDING_METRIC",
+      "date.regex": "^MTN_VTU_HOURLY_VENDING-.*([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.esm_vtu_vending_metric",
+      "filestats.msg.type": "com.mtn.messages.ESM_VTU_VENDING_METRIC",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/ESM_VTU_VENDING_METRIC/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/ESM_VTU_VENDING_METRIC/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/ESM_VTU_VENDING_METRIC",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/ESM_VTU_VENDING_METRIC/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MAPS_2G_CELL_D",
+      "namespace": "flare_8",
+      "table.name": "MAPS_2G_CELL_D",
+      "date.regex": "^Nigeria_BIB_2GCell_Daily.*([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.maps_2g_cell_d",
+      "filestats.msg.type": "com.mtn.messages.MAPS_2G_CELL_D",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/MAPS_2G_CELL_D/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MAPS_2G_CELL_D/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MAPS_2G_CELL_D",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MAPS_2G_CELL_D/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MAPS_2G_CN_M_DATA_BH",
+      "namespace": "flare_8",
+      "table.name": "MAPS_2G_CN_M_DATA_BH",
+      "date.regex": "^Nigeria_BIB_2G_Country_Monthly_Data_BH.*([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.maps_2g_cn_m_data_bh",
+      "filestats.msg.type": "com.mtn.messages.MAPS_2G_CN_M_DATA_BH",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/MAPS_2G_CN_M_DATA_BH/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MAPS_2G_CN_M_DATA_BH/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MAPS_2G_CN_M_DATA_BH/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MAPS_2G_CN_M_DATA_BH/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MAPS_3G_CELL_D",
+      "namespace": "flare_8",
+      "table.name": "MAPS_3G_CELL_D",
+      "date.regex": "^Nigeria_BIB_3GCell_Daily.*([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.maps_3g_cell_d",
+      "filestats.msg.type": "com.mtn.messages.MAPS_3G_CELL_D",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/MAPS_3G_CELL_D/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MAPS_3G_CELL_D/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MAPS_3G_CELL_D/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MAPS_3G_CELL_D/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MAPS_3G_CELL_W",
+      "namespace": "flare_8",
+      "table.name": "MAPS_3G_CELL_W",
+      "date.regex": "^.*([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.maps_3g_cell_w",
+      "filestats.msg.type": "com.mtn.messages.MAPS_3G_CELL_W",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/MAPS_3G_CELL_W/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MAPS_3G_CELL_W/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MAPS_3G_CELL_W/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MAPS_3G_CELL_W/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MAPS_3G_CN_D",
+      "namespace": "flare_8",
+      "table.name": "MAPS_3G_CN_D",
+      "date.regex": "^Nigeria_BIB_3G_Country_Daily.*([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.maps_3g_cn_d",
+      "filestats.msg.type": "com.mtn.messages.MAPS_3G_CN_D",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/MAPS_3G_CN_D/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MAPS_3G_CN_D/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MAPS_3G_CN_D/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MAPS_3G_CN_D/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MAPS_3G_CN_D_BH",
+      "namespace": "flare_8",
+      "table.name": "MAPS_3G_CN_D_BH",
+      "date.regex": "^Nigeria_BIB_3G_Country_Daily_BH.*([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.maps_3g_cn_d_bh",
+      "filestats.msg.type": "com.mtn.messages.MAPS_3G_CN_D_BH",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/MAPS_3G_CN_D_BH/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MAPS_3G_CN_D_BH/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MAPS_3G_CN_D_BH/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MAPS_3G_CN_D_BH/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MAPS_3G_CN_M",
+      "namespace": "flare_8",
+      "table.name": "MAPS_3G_CN_M",
+      "date.regex": "^Nigeria_BIB_3G_Country_Monthly.*([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.maps_3g_cn_m",
+      "filestats.msg.type": "com.mtn.messages.MAPS_3G_CN_M",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/MAPS_3G_CN_M/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MAPS_3G_CN_M/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MAPS_3G_CN_M/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MAPS_3G_CN_M/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MAPS_3G_CN_W_BH",
+      "namespace": "flare_8",
+      "table.name": "MAPS_3G_CN_W_BH",
+      "date.regex": "^Nigeria_BIB_3G_Country_Weekly_BH.*([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.maps_3g_cn_w_bh",
+      "filestats.msg.type": "com.mtn.messages.MAPS_3G_CN_W_BH",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/MAPS_3G_CN_W_BH/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MAPS_3G_CN_W_BH/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MAPS_3G_CN_W_BH/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MAPS_3G_CN_W_BH/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MYMTNWEB_ACTIVEUSERS",
+      "namespace": "flare_8",
+      "table.name": "MYMTNWEB_ACTIVEUSERS",
+      "date.regex": "^.*-([0-9]{8})_([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.mymtnweb_activeusers",
+      "filestats.msg.type": "com.mtn.messages.MYMTNWEB_ACTIVEUSERS",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/ACTIVEUSERS/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/ACTIVEUSERS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/ACTIVEUSERS/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/ACTIVEUSERS/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "MYMTNWEB_PAGE_LOAD",
+      "namespace": "flare_8",
+      "table.name": "MYMTNWEB_PAGE_LOAD",
+      "date.regex": "^.*-([0-9]{8})_([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.mymtnweb_page_load",
+      "filestats.msg.type": "com.mtn.messages.MYMTNWEB_PAGE_LOAD",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/PAGE_LOAD/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/PAGE_LOAD/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/PAGE_LOAD/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/PAGE_LOAD/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "MYMTNWEB_RECHARGE",
+      "namespace": "flare_8",
+      "table.name": "MYMTNWEB_RECHARGE",
+      "date.regex": "^.*-([0-9]{8})_([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.mymtnweb_recharge",
+      "filestats.msg.type": "com.mtn.messages.MYMTNWEB_RECHARGE",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/RECHARGE/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/RECHARGE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/RECHARGE/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/RECHARGE/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "COMPENSATION",
+      "namespace": "flare_8",
+      "table.name": "COMPENSATION",
+      "date.regex": "^.*([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.compensation",
+      "filestats.msg.type": "com.mtn.messages.COMPENSATION",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/COMPENSATION/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/COMPENSATION/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/COMPENSATION/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/COMPENSATION/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "TAPOUT_GPRS",
+      "namespace": "flare_8",
+      "table.name": "TAPOUT_GPRS",
+      "date.regex": "^.*_tapout_gprs_([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.tapout_gprs",
+      "filestats.msg.type": "com.mtn.messages.TAPOUT_GPRS",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/TAPOUT_GPRS/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/TAPOUT_GPRS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/TAPOUT_GPRS/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/TAPOUT_GPRS/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "SMSC_ERROR_BREAKDOWN_PER_ACCOUNT",
+      "namespace": "flare_8",
+      "table.name": "SMSC_ERROR_BREAKDOWN_PER_ACCOUNT",
+      "date.regex": "^.*([0-9]{4})-([0-9]{2})-([0-9]{2})_([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.smsc_error_breakdown_per_account",
+      "filestats.msg.type": "com.mtn.messages.SMSC_ERROR_BREAKDOWN_PER_ACCOUNT",
+      "_date.regex.group": 1,
+      "hour.regex.group": 4,
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/SMSC_ERROR_BREAKDOWN_PER_ACCOUNT/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SMSC_ERROR_BREAKDOWN_PER_ACCOUNT/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SMSC_ERROR_BREAKDOWN_PER_ACCOUNT/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SMSC_ERROR_BREAKDOWN_PER_ACCOUNT/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "ERS_VEND",
+      "table.name": "ERS_VEND",
+      "rejected.msg.type": "com.mtn.messages.ers_vend",
+      "filestats.msg.type": "com.mtn.messages.ERS_VEND",
+      "date.regex": ".*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/ERS_VTU_DUMP/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/ERS_VTU_DUMP/processed/",
+          "is.tarred": false
+        }
+      ]
+    },{
+      "name": "CB_SCHEDULES",
+      "table.name": "CB_SCHEDULES",
+      "rejected.msg.type": "com.mtn.messages.cb_schedules",
+      "filestats.msg.type": "com.mtn.messages.CB_SCHEDULES",
+      "date.regex": "^([0-9]{8})_CB_SCHEDULES.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/CB_SCHEDULES/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/CB_SCHEDULES/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/CB_SCHEDULES/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/CB_SCHEDULES/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "ERS_VEND_NEW",
+      "table.name": "ERS_VEND_NEW",
+      "rejected.msg.type": "com.mtn.messages.ers_vend_new",
+      "filestats.msg.type": "com.mtn.messages.ERS_VEND_NEW",
+      "date.regex": "^.*([0-9]{8})([0-9]{2}).*$",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "incoming.dir": "/mnt/beegfs_api/live/ERS_VEND_NEW/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/ERS_VEND_NEW/processed/",
+          "is.tarred": true
+        },{
+          "location": "/Archive_DAAS_Temp/Archived/ERS_VEND_NEW/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/ERS_VEND_NEW/",
+          "is.tarred": true
+        }]},{
+      "name": "LTE_HSS",
+      "table.name": "LTE_HSS",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.lte_hss",
+      "filestats.msg.type": "com.mtn.messages.LTE_HSS",
+      "date.regex.group": 1,
+      "extract.base.file": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/LTE_HSS/split",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/LTE_HSS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/LTE_HSS/",
+          "is.tarred": true
+        },
+                {
+          "location": "/mnt/beegfs_bsl2/archived/LTE_HSS/",
+          "is.tarred": true
+        }
+]
+        },
+                {
+      "name": "USSD_CDR",
+      "table.name": "USSD_CDR",
+      "date.regex": "^.*rec([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.ussd_cdr",
+      "filestats.msg.type": "com.mtn.messages.USSD_CDR",
+      "date.regex.group": 1,
+      "extract.base.file": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/USSD_CDR/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/USSD_CDR/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/USSD_CDR/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/USSD_CDR/",
+          "is.tarred": true
+        }
+]
+},
+{
+      "name": "WBS_REPORT",
+      "table.name": "WBS_REPORT",
+      "date.regex": "^.*([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.WBS_REPORT",
+      "filestats.msg.type": "com.mtn.messages.WBS_REPORT",
+      "date.regex.group": 1,
+      "extract.base.file": "true",
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/WBS_REPORT/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/WBS_REPORT/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/WBS_REPORT/",
+          "is.tarred": true
+        }
+      
+]
+},{
+      "name": "BONUS_SCORECARD",
+      "table.name": "BONUS_SCORECARD",
+      "date.regex": "^.*([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.bonus_scorecard",
+      "filestats.msg.type": "com.mtn.messages.BONUS_SCORECARD",
+      "date.regex.group": 1,
+      "extract.base.file": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/BONUS_SCORE_CARD/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/BONUS_SCORE_CARD/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/BONUS_SCORE_CARD/",
+          "is.tarred": true
+        }
+]
+},{
+      "name": "BRIGHT_DASHBOARD",
+      "table.name": "BRIGHT_DASHBOARD",
+      "date.regex": "^.*([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.bright_dashboard",
+      "filestats.msg.type": "com.mtn.messages.BRIGHT_DASHBOARD",
+      "date.regex.group": 1,
+      "extract.base.file": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/BRIGHT_DASHBOARD/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/BRIGHT_DASHBOARD/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/BRIGHT_DASHBOARD/",
+          "is.tarred": true
+        }
+]
+},{
+      "name": "BEEP_CALL_SERVICE",
+      "table.name": "BEEP_CALL_SERVICE",
+      "date.regex": "^.*([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.beep_call_service",
+      "filestats.msg.type": "com.mtn.messages.BEEP_CALL_SERVICE",
+      "date.regex.group": 1,
+      "extract.base.file": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/BEEP_CALL_SERVICE/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/BEEP_CALL_SERVICE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/BEEP_CALL_SERVICE/",
+          "is.tarred": true
+        }
+]
+},
+    {
+      "name": "OFFER_DUMP",
+      "table.name": "OFFER_DUMP",
+      "rejected.msg.type": "com.mtn.messages.offer_dump",
+      "filestats.msg.type": "com.mtn.messages.OFFER_DUMP",
+      "date.regex": ".*(DUMP_offer.)([0-9]{8})([0-9]{2}).*$",
+      "date.regex.group": 2,
+      "hour.regex.group": 3,
+      "incoming.dir": "/mnt/beegfs_api/live/OFFER_DUMP/split",
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/OFFER_DUMP/processed/",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/OFFER_DUMP",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/OFFER_DUMP",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "NEWREG_BIOUPDT_POOL_WEEKLY",
+      "table.name": "NEWREG_BIOUPDT_POOL_WEEKLY",
+      "rejected.msg.type": "com.mtn.messages.newreg_bioupdt_pool_weekly",
+      "filestats.msg.type": "com.mtn.messages.NEWREG_BIOUPDT_POOL_WEEKLY",
+      "date.regex": "^([0-9]{8})_NEWREG_BIOUPDT_POOL.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/NEWREG_BIOUPDT_POOL_WEEKLY/incoming",
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/NEWREG_BIOUPDT_POOL_WEEKLY/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/NEWREG_BIOUPDT_POOL_WEEKLY/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/NEWREG_BIOUPDT_POOL_WEEKLY/",
+          "is.tarred": true
+        }
+      ]
+    },    {
+      "name": "MTN_PR_DETAILS",
+      "table.name": "MTN_PR_DETAILS",
+      "rejected.msg.type": "com.mtn.messages.mtn_pr_details",
+      "filestats.msg.type": "com.mtn.messages.MTN_PR_DETAILS",
+      "date.regex": "^([0-9]{8})_MTN_PR_DETAILS.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/MTN_PR_DETAILS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/MTN_PR_DETAILS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MTN_PR_DETAILS/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/MTN_PR_DETAILS/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "VALIDATION_PASSED",
+      "table.name": "VALIDATION_PASSED",
+      "rejected.msg.type": "com.mtn.messages.validation_passed",
+      "filestats.msg.type": "com.mtn.messages.VALIDATION_PASSED",
+      "date.regex": "^([0-9]{8})_VALIDATION_PASSED.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/VALIDATION_PASSED/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/VALIDATION_PASSED/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/VALIDATION_PASSED/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/VALIDATION_PASSED/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "CB_SUBS_POS_SERVICES",
+      "table.name": "CB_SUBS_POS_SERVICES",
+      "rejected.msg.type": "com.mtn.messages.cb_subs_pos_services",
+      "filestats.msg.type": "com.mtn.messages.CB_SUBS_POS_SERVICES",
+      "date.regex": "^([0-9]{8})_CB_SUBS_POS_SERVICES.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/CB_SUBS_POS_SERVICES/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/CB_SUBS_POS_SERVICES/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/CB_SUBS_POS_SERVICES/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/CB_SUBS_POS_SERVICES/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "CLIENT_ACTIVITY_LOG",
+      "table.name": "CLIENT_ACTIVITY_LOG",
+      "rejected.msg.type": "com.mtn.messages.client_activity_log",
+      "filestats.msg.type": "com.mtn.messages.CLIENT_ACTIVITY_LOG",
+      "date.regex": "^([0-9]{8})_CLIENT_ACTIVITY_LOG.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/CLIENT_ACTIVITY_LOG/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/CLIENT_ACTIVITY_LOG/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/CLIENT_ACTIVITY_LOG/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/CLIENT_ACTIVITY_LOG/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "OTP_STATUS",
+      "table.name": "OTP_STATUS",
+      "rejected.msg.type": "com.mtn.messages.otp_status",
+      "filestats.msg.type": "com.mtn.messages.OTP_STATUS",
+      "date.regex": "^([0-9]{8})_OTP_STATUS.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/OTP_STATUS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/OTP_STATUS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/OTP_STATUS/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/OTP_STATUS/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "SERV_STATUS_SEAMFIX_REF",
+      "table.name": "SERV_STATUS_SEAMFIX_REF",
+      "rejected.msg.type": "com.mtn.messages.serv_status_seamfix_ref",
+      "filestats.msg.type": "com.mtn.messages.SERV_STATUS_SEAMFIX_REF",
+      "date.regex": "^([0-9]{8})_SERV_STATUS_SEAMFIX_REF.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/SERV_STATUS_SEAMFIX_REF/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/SERV_STATUS_SEAMFIX_REF/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SERV_STATUS_SEAMFIX_REF/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/SERV_STATUS_SEAMFIX_REF/",
+          "is.tarred": true
+        }
+      ]
+    },	{
+      "name": "SMS_ACTIVATION_REQUEST_JOIN",
+      "table.name": "SMS_ACTIVATION_REQUEST_JOIN",
+      "rejected.msg.type": "com.mtn.messages.sms_activation_request_join",
+      "filestats.msg.type": "com.mtn.messages.SMS_ACTIVATION_REQUEST_JOIN",
+      "date.regex": "^([0-9]{8})_SMS_ACTIVATION_REQUEST_JOIN.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/SMS_ACTIVATION_REQUEST_JOIN/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/SMS_ACTIVATION_REQUEST_JOIN/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SMS_ACTIVATION_REQUEST_JOIN/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/SMS_ACTIVATION_REQUEST_JOIN/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "SMS_ACTIVATION_REQUEST_KPI",
+      "table.name": "SMS_ACTIVATION_REQUEST_KPI",
+      "rejected.msg.type": "com.mtn.messages.sms_activation_request_join",
+      "filestats.msg.type": "com.mtn.messages.SMS_ACTIVATION_REQUEST_KPI",
+      "date.regex": "^([0-9]{8})_SMS_ACTIVATION_REQUEST.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/SMS_ACTIVATION_REQUEST_KPI/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/SMS_ACTIVATION_REQUEST_KPI/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SMS_ACTIVATION_REQUEST_KPI/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/SMS_ACTIVATION_REQUEST_KPI/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "SIM_SWAP",
+      "table.name": "SIM_SWAP",
+      "rejected.msg.type": "com.mtn.messages.sim_swap",
+      "filestats.msg.type": "com.mtn.messages.SIM_SWAP",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/SIM_SWAP/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/SIM_SWAP/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SIM_SWAP/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/SIM_SWAP/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "EDW_SIM_SWAP",
+      "table.name": "EDW_SIM_SWAP",
+      "rejected.msg.type": "com.mtn.messages.edw_sim_swap",
+      "filestats.msg.type": "com.mtn.messages.EDW_SIM_SWAP",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/EDW_SIM_SWAP/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/EDW_SIM_SWAP/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/EDW_SIM_SWAP/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/EDW_SIM_SWAP/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "BIB_AGL_FXL_STS_REPORT",
+      "table.name": "BIB_AGL_FXL_STS_REPORT",
+      "rejected.msg.type": "com.mtn.messages.bib_agl_fxl_sts_report",
+      "filestats.msg.type": "com.mtn.messages.BIB_AGL_FXL_STS_REPORT",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/BIB_AGL_FXL_STS_REPORT/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/BIB_AGL_FXL_STS_REPORT/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/BIB_AGL_FXL_STS_REPORT/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/BIB_AGL_FXL_STS_REPORT/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "MSO_MNP_NUMBER_SUMMARY",
+      "table.name": "MSO_MNP_NUMBER_SUMMARY",
+      "rejected.msg.type": "com.mtn.messages.mso_mnp_number_summary",
+      "filestats.msg.type": "com.mtn.messages.MSO_MNP_NUMBER_SUMMARY",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/MSO_MNP_NUMBER_SUMMARY/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/MSO_MNP_NUMBER_SUMMARY/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MSO_MNP_NUMBER_SUMMARY/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/MSO_MNP_NUMBER_SUMMARY/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "CB_MNP_INTERFACE_DTLS",
+      "table.name": "CB_MNP_INTERFACE_DTLS",
+      "rejected.msg.type": "com.mtn.messages.cb_mnp_interface_dtls",
+      "filestats.msg.type": "com.mtn.messages.CB_MNP_INTERFACE_DTLS",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/CB_MNP_INTERFACE_DTLS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/CB_MNP_INTERFACE_DTLS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/CB_MNP_INTERFACE_DTLS/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/CB_MNP_INTERFACE_DTLS/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "SMS_ACTIVATION_VW",
+      "table.name": "SMS_ACTIVATION_VW",
+      "rejected.msg.type": "com.mtn.messages.sms_activation_vw",
+      "filestats.msg.type": "com.mtn.messages.SMS_ACTIVATION_VW",
+      "date.regex": "^([0-9]{8})_SMS_ACTIVATION_VW.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/SMS_ACTIVATION_VW/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/SMS_ACTIVATION_VW/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/SMS_ACTIVATION_VW/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/SMS_ACTIVATION_VW/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "GUEST_PASS",
+      "table.name": "GUEST_PASS",
+      "rejected.msg.type": "com.mtn.messages.guest_pass",
+      "filestats.msg.type": "com.mtn.messages.GUEST_PASS",
+      "date.regex": "^([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/GUEST_LOG_PATH/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/GUEST_LOG_PATH/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/GUEST_LOG_PATH/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/GUEST_LOG_PATH/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "EMM_DELIVERY_KPI",
+      "namespace": "flare_8",
+      "table.name": "EMM_DELIVERY_KPI",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.emm_delivery_kpi",
+      "filestats.msg.type": "com.mtn.messages.EMM_DELIVERY_KPI",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/EMM_DELIVERY_KPI/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/EMM_DELIVERY_KPI/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/EMM_DELIVERY_KPI/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/EMM_DELIVERY_KPI/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "MANUAL_KPI",
+      "namespace": "flare_8",
+      "table.name": "MANUAL_KPI",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.manual_kpi",
+      "filestats.msg.type": "com.mtn.messages.MANUAL_KPI",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/MANUAL_KPI/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MANUAL_KPI/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MANUAL_KPI/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MANUAL_KPI/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "RECHARGE_SUCCESS_RATE",
+      "namespace": "flare_8",
+      "table.name": "RECHARGE_SUCCESS_RATE",
+      "date.regex": "^([0-9]{8})([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.recharge_success_rate",
+      "filestats.msg.type": "com.mtn.messages.RECHARGE_SUCCESS_RATE",
+      "date.regex.group": 1,
+	  "hour.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/XML_FEED/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/XML_FEED/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/XML_FEED/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/XML_FEED/",
+          "is.tarred": true
+        }
+      ]
+    },	{
+      "name": "HPD_HELP_DESK",
+      "table.name": "HPD_HELP_DESK",
+      "rejected.msg.type": "com.mtn.messages.hpd_help_desk",
+      "filestats.msg.type": "com.mtn.messages.HPD_HELP_DESK",
+      "date.regex": "^([0-9]{8})HPD_HELP_DESK.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/HPD_HELP_DESK/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/HPD_HELP_DESK/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/HPD_HELP_DESK/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/HPD_HELP_DESK/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "CHANGE_REPORT_MTN",
+      "table.name": "CHANGE_REPORT_MTN",
+      "rejected.msg.type": "com.mtn.messages.change_report_mtn",
+      "filestats.msg.type": "com.mtn.messages.CHANGE_REPORT_MTN",
+      "date.regex": "^([0-9]{8})_CHANGE_REPORT_MTN.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/CHANGE_REPORT_MTN/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/CHANGE_REPORT_MTN/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/CHANGE_REPORT_MTN/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/CHANGE_REPORT_MTN/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "NGVS_DUMP",
+      "namespace": "flare_8",
+      "table.name": "NGVS_DUMP",
+      "date.regex": "^.*_([0-9]{2})_([0-9]{2})_([0-9]{4})_.*$",
+      "rejected.msg.type": "com.mtn.messages.ngvs_dump",
+      "filestats.msg.type": "com.mtn.messages.NGVS_DUMP",
+      "_date.regex.group": 1,
+      "year.regex.group": 3,
+      "month.regex.group": 1,
+      "day.regex.group": 2,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/NGVS_DUMP/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/NGVS_DUMP/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/NGVS_DUMP/",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/NGVS_DUMP/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "MAPS_NETWORK_3G_EVENTS",
+      "table.name": "MAPS_NETWORK_3G_EVENTS",
+      "rejected.msg.type": "com.mtn.messages.maps_network_3g_events",
+      "filestats.msg.type": "com.mtn.messages.MAPS_NETWORK_3G_EVENTS",
+      "date.regex": "^.*_([0-9]{8})([0-9]{2}).*$",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "incoming.dir": "/mnt/beegfs_api/live/MAPS_NETWORK_3G_EVENTS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MAPS_NETWORK_3G_EVENTS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MAPS_NETWORK_3G_EVENTS/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "MAPS_NETWORK_2G_EVENTS",
+      "table.name": "MAPS_NETWORK_2G_EVENTS",
+      "rejected.msg.type": "com.mtn.messages.maps_network_2g_events",
+      "filestats.msg.type": "com.mtn.messages.MAPS_NETWORK_2G_EVENTS",
+      "date.regex": "^.*_([0-9]{8})([0-9]{2}).*$",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "incoming.dir": "/mnt/beegfs_api/live/MAPS_NETWORK_2G_EVENTS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MAPS_NETWORK_2G_EVENTS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MAPS_NETWORK_2G_EVENTS/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "BUDGET_YEAR_AMOUNT",
+      "table.name": "BUDGET_YEAR_AMOUNT",
+      "rejected.msg.type": "com.mtn.messages.budget_year_amount",
+      "filestats.msg.type": "com.mtn.messages.BUDGET_YEAR_AMOUNT",
+      "date.regex": "^([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/BUDGET_YEAR_AMOUNT/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/BUDGET_YEAR_AMOUNT/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/BUDGET_YEAR_AMOUNT/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/BUDGET_YEAR_AMOUNT/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "BI_IMEI_ACTIVATION_INPUT_VIEW",
+      "table.name": "BI_IMEI_ACTIVATION_INPUT_VIEW",
+      "rejected.msg.type": "com.mtn.messages.bi_imei_activation_input_view",
+      "filestats.msg.type": "com.mtn.messages.BI_IMEI_ACTIVATION_INPUT_VIEW",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/BI_IMEI_ACTIVATION_INPUT_VIEW/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/BI_IMEI_ACTIVATION_INPUT_VIEW/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/BI_IMEI_ACTIVATION_INPUT_VIEW/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "SOAPPKEY",
+      "table.name": "SOAPPKEY",
+      "rejected.msg.type": "com.mtn.messages.soappkey",
+      "filestats.msg.type": "com.mtn.messages.SOAPPKEY",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/SOAPPKEY/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/SOAPPKEY/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SOAPPKEY/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "SORESPONSE",
+      "table.name": "SORESPONSE",
+      "rejected.msg.type": "com.mtn.messages.soresponse",
+      "filestats.msg.type": "com.mtn.messages.SORESPONSE",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/SORESPONSE/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/SORESPONSE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SORESPONSE/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "SORECORD",
+      "table.name": "SORECORD",
+      "rejected.msg.type": "com.mtn.messages.sorecord",
+      "filestats.msg.type": "com.mtn.messages.SORECORD",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/SORECORD/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/SORECORD/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SORECORD/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "MSO_ACCURACY_STATISTICS",
+      "table.name": "MSO_ACCURACY_STATISTICS",
+      "rejected.msg.type": "com.mtn.messages.mso_accuracy_statistics",
+      "filestats.msg.type": "com.mtn.messages.MSO_ACCURACY_STATISTICS",
+      "date.regex": "^([0-9]{8})_MSO_ACCURACY_STATISTICS.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/MSO_ACCURACY_STATISTICS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/MSO_ACCURACY_STATISTICS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MSO_ACCURACY_STATISTICS/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/MSO_ACCURACY_STATISTICS/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "MSO_PROCESS_AVG_TIME",
+      "table.name": "MSO_PROCESS_AVG_TIME",
+      "rejected.msg.type": "com.mtn.messages.mso_process_avg_time",
+      "filestats.msg.type": "com.mtn.messages.MSO_PROCESS_AVG_TIME",
+      "date.regex": "^([0-9]{8})_MSO_PROCESS_AVG_TIME.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/MSO_PROCESS_AVG_TIME/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/MSO_PROCESS_AVG_TIME/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MSO_PROCESS_AVG_TIME/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/MSO_PROCESS_AVG_TIME/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "BILL_RUN_STATISTICS_TAB",
+      "table.name": "BILL_RUN_STATISTICS_TAB",
+      "rejected.msg.type": "com.mtn.messages.bill_run_statistics_tab",
+      "filestats.msg.type": "com.mtn.messages.BILL_RUN_STATISTICS_TAB",
+      "date.regex": "^([0-9]{6})_BILL_RUN_STATISTICS_TAB.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/BILL_RUN_STATISTICS_TAB/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/BILL_RUN_STATISTICS_TAB/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/BILL_RUN_STATISTICS_TAB/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/BILL_RUN_STATISTICS_TAB/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "AGL_BILL_ANALYZER_MONTHLY",
+      "table.name": "AGL_BILL_ANALYZER_MONTHLY",
+      "rejected.msg.type": "com.mtn.messages.agl_bill_analyzer_monthly",
+      "filestats.msg.type": "com.mtn.messages.AGL_BILL_ANALYZER_MONTHLY",
+      "date.regex": "^([0-9]{6})_AGL_BILL_ANALYZER_MONTHLY.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/AGL_BILL_ANALYZER_MONTHLY/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/AGL_BILL_ANALYZER_MONTHLY/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/AGL_BILL_ANALYZER_MONTHLY/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/AGL_BILL_ANALYZER_MONTHLY/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "CUG_ACCESS_FEES",
+      "table.name": "CUG_ACCESS_FEES",
+      "rejected.msg.type": "com.mtn.messages.cug_access_fees",
+      "filestats.msg.type": "com.mtn.messages.CUG_ACCESS_FEES",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/CUG_ACCESS_FEES/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/CUG_ACCESS_FEES/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/CUG_ACCESS_FEES/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/CUG_ACCESS_FEES/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "HYNETFLEX_CUSTOMER",
+      "table.name": "HYNETFLEX_CUSTOMER",
+      "rejected.msg.type": "com.mtn.messages.hynetflex_customer",
+      "filestats.msg.type": "com.mtn.messages.HYNETFLEX_CUSTOMER",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+          "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/HYNETFLEX_CUSTOMER/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/HYNETFLEX_CUSTOMER/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/HYNETFLEX_CUSTOMER/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "EBU_GROUP_ESCALATIONS",
+      "table.name": "EBU_GROUP_ESCALATIONS",
+      "rejected.msg.type": "com.mtn.messages.ebu_group_escalations",
+      "filestats.msg.type": "com.mtn.messages.EBU_GROUP_ESCALATIONS",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+          "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/EBU_GROUP_ESCALATIONS/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/EBU_GROUP_ESCALATIONS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/EBU_GROUP_ESCALATIONS/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "NEWREG_BIOUPDT_POOL_DAILY",
+      "table.name": "NEWREG_BIOUPDT_POOL_DAILY",
+      "rejected.msg.type": "com.mtn.messages.newreg_bioupdt_pool_daily",
+      "filestats.msg.type": "com.mtn.messages.NEWREG_BIOUPDT_POOL_DAILY",
+      "date.regex": "^([0-9]{8})_CB_NEWREG_BIOUPDT_POOL_DAILY.*$",
+      "date.regex.group": 1,
+	  "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/NEWREG_BIOUPDT_POOL_DAILY/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/NEWREG_BIOUPDT_POOL_DAILY/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/NEWREG_BIOUPDT_POOL_DAILY/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/NEWREG_BIOUPDT_POOL_DAILY/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "MNP_PORTING_BROADCAST",
+      "table.name": "MNP_PORTING_BROADCAST",
+      "rejected.msg.type": "com.mtn.messages.mnp_porting_broadcast",
+      "filestats.msg.type": "com.mtn.messages.MNP_PORTING_BROADCAST",
+      "date.regex": "^([0-9]{8})_MNP_PORTING_BROADCAST.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/MNP_PORTING_BROADCAST/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/MNP_PORTING_BROADCAST/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/MNP_PORTING_BROADCAST/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/MNP_PORTING_BROADCAST/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "BFP_FAILURE_LOG",
+      "table.name": "BFP_FAILURE_LOG",
+      "rejected.msg.type": "com.mtn.messages.bfp_failure_log",
+      "filestats.msg.type": "com.mtn.messages.BFP_FAILURE_LOG",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/BFP_FAILURE_LOG/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/BFP_FAILURE_LOG/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/BFP_FAILURE_LOG/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/BFP_FAILURE_LOG/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "PORT_IN_OUT",
+      "table.name": "PORT_IN_OUT",
+      "rejected.msg.type": "com.mtn.messages.port_in_out",
+      "filestats.msg.type": "com.mtn.messages.PORT_IN_OUT",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/PORT_IN_OUT/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/PORT_IN_OUT/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/PORT_IN_OUT/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/PORT_IN_OUT/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "BYPASS_VENDOR",
+      "namespace": "flare_8",
+      "table.name": "BYPASS_VENDOR",
+      "date.regex": "^.*_([0-9]{4})-([0-9]{2})-([0-9]{2})_.*$",
+      "rejected.msg.type": "com.mtn.messages.bypass_vendor",
+      "filestats.msg.type": "com.mtn.messages.BYPASS_VENDOR",
+      "date.regex.group": 3,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/BYPASS_VENDOR/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/BYPASS_VENDOR/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/BYPASS_VENDOR",
+          "is.tarred": true
+        },
+        {
+          "location": "/mnt/beegfs_bsl2/archived/BYPASS_VENDOR/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "DMC_DUMP_ALL",
+      "namespace": "flare_8",
+      "table.name": "DMC_DUMP_ALL",
+      "date.regex": "^.*_([0-9]{8})_.*$",
+      "rejected.msg.type": "com.mtn.messages.dmc_dump_all",
+      "filestats.msg.type": "com.mtn.messages.dmc_dump_all",
+      "date.regex.group": 1,
+      "feed.filename.column": "base_file_name",
+      "extract.base.file.in.feed.table": "false",
+      "incoming.dir": "/mnt/beegfs_api/live/DMC_DUMP_ALL/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/DMC_DUMP_ALL/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/DMC_DUMP_ALL/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "CC_ONLINE_CENTER_ACTIVITY",
+      "table.name": "CC_ONLINE_CENTER_ACTIVITY",
+      "rejected.msg.type": "com.mtn.messages.cc_online_center_activity",
+      "filestats.msg.type": "com.mtn.messages.CC_ONLINE_CENTER_ACTIVITY",
+      "date.regex": "^incoming([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/CC_ONLINE_CENTER_ACTIVITY/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CC_ONLINE_CENTER_ACTIVITY/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CC_ONLINE_CENTER_ACTIVITY/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "BIOSMART_WEB_TRANSACTIONS",
+      "table.name": "BIOSMART_WEB_TRANSACTIONS",
+      "rejected.msg.type": "com.mtn.messages.biosmart_web_transactions",
+      "filestats.msg.type": "com.mtn.messages.BIOSMART_WEB_TRANSACTIONS",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/BIOSMART_WEB_TRANSACTIONS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/BIOSMART_WEB_TRANSACTIONS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/BIOSMART_WEB_TRANSACTIONS/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "ACTIVE_DEVICES",
+      "table.name": "ACTIVE_DEVICES",
+      "rejected.msg.type": "com.mtn.messages.active_devices",
+      "filestats.msg.type": "com.mtn.messages.ACTIVE_DEVICES",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/ACTIVE_DEVICES/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/ACTIVE_DEVICES/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/ACTIVE_DEVICES/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "WOM_STUDY_ORDER_REPORT_VW",
+      "table.name": "WOM_STUDY_ORDER_REPORT_VW",
+      "rejected.msg.type": "com.mtn.messages.wom_study_order_report_vw",
+      "filestats.msg.type": "com.mtn.messages.WOM_STUDY_ORDER_REPORT_VW",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/WOM_STUDY_ORDER_REPORT_VW/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/WOM_STUDY_ORDER_REPORT_VW/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/WOM_STUDY_ORDER_REPORT_VW/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "WOM_TASK_STATUS_REPORT_VW",
+      "table.name": "WOM_TASK_STATUS_REPORT_VW",
+      "rejected.msg.type": "com.mtn.messages.wom_task_status_report_vw",
+      "filestats.msg.type": "com.mtn.messages.WOM_TASK_STATUS_REPORT_VW",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/WOM_TASK_STATUS_REPORT_VW/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/WOM_TASK_STATUS_REPORT_VW/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/WOM_TASK_STATUS_REPORT_VW/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "TAS_KPI_TARGET_VS_ACHIEVEMENT",
+      "table.name": "TAS_KPI_TARGET_VS_ACHIEVEMENT",
+      "rejected.msg.type": "com.mtn.messages.tas_kpi_target_vs_achievement",
+      "filestats.msg.type": "com.mtn.messages.TAS_KPI_TARGET_VS_ACHIEVEMENT",
+      "date.regex": "^.*_([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/TAS_DUMP_KPI_TARGET_VS_ACHIEVEMENT/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/TAS_DUMP_KPI_TARGET_VS_ACHIEVEMENT/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/TAS_DUMP_KPI_TARGET_VS_ACHIEVEMENT/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "MSO_POST_SWAP_EYEBALLING_VW",
+      "table.name": "MSO_POST_SWAP_EYEBALLING_VW",
+      "rejected.msg.type": "com.mtn.messages.mso_post_swap_eyeballing_vw",
+      "filestats.msg.type": "com.mtn.messages.MSO_POST_SWAP_EYEBALLING_VW",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/MSO_POST_SWAP_EYEBALLING_VW/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/MSO_POST_SWAP_EYEBALLING_VW/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MSO_POST_SWAP_EYEBALLING_VW/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "MTN_FAST_EYEBALLING_RPT",
+      "table.name": "MTN_FAST_EYEBALLING_RPT",
+      "rejected.msg.type": "com.mtn.messages.mtn_fast_eyeballing_rpt",
+      "filestats.msg.type": "com.mtn.messages.MTN_FAST_EYEBALLING_RPT",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/MTN_FAST_EYEBALLING_RPT/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/MTN_FAST_EYEBALLING_RPT/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MTN_FAST_EYEBALLING_RPT/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "DAILY_BVN_LINKING",
+      "table.name": "DAILY_BVN_LINKING",
+      "rejected.msg.type": "com.mtn.messages.daily_bvn_linking",
+      "filestats.msg.type": "com.mtn.messages.DAILY_BVN_LINKING",
+      "date.regex": "^DYA_BVN_Linking_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/DAILY_BVN_LINKING/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/DAILY_BVN_LINKING/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/",
+          "is.tarred": true
+        },
+        {
+          "location": "/nas/share05/archived/DAILY_BVN_LINKING/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "DUMP_SHARESELL",
+      "table.name": "DUMP_SHARESELL",
+      "rejected.msg.type": "com.mtn.messages.dump_sharesell",
+      "filestats.msg.type": "com.mtn.messages.DUMP_SHARESELL",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/DUMP_SHARESELL/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/DUMP_SHARESELL/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/DUMP_SHARESELL/",
+          "is.tarred": true
+        }
+      ]
+    },
+	{
+      "name": "DYA_Daily_Activation",
+      "table.name": "DYA_Daily_Activation",
+      "rejected.msg.type": "com.mtn.messages.dya_daily_activation",
+      "filestats.msg.type": "com.mtn.messages.DYA_Daily_Activation",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/DYA_Daily_Activation/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/DYA_Daily_Activation/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/DYA_Daily_Activation/",
+          "is.tarred": true
+        }
+      ]
+    },
+ {
+      "name": "SUBSCRIBER_TRANSACTIONS_CDR",
+      "table.name": "SUBSCRIBER_TRANSACTIONS_CDR",
+      "rejected.msg.type": "com.mtn.messages.subscriber_transactions_cdr",
+      "filestats.msg.type": "com.mtn.messages.SUBSCRIBER_TRANSACTIONS_CDR",
+      "date.regex": "^.*.([0-9]{4})-([0-9]{2})-([0-9]{2})$",
+      "date.regex.group": 3,
+      "incoming.dir": "/mnt/beegfs_api/live/SMART_APP_SERVICE_CDR/incoming/",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/live/SMART_APP_SERVICE_CDR/incoming/",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SMART_APP_SERVICE_CDR/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "TECHNOLOGY_CELL_SPECIFICATION",
+      "table.name": "TECHNOLOGY_CELL_SPECIFICATION",
+      "rejected.msg.type": "com.mtn.messages.technology_cell_specification",
+      "filestats.msg.type": "com.mtn.messages.TECHNOLOGY_CELL_SPECIFICATION",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/TECHNOLOGY_CELL_SPECIFICATION/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/TECHNOLOGY_CELL_SPECIFICATION/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/TECHNOLOGY_CELL_SPECIFICATION/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "AREA_WIDE_PARAMETERS",
+      "table.name": "AREA_WIDE_PARAMETERS",
+      "rejected.msg.type": "com.mtn.messages.area_wide_parameters",
+      "filestats.msg.type": "com.mtn.messages.AREA_WIDE_PARAMETERS",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/AREA_WIDE_PARAMETERS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/AREA_WIDE_PARAMETERS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/AREA_WIDE_PARAMETERS/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "HW_CAPEX_FIXED",
+      "table.name": "HW_CAPEX_FIXED",
+      "rejected.msg.type": "com.mtn.messages.hw_capex_fixed",
+      "filestats.msg.type": "com.mtn.messages.HW_CAPEX_FIXED",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/HW_CAPEX_FIXED/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/HW_CAPEX_FIXED/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/HW_CAPEX_FIXED/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "SW_CAPEX_FIXED",
+      "table.name": "SW_CAPEX_FIXED",
+      "rejected.msg.type": "com.mtn.messages.sw_capex_fixed",
+      "filestats.msg.type": "com.mtn.messages.SW_CAPEX_FIXED",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/SW_CAPEX_FIXED/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SW_CAPEX_FIXED/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SW_CAPEX_FIXED/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "PENETRATION_RATIO_FIXED",
+      "table.name": "PENETRATION_RATIO_FIXED",
+      "rejected.msg.type": "com.mtn.messages.penetration_ratio_fixed",
+      "filestats.msg.type": "com.mtn.messages.PENETRATION_RATIO_FIXED",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/PENETRATION_RATIO_FIXED/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/PENETRATION_RATIO_FIXED/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/PENETRATION_RATIO_FIXED/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "PAYLOAD_DATA_AT_AREA_AND_BTS_ID",
+      "table.name": "PAYLOAD_DATA_AT_AREA_AND_BTS_ID",
+      "rejected.msg.type": "com.mtn.messages.payload_data_at_area_and_bts_id",
+      "filestats.msg.type": "com.mtn.messages.PAYLOAD_DATA_AT_AREA_AND_BTS_ID",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/PAYLOAD_DATA_AT_AREA_AND_BTS_ID/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/PAYLOAD_DATA_AT_AREA_AND_BTS_ID/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/PAYLOAD_DATA_AT_AREA_AND_BTS_ID/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "MRKT_SIZING_NEXT_10_YRS",
+      "table.name": "MRKT_SIZING_NEXT_10_YRS",
+      "rejected.msg.type": "com.mtn.messages.mrkt_sizing_next_10_yrs",
+      "filestats.msg.type": "com.mtn.messages.MRKT_SIZING_NEXT_10_YRS",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/MRKT_SIZING_NEXT_10_YRS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MRKT_SIZING_NEXT_10_YRS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MRKT_SIZING_NEXT_10_YRS/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "CVM_CAMPAIGN_INFO_LIBRARY",
+      "table.name": "CVM_CAMPAIGN_INFO_LIBRARY",
+      "rejected.msg.type": "com.mtn.messages.cvm_campaign_info_library",
+      "filestats.msg.type": "com.mtn.messages.CVM_CAMPAIGN_INFO_LIBRARY",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/CVM_CAMPAIGN_INFO_LIBRARY/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CVM_CAMPAIGN_INFO_LIBRARY/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CVM_CAMPAIGN_INFO_LIBRARY/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "MPULSE_CHILDREG",
+      "table.name": "MPULSE_CHILDREG",
+      "rejected.msg.type": "com.mtn.messages.mpulse_childreg",
+      "filestats.msg.type": "com.mtn.messages.MPULSE_CHILDREG",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/MPULSE_CHILDREG/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MPULSE_CHILDREG/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MPULSE_CHILDREG/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "MPULSE_PARENTREG",
+      "table.name": "MPULSE_PARENTREG",
+      "rejected.msg.type": "com.mtn.messages.mpulse_parentreg",
+      "filestats.msg.type": "com.mtn.messages.MPULSE_PARENTREG",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/MPULSE_PARENTREG/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MPULSE_PARENTREG/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MPULSE_PARENTREG/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "MPULSE_CHILD_DATAPLANS_SUCCESS",
+      "table.name": "MPULSE_CHILD_DATAPLANS_SUCCESS",
+      "rejected.msg.type": "com.mtn.messages.mpulse_child_dataplans_success",
+      "filestats.msg.type": "com.mtn.messages.MPULSE_CHILD_DATAPLANS_SUCCESS",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/MPULSE_CHILD_DATAPLANS_SUCCESS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MPULSE_CHILD_DATAPLANS_SUCCESS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MPULSE_CHILD_DATAPLANS_SUCCESS/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "MPULSE_MIGRATE_SUCCESS",
+      "table.name": "MPULSE_MIGRATE_SUCCESS",
+      "rejected.msg.type": "com.mtn.messages.mpulse_migrate_success",
+      "filestats.msg.type": "com.mtn.messages.MPULSE_MIGRATE_SUCCESS",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/MPULSE_MIGRATE_SUCCESS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MPULSE_MIGRATE_SUCCESS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MPULSE_MIGRATE_SUCCESS/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "MPULSE_CONTENTCLICKS",
+      "table.name": "MPULSE_CONTENTCLICKS",
+      "rejected.msg.type": "com.mtn.messages.mpulse_contentclicks",
+      "filestats.msg.type": "com.mtn.messages.MPULSE_CONTENTCLICKS",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/MPULSE_CONTENTCLICKS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MPULSE_CONTENTCLICKS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MPULSE_CONTENTCLICKS/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "BILLING_CYCLE_REVENUE",
+      "table.name": "BILLING_CYCLE_REVENUE",
+      "rejected.msg.type": "com.mtn.messages.billing_cycle_revenue",
+      "filestats.msg.type": "com.mtn.messages.BILLING_CYCLE_REVENUE",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/BILLING_CYCLE_REVENUE/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/BILLING_CYCLE_REVENUE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/BILLING_CYCLE_REVENUE/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "SALES_VALUE_USD",
+      "table.name": "SALES_VALUE_USD",
+      "rejected.msg.type": "com.mtn.messages.sales_value_usd",
+      "filestats.msg.type": "com.mtn.messages.SALES_VALUE_USD",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/SALES_VALUE_USD/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SALES_VALUE_USD/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SALES_VALUE_USD/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "SALES_VALUE_LC",
+      "table.name": "SALES_VALUE_LC",
+      "rejected.msg.type": "com.mtn.messages.sales_value_lc",
+      "filestats.msg.type": "com.mtn.messages.SALES_VALUE_LC",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/SALES_VALUE_LC/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SALES_VALUE_LC/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SALES_VALUE_LC/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "FB_MKT_SHARE",
+      "table.name": "FB_MKT_SHARE",
+      "rejected.msg.type": "com.mtn.messages.fb_mkt_share",
+      "filestats.msg.type": "com.mtn.messages.FB_MKT_SHARE",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/FB_MKT_SHARE/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/FB_MKT_SHARE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/FB_MKT_SHARE/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "SALES_UNIT",
+      "table.name": "SALES_UNIT",
+      "rejected.msg.type": "com.mtn.messages.sales_unit",
+      "filestats.msg.type": "com.mtn.messages.SALES_UNIT",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/SALES_UNIT/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SALES_UNIT/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SALES_UNIT/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "PRICE_USD",
+      "table.name": "PRICE_USD",
+      "rejected.msg.type": "com.mtn.messages.price_usd",
+      "filestats.msg.type": "com.mtn.messages.PRICE_USD",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/PRICE_USD/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/PRICE_USD/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/PRICE_USD/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "PRICE_LC",
+      "table.name": "PRICE_LC",
+      "rejected.msg.type": "com.mtn.messages.price_lc",
+      "filestats.msg.type": "com.mtn.messages.PRICE_LC",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/PRICE_LC/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/PRICE_LC/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/PRICE_LC/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "UNBILLED_USAGE",
+      "table.name": "UNBILLED_USAGE",
+      "rejected.msg.type": "com.mtn.messages.unbilled_usage",
+      "filestats.msg.type": "com.mtn.messages.UNBILLED_USAGE",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/UNBILLED_USAGE/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/UNBILLED_USAGE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/UNBILLED_USAGE/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "AYOBA_DTT",
+      "table.name": "AYOBA_DTT",
+      "rejected.msg.type": "com.mtn.messages.ayoba_dtt",
+      "filestats.msg.type": "com.mtn.messages.AYOBA_DTT",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/AYOBA_DTT/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/AYOBA_DTT/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/AYOBA_DTT/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "ERM_10YRS",
+      "table.name": "ERM_10YRS",
+      "rejected.msg.type": "com.mtn.messages.erm_10yrs",
+      "filestats.msg.type": "com.mtn.messages.ERM_10YRS",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/ERM_10YRS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/ERM_10YRS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/ERM_10YRS/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "SMD_IDENTITIES",
+      "table.name": "SMD_IDENTITIES",
+      "rejected.msg.type": "com.mtn.messages.smd_identities",
+      "filestats.msg.type": "com.mtn.messages.SMD_IDENTITIES",
+      "date.regex": "^.*([0-9]{4})_([0-9]{2})_([0-9]{2}).*$",
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+      "incoming.dir": "/mnt/beegfs_api/live/SMD_IDENTITIES/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SMD_IDENTITIES/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SMD_IDENTITIES",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "SMD_MESSAGES",
+      "table.name": "SMD_MESSAGES",
+      "rejected.msg.type": "com.mtn.messages.smd_messages",
+      "filestats.msg.type": "com.mtn.messages.SMD_MESSAGES",
+      "date.regex": "^.*([0-9]{4})_([0-9]{2})_([0-9]{2}).*$",
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+      "incoming.dir": "/mnt/beegfs_api/live/SMD_MESSAGES/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SMD_MESSAGES/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SMD_MESSAGES/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "SMD_SOURCES",
+      "table.name": "SMD_SOURCES",
+      "rejected.msg.type": "com.mtn.messages.smd_sources",
+      "filestats.msg.type": "com.mtn.messages.SMD_SOURCES",
+      "date.regex": "^.*([0-9]{4})_([0-9]{2})_([0-9]{2}).*$",
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+      "incoming.dir": "/mnt/beegfs_api/live/SMD_SOURCES/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SMD_SOURCES/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SMD_SOURCES/",
+          "is.tarred": true
+        }
+      ]
+    },
+     {
+      "name": "SMD_AGENTS_NOTIFICATIONS",
+      "table.name": "SMD_AGENTS_NOTIFICATIONS",
+      "rejected.msg.type": "com.mtn.messages.smd_agents_notifications",
+      "filestats.msg.type": "com.mtn.messages.SMD_AGENTS_NOTIFICATIONS",
+      "date.regex": "^.*([0-9]{4})_([0-9]{2})_([0-9]{2}).*$",
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+      "incoming.dir": "/mnt/beegfs_api/live/SMD_AGENTS_NOTIFICATIONS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SMD_AGENTS_NOTIFICATIONS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SMD_AGENTS_NOTIFICATIONS/",
+          "is.tarred": true
+        }
+      ] 
+    },
+     {
+      "name": "SMD_AGENTS",
+      "table.name": "SMD_AGENTS",
+      "rejected.msg.type": "com.mtn.messages.smd_agents",
+      "filestats.msg.type": "com.mtn.messages.SMD_AGENTS",
+      "date.regex": "^.*([0-9]{4})_([0-9]{2})_([0-9]{2}).*$",
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+      "incoming.dir": "/mnt/beegfs_api/live/SMD_AGENTS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SMD_AGENTS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SMD_AGENTS/",
+          "is.tarred": true
+        }
+      ]
+    },
+     {
+      "name": "SMD_INTERVENTIONS",
+      "table.name": "SMD_INTERVENTIONS",
+      "rejected.msg.type": "com.mtn.messages.smd_interventions",
+      "filestats.msg.type": "com.mtn.messages.SMD_INTERVENTIONS",
+      "date.regex": "^.*([0-9]{4})_([0-9]{2})_([0-9]{2}).*$",
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+      "incoming.dir": "/mnt/beegfs_api/live/SMD_INTERVENTIONS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SMD_INTERVENTIONS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SMD_INTERVENTIONS/",
+          "is.tarred": true
+        }
+      ] 
+    },
+    {
+      "name": "SMD_PRESENCE_TIME",
+      "table.name": "SMD_PRESENCE_TIME",
+      "rejected.msg.type": "com.mtn.messages.smd_presence_time",
+      "filestats.msg.type": "com.mtn.messages.SMD_PRESENCE_TIME",
+      "date.regex": "^.*([0-9]{4})_([0-9]{2})_([0-9]{2}).*$",
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+      "incoming.dir": "/mnt/beegfs_api/live/SMD_PRESENCE_TIME/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SMD_PRESENCE_TIME/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SMD_PRESENCE_TIME/",
+          "is.tarred": true
+        }
+      ]
+    },
+     {
+      "name": "CEM_GB",
+      "table.name": "CEM_GB",
+      "rejected.msg.type": "com.mtn.messages.cem_gb",
+      "filestats.msg.type": "com.mtn.messages.CEM_GB",
+      "date.regex": "^.*_([0-9]{8})([0-9]{2}).*$",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "incoming.dir": "/mnt/beegfs_api/live/CEM_GB/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CEM_GB/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CEM_GB/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "QMATIC",
+      "table.name": "QMATIC",
+      "rejected.msg.type": "com.mtn.messages.qmatic",
+      "filestats.msg.type": "com.mtn.messages.QMATIC",
+      "date.regex": "^.*_([0-9]{8})([0-9]{2}).*$",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "incoming.dir": "/mnt/beegfs_api/live/QMATIC/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/QMATIC/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/QMATIC/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "DIGITAL_INSURANCE_TRANSACTIONS",
+      "namespace": "flare_8",
+      "table.name": "DIGITAL_INSURANCE_TRANSACTIONS",
+      "date.regex": "^([0-9]{8})_.*$",
+      "rejected.msg.type": "com.mtn.messages.digital_insurance_transactions",
+      "filestats.msg.type": "com.mtn.messages.DIGITAL_INSURANCE_TRANSACTIONS",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/DIGITAL_INSURANCE_TRANSACTIONS/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/DIGITAL_INSURANCE_TRANSACTIONS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/DIGITAL_INSURANCE_TRANSACTIONS/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "DIGITAL_INSURANCE_CUSTOMERS",
+      "namespace": "flare_8",
+      "table.name": "DIGITAL_INSURANCE_CUSTOMERS",
+      "date.regex": "^([0-9]{8})_.*$",
+      "rejected.msg.type": "com.mtn.messages.digital_insurance_customers",
+      "filestats.msg.type": "com.mtn.messages.DIGITAL_INSURANCE_CUSTOMERS",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/DIGITAL_INSURANCE_CUSTOMERS/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/DIGITAL_INSURANCE_CUSTOMERS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/DIGITAL_INSURANCE_CUSTOMERS/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "DIGITAL_INSURANCE_REGISTRATIONS",
+      "namespace": "flare_8",
+      "table.name": "DIGITAL_INSURANCE_REGISTRATIONS",
+      "date.regex": "^([0-9]{8})_.*$",
+      "rejected.msg.type": "com.mtn.messages.digital_insurance_registrations",
+      "filestats.msg.type": "com.mtn.messages.DIGITAL_INSURANCE_REGISTRATIONS",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/DIGITAL_INSURANCE_REGISTRATIONS/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/DIGITAL_INSURANCE_REGISTRATIONS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/DIGITAL_INSURANCE_REGISTRATIONS/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "INCIDENNT_REPORT_WEEKLY",
+      "namespace": "flare_8",
+      "table.name": "INCIDENNT_REPORT_WEEKLY",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.incidennt_report_weekly",
+      "filestats.msg.type": "com.mtn.messages.INCIDENNT_REPORT_WEEKLY",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/INCIDENT_REPORT/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/INCIDENT_REPORT/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/INCIDENT_REPORT/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "INCIDENNT_REPORT_MONTHLY",
+      "namespace": "flare_8",
+      "table.name": "INCIDENNT_REPORT_MONTHLY",
+      "date.regex": "^_.*([0-9]{8}).*$",
+      "rejected.msg.type": "com.mtn.messages.incidennt_report_monthly",
+      "filestats.msg.type": "com.mtn.messages.INCIDENNT_REPORT_MONTHLY",
+      "date.regex.group": 1,
+      "extract.base.file.in.feed.table": "false",
+      "feed.filename.column": "base_file_name",
+      "incoming.dir": "/mnt/beegfs_api/live/MONTHLY_INCIDENT_REPORT/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/MONTHLY_INCIDENT_REPORT/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/MONTHLY_INCIDENT_REPORT/",
+          "is.tarred": true
+        }
+      ]
+    },
+     {
+      "name": "CEM_S1MME",
+      "table.name": "CEM_S1MME",
+      "rejected.msg.type": "com.mtn.messages.cem_s1mme",
+      "filestats.msg.type": "com.mtn.messages.CEM_S1MME",
+      "date.regex": "^.*_([0-9]{8})([0-9]{2}).*$",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "incoming.dir": "/mnt/beegfs_api/live/CEM_S1MME/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CEM_S1MME/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CEM_S1MME/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "FLUTTERWAVE",
+      "table.name": "FLUTTERWAVE",
+      "rejected.msg.type": "com.mtn.messages.flutterwave",
+      "filestats.msg.type": "com.mtn.messages.FLUTTERWAVE",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/FLUTTERWAVE/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/FLUTTERWAVE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/FLUTTERWAVE/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "AYOBA_RECON",
+      "table.name": "AYOBA_RECON",
+      "rejected.msg.type": "com.mtn.messages.ayoba_recon",
+      "filestats.msg.type": "com.mtn.messages.AYOBA_RECON",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/AYOBA_RECON/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/AYOBA_RECON/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/AYOBA_RECON/",
+          "is.tarred": true
+        }
+      ]
+    },
+     {
+      "name": "CEM_IUPS",
+      "table.name": "CEM_IUPS",
+      "rejected.msg.type": "com.mtn.messages.cem_iups",
+      "filestats.msg.type": "com.mtn.messages.CEM_IUPS",
+      "date.regex": "^.*_([0-9]{8})([0-9]{2}).*$",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "incoming.dir": "/mnt/beegfs_api/live/CEM_IUPS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CEM_IUPS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CEM_IUPS/",
+          "is.tarred": true
+        }
+      ]
+    },{
+      "name": "CEM_S1_U",
+      "table.name": "CEM_S1_U",
+      "rejected.msg.type": "com.mtn.messages.cem_s1_u",
+      "filestats.msg.type": "com.mtn.messages.CEM_S1_U",
+      "date.regex": "^.*_([0-9]{8})([0-9]{2}).*$",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "incoming.dir": "/mnt/beegfs_api/live/CEM_S1_U/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CEM_S1_U/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CEM_S1_U/",
+          "is.tarred": true
+        }
+      ]
+    },
+     {
+      "name": "CEM_VLR",
+      "table.name": "CEM_VLR",
+      "rejected.msg.type": "com.mtn.messages.cem_vlr",
+      "filestats.msg.type": "com.mtn.messages.CEM_VLR",
+      "date.regex": "^.*_([0-9]{8})([0-9]{2}).*$",
+      "date.regex.group": 1,
+      "hour.regex.group": 2,
+      "incoming.dir": "/mnt/beegfs_api/live/CEM_VLR/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/CEM_VLR/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/CEM_VLR/",
+          "is.tarred": true
+        }
+      ]
+    },
+    {
+      "name": "COUNTRY_WIDE_PARAMETERS",
+      "table.name": "COUNTRY_WIDE_PARAMETERS",
+      "rejected.msg.type": "com.mtn.messages.country_wide_parameters",
+      "filestats.msg.type": "com.mtn.messages.COUNTRY_WIDE_PARAMETERS",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/COUNTRY_WIDE_PARAMETERS/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/COUNTRY_WIDE_PARAMETERS/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/COUNTRY_WIDE_PARAMETERS/",
+          "is.tarred": true
+        }
+      ]
+     }
+    ,{
+      "name": "PAYMENT_GATEWAY_AIRTIME",
+      "table.name": "PAYMENT_GATEWAY_AIRTIME",
+      "rejected.msg.type": "com.mtn.messages.PAYMENT_GATEWAY_AIRTIME",
+      "filestats.msg.type": "com.mtn.messages.PAYMENT_GATEWAY_AIRTIME",
+      "date.regex": "^.*([0-9]{2})_([0-9]{2})_([0-9]{4}).*$",
+      "year.regex.group": 3,
+      "month.regex.group": 2,
+      "day.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_bsl/live/NG_PAYMENT_GATEWAY/incoming/",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/NG_PAYMENT_GATEWAY/processed",
+          "is.tarred": false
+        }
+      ]
+    },{
+      "name": "SOCIAL_MEDIA_DIMELO",
+      "namespace": "flare_8",
+      "table.name": "SOCIAL_MEDIA_DIMELO",
+      "date.regex": "^.*_([0-9]{4})_([0-9]{2})_([0-9]{2}).*$",
+      "rejected.msg.type": "com.mtn.messages.social_media_dimelo",
+      "filestats.msg.type": "com.mtn.messages.SOCIAL_MEDIA_DIMELO",
+      "_date.regex.group": 1,
+      "year.regex.group": 1,
+      "month.regex.group": 2,
+      "day.regex.group": 3,
+      "extract.base.file.in.feed.table": "true",
+      "incoming.dir": "/mnt/beegfs_api/live/SOCIAL_DIMELO_CRM/incoming",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/SOCIAL_DIMELO_CRM/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SOCIAL_DIMELO_CRM/",
+          "is.tarred": true
+        }
+      ]
+    },
+{
+      "name": "tbl_data_agent_registration_vw",
+      "table.name": "tbl_data_agent_registration_vw",
+      "rejected.msg.type": "com.mtn.messages.tbl_data_agent_registration_vw",
+      "filestats.msg.type": "com.mtn.messages.TBL_DATA_AGENT_REGISTRATION_VW",
+      "date.regex": "^.*_([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/tbl_data_agent_registration_vw/incoming/",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/tbl_data_agent_registration_vw/processed/",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/tbl_data_agent_registration_vw/",
+          "is.tarred": true
+        }
+      ]
+    },
+      {
+      "name": "PIN_PASSWORD",
+      "table.name": "PIN_PASSWORD",
+      "rejected.msg.type": "com.mtn.messages.pin_password",
+      "filestats.msg.type": "com.mtn.messages.PIN_PASSWORD",
+      "date.regex": "^([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/PIN_PASSWORD/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/PIN_PASSWORD/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/PIN_PASSWORD",
+          "is.tarred": true
+        }
+      ]
+    },
+   {
+      "name": "SIP_SERVER",
+      "table.name": "SIP_SERVER",
+      "rejected.msg.type": "com.mtn.messages.sip_server",
+      "filestats.msg.type": "com.mtn.messages.SIP_SERVER",
+      "date.regex": "^.*CDR-([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/FlareData/CDR/SIP_SERVER/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/FlareData/CDR/SIP_SERVER/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/SIP_SERVER",
+          "is.tarred": true
+        }
+      ]
+    },
+   {
+      "name": "FLUTTERWAVE_ISEC",
+      "table.name": "FLUTTERWAVE_ISEC",
+      "rejected.msg.type": "com.mtn.messages.flutterwave_isec",
+      "filestats.msg.type": "com.mtn.messages.FLUTTERWAVE_ISEC",
+      "date.regex": "^.*([0-9]{8}).*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/ISEC/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/ISEC/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/ISEC",
+          "is.tarred": true
+        }
+      ]
+    },
+   {
+      "name": "PSCOM_PIPELINE",
+      "table.name": "PSCOM_PIPELINE",
+      "rejected.msg.type": "com.mtn.messages.pscom_pipeline",
+      "filestats.msg.type": "com.mtn.messages.PSCOM_PIPELINE",
+      "date.regex": "^.*_([0-9]{2})([0-9]{2})([0-9]{4}).*$",
+      "_date.regex.group": 1,
+      "year.regex.group": 3,
+      "month.regex.group": 2,
+      "day.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/PSCOM_PIPELINE/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/PSCOM_PIPELINE/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/PSCOM_PIPELINE",
+          "is.tarred": true
+        }
+      ]
+    }, 
+    {
+      "name": "IFS_VW_INVOICED_SALES_TRAN",
+      "table.name": "IFS_VW_INVOICED_SALES_TRAN",
+      "rejected.msg.type": "com.mtn.messages.ifs_vw_invoiced_sales_tran",
+      "filestats.msg.type": "com.mtn.messages.IFS_VW_INVOICED_SALES_TRAN",
+      "date.regex": "^([0-9]{8})_.*$",
+      "date.regex.group": 1,
+      "incoming.dir": "/mnt/beegfs_api/live/IFS_VW_INVOICED_SALES_TRAN/incoming",
+      "extract.base.file.in.feed.table": "true",
+      "files.locations": [
+        {
+          "location": "/mnt/beegfs_api/production/live/IFS_VW_INVOICED_SALES_TRAN/processed",
+          "is.tarred": false
+        },
+        {
+          "location": "/nas/share05/archived/IFS_VW_INVOICED_SALES_TRAN/",
+          "is.tarred": true
+        }
+      ]
+    }
+  ]
+}

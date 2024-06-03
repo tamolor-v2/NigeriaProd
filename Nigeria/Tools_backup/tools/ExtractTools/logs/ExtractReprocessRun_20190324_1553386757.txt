@@ -1,0 +1,205 @@
+ INFO [main] - 2019:03:24 01:19:18 main: adding include file filter - .*\.tar.gz$
+ERROR [main] - 2019:03:24 01:19:18 main: given input path doesn't exist - -idf
+ERROR [main] - 2019:03:24 01:19:18 main: given input path doesn't exist - 201901
+ INFO [main] - 2019:03:24 01:19:18 main: Processing input path - /nas/share05/archived/AIR_REFILL_MA
+ INFO [main] - 2019:03:24 01:19:18 main: Creating initial direcotry work unit and placing into queue, input path: /nas/share05/archived/AIR_REFILL_MA, full path: /nas/share05/archived/AIR_REFILL_MA, name: AIR_REFILL_MA, modified: 1553342400000
+ INFO [main] - 2019:03:24 01:19:18 with parallelism: dirs: 4, files: 32, depth: 15, maxFiles: 1000000000
+ INFO [main] - 2019:03:24 01:19:18 Created file to write file information - /nas/share05/archived/SPOOL/WAHEED/report/latest/fileinfo-AIR_REFILL_MA-20190324_011918_989-001.txt.gz
+ INFO [main] - 2019:03:24 01:19:19 main: added new file collection @ 0/4
+ INFO [main] - 2019:03:24 01:19:19 Created file to write file information - /nas/share05/archived/SPOOL/WAHEED/report/latest/fileinfo-AIR_REFILL_MA-20190324_011918_989-002.txt.gz
+ INFO [main] - 2019:03:24 01:19:19 main: added new file collection @ 1/4
+ INFO [main] - 2019:03:24 01:19:19 Created file to write file information - /nas/share05/archived/SPOOL/WAHEED/report/latest/fileinfo-AIR_REFILL_MA-20190324_011918_989-003.txt.gz
+ INFO [main] - 2019:03:24 01:19:19 main: added new file collection @ 2/4
+ INFO [main] - 2019:03:24 01:19:19 Created file to write file information - /nas/share05/archived/SPOOL/WAHEED/report/latest/fileinfo-AIR_REFILL_MA-20190324_011918_989-004.txt.gz
+ INFO [main] - 2019:03:24 01:19:19 main: added new file collection @ 3/4
+ INFO [main] - 2019:03:24 01:19:19 main: number of file collections: - 4, 
+ INFO [main] - 2019:03:24 01:19:19 main: Successfully validated arguments, output path: /nas/share05/archived/SPOOL/WAHEED/report/latest, out full path: /nas/share05/archived/SPOOL/WAHEED/report/latest, out path pattern: 
+ INFO [main] - 2019:03:24 01:19:19 Elapsed:230 ms, in queue: dirs - 0; files - 0, processed: dirs - 0, files: 0, In FCs: count - 0, size - 0, ActiveCount: 1
+ INFO [main] - 2019:03:24 01:19:20 Elapsed:1239 ms, in queue: dirs - 6373; files - 811, processed: dirs - 7593, files: 961, In FCs: count - 118, size - 0, ActiveCount: 7221
+ INFO [main] - 2019:03:24 01:19:21 Elapsed:2240 ms, in queue: dirs - 10001; files - 2213, processed: dirs - 12552, files: 2487, In FCs: count - 242, size - 0, ActiveCount: 12254
+ INFO [main] - 2019:03:24 01:19:22 Elapsed:3241 ms, in queue: dirs - 10000; files - 6199, processed: dirs - 16307, files: 7421, In FCs: count - 1190, size - 0, ActiveCount: 16237
+ INFO [main] - 2019:03:24 01:19:23 Elapsed:4241 ms, in queue: dirs - 10000; files - 10968, processed: dirs - 20385, files: 12330, In FCs: count - 1330, size - 0, ActiveCount: 21005
+ INFO [main] - 2019:03:24 01:19:24 Elapsed:5242 ms, in queue: dirs - 10001; files - 14509, processed: dirs - 23546, files: 16520, In FCs: count - 1979, size - 0, ActiveCount: 24548
+ INFO [main] - 2019:03:24 01:19:25 Elapsed:6242 ms, in queue: dirs - 10001; files - 16965, processed: dirs - 25828, files: 19180, In FCs: count - 2183, size - 0, ActiveCount: 27003
+ INFO [main] - 2019:03:24 01:19:26 Elapsed:7243 ms, in queue: dirs - 10001; files - 19715, processed: dirs - 28677, files: 22126, In FCs: count - 2379, size - 0, ActiveCount: 29755
+ INFO [main] - 2019:03:24 01:19:27 Elapsed:8248 ms, in queue: dirs - 10000; files - 21264, processed: dirs - 31180, files: 24767, In FCs: count - 3471, size - 0, ActiveCount: 31301
+ INFO [main] - 2019:03:24 01:19:28 Elapsed:9248 ms, in queue: dirs - 10001; files - 24547, processed: dirs - 33293, files: 28263, In FCs: count - 3684, size - 0, ActiveCount: 34587
+ INFO [main] - 2019:03:24 01:19:29 Elapsed:10249 ms, in queue: dirs - 10001; files - 26565, processed: dirs - 35359, files: 30453, In FCs: count - 3856, size - 0, ActiveCount: 36604
+ INFO [main] - 2019:03:24 01:19:30 Elapsed:11249 ms, in queue: dirs - 10001; files - 29346, processed: dirs - 37803, files: 33429, In FCs: count - 4051, size - 0, ActiveCount: 39387
+ INFO [main] - 2019:03:24 01:19:31 Elapsed:12250 ms, in queue: dirs - 10001; files - 33100, processed: dirs - 40849, files: 37431, In FCs: count - 4299, size - 0, ActiveCount: 43140
+ INFO [main] - 2019:03:24 01:19:32 Elapsed:13250 ms, in queue: dirs - 10001; files - 36550, processed: dirs - 43841, files: 41214, In FCs: count - 4632, size - 0, ActiveCount: 46589
+ INFO [main] - 2019:03:24 01:19:33 Elapsed:14257 ms, in queue: dirs - 8621; files - 39745, processed: dirs - 44716, files: 44616, In FCs: count - 4839, size - 0, ActiveCount: 48402
+ INFO [main] - 2019:03:24 01:19:34 Elapsed:15258 ms, in queue: dirs - 5847; files - 44110, processed: dirs - 44725, files: 49316, In FCs: count - 5174, size - 0, ActiveCount: 49993
+ INFO [main] - 2019:03:24 01:19:35 Elapsed:16258 ms, in queue: dirs - 3225; files - 47351, processed: dirs - 44726, files: 52752, In FCs: count - 5369, size - 0, ActiveCount: 50612
+ INFO [main] - 2019:03:24 01:19:36 Elapsed:17286 ms, in queue: dirs - 0; files - 51304, processed: dirs - 44740, files: 57440, In FCs: count - 6104, size - 0, ActiveCount: 51336
+ INFO [main] - 2019:03:24 01:19:37 Elapsed:18286 ms, in queue: dirs - 0; files - 51082, processed: dirs - 44740, files: 57440, In FCs: count - 6326, size - 0, ActiveCount: 51114
+ INFO [main] - 2019:03:24 01:19:38 Elapsed:19287 ms, in queue: dirs - 0; files - 50769, processed: dirs - 44740, files: 57440, In FCs: count - 6639, size - 0, ActiveCount: 50801
+ INFO [main] - 2019:03:24 01:19:39 Elapsed:20287 ms, in queue: dirs - 0; files - 50586, processed: dirs - 44740, files: 57440, In FCs: count - 6822, size - 0, ActiveCount: 50618
+ INFO [main] - 2019:03:24 01:19:40 Elapsed:21288 ms, in queue: dirs - 0; files - 50503, processed: dirs - 44740, files: 57440, In FCs: count - 6905, size - 0, ActiveCount: 50535
+ INFO [main] - 2019:03:24 01:19:41 Elapsed:22288 ms, in queue: dirs - 0; files - 50423, processed: dirs - 44740, files: 57440, In FCs: count - 6985, size - 0, ActiveCount: 50455
+ INFO [main] - 2019:03:24 01:19:42 Elapsed:23289 ms, in queue: dirs - 0; files - 49971, processed: dirs - 44740, files: 57440, In FCs: count - 7437, size - 0, ActiveCount: 50003
+ INFO [main] - 2019:03:24 01:19:43 Elapsed:24289 ms, in queue: dirs - 0; files - 49756, processed: dirs - 44740, files: 57440, In FCs: count - 7652, size - 0, ActiveCount: 49788
+ INFO [main] - 2019:03:24 01:19:44 Elapsed:25290 ms, in queue: dirs - 0; files - 49568, processed: dirs - 44740, files: 57440, In FCs: count - 7840, size - 0, ActiveCount: 49600
+ INFO [main] - 2019:03:24 01:19:45 Elapsed:26290 ms, in queue: dirs - 0; files - 49341, processed: dirs - 44740, files: 57440, In FCs: count - 8067, size - 0, ActiveCount: 49373
+ INFO [main] - 2019:03:24 01:19:46 Elapsed:27291 ms, in queue: dirs - 0; files - 48804, processed: dirs - 44740, files: 57440, In FCs: count - 8604, size - 0, ActiveCount: 48836
+ INFO [main] - 2019:03:24 01:19:47 Elapsed:28291 ms, in queue: dirs - 0; files - 48641, processed: dirs - 44740, files: 57440, In FCs: count - 8767, size - 0, ActiveCount: 48673
+ INFO [main] - 2019:03:24 01:19:48 Elapsed:29291 ms, in queue: dirs - 0; files - 48075, processed: dirs - 44740, files: 57440, In FCs: count - 9333, size - 0, ActiveCount: 48107
+ INFO [main] - 2019:03:24 01:19:49 Elapsed:30292 ms, in queue: dirs - 0; files - 46429, processed: dirs - 44740, files: 57440, In FCs: count - 10979, size - 0, ActiveCount: 46461
+ INFO [main] - 2019:03:24 01:19:50 Elapsed:31292 ms, in queue: dirs - 0; files - 44670, processed: dirs - 44740, files: 57440, In FCs: count - 12738, size - 0, ActiveCount: 44702
+ INFO [main] - 2019:03:24 01:19:51 Elapsed:32293 ms, in queue: dirs - 0; files - 44465, processed: dirs - 44740, files: 57440, In FCs: count - 12943, size - 0, ActiveCount: 44497
+ INFO [main] - 2019:03:24 01:19:52 Elapsed:33293 ms, in queue: dirs - 0; files - 44238, processed: dirs - 44740, files: 57440, In FCs: count - 13170, size - 0, ActiveCount: 44270
+ INFO [main] - 2019:03:24 01:19:53 Elapsed:34294 ms, in queue: dirs - 0; files - 43623, processed: dirs - 44740, files: 57440, In FCs: count - 13785, size - 0, ActiveCount: 43655
+ INFO [main] - 2019:03:24 01:19:54 Elapsed:35294 ms, in queue: dirs - 0; files - 43249, processed: dirs - 44740, files: 57440, In FCs: count - 14159, size - 0, ActiveCount: 43281
+ INFO [main] - 2019:03:24 01:19:55 Elapsed:36294 ms, in queue: dirs - 0; files - 43014, processed: dirs - 44740, files: 57440, In FCs: count - 14394, size - 0, ActiveCount: 43046
+ INFO [main] - 2019:03:24 01:19:56 Elapsed:37296 ms, in queue: dirs - 0; files - 42341, processed: dirs - 44740, files: 57440, In FCs: count - 15067, size - 0, ActiveCount: 42373
+ INFO [main] - 2019:03:24 01:19:57 Elapsed:38297 ms, in queue: dirs - 0; files - 42191, processed: dirs - 44740, files: 57440, In FCs: count - 15217, size - 0, ActiveCount: 42223
+ INFO [main] - 2019:03:24 01:19:58 Elapsed:39297 ms, in queue: dirs - 0; files - 41885, processed: dirs - 44740, files: 57440, In FCs: count - 15523, size - 0, ActiveCount: 41917
+ INFO [main] - 2019:03:24 01:19:59 Elapsed:40298 ms, in queue: dirs - 0; files - 41669, processed: dirs - 44740, files: 57440, In FCs: count - 15739, size - 0, ActiveCount: 41701
+ INFO [main] - 2019:03:24 01:20:00 Elapsed:41298 ms, in queue: dirs - 0; files - 41281, processed: dirs - 44740, files: 57440, In FCs: count - 16127, size - 0, ActiveCount: 41313
+ INFO [main] - 2019:03:24 01:20:01 Elapsed:42299 ms, in queue: dirs - 0; files - 41092, processed: dirs - 44740, files: 57440, In FCs: count - 16316, size - 0, ActiveCount: 41124
+ INFO [main] - 2019:03:24 01:20:02 Elapsed:43299 ms, in queue: dirs - 0; files - 40818, processed: dirs - 44740, files: 57440, In FCs: count - 16590, size - 0, ActiveCount: 40850
+ INFO [main] - 2019:03:24 01:20:03 Elapsed:44299 ms, in queue: dirs - 0; files - 39203, processed: dirs - 44740, files: 57440, In FCs: count - 18205, size - 0, ActiveCount: 39235
+ INFO [main] - 2019:03:24 01:20:04 Elapsed:45300 ms, in queue: dirs - 0; files - 38984, processed: dirs - 44740, files: 57440, In FCs: count - 18424, size - 0, ActiveCount: 39016
+ INFO [main] - 2019:03:24 01:20:05 Elapsed:46301 ms, in queue: dirs - 0; files - 38326, processed: dirs - 44740, files: 57440, In FCs: count - 19082, size - 0, ActiveCount: 38358
+ INFO [main] - 2019:03:24 01:20:06 Elapsed:47301 ms, in queue: dirs - 0; files - 38091, processed: dirs - 44740, files: 57440, In FCs: count - 19317, size - 0, ActiveCount: 38123
+ INFO [main] - 2019:03:24 01:20:07 Elapsed:48302 ms, in queue: dirs - 0; files - 36810, processed: dirs - 44740, files: 57440, In FCs: count - 20598, size - 0, ActiveCount: 36842
+ INFO [main] - 2019:03:24 01:20:08 Elapsed:49302 ms, in queue: dirs - 0; files - 36003, processed: dirs - 44740, files: 57440, In FCs: count - 21405, size - 0, ActiveCount: 36035
+ INFO [main] - 2019:03:24 01:20:09 Elapsed:50302 ms, in queue: dirs - 0; files - 35589, processed: dirs - 44740, files: 57440, In FCs: count - 21819, size - 0, ActiveCount: 35621
+ INFO [main] - 2019:03:24 01:20:10 Elapsed:51303 ms, in queue: dirs - 0; files - 35064, processed: dirs - 44740, files: 57440, In FCs: count - 22344, size - 0, ActiveCount: 35096
+ INFO [main] - 2019:03:24 01:20:11 Elapsed:52303 ms, in queue: dirs - 0; files - 32552, processed: dirs - 44740, files: 57440, In FCs: count - 24856, size - 0, ActiveCount: 32584
+ INFO [main] - 2019:03:24 01:20:12 Elapsed:53304 ms, in queue: dirs - 0; files - 32227, processed: dirs - 44740, files: 57440, In FCs: count - 25181, size - 0, ActiveCount: 32259
+ INFO [main] - 2019:03:24 01:20:13 Elapsed:54304 ms, in queue: dirs - 0; files - 31981, processed: dirs - 44740, files: 57440, In FCs: count - 25427, size - 0, ActiveCount: 32013
+ INFO [main] - 2019:03:24 01:20:14 Elapsed:55348 ms, in queue: dirs - 0; files - 31834, processed: dirs - 44740, files: 57440, In FCs: count - 25575, size - 0, ActiveCount: 31866
+ INFO [main] - 2019:03:24 01:20:15 Elapsed:56349 ms, in queue: dirs - 0; files - 31678, processed: dirs - 44740, files: 57440, In FCs: count - 25730, size - 0, ActiveCount: 31710
+ INFO [main] - 2019:03:24 01:20:16 Elapsed:57349 ms, in queue: dirs - 0; files - 31518, processed: dirs - 44740, files: 57440, In FCs: count - 25890, size - 0, ActiveCount: 31550
+ INFO [main] - 2019:03:24 01:20:17 Elapsed:58350 ms, in queue: dirs - 0; files - 31316, processed: dirs - 44740, files: 57440, In FCs: count - 26092, size - 0, ActiveCount: 31348
+ INFO [main] - 2019:03:24 01:20:18 Elapsed:59350 ms, in queue: dirs - 0; files - 30845, processed: dirs - 44740, files: 57440, In FCs: count - 26563, size - 0, ActiveCount: 30877
+ INFO [main] - 2019:03:24 01:20:19 Elapsed:60351 ms, in queue: dirs - 0; files - 30579, processed: dirs - 44740, files: 57440, In FCs: count - 26829, size - 0, ActiveCount: 30611
+ INFO [main] - 2019:03:24 01:20:20 Elapsed:61351 ms, in queue: dirs - 0; files - 30354, processed: dirs - 44740, files: 57440, In FCs: count - 27054, size - 0, ActiveCount: 30386
+ INFO [main] - 2019:03:24 01:20:21 Elapsed:62352 ms, in queue: dirs - 0; files - 30093, processed: dirs - 44740, files: 57440, In FCs: count - 27315, size - 0, ActiveCount: 30125
+ INFO [main] - 2019:03:24 01:20:22 Elapsed:63352 ms, in queue: dirs - 0; files - 29831, processed: dirs - 44740, files: 57440, In FCs: count - 27577, size - 0, ActiveCount: 29863
+ INFO [main] - 2019:03:24 01:20:23 Elapsed:64353 ms, in queue: dirs - 0; files - 29668, processed: dirs - 44740, files: 57440, In FCs: count - 27740, size - 0, ActiveCount: 29700
+ INFO [main] - 2019:03:24 01:20:24 Elapsed:65353 ms, in queue: dirs - 0; files - 29504, processed: dirs - 44740, files: 57440, In FCs: count - 27904, size - 0, ActiveCount: 29536
+ INFO [main] - 2019:03:24 01:20:25 Elapsed:66354 ms, in queue: dirs - 0; files - 29303, processed: dirs - 44740, files: 57440, In FCs: count - 28105, size - 0, ActiveCount: 29335
+ INFO [main] - 2019:03:24 01:20:26 Elapsed:67354 ms, in queue: dirs - 0; files - 28995, processed: dirs - 44740, files: 57440, In FCs: count - 28413, size - 0, ActiveCount: 29027
+ INFO [main] - 2019:03:24 01:20:27 Elapsed:68355 ms, in queue: dirs - 0; files - 27846, processed: dirs - 44740, files: 57440, In FCs: count - 29562, size - 0, ActiveCount: 27878
+ INFO [main] - 2019:03:24 01:20:28 Elapsed:69356 ms, in queue: dirs - 0; files - 27622, processed: dirs - 44740, files: 57440, In FCs: count - 29786, size - 0, ActiveCount: 27654
+ INFO [main] - 2019:03:24 01:20:29 Elapsed:70357 ms, in queue: dirs - 0; files - 26499, processed: dirs - 44740, files: 57440, In FCs: count - 30909, size - 0, ActiveCount: 26531
+ INFO [main] - 2019:03:24 01:20:30 Elapsed:71357 ms, in queue: dirs - 0; files - 26325, processed: dirs - 44740, files: 57440, In FCs: count - 31083, size - 0, ActiveCount: 26357
+ INFO [main] - 2019:03:24 01:20:31 Elapsed:72358 ms, in queue: dirs - 0; files - 25938, processed: dirs - 44740, files: 57440, In FCs: count - 31470, size - 0, ActiveCount: 25970
+ INFO [main] - 2019:03:24 01:20:32 Elapsed:73358 ms, in queue: dirs - 0; files - 25758, processed: dirs - 44740, files: 57440, In FCs: count - 31650, size - 0, ActiveCount: 25790
+ INFO [main] - 2019:03:24 01:20:33 Elapsed:74359 ms, in queue: dirs - 0; files - 25482, processed: dirs - 44740, files: 57440, In FCs: count - 31926, size - 0, ActiveCount: 25514
+ INFO [main] - 2019:03:24 01:20:34 Elapsed:75360 ms, in queue: dirs - 0; files - 25259, processed: dirs - 44740, files: 57440, In FCs: count - 32149, size - 0, ActiveCount: 25291
+ INFO [main] - 2019:03:24 01:20:35 Elapsed:76361 ms, in queue: dirs - 0; files - 23484, processed: dirs - 44740, files: 57440, In FCs: count - 33924, size - 0, ActiveCount: 23516
+ INFO [main] - 2019:03:24 01:20:36 Elapsed:77361 ms, in queue: dirs - 0; files - 23311, processed: dirs - 44740, files: 57440, In FCs: count - 34097, size - 0, ActiveCount: 23343
+ INFO [main] - 2019:03:24 01:20:37 Elapsed:78362 ms, in queue: dirs - 0; files - 23168, processed: dirs - 44740, files: 57440, In FCs: count - 34240, size - 0, ActiveCount: 23200
+ INFO [main] - 2019:03:24 01:20:38 Elapsed:79362 ms, in queue: dirs - 0; files - 23039, processed: dirs - 44740, files: 57440, In FCs: count - 34369, size - 0, ActiveCount: 23071
+ INFO [main] - 2019:03:24 01:20:39 Elapsed:80363 ms, in queue: dirs - 0; files - 22921, processed: dirs - 44740, files: 57440, In FCs: count - 34487, size - 0, ActiveCount: 22953
+ INFO [main] - 2019:03:24 01:20:40 Elapsed:81363 ms, in queue: dirs - 0; files - 22805, processed: dirs - 44740, files: 57440, In FCs: count - 34603, size - 0, ActiveCount: 22837
+ INFO [main] - 2019:03:24 01:20:41 Elapsed:82364 ms, in queue: dirs - 0; files - 22683, processed: dirs - 44740, files: 57440, In FCs: count - 34725, size - 0, ActiveCount: 22715
+ INFO [main] - 2019:03:24 01:20:42 Elapsed:83364 ms, in queue: dirs - 0; files - 22560, processed: dirs - 44740, files: 57440, In FCs: count - 34848, size - 0, ActiveCount: 22592
+ INFO [main] - 2019:03:24 01:20:43 Elapsed:84365 ms, in queue: dirs - 0; files - 22510, processed: dirs - 44740, files: 57440, In FCs: count - 34898, size - 0, ActiveCount: 22542
+ INFO [main] - 2019:03:24 01:20:44 Elapsed:85366 ms, in queue: dirs - 0; files - 22388, processed: dirs - 44740, files: 57440, In FCs: count - 35020, size - 0, ActiveCount: 22420
+ INFO [main] - 2019:03:24 01:20:45 Elapsed:86366 ms, in queue: dirs - 0; files - 21580, processed: dirs - 44740, files: 57440, In FCs: count - 35828, size - 0, ActiveCount: 21612
+ INFO [main] - 2019:03:24 01:20:46 Elapsed:87367 ms, in queue: dirs - 0; files - 21378, processed: dirs - 44740, files: 57440, In FCs: count - 36030, size - 0, ActiveCount: 21410
+ INFO [main] - 2019:03:24 01:20:47 Elapsed:88368 ms, in queue: dirs - 0; files - 19998, processed: dirs - 44740, files: 57440, In FCs: count - 37410, size - 0, ActiveCount: 20030
+ INFO [main] - 2019:03:24 01:20:48 Elapsed:89369 ms, in queue: dirs - 0; files - 18857, processed: dirs - 44740, files: 57440, In FCs: count - 38551, size - 0, ActiveCount: 18889
+ INFO [main] - 2019:03:24 01:20:49 Elapsed:90370 ms, in queue: dirs - 0; files - 18684, processed: dirs - 44740, files: 57440, In FCs: count - 38724, size - 0, ActiveCount: 18716
+ INFO [main] - 2019:03:24 01:20:50 Elapsed:91370 ms, in queue: dirs - 0; files - 18467, processed: dirs - 44740, files: 57440, In FCs: count - 38941, size - 0, ActiveCount: 18499
+ INFO [main] - 2019:03:24 01:20:51 Elapsed:92371 ms, in queue: dirs - 0; files - 18241, processed: dirs - 44740, files: 57440, In FCs: count - 39167, size - 0, ActiveCount: 18273
+ INFO [main] - 2019:03:24 01:20:52 Elapsed:93371 ms, in queue: dirs - 0; files - 16950, processed: dirs - 44740, files: 57440, In FCs: count - 40458, size - 0, ActiveCount: 16982
+ INFO [main] - 2019:03:24 01:20:53 Elapsed:94372 ms, in queue: dirs - 0; files - 16740, processed: dirs - 44740, files: 57440, In FCs: count - 40668, size - 0, ActiveCount: 16772
+ INFO [main] - 2019:03:24 01:20:54 Elapsed:95373 ms, in queue: dirs - 0; files - 16547, processed: dirs - 44740, files: 57440, In FCs: count - 40861, size - 0, ActiveCount: 16579
+ INFO [main] - 2019:03:24 01:20:55 Elapsed:96373 ms, in queue: dirs - 0; files - 15586, processed: dirs - 44740, files: 57440, In FCs: count - 41822, size - 0, ActiveCount: 15618
+ INFO [main] - 2019:03:24 01:20:56 Elapsed:97374 ms, in queue: dirs - 0; files - 15157, processed: dirs - 44740, files: 57440, In FCs: count - 42251, size - 0, ActiveCount: 15189
+ INFO [main] - 2019:03:24 01:20:57 Elapsed:98374 ms, in queue: dirs - 0; files - 14437, processed: dirs - 44740, files: 57440, In FCs: count - 42971, size - 0, ActiveCount: 14469
+ INFO [main] - 2019:03:24 01:20:58 Elapsed:99375 ms, in queue: dirs - 0; files - 14283, processed: dirs - 44740, files: 57440, In FCs: count - 43125, size - 0, ActiveCount: 14315
+ INFO [main] - 2019:03:24 01:20:59 Elapsed:100375 ms, in queue: dirs - 0; files - 14150, processed: dirs - 44740, files: 57440, In FCs: count - 43258, size - 0, ActiveCount: 14182
+ INFO [main] - 2019:03:24 01:21:00 Elapsed:101376 ms, in queue: dirs - 0; files - 13831, processed: dirs - 44740, files: 57440, In FCs: count - 43577, size - 0, ActiveCount: 13863
+ INFO [main] - 2019:03:24 01:21:01 Elapsed:102377 ms, in queue: dirs - 0; files - 13694, processed: dirs - 44740, files: 57440, In FCs: count - 43714, size - 0, ActiveCount: 13726
+ INFO [main] - 2019:03:24 01:21:02 Elapsed:103378 ms, in queue: dirs - 0; files - 13242, processed: dirs - 44740, files: 57440, In FCs: count - 44166, size - 0, ActiveCount: 13274
+ INFO [main] - 2019:03:24 01:21:03 Elapsed:104378 ms, in queue: dirs - 0; files - 13009, processed: dirs - 44740, files: 57440, In FCs: count - 44399, size - 0, ActiveCount: 13041
+ INFO [main] - 2019:03:24 01:21:04 Elapsed:105378 ms, in queue: dirs - 0; files - 12227, processed: dirs - 44740, files: 57440, In FCs: count - 45181, size - 0, ActiveCount: 12259
+ INFO [main] - 2019:03:24 01:21:05 Elapsed:106381 ms, in queue: dirs - 0; files - 12114, processed: dirs - 44740, files: 57440, In FCs: count - 45294, size - 0, ActiveCount: 12146
+ INFO [main] - 2019:03:24 01:21:06 Elapsed:107381 ms, in queue: dirs - 0; files - 11987, processed: dirs - 44740, files: 57440, In FCs: count - 45421, size - 0, ActiveCount: 12019
+ INFO [main] - 2019:03:24 01:21:07 Elapsed:108382 ms, in queue: dirs - 0; files - 11856, processed: dirs - 44740, files: 57440, In FCs: count - 45552, size - 0, ActiveCount: 11888
+ INFO [main] - 2019:03:24 01:21:08 Elapsed:109382 ms, in queue: dirs - 0; files - 11734, processed: dirs - 44740, files: 57440, In FCs: count - 45674, size - 0, ActiveCount: 11766
+ INFO [main] - 2019:03:24 01:21:09 Elapsed:110383 ms, in queue: dirs - 0; files - 11608, processed: dirs - 44740, files: 57440, In FCs: count - 45800, size - 0, ActiveCount: 11640
+ INFO [main] - 2019:03:24 01:21:10 Elapsed:111383 ms, in queue: dirs - 0; files - 11158, processed: dirs - 44740, files: 57440, In FCs: count - 46250, size - 0, ActiveCount: 11190
+ INFO [main] - 2019:03:24 01:21:11 Elapsed:112384 ms, in queue: dirs - 0; files - 11034, processed: dirs - 44740, files: 57440, In FCs: count - 46374, size - 0, ActiveCount: 11066
+ INFO [main] - 2019:03:24 01:21:12 Elapsed:113385 ms, in queue: dirs - 0; files - 10890, processed: dirs - 44740, files: 57440, In FCs: count - 46518, size - 0, ActiveCount: 10922
+ INFO [main] - 2019:03:24 01:21:13 Elapsed:114385 ms, in queue: dirs - 0; files - 10656, processed: dirs - 44740, files: 57440, In FCs: count - 46752, size - 0, ActiveCount: 10688
+ INFO [main] - 2019:03:24 01:21:14 Elapsed:115386 ms, in queue: dirs - 0; files - 10343, processed: dirs - 44740, files: 57440, In FCs: count - 47065, size - 0, ActiveCount: 10375
+ INFO [main] - 2019:03:24 01:21:15 Elapsed:116386 ms, in queue: dirs - 0; files - 10197, processed: dirs - 44740, files: 57440, In FCs: count - 47211, size - 0, ActiveCount: 10229
+ INFO [main] - 2019:03:24 01:21:16 Elapsed:117387 ms, in queue: dirs - 0; files - 9766, processed: dirs - 44740, files: 57440, In FCs: count - 47642, size - 0, ActiveCount: 9798
+ INFO [main] - 2019:03:24 01:21:17 Elapsed:118388 ms, in queue: dirs - 0; files - 9617, processed: dirs - 44740, files: 57440, In FCs: count - 47791, size - 0, ActiveCount: 9649
+ INFO [main] - 2019:03:24 01:21:18 Elapsed:119389 ms, in queue: dirs - 0; files - 9475, processed: dirs - 44740, files: 57440, In FCs: count - 47933, size - 0, ActiveCount: 9507
+ INFO [main] - 2019:03:24 01:21:19 Elapsed:120389 ms, in queue: dirs - 0; files - 9014, processed: dirs - 44740, files: 57440, In FCs: count - 48394, size - 0, ActiveCount: 9046
+ INFO [main] - 2019:03:24 01:21:20 Elapsed:121389 ms, in queue: dirs - 0; files - 8852, processed: dirs - 44740, files: 57440, In FCs: count - 48556, size - 0, ActiveCount: 8884
+ INFO [main] - 2019:03:24 01:21:21 Elapsed:122390 ms, in queue: dirs - 0; files - 8598, processed: dirs - 44740, files: 57440, In FCs: count - 48810, size - 0, ActiveCount: 8630
+ INFO [main] - 2019:03:24 01:21:22 Elapsed:123391 ms, in queue: dirs - 0; files - 8181, processed: dirs - 44740, files: 57440, In FCs: count - 49228, size - 0, ActiveCount: 8213
+ INFO [main] - 2019:03:24 01:21:23 Elapsed:124391 ms, in queue: dirs - 0; files - 7763, processed: dirs - 44740, files: 57440, In FCs: count - 49645, size - 0, ActiveCount: 7795
+ INFO [main] - 2019:03:24 01:21:24 Elapsed:125396 ms, in queue: dirs - 0; files - 7052, processed: dirs - 44740, files: 57440, In FCs: count - 50356, size - 0, ActiveCount: 7084
+ INFO [main] - 2019:03:24 01:21:25 Elapsed:126396 ms, in queue: dirs - 0; files - 6562, processed: dirs - 44740, files: 57440, In FCs: count - 50846, size - 0, ActiveCount: 6594
+ INFO [main] - 2019:03:24 01:21:26 Elapsed:127397 ms, in queue: dirs - 0; files - 6468, processed: dirs - 44740, files: 57440, In FCs: count - 50940, size - 0, ActiveCount: 6500
+ INFO [main] - 2019:03:24 01:21:27 Elapsed:128398 ms, in queue: dirs - 0; files - 6233, processed: dirs - 44740, files: 57440, In FCs: count - 51175, size - 0, ActiveCount: 6265
+ INFO [main] - 2019:03:24 01:21:28 Elapsed:129399 ms, in queue: dirs - 0; files - 5873, processed: dirs - 44740, files: 57440, In FCs: count - 51535, size - 0, ActiveCount: 5905
+ INFO [main] - 2019:03:24 01:21:29 Elapsed:130399 ms, in queue: dirs - 0; files - 5563, processed: dirs - 44740, files: 57440, In FCs: count - 51845, size - 0, ActiveCount: 5595
+ INFO [main] - 2019:03:24 01:21:30 Elapsed:131400 ms, in queue: dirs - 0; files - 4696, processed: dirs - 44740, files: 57440, In FCs: count - 52712, size - 0, ActiveCount: 4728
+ INFO [main] - 2019:03:24 01:21:31 Elapsed:132400 ms, in queue: dirs - 0; files - 3986, processed: dirs - 44740, files: 57440, In FCs: count - 53422, size - 0, ActiveCount: 4018
+ INFO [main] - 2019:03:24 01:21:32 Elapsed:133401 ms, in queue: dirs - 0; files - 2996, processed: dirs - 44740, files: 57440, In FCs: count - 54412, size - 0, ActiveCount: 3028
+ INFO [main] - 2019:03:24 01:21:33 Elapsed:134401 ms, in queue: dirs - 0; files - 2768, processed: dirs - 44740, files: 57440, In FCs: count - 54640, size - 0, ActiveCount: 2800
+ INFO [main] - 2019:03:24 01:21:34 Elapsed:135402 ms, in queue: dirs - 0; files - 2567, processed: dirs - 44740, files: 57440, In FCs: count - 54841, size - 0, ActiveCount: 2599
+ INFO [main] - 2019:03:24 01:21:35 Elapsed:136402 ms, in queue: dirs - 0; files - 2382, processed: dirs - 44740, files: 57440, In FCs: count - 55026, size - 0, ActiveCount: 2414
+ INFO [main] - 2019:03:24 01:21:36 Elapsed:137402 ms, in queue: dirs - 0; files - 2162, processed: dirs - 44740, files: 57440, In FCs: count - 55246, size - 0, ActiveCount: 2194
+ INFO [main] - 2019:03:24 01:21:37 Elapsed:138405 ms, in queue: dirs - 0; files - 1597, processed: dirs - 44740, files: 57440, In FCs: count - 55811, size - 0, ActiveCount: 1629
+ INFO [main] - 2019:03:24 01:21:38 Elapsed:139406 ms, in queue: dirs - 0; files - 1205, processed: dirs - 44740, files: 57440, In FCs: count - 56203, size - 0, ActiveCount: 1237
+ INFO [main] - 2019:03:24 01:21:39 Elapsed:140406 ms, in queue: dirs - 0; files - 1101, processed: dirs - 44740, files: 57440, In FCs: count - 56307, size - 0, ActiveCount: 1133
+ INFO [main] - 2019:03:24 01:21:40 Elapsed:141406 ms, in queue: dirs - 0; files - 1064, processed: dirs - 44740, files: 57440, In FCs: count - 56344, size - 0, ActiveCount: 1096
+ INFO [main] - 2019:03:24 01:21:41 Elapsed:142407 ms, in queue: dirs - 0; files - 690, processed: dirs - 44740, files: 57440, In FCs: count - 56718, size - 0, ActiveCount: 722
+ INFO [main] - 2019:03:24 01:21:42 Elapsed:143407 ms, in queue: dirs - 0; files - 558, processed: dirs - 44740, files: 57440, In FCs: count - 56850, size - 0, ActiveCount: 590
+ INFO [main] - 2019:03:24 01:21:43 Elapsed:144408 ms, in queue: dirs - 0; files - 529, processed: dirs - 44740, files: 57440, In FCs: count - 56879, size - 0, ActiveCount: 561
+ INFO [main] - 2019:03:24 01:21:44 Elapsed:145408 ms, in queue: dirs - 0; files - 517, processed: dirs - 44740, files: 57440, In FCs: count - 56891, size - 0, ActiveCount: 549
+ INFO [main] - 2019:03:24 01:21:45 Elapsed:146409 ms, in queue: dirs - 0; files - 505, processed: dirs - 44740, files: 57440, In FCs: count - 56903, size - 0, ActiveCount: 537
+ INFO [main] - 2019:03:24 01:21:46 Elapsed:147409 ms, in queue: dirs - 0; files - 477, processed: dirs - 44740, files: 57440, In FCs: count - 56931, size - 0, ActiveCount: 509
+ INFO [main] - 2019:03:24 01:21:47 Elapsed:148409 ms, in queue: dirs - 0; files - 6, processed: dirs - 44740, files: 57440, In FCs: count - 57402, size - 0, ActiveCount: 38
+ INFO [main] - 2019:03:24 01:21:48 main: shutting down threads and work queue..
+ INFO [pool-2-thread-2] - 2019:03:24 01:21:48 StartProcessDir - exiting thread - idx 2
+ INFO [pool-2-thread-4] - 2019:03:24 01:21:48 StartProcessDir - exiting thread - idx 4
+ INFO [pool-2-thread-1] - 2019:03:24 01:21:48 StartProcessDir - exiting thread - idx 1
+ INFO [pool-2-thread-3] - 2019:03:24 01:21:48 StartProcessDir - exiting thread - idx 3
+ INFO [FileOps-1-thread-6] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 6
+ INFO [FileOps-1-thread-18] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 18
+ INFO [FileOps-1-thread-30] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 30
+ INFO [FileOps-1-thread-2] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 2
+ INFO [FileOps-1-thread-20] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 20
+ INFO [FileOps-1-thread-5] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 5
+ INFO [FileOps-1-thread-14] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 14
+ INFO [FileOps-1-thread-16] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 16
+ INFO [FileOps-1-thread-29] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 29
+ INFO [FileOps-1-thread-1] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 1
+ INFO [FileOps-1-thread-21] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 21
+ INFO [FileOps-1-thread-32] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 32
+ INFO [FileOps-1-thread-19] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 19
+ INFO [FileOps-1-thread-23] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 23
+ INFO [FileOps-1-thread-3] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 3
+ INFO [FileOps-1-thread-22] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 22
+ INFO [FileOps-1-thread-17] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 17
+ INFO [FileOps-1-thread-31] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 31
+ INFO [FileOps-1-thread-24] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 24
+ INFO [FileOps-1-thread-26] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 26
+ INFO [FileOps-1-thread-28] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 28
+ INFO [FileOps-1-thread-8] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 8
+ INFO [FileOps-1-thread-25] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 25
+ INFO [FileOps-1-thread-4] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 4
+ INFO [FileOps-1-thread-11] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 11
+ INFO [FileOps-1-thread-13] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 13
+ INFO [FileOps-1-thread-10] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 10
+ INFO [FileOps-1-thread-27] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 27
+ INFO [FileOps-1-thread-7] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 7
+ INFO [FileOps-1-thread-12] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 12
+ INFO [FileOps-1-thread-15] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 15
+ INFO [FileOps-1-thread-9] - 2019:03:24 01:21:48 StartProcessFile - exiting thread - idx 9
+ShutdownHook: stats - #files: 57440, #compressed: 57440, #dirs: 44740, filesSize: 123318760328, compressedSize: 123318760328, numLines: 0
+ShutdownHook: stats - number of directories from dir collection: 44741
+Elapsed:150350 ms, exiting cleanly..

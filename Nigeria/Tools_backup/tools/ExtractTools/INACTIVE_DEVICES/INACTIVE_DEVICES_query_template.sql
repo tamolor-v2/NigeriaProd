@@ -1,0 +1,1 @@
+select * from BIOCAPTURE.INACTIVE_DEVICES 

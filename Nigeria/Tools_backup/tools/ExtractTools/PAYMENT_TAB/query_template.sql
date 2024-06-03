@@ -1,0 +1,17 @@
+select translate(COMPANY,chr(10)||chr(11)||chr(13) , ' '),
+translate(SERIES_ID,chr(10)||chr(11)||chr(13) , ' '),
+translate(PAYMENT_ID,chr(10)||chr(11)||chr(13) , ' '),
+translate(ROWVERSION,chr(10)||chr(11)||chr(13) , ' '),
+translate(REG_DATE,chr(10)||chr(11)||chr(13) , ' '),
+translate(PAY_DATE,chr(10)||chr(11)||chr(13) , ' '),
+translate(VOUCHER_DATE,chr(10)||chr(11)||chr(13) , ' '),
+translate(ACCOUNTING_YEAR,chr(10)||chr(11)||chr(13) , ' '),
+translate(VOUCHER_TYPE,chr(10)||chr(11)||chr(13) , ' '),
+translate(USER_GROUP,chr(10)||chr(11)||chr(13) , ' '),
+translate(USERID,chr(10)||chr(11)||chr(13) , ' '),
+translate(VOUCHER_NO,chr(10)||chr(11)||chr(13) , ' '),
+translate(PAYMENT_TYPE_CODE,chr(10)||chr(11)||chr(13) , ' '),
+translate(NOTE,chr(10)||chr(11)||chr(13) , ' '),
+translate(YEAR_PERIOD_KEY,chr(10)||chr(11)||chr(13) , ' '),
+translate(PAYMENT_ROLLBACK_STATUS,chr(10)||chr(11)||chr(13) , ' ') 
+from IFSAPP.PAYMENT_TAB  

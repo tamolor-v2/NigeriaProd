@@ -1,0 +1,16 @@
+{
+	"decreaseRatio": 0.55,
+	"backDays" : 7,
+	"tableName": "dq.final_feed_report_email_P2",
+	"rejectionRatio": 0.25,
+
+
+        "reportDate": "20191220",
+	"templateFile" : "/nas/share05/tools/validation_Rep2",
+	"headerFile": "/nas/share05/tools/validationCheck/email/mailheader_BSL",
+	"emailScript": "/nas/share05/tools/validationCheck/email/sendEmail.sh",
+        "removeFromReport": "",
+        "increaseRatio"  : 0.55,
+"Hostname" : "edge01002"
+
+}

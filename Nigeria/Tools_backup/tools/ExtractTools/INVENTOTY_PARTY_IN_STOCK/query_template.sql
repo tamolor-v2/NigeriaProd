@@ -1,0 +1,7 @@
+select CREATE_DATE,
+WAIV_DEV_REJ_NO, 
+LOCATION_NO,
+RECEIPT_DATE, 
+CONTRACT, 
+PART_NO, 
+QTY_ONHAND from IFSAPP.inventory_part_in_stock 

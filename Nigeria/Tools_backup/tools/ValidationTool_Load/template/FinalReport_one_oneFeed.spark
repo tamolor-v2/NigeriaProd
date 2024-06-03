@@ -1,0 +1,38 @@
+import org.apache.spark.sql._
+val hiveContext = new org.apache.spark.sql.hive.HiveContext(sc)
+
+hiveContext.sql("set hive.enforce.bucketing=true")
+hiveContext.sql("set hive.exec.dynamic.partition.mode=nonstrict")
+
+
+hiveContext.sql("insert overwrite table databasename.final_feed_report_new partition (tbl_dt)  select * from databasename.final_feed_report_new dd where dd.feed_name<>\"FeedNameValues\" and tbl_dt=targetdate")
+
+println("Done")
+
+val buffer = scala.collection.mutable.ArrayBuffer(
+" insert into table databasename.final_feed_report_new partition (tbl_dt) 						" ,
+" select fcs.feed_name HiveTargetTable,  coalesce(fcs.numberofline ,0) feed_name_lineNumber, fcs.numberoffiles    ,       " ,
+" a.feedname DiroctoryFeedName,  coalesce(a.numberofline ,0) DiroctoryFeedNameLineCount,a.numberoffile             ,   " ,
+" b.feed_name RjectedFeedname,  coalesce(b.numberofline,0) TotalRejectedCount ,                         " ,
+" coalesce(a.numberofline,0)-(coalesce(fcs.numberofline,0)+coalesce(b.numberofline,0)) Deff ,                                        " ,
+" (coalesce(a.numberofline,0)-(coalesce(fcs.numberofline,0)+coalesce(b.numberofline,0)))/coalesce(a.numberofline,0)*100 ratio ,      " ,
+" case when coalesce(a.numberofline ,0) <> coalesce(fcs.numberofline ,0)+coalesce(b.numberofline,0)     " ,
+" then \"Not Match\" else \"Match\" end status,fcs.tbl_dt  from                                                    " ,
+" (select * from databasename.feeds_count_summary s where feed_name=\"FeedNameValues\" and  tbl_dt=targetdate  )fcs                                                " ,
+"                                                                                  " ,
+" left outer join  (select * from databasename.Directory_filesopps_summary a where feedname=\"FeedNameValues\"                         " ,
+"        " ,
+"                                                                         " ,
+" and  file_dt=targetdate ) a                                                                                                 " ,
+" on fcs.feed_name=a.feedname and fcs.tbl_dt=a.file_dt left outer join                                                           " ,
+" (select * from databasename.feeds_count_rejected_summary where                                           " ,
+"   feed_name  = \"FeedNameValues\"      " ,
+"                           " ,
+"  and  tbl_dt=targetdate) b   on fcs.feed_name=b.feed_name and fcs.tbl_dt=b.tbl_dt     " )
+  
+  
+  
+val sql=buffer.mkString(" ")
+println(sql)
+hiveContext.sql(sql)
+exit

@@ -1,0 +1,9 @@
+set hive.exec.dynamic.partition.mode=nonstrict;
+insert overwrite table databasename.feeds_count_stats_summary partition (feed_name,file_dt)           
+ select
+ count(*) as numberoffiles, 
+ tbl_dt, 
+ feedname,
+ file_dt     
+ from databasename.files_count_stats_summary where file_dt= targetdate
+ group by feedname,file_dt, tbl_dt;

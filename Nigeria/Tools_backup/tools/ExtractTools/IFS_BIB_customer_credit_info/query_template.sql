@@ -1,0 +1,17 @@
+select
+translate(CUSTOMER_ADDRESS, chr(10)||chr(11)||chr(13) , ' ')
+,translate(EMAIL_ADDRESS, chr(10)||chr(11)||chr(13) , ' ')
+,translate(CUSTOMER_MSISDN, chr(10)||chr(11)||chr(13) , ' ')
+,translate(CUSTOMER_NAME, chr(10)||chr(11)||chr(13) , ' ')
+,translate(CUSTOMER_CODE, chr(10)||chr(11)||chr(13) , ' ')
+,translate(CREDIT_LIMIT, chr(10)||chr(11)||chr(13) , ' ')
+,translate(BANK_NAME, chr(10)||chr(11)||chr(13) , ' ')
+,translate(BANK_GUARANTEE_AMOUNT, chr(10)||chr(11)||chr(13) , ' ')
+,translate(BG_REF_NO, chr(10)||chr(11)||chr(13) , ' ')
+,translate(ISSUE_DATE, chr(10)||chr(11)||chr(13) , ' ')
+,translate(BG_EXPIRY_DATE, chr(10)||chr(11)||chr(13) , ' ')
+,translate(TOTAL_CREDIT_SALES, chr(10)||chr(11)||chr(13) , ' ')
+,translate(TOTAL_HCR_SALES, chr(10)||chr(11)||chr(13) , ' ')
+,translate(TOTAL_CASH_SALES, chr(10)||chr(11)||chr(13) , ' ')
+,translate(TOTAL_SALES, chr(10)||chr(11)||chr(13) , ' ')
+,translate(TRANSACTION_DATE, chr(10)||chr(11)||chr(13) , ' ')  from IFsapp.IFS_BIB_customer_credit_info

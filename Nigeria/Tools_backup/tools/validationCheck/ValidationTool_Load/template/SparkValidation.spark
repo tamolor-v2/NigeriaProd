@@ -1,0 +1,30 @@
+import org.apache.spark.sql._
+val hiveContext = new org.apache.spark.sql.hive.HiveContext(sc)
+
+
+hiveContext.sql("insert overwrite table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"CCN_VOICE_MA\", count(*) from databasename.CCN_VOICE_MA where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\"")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"CCN_SMS_MA\" , count(*) from databasename.CCN_SMS_MA  where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\"")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"CCN_GPRS_MA\" , count(*) from databasename.CCN_GPRS_MA  where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\"")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"CCN_VOICE_DA\", count(*) from databasename.CCN_VOICE_DA where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\"")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"CCN_SMS_DA\" , count(*) from databasename.CCN_SMS_DA  where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\"")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"CCN_GPRS_DA\" , count(*) from databasename.CCN_GPRS_DA  where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\"")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"AIR_ADJ_MA\" , count(*) from databasename.AIR_ADJ_MA  where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\"")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"AIR_ADJ_DA\" , count(*) from databasename.AIR_ADJ_DA  where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\"")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"AIR_REFILL_MA\", count(*) from databasename.AIR_REFILL_MA where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\"")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"AIR_REFILL_DA\", count(*) from databasename.AIR_REFILL_DA where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)=\"targetdate\"")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"SDP_DUMP_MA_CSV\", count(*) from databasename.SDP_DUMP_MA_CSV where tbl_dt=targetdate")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"SDP_DUMP_DA_CSV\", count(*) from databasename.SDP_DUMP_DA_CSV where tbl_dt=targetdate")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"SDP_ACC_ADJ_MA\", count(*) from databasename.SDP_ACC_ADJ_MA  where file_name like \"%targetdate%\"")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"SDP_ACC_ADJ_DA\", count(*) from databasename.SDP_ACC_ADJ_DA  where file_name like \"%targetdate%\"")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"EVD_CDR\", count(*) from databasename.EVD_CDR  where file_name like \"%targetdate%\"")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"ADC_SUBS_HANDSET\", count(*) from databasename.ADC_SUBS_HANDSET where file_name like \"%targetdate%\"")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"EWP_EOD_USER_ACC_BAL\" ,  count(*) from databasename.EWP_EOD_USER_ACC_BAL   where tbl_dt=targetdate")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"EWP_EOD_REGISTRATIONS\",  count(*) from databasename.EWP_EOD_REGISTRATIONS  where tbl_dt=targetdate")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"EWP_EOD_TRANSACTIONS\" , count(*) from databasename.EWP_EOD_TRANSACTIONS   where tbl_dt=targetdate")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"EWP_EOD_CUSTODY_ACC_BAL\", count(*) from databasename.EWP_EOD_CUSTODY_ACC_BAL where tbl_dt=targetdate")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"FIN_LOG\" , count(*) from databasename.FIN_LOG where file_name like \"%targetdate%\"")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"PM_RATED\", count(*) from databasename.PM_RATED  where tbl_dt=targetdate")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"GGSN_CDR\", count(*) from databasename.GGSN_CDR  where tbl_dt=\"targetdate\"")
+hiveContext.sql("insert into table databasename.feeds_count_summary partition (tbl_dt=targetdate) select \"MSC_CDR\", count(*) from databasename.MSC_CDR  where tb    l_dt=\"targetdate\"")
+
+exit;

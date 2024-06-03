@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Properties>
+    <Property name="log-path">/mnt/beegfs/tools/Consolidation/logs</Property>
+  </Properties>
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </Console>
+    <RollingFile name="HourlyRoll" fileName="${log-path}/Consolidation.log" filePattern="${log-path}/Consolidation-%d{yyyy-MM-dd-HH}-%i.log.gz">
+      <!-- PatternLayout pattern="%d - %c [%t] (%F:%L) - %p - %m %n"  -->
+      <!-- PatternLayout pattern="%d - %c [%t] (%M) - %p - %m %n"  -->
+      <PatternLayout pattern="%d - %c [%t] - %p - %m %n" />
+      <Policies>
+        <SizeBasedTriggeringPolicy size="256 MB" />
+        <TimeBasedTriggeringPolicy />
+        <OnStartupTriggeringPolicy />
+      </Policies>
+    </RollingFile>
+    <File name="summary" fileName="${log-path}/summary.log">
+      <PatternLayout>
+          <Pattern>%d - %c [%t] - %p - %m %n</Pattern>
+      </PatternLayout>
+    </File> 
+  </Appenders>
+  <Loggers>
+    <Root level="debug">
+      <AppenderRef ref="Console"/>
+   <!--   <AppenderRef ref="HourlyRoll"/> -->
+    </Root>
+    <Logger name="consolidation.summary" level="info" additivity="false" >
+         <AppenderRef ref="Console"/>
+         <AppenderRef ref="summary" />
+    </Logger>
+
+
+  </Loggers>
+</Configuration>

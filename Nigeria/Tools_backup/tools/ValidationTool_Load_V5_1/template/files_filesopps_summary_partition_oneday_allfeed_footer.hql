@@ -1,0 +1,1 @@
+else 'UK' end) feed_name, case when path like '%archived%' then split(split(path,'archived')[2],'/')[3] else '1917' end file_dt from databaseTables.files_filesopps_summary_pre where lines > 0 and tbl_dt between yesterday and nextday) FilesOps where file_dt like 'targetdate';

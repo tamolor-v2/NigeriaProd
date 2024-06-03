@@ -1,0 +1,19 @@
+import org.apache.spark.sql._
+val hiveContext = new org.apache.spark.sql.hive.HiveContext(sc)
+
+hiveContext.sql("set hive.enforce.bucketing=true")
+hiveContext.sql("set hive.exec.dynamic.partition.mode=nonstrict")
+
+val buffer = scala.collection.mutable.ArrayBuffer(
+" insert overwrite table databasename.files_count_stats_detailes  partition (tbl_dt,feed_name) ",
+" select row_number() over(partition by filename order by starttime desc) seq, filename, status, starttime, recordscount, processedrecordscount, tbl_dt, ",
+" upper(substring(fsys_msgtype,18)) feed_name from databasename.file_stats where tbl_dt>=predate ")
+
+val sql=buffer.mkString(" ")
+
+println(sql)
+hiveContext.sql(sql)
+
+
+exit;
+

@@ -1,0 +1,14 @@
+#!/bin/bash 
+
+yest=$(date -d '-1 day' '+%Y%m%d')
+yest2=$(date -d '-1 day' '+%m%d%Y')
+mytime() {
+date +"%Y-%m-%d_%H-%M-%S"
+}
+
+
+time java -Xmx30g -Xms30g -Dlog4j.configurationFile=/home/daasuser/fileOps/log4j2.xml -jar /home/daasuser/fileOps/FileOps_2.11-0.1-SNAPSHOT_hdfs.jar -in /mnt/beegfs/production/archived/AIR_ADJ_DA/$yest /mnt/beegfs/production/archived/AIR_REFILL_MA/$yest /mnt/beegfs/production/archived/CCN_GPRS_DA/$yest /mnt/beegfs/production/archived/CCN_SMS_MA/$yest /mnt/beegfs/production/archived/GGSN/$yest /mnt/beegfs/production/archived/MSC/$yest /mnt/beegfs/production/archived/SDP_ADJ_DA/$yest /mnt/beegfs/production/archived/AIR_ADJ_MA/$yest /mnt/beegfs/production/archived/BUNDLE4U_GPRS/$yest /mnt/beegfs/production/archived/CCN_GPRS_MA/$yest /mnt/beegfs/production/archived/CCN_VOICE_AC/$yest /mnt/beegfs/production/archived/HSDP/$yest /mnt/beegfs/production/archived/SDP_DMP_MA/$yest /mnt/beegfs/production/archived/AIR_REFILL_AC/$yest /mnt/beegfs/production/archived/BUNDLE4U_VOICE/$yest /mnt/beegfs/production/archived/CCN_SMS_AC/$yest /mnt/beegfs/production/archived/CCN_VOICE_DA/$yest /mnt/beegfs/production/archived/DMC_DUMP_ALL/$yest /mnt/beegfs/production/archived/MAPS_INV_2G/$yest /mnt/beegfs/production/archived/SDP_ACC_ADJ_AC/$yest /mnt/beegfs/production/archived/SGSN/$yest /mnt/beegfs/production/archived/AIR_REFILL_DA/$yest /mnt/beegfs/production/archived/CCN_GPRS_AC/$yest /mnt/beegfs/production/archived/CCN_SMS_DA/$yest /mnt/beegfs/production/archived/CCN_VOICE_MA/$yest /mnt/beegfs/production/archived/EWP_FINANCIAL_LOG/$yest /mnt/beegfs/production/archived/MAPS_INV_4G/$yest /mnt/beegfs/production/archived/SDP_ACC_ADJ_MA/$yest /mnt/beegfs/production/archived/WBS_PM_RATED_CDRS/$yest /mnt/beegfs/production/archived/SDP_DMP_AC/$yest  /mnt/beegfs/production/archived/SDP_DMP_DA/$yest /mnt/beegfs/production/archived/SDP_DUMP_OFFER/$yest /mnt/beegfs/production/archived/SDP_DUMP_SUBSCRIBER/$yest /mnt/beegfs/production/archived/RECON/$yest /mnt/beegfs/production/archived/CB_SERV_MAST_VIEW/$yest /mnt/beegfs/production/archived/CUG_ACCESS_FEES/$yest  /mnt/beegfs/production/archived/SDP_DMP_MA/$yest  /mnt/beegfs/production/archived/MAPS_INV_3G/$yest  /mnt/beegfs/production/archived/MOBILE_MONEY/$yest  /mnt/beegfs/production/archived/AGL_CRM_COUNTRY_MAP/$yest /mnt/beegfs/production/archived/AGL_CRM_LGA_MAP/$yest /mnt/beegfs/production/archived/AGL_CRM_STATE_MAP/$yest /mnt/beegfs/production/archived/CALL_REASON/$yest  /mnt/beegfs/production/archived/CALL_REASON_MONTHLY/$yest /mnt/beegfs/production/archived/MNP_PORTING_BROADCAST/$yest /mnt/beegfs/production/archived/MVAS_DND_MSISDN_REP_CDR/$yest /mnt/beegfs/production/archived/NEWREG_BIOUPDT_POOL/$yest -out /mnt/beegfs/tmp/waddah/linecount -od -tf 1 -nt 32 -dp 15 -of -op lineCount -lbl lineCount$yest -fnfp 5 -rg "$yest|$yest2" 2>&1 | tee "/mnt/beegfs/tmp/waddah/linecount/linecount_archived_$yest_$(mytime).log"
+
+
+
+

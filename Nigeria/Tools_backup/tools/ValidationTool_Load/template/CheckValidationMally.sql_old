@@ -1,0 +1,57 @@
+use flaretest;
+
+msck repair table CCN_VOICE_MA				;
+msck repair table CCN_SMS_MA               ;
+msck repair table CCN_GPRS_MA              ;
+msck repair table CCN_VOICE_DA             ;
+msck repair table CCN_SMS_DA               ;
+msck repair table CCN_GPRS_DA              ;
+msck repair table AIR_ADJ_MA               ;
+msck repair table AIR_ADJ_DA               ;
+msck repair table AIR_REFILL_MA            ;
+msck repair table AIR_REFILL_DA            ;
+msck repair table SDP_DUMP_MA_CSV          ;
+msck repair table SDP_DUMP_DA_CSV          ;
+msck repair table SDP_ACC_ADJ_MA           ;
+msck repair table SDP_ACC_ADJ_DA           ;
+msck repair table EVD_CDR                  ;
+msck repair table ADC_SUBS_HANDSET         ;
+msck repair table MSC_CDR                  ;
+msck repair table EWP_EOD_USER_ACC_BAL     ;
+msck repair table EWP_EOD_REGISTRATIONS    ;
+msck repair table EWP_EOD_TRANSACTIONS     ;
+msck repair table EWP_EOD_CUSTODY_ACC_BAL  ;
+msck repair table FIN_LOG              ;
+msck repair table PM_RATED                 ;
+msck repair table GGSN_CDR                 ;
+
+
+insert into table Tables_count_summary  select "CCN_VOICE_MA","targetdate",			count(*) from CCN_VOICE_MA			where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)="targetdate";
+insert into table Tables_count_summary  select "CCN_SMS_MA"  ,"targetdate",          count(*) from CCN_SMS_MA            where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)="targetdate"; ;
+insert into table Tables_count_summary  select "CCN_GPRS_MA" ,"targetdate",          count(*) from CCN_GPRS_MA           where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)="targetdate"; ;
+insert into table Tables_count_summary  select "CCN_VOICE_DA","targetdate",          count(*) from CCN_VOICE_DA          where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)="targetdate"; ;
+insert into table Tables_count_summary  select "CCN_SMS_DA"  ,"targetdate",          count(*) from CCN_SMS_DA            where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)="targetdate"; ;
+insert into table Tables_count_summary  select "CCN_GPRS_DA" ,"targetdate",          count(*) from CCN_GPRS_DA           where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)="targetdate"; ;
+insert into table Tables_count_summary  select "AIR_ADJ_MA"  ,"targetdate",          count(*) from AIR_ADJ_MA            where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)="targetdate"; ;
+insert into table Tables_count_summary  select "AIR_ADJ_DA"  ,"targetdate",          count(*) from AIR_ADJ_DA            where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)="targetdate"; ;
+insert into table Tables_count_summary  select "AIR_REFILL_MA","targetdate",         count(*) from AIR_REFILL_MA         where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)="targetdate"; ;
+insert into table Tables_count_summary  select "AIR_REFILL_DA","targetdate",         count(*) from AIR_REFILL_DA         where substring(substring(file_name,INSTR(file_name,'incoming')+9),1,8)="targetdate"; ;
+insert into table Tables_count_summary  select "SDP_DUMP_MA_CSV",        "targetdate",count(*) from  SDP_DUMP_MA_CSV          where tbl_dt=targetdate;
+insert into table Tables_count_summary  select "SDP_DUMP_DA_CSV",        "targetdate",count(*) from  SDP_DUMP_DA_CSV          where tbl_dt=targetdate;
+insert into table Tables_count_summary  select "SDP_ACC_ADJ_MA",        "targetdate",count(*) from  SDP_ACC_ADJ_MA           where file_name like "%targetdate%";
+insert into table Tables_count_summary  select "SDP_ACC_ADJ_DA",        "targetdate",count(*) from  SDP_ACC_ADJ_DA           where file_name like "%targetdate%";
+insert into table Tables_count_summary  select "EVD_CDR",         "targetdate",count(*) from  EVD_CDR                  where file_name like "%targetdate%";
+insert into table Tables_count_summary  select "ADC_SUBS_HANDSET",        "targetdate",count(*) from  ADC_SUBS_HANDSET         where file_name like "%targetdate%";
+insert into table Tables_count_summary  select "MSC_CDR",                 "targetdate",count(*) from  MSC_CDR                  where tbl_dt = "targetdate";
+insert into table Tables_count_summary  select "EWP_EOD_USER_ACC_BAL" ,   "targetdate",count(*) from  EWP_EOD_USER_ACC_BAL     where tbl_dt=targetdate;
+insert into table Tables_count_summary  select "EWP_EOD_REGISTRATIONS",   "targetdate",count(*) from  EWP_EOD_REGISTRATIONS    where tbl_dt=targetdate;
+insert into table Tables_count_summary  select "EWP_EOD_TRANSACTIONS" ,  "targetdate",count(*) from  EWP_EOD_TRANSACTIONS     where tbl_dt=targetdate;
+insert into table Tables_count_summary  select "EWP_EOD_CUSTODY_ACC_BAL", "targetdate",count(*) from  EWP_EOD_CUSTODY_ACC_BAL  where tbl_dt=targetdate;
+insert into table Tables_count_summary  select "FIN_LOG" ,             	"targetdate",count(*) from  FIN_LOG              	where file_name like "%targetdate%";
+insert into table Tables_count_summary  select "PM_RATED",                "targetdate",count(*) from  PM_RATED                 where tbl_dt=targetdate;
+insert into table Tables_count_summary  select "GGSN_CDR",                "targetdate",count(*) from  GGSN_CDR                 where tbl_dt="targetdate";
+
+
+
+
+

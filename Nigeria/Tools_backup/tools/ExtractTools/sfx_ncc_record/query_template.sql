@@ -1,0 +1,8 @@
+select FILE_NAME,     
+UNIQUE_ID,     
+PHONE_NUMBER,  
+DATE_GENERATED, 
+TO_DATE(TO_CHAR(SYNC_DATE, 'yyyy-MM-DD HH:mm:ss'), 'yyyy-MM-DD HH:mi:ss') SYNC_DATE,   
+BUCKET_STATUS, 
+CAT_STATUS,    
+ARCHIVE_NAME  from BIOCAPTURE.sfx_ncc_record 

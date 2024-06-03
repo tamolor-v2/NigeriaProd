@@ -1,0 +1,15 @@
+cat: /mnt/beegfs/tools/Crontab/Scripts/email.dat: No such file or directory
+CUSTOMER_DETAILS.sh: line 16: /mnt/beegfs/tools/Crontab/logs/general_logs/20190917/genral_logs_20190917.log: No such file or directory
+CUSTOMER_DETAILS
+hive -hivevar DATA_NAMESPACE=stg_gen -hivevar DATA_PATH=/FlareData/output_8 -f /mnt/beegfs_bsl/Deployment/DEV/output/CUSTOMER_DETAILS/CUSTOMER_DETAILS.hql
+log4j:WARN No such property [maxFileSize] in org.apache.log4j.DailyRollingFileAppender.
+
+Logging initialized using configuration in file:/etc/hive/2.6.1.0-129/0/hive-log4j.properties
+OK
+Time taken: 2.602 seconds
+OK
+Time taken: 0.227 seconds
+OK
+Time taken: 0.374 seconds
+starting command: bash /home/daasuser/JDBC_Tool/JDBCExtract.scala --configFile /mnt/beegfs_bsl/tools/ExtractTools/CUSTOMER_DETAILS/config.properties --sqlFile /mnt/beegfs_bsl/tools/ExtractTools/CUSTOMER_DETAILS/query_template.sql --outputFile /mnt/beegfs_bsl/tools/ExtractTools/CUSTOMER_DETAILS/tmp/20190916/.20190916_CUSTOMER_DETAILS.gz --delimiter | --kvTemplate ${DATE}=20190916
+cat: /mnt/beegfs_bsl/tools/ExtractTools/CB_RETAIL_OUTLETS/logs/20190916/*.log: No such file or directory

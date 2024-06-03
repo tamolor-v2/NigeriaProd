@@ -1,0 +1,29 @@
+Dedups{
+	LoadCluster {
+		ClusterName=NigeriaLoadCluster
+		Schema="testing"
+		Feeds{
+		MSC_CDR{	
+			seq=1
+			unique_fields="file_name|file_offset"
+		}	
+		MAPS2G{
+			seq=2
+			unique_fields="file_name|file_offset"
+			}
+		MAPS3G{
+			seq=3
+			unique_fields="file_name|file_offset"
+			}
+		MVAS_DND_MSISDN_REPORT{
+			seq=4
+			unique_fields="file_name|file_offset"
+			}
+		}
+		CS5_CCN_VOICE_MA{
+                        seq=4
+                        unique_fields="file_name|file_offset"
+
+}
+	}
+}
