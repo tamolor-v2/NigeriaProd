@@ -7,7 +7,8 @@
     "fromEmail": "DAAS_note_ng@mtn.com",
     "Subject": "DAAS_Note_MTN_NG_<PrestoTransactionTool>",
     "toEmail": [
-        "m.nabeel@ligadata.com"
+        "m.nabeel@ligadata.com",
+        "t.olorunfemi@ligadata.com"
     ],
     "connection": {
         "presto": {
