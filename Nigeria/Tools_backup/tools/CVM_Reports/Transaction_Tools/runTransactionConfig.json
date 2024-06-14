@@ -1,0 +1,414 @@
+{
+    "paths": {
+        "toolTmp": "/nas/share05/tools/TransactionsTool/tmp",
+        "toolLog": "/nas/share05/tools/TransactionsTool/logs"
+    },
+    "SMTPNode": "edge01002",
+    "fromEmail": "DAAS_note_ng@mtn.com",
+    "Subject": "DAAS_Note_MTN_NG_<PrestoTransactionTool>",
+    "toEmail": [
+        "m.nabeel@ligadata.com"
+    ],
+    "connection": {
+        "presto": {
+            "host": "10.1.197.145",
+            "port": "8999",
+            "username": "daasuser",
+            "password": "",
+            "catalog": "hive5",
+            "SSL": false,
+            "SSLKeyStorePath": "",
+            "SSLKeyStorePassword": "",
+            "jarPath": "/nas/share05/tools/TransactionsTool/presto-jdbc-350.jar"
+        },
+	"postgres": {
+            "host": "",
+            "port": "",
+            "username": "",
+            "password": "",
+            "database": ""
+        }
+    },
+    "queries": [
+        {
+            "queryName": "CVM20_SIM_TMP",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_SIM_TMP.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "CVM20_BIO_DATA_TMP",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_BIO_DATA_TMP.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "CVM20_CUSTOMERINFO",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_CUSTOMERINFO.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "CVM20_CUSTOMERSUBJECT_TMP",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_CUSTOMERSUBJECT_TMP.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "CVM20_SUBS_TMP",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_SUBS_TMP.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "CVM20_USG_VOI_DATA_SMS_TMP",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_USG_VOI_DATA_SMS_TMP.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "CVM20_USG_VOI_USG_CLUSTER_TMP",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_USG_VOI_USG_CLUSTER_TMP.sql",
+            "executType": "PRESTO"
+        },
+         {
+            "queryName": "CVM20_CUSTOMERSUBJECT_SN_TMP",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_CUSTOMERSUBJECT_SN_TMP.sql",
+            "executType": "PRESTO"
+        },
+         {
+            "queryName": "CVM20_USG_DATA_SMS_VOI_TMP",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_USG_DATA_SMS_VOI_TMP.sql",
+            "executType": "PRESTO"
+        },
+         {
+            "queryName": "CVM20_USG_DATA",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_USG_DATA.sql",
+            "executType": "PRESTO"
+        },
+         {
+            "queryName": "CVM20_USG_SMS",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_USG_SMS.sql",
+            "executType": "PRESTO"
+        },
+         {
+            "queryName": "CVM20_DEVICE",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_DEVICE.sql",
+            "executType": "PRESTO"
+        },
+         {
+            "queryName": "CVM20_DEVICE_TMP",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_DEVICE_TMP.sql",
+            "executType": "PRESTO"
+        },
+         {
+            "queryName": "CVM20_ATTRIBUTES_INACTIVITY",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_ATTRIBUTES_INACTIVITY.sql",
+            "executType": "PRESTO"
+        },
+         {
+            "queryName": "CVM20_ATTRIBUTES_ACTIVITY",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_ATTRIBUTES_ACTIVITY.sql",
+            "executType": "PRESTO"
+        },
+         {
+            "queryName": "CVM20_ATTRIBUTES_BALANCE",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_ATTRIBUTES_BALANCE.sql",
+            "executType": "PRESTO"
+        },
+         {
+            "queryName": "CVM20_REC_ENGINE_DEV2",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_REC_ENGINE_DEV2.sql",
+            "executType": "PRESTO"
+        },
+         {
+            "queryName": "CVM20_CC_TMP",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_CC_TMP.sql",
+            "executType": "PRESTO"
+        },
+       {
+            "queryName": "CVM20_REFILL_DATA_BUNDLE",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_REFILL_DATA_BUNDLE.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "CVM20_REFILL_DATA_BUNDLE_TMP",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_REFILL_DATA_BUNDLE_TMP.sql",
+            "executType": "PRESTO"
+        },
+       {
+            "queryName": "CVM20_DISTRIBUTOR_ACTIVATIONS",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_DISTRIBUTOR_ACTIVATIONS.sql",
+            "executType": "PRESTO"
+        },
+       {
+            "queryName": "CVM20_USG_DATA_SMS_VOI_PRD_TMP",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_USG_DATA_SMS_VOI_PRD_TMP.sql",
+            "executType": "PRESTO"
+        },
+       {
+            "queryName": "CVM20_DATA_BUNDLE_REV_TMP",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_DATA_BUNDLE_REV_TMP.sql",
+            "executType": "PRESTO"
+        },
+       {
+            "queryName": "CVM20_DIGITAL_SERVICES_REV_TMP",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_DIGITAL_SERVICES_REV_TMP.sql",
+            "executType": "PRESTO"
+        },		
+       {
+            "queryName": "CVM20_REV_IC_TMP",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_REV_IC_TMP.sql",
+            "executType": "PRESTO"
+        },
+       {
+            "queryName": "CVM20_REV_VOI_SMS_DATA_TMP_STG",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_REV_VOI_SMS_DATA_TMP_STG.sql",
+            "executType": "PRESTO"
+        },
+       {
+            "queryName": "CVM20_REV_VOI_SMS_DATA_TMP",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_REV_VOI_SMS_DATA_TMP.sql",
+            "executType": "PRESTO"
+        },
+       {
+            "queryName": "CVM20_AYOBA",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_AYOBA.sql",
+            "executType": "PRESTO"
+        },
+       {
+            "queryName": "CVM20_REG_SBSCR_FLAGS",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_REG_SBSCR_FLAGS.sql",
+            "executType": "PRESTO"
+        },
+       {
+            "queryName": "CVM20_REG_SBSCR_BASE",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_REG_SBSCR_BASE.sql",
+            "executType": "PRESTO"
+        },
+       {
+            "queryName": "CVM20_BUNDLE_TRANSACTION",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_BUNDLE_TRANSACTION.sql",
+            "executType": "PRESTO"
+        },
+       {
+            "queryName": "CVM20_REC_ENGINE_DEV_PROD",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_REC_ENGINE_DEV_PROD.sql",
+            "executType": "PRESTO"
+        },
+       {
+            "queryName": "CVM20_CAMPAIGN_RELATED_ATTRIBUTES",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_CAMPAIGN_RELATED_ATTRIBUTES.sql",
+            "executType": "PRESTO"
+        },
+       {
+            "queryName": "CVM20_REFILL_AND_SUBSCRIPTION_BACTH2",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_REFILL_AND_SUBSCRIPTION_BACTH2.sql",
+            "executType": "PRESTO"
+        },
+       {
+            "queryName": "CVM20_REFILL_INFO",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CVM20_REFILL_INFO.sql",
+            "executType": "PRESTO"
+        },	
+        {
+            "queryName": "BUNDLE_SPLIT",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/BUNDLE_SPLIT.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "CDR_DATA",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CDR_DATA.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "CDR_RECHARGE",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CDR_RECHARGE.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "CDR_SMS",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CDR_SMS.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "CDR_SUBSCRIPTION",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CDR_SUBSCRIPTION.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "CDR_VOICE",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/CDR_VOICE.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "EVD_STOCK_LEVEL",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/EVD_STOCK_LEVEL.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "EVD_TRANSACTIONS",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/EVD_TRANSACTIONS.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "MFS_ACCOUNTS",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/MFS_ACCOUNTS.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "MFS_ACQUISITION",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/MFS_ACQUISITION.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "MFS_ACTIVE_SUBSCRIBERS",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/MFS_ACTIVE_SUBSCRIBERS.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "MFS_REGISTRATIONS",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/MFS_REGISTRATIONS.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "MFS_STOCK_LEVEL",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/MFS_STOCK_LEVEL.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "MFS_TRANSACTIONS",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/MFS_TRANSACTIONS.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "MSISDN_DISTRIBUTOR",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/MSISDN_DISTRIBUTOR.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "PHYSICAL_RECHARGES",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/PHYSICAL_RECHARGES.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "POS_GEO_PLACES",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/POS_GEO_PLACES.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "POS_MSISDN",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/POS_MSISDN.sql",
+            "executType": "PRESTO"
+        },
+        {
+            "queryName": "SIM_TRANSACTIONS",
+            "queryPath": "/nas/share05/tools/TransactionsTool/Templates/SIM_TRANSACTIONS.sql",
+            "executType": "PRESTO"
+        }
+    ],
+    "dictionary": [
+        {
+            "name": "firstDayOfMonth",
+            "description": "first day of Month from startDate"
+        },
+        {
+            "name": "lastDayOfMonth",
+            "description": "last day of Month from startDate"
+        },
+        {
+            "name": "yyyyDateFormat",
+            "description": "get format 'yyyy-mm-dd' from startDate with format like 'yyyymmdd'"
+        },
+        {
+            "name": "yyyymmddRunDate",
+            "description": "startDate"
+        },
+        {
+            "name": "yyyyRunDateWeek",
+            "description": "day +6 from startDate"
+        },
+        {
+            "name": "startDatePlusOne",
+            "description": "day +1 from startDate"
+        },
+        {
+            "name": "LdLmdate",
+            "description": ""
+        },
+        {
+            "name": "ydate",
+            "description": "day -1 from startDate"
+        },
+        {
+            "name": "y90day",
+            "description": "day -90 from startDate"
+        },
+        {
+            "name": "y30date",
+            "description": ""
+        },
+        {
+            "name": "vmonth",
+            "description": ""
+        },
+        {
+            "name": "vday",
+            "description": ""
+        },
+        {
+            "name": "y6day",
+            "description": ""
+        },
+        {
+            "name": "y11date",
+            "description": ""
+        },
+        {
+            "name": "y10date",
+            "description": ""
+        },
+        {
+            "name": "y20date",
+            "description": ""
+        },
+        {
+            "name": "y21date",
+            "description": ""
+        },
+        {
+            "name": "y1month",
+            "description": ""
+        },
+        {
+            "name": "y2month",
+            "description": ""
+        },
+        {
+            "name": "monthAgo1tmp",
+            "description": ""
+        },
+        {
+            "name": "monthAgo",
+            "description": ""
+        },
+        {
+            "name": "sDashedFormat",
+            "description": ""
+        },
+        {
+            "name": "eDashedFormat",
+            "description": ""
+        },
+        {
+            "name": "staticDateAndTime",
+            "description": ""
+        },
+        {
+            "name": "shiftTime",
+            "description": ""
+        },
+        {
+            "name": "startDateYYYYMMDDFromat",
+            "description": ""
+        },
+        {
+            "name": "endDateYYYYMMDDFromat",
+            "description": ""
+        }
+    ]
+}
