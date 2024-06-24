@@ -1,9 +1,0 @@
-[ {
-  "AdapterName" : "flytxt_incoming_voice_usage",
-  "MessageNames" : [ "com.mtn.messages.FLYTXT_INCOMING_VOICE_USAGE" ],
-  "Options" : {
-    "alwaysQuoteFields" : false,
-    "fieldDelimiter" : ","
-  },
-  "Serializer" : "com.ligadata.kamanja.serializer.csvserdeser"
-} ]

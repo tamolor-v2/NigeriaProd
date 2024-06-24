@@ -1,9 +1,0 @@
-{
-  "flytxteventsModel": {
-  
-  "MessageAndContainers": ["com.mtn.containers.vp_hsdp_lookup","com.mtn.containers.mnp_porting_broadcast"],
-    "InputTypesSets": [ ["com.mtn.messages.cs5_ccn_gprs_ma"],["com.mtn.messages.cs5_air_refill_ma"],["com.mtn.messages.msc_daas"],["com.mtn.messages.hsdp_cdr"],["com.mtn.messages.cs5_ccn_sms_ma"],["com.mtn.messages.cs5_ccn_voice_ma"] ],
-    "OutputTypes": ["com.mtn.messages.cm_pack_sub_event" ,"com.mtn.messages.cm_rbt_event" ,"com.mtn.messages.cm_refill_event","com.mtn.messages.cm_vas_event","com.mtn.messages.flytxt_data_balance","com.mtn.messages.flytxt_incoming_voice_usage","com.mtn.messages.flytxt_main_acct_balance","com.mtn.messages.flytxt_data_bundle_expiry"],
-	"Dependencies":["flytxtenrichment_2.11-1.0.jar","commons-csv-1.4.jar","enrichmentutilities_2.11-1.0.jar","transactiondateutil_2.11-1.5.3.jar"]
-  }
-}
