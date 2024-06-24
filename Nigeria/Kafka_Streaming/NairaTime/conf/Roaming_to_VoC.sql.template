@@ -1,4 +1,0 @@
-Select Customer_ID, Address,  language, SURVEY_ID, EVENT,SMSRoam_Flag,VOIRoam_Flag,DataRoam_Flag, Transaction_Timestamp
-from ${SCHEMA_NAME}.${TABLE_NAME}
-Where tbl_dt BETWEEN ${START_DATE} AND ${END_DATE}
-and cast(date_format(from_iso8601_timestamp(Transaction_Timestamp),'%H') as integer) BETWEEN ${START_HOUR} and ${END_HOUR}

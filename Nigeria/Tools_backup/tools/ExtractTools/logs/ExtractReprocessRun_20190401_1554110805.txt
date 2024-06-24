@@ -1,1 +1,0 @@
-Error: Unable to access jarfile /home/oolanip/FileOps_2.11-0.1-SNAPSHOT.jar

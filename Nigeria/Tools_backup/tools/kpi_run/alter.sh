@@ -1,5 +1,0 @@
-for rdate in 20171201 20171202 20171203 20171204 20171205 20171206 20171207 20171208 20171209 20171210 20171211 20171212 20171213 20171214 20171215 20171216 20171217 20171218 20171219 20171220 20171221 20171222 20171223 20171224 20171225 20171226 20171227 20171228 20171229 20171230 20171231 20180101 20180102 20180103 20180322 20180323 20180324 20180325 20180326 20180327 20180328 20180329 20180330; do
-# hive --hiveconf tez.queue.name=Q1 -e "ALTER TABLE KPI.DASHBOARD_STATS ADD PARTITION (TBL_DT='$rdate') LOCATION '/user/data/kpi/nigeria/fact/KPI.DASHBOARD_STATS/$rdate';"
- #hive --hiveconf tez.queue.name=Q1 -e "alter table KPI.FACT_RGS add partition (aggr='daily', tbl_dt='$rdate') location '/user/data/kpi/nigeria/fact/KPI.FACT_RGS/daily/$rdate';"
-hive --hiveconf tez.queue.name=Q1 -e "alter table KPI.FACT_SUBSCRIBER_MOVEMENT add partition (aggr='daily', tbl_dt='$rdate') location '/user/data/kpi/nigeria/fact/KPI.FACT_SUBSCRIBER_MOVEMENT/daily/$rdate';"
-done 

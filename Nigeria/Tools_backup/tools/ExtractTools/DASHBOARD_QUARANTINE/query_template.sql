@@ -1,2 +1,0 @@
-select TO_DATE(TO_CHAR(DATE_ , 'yyyy-MM-DD HH:mm:ss'), 'yyyy-MM-DD HH:mi:ss') DATE_ ,
-MSISDN from BIOCAPTURE.DASHBOARD_QUARANTINE 

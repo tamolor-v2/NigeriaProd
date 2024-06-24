@@ -1,3 +1,0 @@
-mytime=$(date +"%Y-%m-%d_%H-%M-%S")
-
-time java -Dlog4j.configurationFile=/mnt/beegfs/yousef/incomingNumberCheck/config/log4j2.xml -jar  /mnt/beegfs/yousef/incomingNumberCheck/jar/NumberChecker_2.10-1.0.jar -i -c  /mnt/beegfs/yousef/incomingNumberCheck/config/incomingCheckNumber.json 2>&1 | tee "/mnt/beegfs/yousef/incomingNumberCheck/log/incoming_number_check_${mytime}.log"  

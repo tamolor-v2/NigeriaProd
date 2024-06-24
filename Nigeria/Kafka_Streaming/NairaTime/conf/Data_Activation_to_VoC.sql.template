@@ -1,4 +1,0 @@
-Select Customer_ID, Address,  language, SURVEY_ID, EVENT,Transaction_Timestamp,Channel,shortcode,service_name,partner_name,product_name,service_category,service_sub_category,tariff_plan,segment,tenure,ng_state,tbl_dt
-from ${SCHEMA_NAME}.${TABLE_NAME}
-Where tbl_dt BETWEEN ${START_DATE} AND ${END_DATE}
-and cast(date_format(from_iso8601_timestamp(Transaction_Timestamp),'%H') as integer) BETWEEN ${START_HOUR} and ${END_HOUR}

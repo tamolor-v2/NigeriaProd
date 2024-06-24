@@ -1,4 +1,0 @@
-select Sender_MSISDN,Balance,Original_Timestamp,Tbl_Dt
-from FLARE_8.VP_EVD_STOCK_BAL_TO_TAS
-where tbl_dt BETWEEN ${START_DATE} AND ${END_DATE}
-and cast(date_format(Original_Timestamp,'%H') as integer) BETWEEN ${START_HOUR} and ${END_HOUR}

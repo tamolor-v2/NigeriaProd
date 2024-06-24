@@ -1,1 +1,0 @@
-select * from IFSAPP.MTN_RECEIPT_RECONC_RPT 

@@ -1,4 +1,0 @@
-select MoMo_MSISDN,Date_time_of_fetch,coalesce(Balance_Amount,0.0) Balance_Amount,Profile, Account_Type
-from ${SCHEMA_NAME}.${TABLE_NAME}
-where cast(date_format(from_iso8601_timestamp(date_time_of_fetch),'%Y%m%d') as integer) BETWEEN ${START_DATE} AND ${END_DATE}
-and cast(date_format(from_iso8601_timestamp(date_time_of_fetch),'%H') as integer) BETWEEN ${START_HOUR} and ${END_HOUR}

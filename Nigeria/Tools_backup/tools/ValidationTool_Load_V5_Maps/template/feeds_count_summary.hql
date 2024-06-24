@@ -1,1 +1,0 @@
-insert into databaseTables.feeds_count_summary_pre select feed_name,sum(numberofline),count(distinct file_name) numberoffile,cast(current_timestamp as timestamp),'daasuser',file_dt from databaseTables.files_count_summary_pre where file_dt=targetdate group by feed_name,file_dt;

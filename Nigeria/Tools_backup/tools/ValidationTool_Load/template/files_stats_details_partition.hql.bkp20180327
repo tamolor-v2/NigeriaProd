@@ -1,7 +1,0 @@
-set hive.exec.dynamic.partition.mode=nonstrict;
-insert overwrite table databasename.files_count_stats_detailes partition (tbl_dt,feed_name)   
- select 
- distinct filename, 
- targetdate,
- upper(substring(fsys_msgtype,18)) feed_name
- from databasename.file_stats where tbl_dt>=predate ;

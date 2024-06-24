@@ -1,1 +1,0 @@
-insert into databaseTables.files_count_summary_pre select file_name,split(file_name,'/')[cardinality(split(file_name,'/'))],count(*),cast(current_timestamp as timestamp),'daasuser',cast(FeedFileterValues as integer),tbl_dt,'FeedNameValues' from databasename.FeedNameValues where FeedFileterValues='targetdate' group by tbl_dt,file_name,FeedFileterValues;

@@ -1,7 +1,0 @@
-bash: /mnt/beegfs/tools/JsonBuilder/JsonBuilder.scala: No such file or directory
-cat: /mnt/beegfs/tools/Crontab/Scripts/email.dat: No such file or directory
-rm: cannot remove ‘/mnt/beegfs_bsl/tools/ExtractTools/NPS_KIND_IMSI_ROUTING/logs/20190606’: No such file or directory
-NPS_KIND_IMSI_ROUTING.sh: line 16: /mnt/beegfs/tools/Crontab/logs/general_logs/20190805/genral_logs_20190805.log: No such file or directory
-starting command: bash /mnt/beegfs_bsl/tools/ExtractTools/NPS_KIND_IMSI_ROUTING/JDBCExtract.scala --configFile /mnt/beegfs_bsl/tools/ExtractTools/NPS_KIND_IMSI_ROUTING/config.properties --sqlFile /mnt/beegfs_bsl/tools/ExtractTools/NPS_KIND_IMSI_ROUTING/query_template.sql --outputFile /mnt/beegfs_bsl/tools/ExtractTools/NPS_KIND_IMSI_ROUTING/tmp/Aya/20190804/.20190804_AYA_NPS_KIND_IMSI_ROUTING.gz --delimiter | --kvTemplate ${DATE}=20190804
-mv: cannot stat ‘/mnt/beegfs_bsl/tools/ExtractTools/NPS_KIND_IMSI_ROUTING/tmp/20190804’: No such file or directory
-bash: /mnt/beegfs/tools/JsonBuilder/JsonBuilder.scala: No such file or directory

@@ -1,1 +1,0 @@
-select Incident_Number,Reported_Date,Last_Modified_Date,Assigned_Group,Priority,Status,Description,Categorization_Tier_1,Service_Type,Assigned_Support_Organization from aradmin.HPD_Help_Desk

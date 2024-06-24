@@ -1,4 +1,0 @@
-From: DAAS_Note_NG@edge01002.mtn.com
-To:  ahmed@ligadata.com 
-Subject: ${SUBJECT}
-Content-Type: text/html

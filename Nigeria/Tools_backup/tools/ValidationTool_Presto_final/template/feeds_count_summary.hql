@@ -1,1 +1,0 @@
-insert into dq.feeds_count_summary select feed_name,sum(numberofline),count(distinct file_name) numberoffile,cast(current_timestamp as timestamp),'daasuser',file_dt from audit.files_count_summary_pre where file_dt=targetdate group by feed_name,file_dt;

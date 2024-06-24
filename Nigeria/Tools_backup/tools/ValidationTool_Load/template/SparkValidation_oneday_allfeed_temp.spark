@@ -1,1 +1,0 @@
-hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,FeedFileterValues , count(*),targetdate,        \"FeedNameValues\"                                       from databasename.FeedNameValues  where FeedFileterValues=\"targetdate\"  targethdfsdate  group by file_name")

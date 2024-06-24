@@ -1,1 +1,0 @@
-select * from TT_MSO_1.EDW_CALL_REASON_1 WHERE SUBSTR (MSISDN,-1,1)='${msisdn}'

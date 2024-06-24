@@ -1,4 +1,0 @@
-rm: cannot remove ‘/mnt/beegfs_bsl/tools/ExtractTools/WBS_CLIENT_DAARS_TAPIN/logs/20190630’: No such file or directory
-starting command: bash /home/daasuser/JDBC_Tool/JDBCExtract.scala --configFile /nas/share05/tools/ExtractTools/WBS_CLIENT_DAARS_TAPIN/config.properties --sqlFile /nas/share05/tools/ExtractTools/WBS_CLIENT_DAARS_TAPIN/query_template.sql --outputFile /mnt/beegfs_bsl/tools/ExtractTools/WBS_CLIENT_DAARS_TAPIN/tmp/20190828/20190828_WBS_CLIENT_DAARS_TAPIN.gz --delimiter | --kvTemplate ${DATE}=20190828;
-hi
-cat: /mnt/beegfs_bsl/tools/ExtractTools/WBS_CLIENT_DAARS_TAPIN/logs/20190828/*.log: No such file or directory

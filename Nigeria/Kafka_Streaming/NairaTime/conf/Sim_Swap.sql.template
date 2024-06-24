@@ -1,5 +1,0 @@
-Select msisdn_key  as Customer_ID, msisdn_key as Address,  'EN' language, '66' SURVEY_ID, 'SIM_Swap' EVENT, open_date as Transaction_Timestamp,
-Customer_First_Name, Customer_Last_Name, Agent_ID, Retail_Shop, Area, Sub_Area, Tariff_Plan, Segment, Tenure, MSC_State 
-from ${SCHEMA_NAME}.${TABLE_NAME}
-Where tbl_dt BETWEEN ${START_DATE} AND ${END_DATE} and area= 'SIM SWAP REQUEST'
-and cast(date_format(from_iso8601_timestamp(open_date),'%H') as integer) BETWEEN ${START_HOUR} and ${END_HOUR}

@@ -1,9 +1,0 @@
-import org.apache.spark.sql._
-val hiveContext = new org.apache.spark.sql.hive.HiveContext(sc)
-
-hiveContext.sql("set hive.enforce.bucketing=true")
-hiveContext.sql("set hive.exec.dynamic.partition.mode=nonstrict")
-
-
-hiveContext.sql("insert overwrite table databasename.files_count_summary partition (tbl_dt,feedname)  select file_name,substring(file_name,INSTR(file_name,'incoming')+9) , count(*),DateReg,       \"TargetFeedname\"                                           from databasename.CCN_SMS_MA  group by file_name,")
-

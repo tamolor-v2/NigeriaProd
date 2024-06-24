@@ -1,5 +1,0 @@
-Select Customer_ID,Address,language,Survey_ID,Event,Transaction_Timestamp,Date_Key,req_received_date_from_clm,
-simreg_kit_num_v,registration_state,State_name,dealer_code_v,eyeball_status_v
-from ${SCHEMA_NAME}.${TABLE_NAME}
-Where tbl_dt BETWEEN ${START_DATE} AND ${END_DATE}
-and cast(date_format(from_iso8601_timestamp(Transaction_Timestamp),'%H') as integer) BETWEEN ${START_HOUR} and ${END_HOUR}

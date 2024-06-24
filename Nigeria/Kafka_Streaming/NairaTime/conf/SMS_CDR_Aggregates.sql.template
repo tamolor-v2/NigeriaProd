@@ -1,3 +1,0 @@
-select subscribermsisdn,Period_id,total_sms_count,tot_sms_cntpayg,monetary_cost,tot_sms_cntBundle
-from ${SCHEMA_NAME}.${TABLE_NAME}
-where Period_id BETWEEN ${START_DATE} AND ${END_DATE}

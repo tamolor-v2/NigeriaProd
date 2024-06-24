@@ -1,3 +1,0 @@
-select aparty_msisdn,bparty_msisdn, call_duration,monetary_cost,bundle_id,cell_id,bparty_msisdn_type,time_stamp Event_time, date_key
-from ${SCHEMA_NAME}.${TABLE_NAME}
-where date_key BETWEEN ${START_DATE} AND ${END_DATE}

@@ -1,3 +1,0 @@
-select subscribermsisdn,period_id,totalcalls_duration,totalcalls_durationpayg,onnet_calls_duration
-from ${SCHEMA_NAME}.${TABLE_NAME}
-where period_id BETWEEN ${START_DATE} AND ${END_DATE}

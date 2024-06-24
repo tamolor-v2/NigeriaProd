@@ -1,3 +1,0 @@
-starting command: bash /home/daasuser/JDBC_Tool/JDBCExtract.scala --configFile /mnt/beegfs_bsl/tools/ExtractTools/OTP_STATUS/config.properties --sqlFile /mnt/beegfs_bsl/tools/ExtractTools/OTP_STATUS/query_template.sql --outputFile /mnt/beegfs_bsl/tools/ExtractTools/OTP_STATUS/tmp//20190815/20190815_OTP_STATUS.gz --delimiter | --kvTemplate ${DATE}=20190815;
-mv: target ‘/mnt/beegfs_bsl/live/DB_extract_lz/OTP_STATUS/incoming/’ is not a directory
-hi

@@ -1,3 +1,0 @@
-
-
-select to_clob(activity_name) || chr(001) || event_ref_no || chr(001) || "SERVICE_ID/USER_ID" || chr(001) || created_by || chr(001) || created_user_source || chr(001) || location_desc || chr(001) || created_date_time || chr(001) || assigned_date_time || chr(001) || closed_date_time || chr(001) || status || chr(001) || "STATUS MODIFIED_BY" || chr(001) || ticket_type || chr(001) || catecory || chr(001) || sub_category || chr(001) || translate(issue_note, chr(10)||chr(11)||chr(13) , ' ') || chr(001) || translate(resolution_note, chr(10)||chr(11)||chr(13) , ' ') || chr(001) || to_char(to_date(CREATED_DATE_TIME,'DD-MON-YYYY HH24:MI:SS'),'yyyymmdd') from TT_MSO_1.CALL_REASON_APR_19_VW where SUBSTR (event_ref_no,-1,1)='${msisdn}'
